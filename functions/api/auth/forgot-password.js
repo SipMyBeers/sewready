@@ -1,5 +1,7 @@
 // POST /api/auth/forgot-password — sends password reset email via Resend
 
+import { checkRateLimit } from './_rate-limit.js';
+
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -9,6 +11,11 @@ function json(data, status = 200) {
 
 export async function onRequestPost(context) {
   try {
+    // Rate limit: 3 attempts per 15 minutes per IP
+    const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
+    const allowed = await checkRateLimit(context.env.DB, `forgot:${ip}`, 3, 900);
+    if (!allowed) return json({ error: 'Too many reset requests. Try again in 15 minutes.' }, 429);
+
     const { email, shop_slug } = await context.request.json();
 
     if (!email || !shop_slug) {

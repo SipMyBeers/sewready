@@ -1,5 +1,7 @@
 // POST /api/auth/login — verify email+password, create session, set HTTP-only cookie
 
+import { checkRateLimit } from './_rate-limit.js';
+
 async function hashPassword(password) {
   const encoder = new TextEncoder();
   const data = encoder.encode(password);
@@ -16,6 +18,11 @@ function json(data, status = 200, headers = {}) {
 
 export async function onRequestPost(context) {
   try {
+    // Rate limit: 5 attempts per 15 minutes per IP
+    const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
+    const allowed = await checkRateLimit(context.env.DB, `login:${ip}`, 5, 900);
+    if (!allowed) return json({ error: 'Too many login attempts. Try again in 15 minutes.' }, 429);
+
     const { email, password, shop_slug } = await context.request.json();
 
     if (!email || !password || !shop_slug) {

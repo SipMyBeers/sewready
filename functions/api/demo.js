@@ -1,6 +1,8 @@
 // POST /api/demo — creates ephemeral demo shop with pre-seeded data
 // GET  /api/demo?slug=xxx — checks if demo shop exists
 
+import { checkRateLimit } from './auth/_rate-limit.js';
+
 async function hashPassword(password) {
   const encoder = new TextEncoder();
   const data = encoder.encode(password);
@@ -109,6 +111,30 @@ const DEMO_ORDERS = [
 
 export async function onRequestPost(context) {
   try {
+    // Rate limit: 3 demos per hour per IP
+    const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
+    const allowed = await checkRateLimit(context.env.DB, `demo:${ip}`, 3, 3600);
+    if (!allowed) return json({ error: 'Too many demo requests. Try again in an hour.' }, 429);
+
+    // Cleanup expired demos (> 24h old) before creating new one
+    const db = context.env.DB;
+    try {
+      const expired = await db.prepare(
+        "SELECT slug FROM shops WHERE slug LIKE 'demo-%' AND created_at < datetime('now', '-1 day')"
+      ).all();
+      for (const shop of expired.results) {
+        await db.batch([
+          db.prepare('DELETE FROM orders WHERE shop_slug = ?').bind(shop.slug),
+          db.prepare('DELETE FROM sessions WHERE shop_slug = ?').bind(shop.slug),
+          db.prepare('DELETE FROM admin_users WHERE shop_slug = ?').bind(shop.slug),
+          db.prepare('DELETE FROM notifications WHERE shop_slug = ?').bind(shop.slug),
+          db.prepare('DELETE FROM shops WHERE slug = ?').bind(shop.slug),
+        ]);
+      }
+    } catch (cleanupErr) {
+      console.error('Demo cleanup error:', cleanupErr);
+    }
+
     // Generate unique demo slug
     const demoId = crypto.randomUUID().substring(0, 8);
     const slug = `demo-${demoId}`;

@@ -220,3 +220,11 @@ CREATE INDEX IF NOT EXISTS idx_photos_order ON order_photos(shop_slug, order_id)
 -- To add manually: ALTER TABLE admin_users ADD COLUMN reset_token TEXT;
 --                  ALTER TABLE admin_users ADD COLUMN reset_expires TEXT;
 SELECT 1;
+
+-- ── Rate Limiting ─────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS rate_limits (
+  key TEXT NOT NULL,
+  ts INTEGER NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_rate_limits_key ON rate_limits(key);

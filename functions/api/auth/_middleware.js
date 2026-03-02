@@ -13,16 +13,9 @@ const PUBLIC_PATHS = ['/api/auth/login', '/api/auth/register', '/api/auth/forgot
 export async function onRequest(context) {
   const url = new URL(context.request.url);
 
-  // CORS preflight
+  // CORS preflight — handled by parent _middleware.js, just pass through
   if (context.request.method === 'OPTIONS') {
-    return new Response(null, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Credentials': 'true',
-      },
-    });
+    return context.next();
   }
 
   // Public endpoints don't require auth
