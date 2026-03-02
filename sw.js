@@ -4,7 +4,7 @@
 //  stale-while-revalidate for HTML
 // ══════════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'sewready-v3';
+const CACHE_VERSION = 'sewready-v4';
 const STATIC_CACHE = CACHE_VERSION + '-static';
 const API_CACHE = CACHE_VERSION + '-api';
 
@@ -47,6 +47,22 @@ self.addEventListener('activate', function (event) {
       );
     }).then(function () {
       return self.clients.claim();
+    })
+  );
+});
+
+// Notification click — focus or open driver app
+self.addEventListener('notificationclick', function (event) {
+  event.notification.close();
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (windowClients) {
+      for (var i = 0; i < windowClients.length; i++) {
+        var client = windowClients[i];
+        if (client.url.indexOf('/driver') !== -1 && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      return clients.openWindow('/driver.html');
     })
   );
 });

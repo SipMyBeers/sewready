@@ -363,12 +363,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var driverSection = document.getElementById('driverSetup');
   if (driverSection) {
+    function driverStatusBadge(d) {
+      if (d.email && !d.reset_token) {
+        return '<span style="padding:2px 8px;font-size:10px;font-weight:700;border-radius:4px;background:rgba(52,211,153,0.15);color:#34d399">Active</span>';
+      }
+      if (d.reset_token) {
+        return '<span style="padding:2px 8px;font-size:10px;font-weight:700;border-radius:4px;background:rgba(250,204,21,0.15);color:#facc15">Invited</span>';
+      }
+      return '<span style="padding:2px 8px;font-size:10px;font-weight:700;border-radius:4px;background:rgba(148,163,184,0.15);color:#94a3b8">No account</span>';
+    }
+
+    function showInviteLinkModal(url, email) {
+      var overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);padding:20px';
+      overlay.innerHTML =
+        '<div style="background:#141d33;border:1px solid rgba(240,232,220,0.1);border-radius:16px;padding:28px 24px;max-width:440px;width:100%">' +
+          '<h3 style="margin:0 0 8px;font-size:16px;font-weight:700;color:#fff">Driver Invite Link</h3>' +
+          '<p style="margin:0 0 16px;font-size:13px;color:rgba(240,232,220,0.6)">Send this link to <strong style="color:#06b6d4">' + email + '</strong> to set up their password:</p>' +
+          '<input id="inviteLinkInput" type="text" value="' + url + '" readonly style="width:100%;padding:10px 12px;font-size:13px;font-family:monospace;background:rgba(240,232,220,0.06);color:#f0e8dc;border:1px solid rgba(240,232,220,0.1);border-radius:8px;box-sizing:border-box;margin-bottom:12px">' +
+          '<div style="display:flex;gap:8px">' +
+            '<button id="inviteCopyBtn" style="flex:1;padding:10px;border:none;border-radius:8px;font-size:14px;font-weight:600;color:#fff;background:linear-gradient(135deg,#3a6ea5,#06b6d4);cursor:pointer">Copy Link</button>' +
+            '<button id="inviteCloseBtn" style="padding:10px 20px;border:1px solid rgba(240,232,220,0.1);border-radius:8px;font-size:14px;font-weight:600;color:#f0e8dc;background:transparent;cursor:pointer">Close</button>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(overlay);
+
+      document.getElementById('inviteCopyBtn').addEventListener('click', function () {
+        var input = document.getElementById('inviteLinkInput');
+        input.select();
+        navigator.clipboard.writeText(input.value).then(function () {
+          document.getElementById('inviteCopyBtn').textContent = 'Copied!';
+        });
+      });
+      document.getElementById('inviteCloseBtn').addEventListener('click', function () {
+        document.body.removeChild(overlay);
+      });
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) document.body.removeChild(overlay);
+      });
+    }
+
     function renderDriverList() {
       DataStore.getDrivers().then(function (drivers) {
+        var inputStyle = 'padding:6px 10px;border-radius:6px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;font-size:13px';
         var html = '<div style="margin-bottom:12px">' +
           drivers.filter(function (d) { return d.active; }).map(function (d) {
             return '<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(240,232,220,0.06)">' +
               '<span style="flex:1;font-weight:500">' + d.name + '</span>' +
+              '<span style="color:rgba(240,232,220,0.4);font-size:12px">' + (d.email || '') + '</span>' +
+              driverStatusBadge(d) +
               '<span style="color:rgba(240,232,220,0.5);font-size:12px">' + (d.phone || 'No phone') + '</span>' +
               '<span style="color:rgba(240,232,220,0.4);font-size:12px">' + (d.vehicle || '') + '</span>' +
               '<button class="remove-driver-btn" data-id="' + d.id + '" style="padding:3px 10px;font-size:11px;background:rgba(231,76,60,0.1);color:#e74c3c;border:1px solid rgba(231,76,60,0.2);border-radius:4px;cursor:pointer">Remove</button>' +
@@ -377,9 +420,10 @@ document.addEventListener('DOMContentLoaded', () => {
         '</div>';
 
         html += '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-          '<input type="text" id="newDriverName" placeholder="Driver name" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;font-size:13px;flex:1">' +
-          '<input type="tel" id="newDriverPhone" placeholder="Phone" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;font-size:13px;width:120px">' +
-          '<input type="text" id="newDriverVehicle" placeholder="Vehicle" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;font-size:13px;width:120px">' +
+          '<input type="text" id="newDriverName" placeholder="Driver name" style="' + inputStyle + ';flex:1">' +
+          '<input type="email" id="newDriverEmail" placeholder="Email (for login)" style="' + inputStyle + ';width:160px">' +
+          '<input type="tel" id="newDriverPhone" placeholder="Phone" style="' + inputStyle + ';width:120px">' +
+          '<input type="text" id="newDriverVehicle" placeholder="Vehicle" style="' + inputStyle + ';width:120px">' +
           '<button id="addDriverBtn" class="btn-primary" style="padding:6px 16px;font-size:13px">Add Driver</button>' +
         '</div>';
 
@@ -389,13 +433,27 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('addDriverBtn').addEventListener('click', function () {
           var name = document.getElementById('newDriverName').value.trim();
           if (!name) return;
+          var email = document.getElementById('newDriverEmail').value.trim();
+          var btn = document.getElementById('addDriverBtn');
+          btn.disabled = true;
+          btn.textContent = '...';
           DataStore.createDriver({
             name: name,
             phone: document.getElementById('newDriverPhone').value.trim(),
-            vehicle: document.getElementById('newDriverVehicle').value.trim()
+            vehicle: document.getElementById('newDriverVehicle').value.trim(),
+            email: email || undefined
+          }).then(function (result) {
+            if (result && result.invite_token) {
+              var inviteUrl = window.location.origin + '/driver.html?setup_token=' + result.invite_token;
+              showInviteLinkModal(inviteUrl, email);
+            }
+            showToast('Driver added!');
+            renderDriverList();
+          }).catch(function () {
+            showToast('Failed to add driver');
+            btn.disabled = false;
+            btn.textContent = 'Add Driver';
           });
-          setTimeout(renderDriverList, 500);
-          showToast('Driver added!');
         });
 
         // Bind remove buttons

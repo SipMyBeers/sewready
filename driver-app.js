@@ -11,6 +11,8 @@
   var driverId = null;
   var refreshTimer = null;
   var currentTab = 'drvPanelAvailable';
+  var previousDeliveryIds = [];
+  var notificationsEnabled = false;
 
   // ── Helpers ────────────────────────────────────────────────
   function $(id) { return document.getElementById(id); }
@@ -28,6 +30,54 @@
     var data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Request failed');
     return data;
+  }
+
+  // ── Maps Navigation ──────────────────────────────────────
+  function openNavigation(address) {
+    var encoded = encodeURIComponent(address);
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + encoded, '_blank');
+  }
+
+  // ── Notifications ───────────────────────────────────────
+  async function requestNotificationPermission() {
+    if (!('Notification' in window)) return;
+    if (Notification.permission === 'granted') {
+      notificationsEnabled = true;
+      return;
+    }
+    if (Notification.permission === 'denied') return;
+    var result = await Notification.requestPermission();
+    notificationsEnabled = (result === 'granted');
+  }
+
+  function checkForNewDeliveries(deliveries) {
+    if (!notificationsEnabled) return;
+    var unassigned = deliveries.filter(function (d) {
+      return d.status === 'pending' && !d.driver_id;
+    });
+    var currentIds = unassigned.map(function (d) { return d.id; });
+    var newOnes = currentIds.filter(function (id) {
+      return previousDeliveryIds.indexOf(id) === -1;
+    });
+    previousDeliveryIds = currentIds;
+
+    if (newOnes.length === 0) return;
+    var msg = newOnes.length === 1
+      ? '1 new delivery available!'
+      : newOnes.length + ' new deliveries available!';
+
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.ready.then(function (reg) {
+        reg.showNotification('SewRunner', {
+          body: msg,
+          icon: '/icon-192.png',
+          tag: 'new-delivery',
+          renotify: true,
+        });
+      });
+    } else {
+      new Notification('SewRunner', { body: msg });
+    }
   }
 
   // ── Brand Hydration ────────────────────────────────────────
@@ -111,6 +161,7 @@
     $('drvSetupOverlay').style.display = 'none';
     $('drvApp').style.display = '';
     $('drvDriverName').textContent = driverInfo.name || 'Driver';
+    requestNotificationPermission();
     renderProfile();
     loadDeliveries();
     startAutoRefresh();
@@ -226,10 +277,10 @@
       html += '<a class="drv-card-phone" href="tel:' + escHtml(d.customer_phone) + '">' + escHtml(d.customer_phone) + '</a>';
     }
     if (d.pickup_address) {
-      html += '<div class="drv-card-addr"><span class="drv-addr-label">Pickup:</span> ' + escHtml(d.pickup_address) + '</div>';
+      html += '<div class="drv-card-addr"><span class="drv-addr-label">Pickup:</span> <a class="drv-addr-link" href="https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(d.pickup_address) + '" target="_blank" rel="noopener">' + escHtml(d.pickup_address) + '</a></div>';
     }
     if (d.delivery_address) {
-      html += '<div class="drv-card-addr"><span class="drv-addr-label">Deliver:</span> ' + escHtml(d.delivery_address) + '</div>';
+      html += '<div class="drv-card-addr"><span class="drv-addr-label">Deliver:</span> <a class="drv-addr-link" href="https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(d.delivery_address) + '" target="_blank" rel="noopener">' + escHtml(d.delivery_address) + '</a></div>';
     }
     if (scheduleText) {
       html += '<div class="drv-card-schedule">' + escHtml(scheduleText) + '</div>';
@@ -240,11 +291,18 @@
 
     if (showActions) {
       var action = nextAction(d.status);
-      if (action) {
+      var navStatuses = ['assigned', 'en-route', 'picked-up'];
+      var navAddr = d.delivery_address || d.pickup_address;
+      if (action || (navAddr && navStatuses.indexOf(d.status) !== -1)) {
         html += '<div class="drv-delivery-actions">';
-        html += '<button class="drv-action-btn" data-id="' + d.id + '" data-next="' + action.nextStatus + '"';
-        if (action.assignSelf) html += ' data-assign="1"';
-        html += '>' + action.label + '</button>';
+        if (navAddr && navStatuses.indexOf(d.status) !== -1) {
+          html += '<button class="drv-navigate-btn" data-addr="' + escHtml(navAddr) + '">Navigate</button>';
+        }
+        if (action) {
+          html += '<button class="drv-action-btn" data-id="' + d.id + '" data-next="' + action.nextStatus + '"';
+          if (action.assignSelf) html += ' data-assign="1"';
+          html += '>' + action.label + '</button>';
+        }
         html += '</div>';
       }
     }
@@ -264,6 +322,7 @@
     try {
       var data = await api('/api/drivers/deliveries');
       var deliveries = data.deliveries || [];
+      checkForNewDeliveries(deliveries);
 
       var available = [];
       var active = [];
@@ -304,6 +363,11 @@
           handleStatusAction(btn);
         });
       });
+      container.querySelectorAll('.drv-navigate-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openNavigation(btn.getAttribute('data-addr'));
+        });
+      });
     }
   }
 
@@ -336,15 +400,38 @@
   }
 
   // ── Profile ────────────────────────────────────────────────
+  function notificationStatusText() {
+    if (!('Notification' in window)) return 'Not supported';
+    if (Notification.permission === 'denied') return 'Blocked';
+    if (notificationsEnabled) return 'On';
+    return 'Off';
+  }
+
   function renderProfile() {
     var card = $('drvProfileCard');
     if (!driverInfo) return;
+
+    var notifStatus = notificationStatusText();
+    var notifColor = notifStatus === 'On' ? '#34d399' : notifStatus === 'Blocked' ? '#ef4444' : '#94a3b8';
+    var notifAction = '';
+    if (notifStatus === 'Off') {
+      notifAction = '<button id="drvNotifToggle" style="padding:4px 12px;font-size:12px;font-weight:600;border:1px solid #06b6d4;color:#06b6d4;background:transparent;border-radius:6px;cursor:pointer">Enable</button>';
+    }
+
     card.innerHTML =
       '<div class="drv-profile-row"><span class="drv-profile-label">Name</span><span>' + escHtml(driverInfo.name) + '</span></div>' +
       '<div class="drv-profile-row"><span class="drv-profile-label">Email</span><span>' + escHtml(driverInfo.email || '—') + '</span></div>' +
       '<div class="drv-profile-row"><span class="drv-profile-label">Phone</span><span>' + escHtml(driverInfo.phone || '—') + '</span></div>' +
       '<div class="drv-profile-row"><span class="drv-profile-label">Vehicle</span><span>' + escHtml(driverInfo.vehicle || '—') + '</span></div>' +
+      '<div class="drv-profile-row"><span class="drv-profile-label">Notifications</span><span style="display:flex;align-items:center;gap:8px"><span style="color:' + notifColor + ';font-weight:600">' + notifStatus + '</span>' + notifAction + '</span></div>' +
       '<button class="drv-logout-btn" id="drvLogoutBtn">Sign Out</button>';
+
+    if ($('drvNotifToggle')) {
+      $('drvNotifToggle').onclick = async function () {
+        await requestNotificationPermission();
+        renderProfile();
+      };
+    }
 
     $('drvLogoutBtn').onclick = async function () {
       try {

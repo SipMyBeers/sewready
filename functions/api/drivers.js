@@ -15,7 +15,7 @@ export async function onRequestGet(context) {
 
   try {
     const { results } = await context.env.DB.prepare(
-      'SELECT * FROM drivers WHERE shop_slug = ? ORDER BY name'
+      'SELECT id, shop_slug, name, phone, vehicle, email, active, reset_token, reset_expires FROM drivers WHERE shop_slug = ? ORDER BY name'
     ).bind(shop).all();
     return json(results);
   } catch (err) {

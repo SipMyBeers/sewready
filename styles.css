@@ -3257,6 +3257,24 @@ body {
 .drv-action-btn:hover { opacity: .9; }
 .drv-action-btn:disabled { opacity: .5; cursor: wait; }
 
+/* ── Navigate Button ───────────────────────────────────────── */
+.drv-navigate-btn {
+  padding: 12px; border-radius: 10px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  color: var(--drv-accent, #06b6d4);
+  background: transparent;
+  border: 2px solid var(--drv-accent, #06b6d4);
+  transition: opacity .2s; min-height: 44px;
+}
+.drv-navigate-btn:hover { opacity: .8; }
+
+/* ── Clickable Address Links ───────────────────────────────── */
+.drv-addr-link {
+  color: var(--drv-accent, #06b6d4);
+  text-decoration: none;
+}
+.drv-addr-link:hover { text-decoration: underline; }
+
 /* ── Empty State ────────────────────────────────────────────── */
 .drv-empty {
   font-size: 14px; color: var(--text-muted, #94a3b8);
