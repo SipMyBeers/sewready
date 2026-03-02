@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'tt-tailor',
   name: 'T & T Tailor & Alterations',
   tagline: 'Expert tailoring and alterations. Dress uniforms and combat gear specialists.',

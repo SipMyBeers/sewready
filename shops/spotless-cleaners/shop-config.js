@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'spotless-cleaners',
   name: 'Spotless Cleaners & Alterations',
   tagline: 'Spotless cleaning and expert alterations. Uniforms that pass every inspection.',

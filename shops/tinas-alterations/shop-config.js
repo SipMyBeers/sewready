@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'tinas-alterations',
   name: 'Tina\'s Alterations',
   tagline: 'Quality alterations with a personal touch. Military uniform specialists.',

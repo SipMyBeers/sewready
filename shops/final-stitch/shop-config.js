@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'final-stitch',
   name: 'Final Stitch: Alterations & Clothing',
   tagline: 'Where every alteration is the final word. Military uniform perfection.',

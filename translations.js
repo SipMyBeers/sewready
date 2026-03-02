@@ -217,7 +217,118 @@ const TRANSLATIONS = {
     'misc.due': 'Due:',
     'misc.bringingOwn': 'bringing own',
     'misc.needsPurchase': 'needs purchase',
-    'misc.customerProviding': 'customer providing'
+    'misc.customerProviding': 'customer providing',
+
+    // ── Admin Dashboard ────────────────────────────────────
+    'admin.dashboard': 'Dashboard',
+    'admin.incoming': 'Incoming',
+    'admin.orders': 'Orders',
+    'admin.services': 'Services',
+    'admin.inventory': 'Inventory',
+    'admin.sopLibrary': 'SOP Library',
+    'admin.calendar': 'Calendar',
+    'admin.analytics': 'Analytics',
+    'admin.settings': 'Settings',
+    'admin.employees': 'Employees',
+
+    // Dashboard Stats
+    'admin.newOrders': 'New Orders',
+    'admin.inProgress': 'In Progress',
+    'admin.readyPickup': 'Ready for Pickup',
+    'admin.completed': 'Completed',
+    'admin.thisWeekDeadlines': "This Week's Deadlines",
+    'admin.scheduledPickups': 'Scheduled Pickups',
+    'admin.activeOrders': 'Active Orders',
+    'admin.viewAllOrders': 'View All Orders',
+
+    // Order Management
+    'admin.orderSearch': 'Search orders...',
+    'admin.allStatuses': 'All Statuses',
+    'admin.newOrder': 'New Order',
+    'admin.orderDetail': 'Order Detail',
+    'admin.customerComment': 'Customer Comment',
+    'admin.orderInfo': 'Order Info',
+    'admin.serviceChecklist': 'Service Checklist',
+    'admin.itemPhotos': 'Item Photos',
+    'admin.receipt': 'Receipt',
+    'admin.label': 'Label',
+    'admin.driverAssignment': 'Driver Assignment',
+    'admin.orderPhotos': 'Order Photos',
+    'admin.activity': 'Activity',
+    'admin.noActivity': 'No activity recorded',
+    'admin.noPhotos': 'No photos uploaded',
+    'admin.selectDriver': 'Select driver...',
+    'admin.assign': 'Assign',
+
+    // Settings
+    'admin.shopInfo': 'Shop Information',
+    'admin.shopName': 'Shop Name',
+    'admin.shopAddress': 'Address',
+    'admin.shopPhone': 'Phone',
+    'admin.shopEmail': 'Email',
+    'admin.saveChanges': 'Save Changes',
+    'admin.settingsSaved': 'Settings saved successfully!',
+    'admin.employeeSchedule': 'Employee Schedule',
+    'admin.shiftRequests': 'Shift Requests',
+    'admin.closedDates': 'Closed Dates',
+    'admin.driverSetup': 'Driver Setup',
+    'admin.driverSetupSub': 'Manage drivers for pickup and delivery service.',
+    'admin.addDriver': 'Add Driver',
+    'admin.removeDriver': 'Remove',
+    'admin.driverAdded': 'Driver added!',
+    'admin.driverRemoved': 'Driver removed',
+    'admin.billing': 'Billing & Plan',
+    'admin.currentPlan': 'Current Plan:',
+    'admin.notifications': 'Notifications',
+    'admin.emailOnNew': 'Email on new orders',
+    'admin.smsOnNew': 'SMS on new orders',
+
+    // Analytics
+    'admin.analyticsTitle': 'Analytics Dashboard',
+    'admin.ordersToday': 'Orders Today',
+    'admin.revenueRange': 'Revenue (Range)',
+    'admin.avgOrderValue': 'Avg Order Value',
+    'admin.totalOrdersRange': 'Total Orders (Range)',
+    'admin.ordersPerDay': 'Orders Per Day',
+    'admin.revenuePerDay': 'Revenue Per Day',
+    'admin.ordersByStatus': 'Orders by Status',
+    'admin.topServices': 'Top Services',
+
+    // Calendar
+    'admin.calendarTitle': 'Appointment Calendar',
+    'admin.addAppointment': 'Add Appointment',
+
+    // Inventory Admin
+    'admin.inventoryTitle': 'Inventory Management',
+    'admin.stockLevel': 'Stock Level',
+    'admin.lowStock': 'Low Stock',
+    'admin.restock': 'Restock',
+
+    // Services Admin
+    'admin.servicesTitle': 'Service Catalog',
+    'admin.addService': 'Add Service',
+    'admin.editService': 'Edit Service',
+    'admin.servicePrice': 'Price',
+    'admin.serviceTime': 'Est. Time',
+
+    // SOP Library
+    'admin.sopTitle': 'Standard Operating Procedures',
+    'admin.sopSearch': 'Search SOPs...',
+
+    // Auth
+    'admin.signIn': 'Sign In',
+    'admin.signOut': 'Sign Out',
+    'admin.email': 'Email',
+    'admin.password': 'Password',
+    'admin.enterCredentials': 'Sign in to your admin account',
+
+    // Wizard (driver + photo additions)
+    'wizard.pickupAddress': 'Pickup Address',
+    'wizard.pickupAddressPlaceholder': 'Enter your address for pickup',
+    'wizard.pickupDate': 'Pickup Date',
+    'wizard.pickupTime': 'Pickup Time',
+    'wizard.photoUpload': 'Photo of Item(s)',
+    'wizard.photoUploadSub': 'Take a photo of your uniform items. Helps us prepare. Max 5 photos.'
   },
 
   ko: {
@@ -433,7 +544,118 @@ const TRANSLATIONS = {
     'misc.due': '마감:',
     'misc.bringingOwn': '본인 지참',
     'misc.needsPurchase': '구매 필요',
-    'misc.customerProviding': '고객 제공'
+    'misc.customerProviding': '고객 제공',
+
+    // ── 관리자 대시보드 ─────────────────────────────────────
+    'admin.dashboard': '대시보드',
+    'admin.incoming': '접수',
+    'admin.orders': '주문',
+    'admin.services': '서비스',
+    'admin.inventory': '재고',
+    'admin.sopLibrary': 'SOP 라이브러리',
+    'admin.calendar': '일정',
+    'admin.analytics': '분석',
+    'admin.settings': '설정',
+    'admin.employees': '직원',
+
+    // 대시보드 통계
+    'admin.newOrders': '새 주문',
+    'admin.inProgress': '작업 중',
+    'admin.readyPickup': '수령 가능',
+    'admin.completed': '완료',
+    'admin.thisWeekDeadlines': '이번 주 마감',
+    'admin.scheduledPickups': '예정된 수령',
+    'admin.activeOrders': '진행 중 주문',
+    'admin.viewAllOrders': '전체 주문 보기',
+
+    // 주문 관리
+    'admin.orderSearch': '주문 검색...',
+    'admin.allStatuses': '모든 상태',
+    'admin.newOrder': '새 주문',
+    'admin.orderDetail': '주문 상세',
+    'admin.customerComment': '고객 메모',
+    'admin.orderInfo': '주문 정보',
+    'admin.serviceChecklist': '서비스 체크리스트',
+    'admin.itemPhotos': '품목 사진',
+    'admin.receipt': '영수증',
+    'admin.label': '라벨',
+    'admin.driverAssignment': '드라이버 배정',
+    'admin.orderPhotos': '주문 사진',
+    'admin.activity': '활동 이력',
+    'admin.noActivity': '활동 기록 없음',
+    'admin.noPhotos': '업로드된 사진 없음',
+    'admin.selectDriver': '드라이버 선택...',
+    'admin.assign': '배정',
+
+    // 설정
+    'admin.shopInfo': '매장 정보',
+    'admin.shopName': '매장명',
+    'admin.shopAddress': '주소',
+    'admin.shopPhone': '전화번호',
+    'admin.shopEmail': '이메일',
+    'admin.saveChanges': '변경 저장',
+    'admin.settingsSaved': '설정이 저장되었습니다!',
+    'admin.employeeSchedule': '직원 일정',
+    'admin.shiftRequests': '근무 변경 요청',
+    'admin.closedDates': '휴무일',
+    'admin.driverSetup': '드라이버 설정',
+    'admin.driverSetupSub': '픽업 및 배달 서비스 드라이버를 관리합니다.',
+    'admin.addDriver': '드라이버 추가',
+    'admin.removeDriver': '제거',
+    'admin.driverAdded': '드라이버가 추가되었습니다!',
+    'admin.driverRemoved': '드라이버가 제거되었습니다',
+    'admin.billing': '결제 및 플랜',
+    'admin.currentPlan': '현재 플랜:',
+    'admin.notifications': '알림',
+    'admin.emailOnNew': '새 주문 이메일 알림',
+    'admin.smsOnNew': '새 주문 SMS 알림',
+
+    // 분석
+    'admin.analyticsTitle': '분석 대시보드',
+    'admin.ordersToday': '오늘 주문',
+    'admin.revenueRange': '매출 (기간)',
+    'admin.avgOrderValue': '평균 주문 금액',
+    'admin.totalOrdersRange': '총 주문 (기간)',
+    'admin.ordersPerDay': '일별 주문',
+    'admin.revenuePerDay': '일별 매출',
+    'admin.ordersByStatus': '상태별 주문',
+    'admin.topServices': '인기 서비스',
+
+    // 일정
+    'admin.calendarTitle': '예약 일정',
+    'admin.addAppointment': '예약 추가',
+
+    // 재고 관리
+    'admin.inventoryTitle': '재고 관리',
+    'admin.stockLevel': '재고 수준',
+    'admin.lowStock': '재고 부족',
+    'admin.restock': '재입고',
+
+    // 서비스 관리
+    'admin.servicesTitle': '서비스 목록',
+    'admin.addService': '서비스 추가',
+    'admin.editService': '서비스 수정',
+    'admin.servicePrice': '가격',
+    'admin.serviceTime': '예상 시간',
+
+    // SOP 라이브러리
+    'admin.sopTitle': '표준 운영 절차',
+    'admin.sopSearch': 'SOP 검색...',
+
+    // 인증
+    'admin.signIn': '로그인',
+    'admin.signOut': '로그아웃',
+    'admin.email': '이메일',
+    'admin.password': '비밀번호',
+    'admin.enterCredentials': '관리자 계정으로 로그인하세요',
+
+    // 위저드 (드라이버 + 사진 추가)
+    'wizard.pickupAddress': '픽업 주소',
+    'wizard.pickupAddressPlaceholder': '픽업을 위한 주소를 입력하세요',
+    'wizard.pickupDate': '픽업 날짜',
+    'wizard.pickupTime': '픽업 시간',
+    'wizard.photoUpload': '품목 사진',
+    'wizard.photoUploadSub': '군복 사진을 촬영하세요. 준비에 도움이 됩니다. 최대 5장.'
   }
 };
 

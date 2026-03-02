@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'connies-sewing',
   name: 'Connie\'s Sewing Room',
   tagline: 'Cozy sewing shop with personal service. Military uniform specialists.',

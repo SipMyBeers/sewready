@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'tailorite',
   name: 'Tailorite',
   tagline: 'Modern tailoring with traditional craftsmanship. Military uniform experts.',

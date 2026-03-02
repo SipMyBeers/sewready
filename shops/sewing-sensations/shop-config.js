@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'sewing-sensations',
   name: 'Sewing Sensations',
   tagline: 'Creative sewing and uniform alterations. Where quality meets artistry.',

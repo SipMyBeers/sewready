@@ -288,4 +288,127 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Init ───────────────────────────────────────────────────
   renderScheduleSection();
 
+  // ══════════════════════════════════════════════════════════
+  //  BILLING & PLAN
+  // ══════════════════════════════════════════════════════════
+
+  const _SHOP_TIER = (typeof shopConfig !== 'undefined' && shopConfig.tier) || 'full';
+  const _SHOP_SLUG = (typeof shopConfig !== 'undefined' && shopConfig.slug) || '';
+
+  const tierBadge = document.getElementById('billingTierBadge');
+  const billingStatus = document.getElementById('billingStatus');
+  const pastDueWarning = document.getElementById('billingPastDueWarning');
+  const upgradeOnlineBtn = document.getElementById('billingUpgradeOnline');
+  const upgradeFullBtn = document.getElementById('billingUpgradeFull');
+  const manageBtn = document.getElementById('billingManageBtn');
+
+  // Tier badge styling
+  const tierColors = {
+    'storefront': { bg: 'rgba(249,115,22,.15)', color: '#f97316' },
+    'online': { bg: 'rgba(59,130,246,.15)', color: '#3b82f6' },
+    'full': { bg: 'rgba(34,197,94,.15)', color: '#22c55e' }
+  };
+  const tierLabels = { 'storefront': 'Storefront — Free', 'online': 'Online — $79/mo', 'full': 'Full — $149/mo' };
+
+  function renderBilling() {
+    if (!tierBadge) return;
+
+    var tc = tierColors[_SHOP_TIER] || tierColors.storefront;
+    tierBadge.textContent = tierLabels[_SHOP_TIER] || _SHOP_TIER;
+    tierBadge.style.background = tc.bg;
+    tierBadge.style.color = tc.color;
+
+    // Show upgrade buttons based on current tier
+    if (_SHOP_TIER === 'storefront') {
+      if (upgradeOnlineBtn) upgradeOnlineBtn.style.display = 'inline-block';
+      if (upgradeFullBtn) upgradeFullBtn.style.display = 'inline-block';
+    } else if (_SHOP_TIER === 'online') {
+      if (upgradeFullBtn) upgradeFullBtn.style.display = 'inline-block';
+      if (manageBtn) manageBtn.style.display = 'inline-block';
+    } else if (_SHOP_TIER === 'full') {
+      if (manageBtn) manageBtn.style.display = 'inline-block';
+      if (billingStatus) billingStatus.textContent = 'Active';
+    }
+
+    // Check URL params for billing result
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('billing') === 'success') {
+      showToast('Subscription activated! Welcome to your new plan.');
+      window.history.replaceState({}, '', window.location.pathname);
+    } else if (params.get('billing') === 'canceled') {
+      showToast('Checkout canceled. No changes made.');
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }
+
+  // Snipcart handles checkout via data attributes on the buttons.
+  // Upgrade buttons are snipcart-add-item, Manage is snipcart-checkout.
+  // Add shop slug as custom field so the webhook can identify the shop.
+  if (upgradeOnlineBtn && _SHOP_SLUG) {
+    upgradeOnlineBtn.setAttribute('data-item-custom1-name', 'Shop');
+    upgradeOnlineBtn.setAttribute('data-item-custom1-value', _SHOP_SLUG);
+    upgradeOnlineBtn.setAttribute('data-item-custom1-type', 'hidden');
+  }
+  if (upgradeFullBtn && _SHOP_SLUG) {
+    upgradeFullBtn.setAttribute('data-item-custom1-name', 'Shop');
+    upgradeFullBtn.setAttribute('data-item-custom1-value', _SHOP_SLUG);
+    upgradeFullBtn.setAttribute('data-item-custom1-type', 'hidden');
+  }
+
+  renderBilling();
+
+  // ══════════════════════════════════════════════════════════
+  //  DRIVER SETUP SECTION
+  // ══════════════════════════════════════════════════════════
+
+  var driverSection = document.getElementById('driverSetup');
+  if (driverSection) {
+    function renderDriverList() {
+      DataStore.getDrivers().then(function (drivers) {
+        var html = '<div style="margin-bottom:12px">' +
+          drivers.filter(function (d) { return d.active; }).map(function (d) {
+            return '<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(240,232,220,0.06)">' +
+              '<span style="flex:1;font-weight:500">' + d.name + '</span>' +
+              '<span style="color:rgba(240,232,220,0.5);font-size:12px">' + (d.phone || 'No phone') + '</span>' +
+              '<span style="color:rgba(240,232,220,0.4);font-size:12px">' + (d.vehicle || '') + '</span>' +
+              '<button class="remove-driver-btn" data-id="' + d.id + '" style="padding:3px 10px;font-size:11px;background:rgba(231,76,60,0.1);color:#e74c3c;border:1px solid rgba(231,76,60,0.2);border-radius:4px;cursor:pointer">Remove</button>' +
+            '</div>';
+          }).join('') +
+        '</div>';
+
+        html += '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+          '<input type="text" id="newDriverName" placeholder="Driver name" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;font-size:13px;flex:1">' +
+          '<input type="tel" id="newDriverPhone" placeholder="Phone" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;font-size:13px;width:120px">' +
+          '<input type="text" id="newDriverVehicle" placeholder="Vehicle" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;font-size:13px;width:120px">' +
+          '<button id="addDriverBtn" class="btn-primary" style="padding:6px 16px;font-size:13px">Add Driver</button>' +
+        '</div>';
+
+        driverSection.innerHTML = html;
+
+        // Bind add button
+        document.getElementById('addDriverBtn').addEventListener('click', function () {
+          var name = document.getElementById('newDriverName').value.trim();
+          if (!name) return;
+          DataStore.createDriver({
+            name: name,
+            phone: document.getElementById('newDriverPhone').value.trim(),
+            vehicle: document.getElementById('newDriverVehicle').value.trim()
+          });
+          setTimeout(renderDriverList, 500);
+          showToast('Driver added!');
+        });
+
+        // Bind remove buttons
+        driverSection.querySelectorAll('.remove-driver-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            DataStore.deleteDriver(btn.dataset.id);
+            setTimeout(renderDriverList, 500);
+            showToast('Driver removed');
+          });
+        });
+      });
+    }
+    renderDriverList();
+  }
+
 });

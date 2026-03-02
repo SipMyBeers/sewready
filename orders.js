@@ -1,7 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Current employee (would come from auth in production) ──
-  const currentUser = 'Maria S.';
+  // ── Tier Gating ────────────────────────────────────────────
+  const _SHOP_TIER = (typeof shopConfig !== 'undefined' && shopConfig.tier) || 'full';
+
+  // Storefront tier: show upgrade prompt
+  if (_SHOP_TIER === 'storefront') {
+    var main = document.querySelector('.main-content') || document.querySelector('main');
+    if (main) {
+      main.innerHTML =
+        '<div style="max-width:480px;margin:80px auto;text-align:center;padding:32px">' +
+          '<h2 style="margin-bottom:12px">Order Management Not Available</h2>' +
+          '<p style="color:var(--text-muted)">This shop is on the <strong>Storefront</strong> plan.</p>' +
+          '<p style="margin-top:16px"><a href="mailto:support@sewready.com" style="color:var(--accent)">Contact us to upgrade</a></p>' +
+        '</div>';
+    }
+    return;
+  }
+
+  // ── Current employee (from auth system) ──
+  const currentUser = (window.currentUser && window.currentUser.name) ? window.currentUser.name : 'Admin';
 
   // ── Customer Database (from DataStore) ─────────────────────
   const customers = DataStore.getCustomers();
@@ -247,8 +264,44 @@ document.addEventListener('DOMContentLoaded', () => {
     toastTimer = setTimeout(() => toastEl.classList.remove('toast-show'), duration);
   }
 
-  function simulateCustomerNotification(order) {
-    showToast('Notified ' + order.customer + ' via SMS & Email that order ' + order.id + ' is ready for pickup');
+  function sendCustomerNotification(order) {
+    if (_SHOP_TIER !== 'full') {
+      showToast('Upgrade to Full Shop for SMS & email notifications');
+      return;
+    }
+    var shopCfg = DataStore.getShopConfig();
+    showToast('Sending notification to ' + order.customer + '...');
+
+    fetch('/api/notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        shop_slug: (typeof shopConfig !== 'undefined' && shopConfig.slug) ? shopConfig.slug : 'sewready',
+        order_id: order.id,
+        customer_phone: order.phone,
+        customer_email: order.email,
+        customer_name: order.customer,
+        shop_name: shopCfg.name || 'SewReady',
+        shop_phone: shopCfg.phone || '',
+        type: order.status || 'ready'
+      })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (res) {
+      var smsOk = res.results && res.results.sms && res.results.sms.status === 'sent';
+      var emailOk = res.results && res.results.email && res.results.email.status === 'sent';
+      var methods = [];
+      if (smsOk) methods.push('SMS');
+      if (emailOk) methods.push('Email');
+      if (methods.length > 0) {
+        showToast('Notified ' + order.customer + ' via ' + methods.join(' & '));
+      } else {
+        showToast('Notification queued for ' + order.customer);
+      }
+    })
+    .catch(function () {
+      showToast('Notified ' + order.customer + ' (queued offline)');
+    });
   }
 
   function calcOrderTotal(order) {
@@ -276,7 +329,8 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         const prev = order.status;
         DataStore.updateOrderStatus(order.id, key);
-        if ((key === 'ready' || key === 'completed') && prev !== key) simulateCustomerNotification(order);
+        if ((key === 'ready' || key === 'completed') && prev !== key && _SHOP_TIER === 'full') sendCustomerNotification(order);
+        if (key === 'completed' && prev !== 'completed' && typeof printPickupReceipt === 'function') printPickupReceipt(order);
         dd.remove();
         render();
       });
@@ -504,6 +558,25 @@ document.addEventListener('DOMContentLoaded', () => {
                   '<div><strong>Pickup Date:</strong> ' + formatDate(order.deadline) + '</div>' +
                   '<div><strong>Pickup:</strong> ' + order.pickup + '</div>' +
                 '</div>' +
+                '<div class="detail-print-actions" style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">' +
+                  '<button class="btn-print-receipt" data-id="' + order.id + '" style="padding:6px 14px;font-size:12px;background:var(--accent,#a855f7);color:#fff;border:none;border-radius:6px;cursor:pointer">&#128424; Receipt</button>' +
+                  '<button class="btn-print-label" data-id="' + order.id + '" style="padding:6px 14px;font-size:12px;background:var(--border,rgba(240,232,220,.08));color:var(--text,#f0e8dc);border:none;border-radius:6px;cursor:pointer">&#127991; Label</button>' +
+                '</div>' +
+                // Driver assignment panel
+                '<div class="detail-driver-panel" data-order="' + order.id + '" style="margin-top:16px;padding:12px;border-radius:8px;background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.1)">' +
+                  '<h4 style="margin:0 0 8px;font-size:13px">&#128666; Driver Assignment</h4>' +
+                  '<div class="driver-assignment-content" id="driverPanel-' + order.id + '"><span style="color:rgba(240,232,220,0.4);font-size:12px">Loading...</span></div>' +
+                '</div>' +
+                // Photo grid
+                '<div class="detail-photo-grid" style="margin-top:16px">' +
+                  '<h4 style="margin:0 0 8px;font-size:13px">&#128247; Order Photos</h4>' +
+                  '<div class="photo-grid-content" id="photoGrid-' + order.id + '"><span style="color:rgba(240,232,220,0.4);font-size:12px">Loading...</span></div>' +
+                '</div>' +
+                // Audit trail
+                '<div class="detail-audit" style="margin-top:16px">' +
+                  '<h4 style="margin:0 0 8px;font-size:13px">&#128221; Activity</h4>' +
+                  '<div class="audit-content" id="auditTrail-' + order.id + '"><span style="color:rgba(240,232,220,0.4);font-size:12px">Loading...</span></div>' +
+                '</div>' +
               '</div>' +
             '</div>' +
           '</td>';
@@ -536,7 +609,136 @@ document.addEventListener('DOMContentLoaded', () => {
             render();
           });
         });
+
+        // Load driver assignment, photos, audit for expanded order
+        loadDriverPanel(order.id);
+        loadPhotoGrid(order.id);
+        loadAuditTrail(order.id);
+
+        // Print buttons
+        detailTr.querySelectorAll('.btn-print-receipt').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            var ord = orders.find(o => o.id === btn.dataset.id);
+            if (ord && typeof printPickupReceipt === 'function') {
+              if (ord.status === 'completed') printPickupReceipt(ord);
+              else printDropoffReceipt(ord);
+            }
+          });
+        });
+        detailTr.querySelectorAll('.btn-print-label').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            var ord = orders.find(o => o.id === btn.dataset.id);
+            if (ord && typeof printOrderLabel === 'function') printOrderLabel(ord);
+          });
+        });
       }
+    });
+  }
+
+  // ── Driver Assignment Panel ──────────────────────────────
+  function loadDriverPanel(orderId) {
+    var panel = document.getElementById('driverPanel-' + orderId);
+    if (!panel) return;
+    DataStore.getDriverAssignments(orderId).then(function (assignments) {
+      DataStore.getDrivers().then(function (drivers) {
+        if (assignments.length > 0) {
+          var a = assignments[0];
+          var statusSteps = ['pending', 'assigned', 'en-route', 'picked-up', 'delivered'];
+          var timeline = statusSteps.map(function (s) {
+            var active = statusSteps.indexOf(a.status) >= statusSteps.indexOf(s);
+            return '<span style="padding:3px 8px;border-radius:4px;font-size:11px;' +
+              (active ? 'background:rgba(168,85,247,0.2);color:#a855f7;font-weight:600' : 'background:rgba(240,232,220,0.04);color:rgba(240,232,220,0.3)') +
+              '">' + s + '</span>';
+          }).join(' &#8250; ');
+
+          panel.innerHTML = '<div style="margin-bottom:8px">' + timeline + '</div>' +
+            '<div style="font-size:12px;color:rgba(240,232,220,0.6)">' +
+              (a.driver_name ? 'Driver: <strong>' + a.driver_name + '</strong>' : 'No driver assigned') +
+              (a.scheduled_date ? ' &middot; ' + a.scheduled_date : '') +
+            '</div>' +
+            '<div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap">' +
+              statusSteps.filter(function (s) { return statusSteps.indexOf(s) > statusSteps.indexOf(a.status); }).map(function (s) {
+                return '<button class="driver-status-btn" data-assignment="' + a.id + '" data-status="' + s + '" style="padding:3px 10px;font-size:11px;border:1px solid rgba(168,85,247,0.2);background:none;color:#a855f7;border-radius:4px;cursor:pointer">' + s + '</button>';
+              }).join('') +
+            '</div>';
+
+          // Bind status update buttons
+          panel.querySelectorAll('.driver-status-btn').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+              e.stopPropagation();
+              DataStore.updateDriverAssignment(btn.dataset.assignment, { status: btn.dataset.status, shop_slug: DataStore.getShopConfig().slug || '' });
+              setTimeout(function () { loadDriverPanel(orderId); }, 500);
+            });
+          });
+        } else {
+          // No assignment — show create form
+          var driverOpts = drivers.filter(function (d) { return d.active; }).map(function (d) {
+            return '<option value="' + d.id + '">' + d.name + '</option>';
+          }).join('');
+          panel.innerHTML = '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">' +
+            '<select id="driverSelect-' + orderId + '" style="padding:4px 8px;border-radius:4px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;font-size:12px">' +
+              '<option value="">Select driver...</option>' + driverOpts +
+            '</select>' +
+            '<button class="assign-driver-btn" data-order="' + orderId + '" style="padding:4px 12px;font-size:12px;background:#a855f7;color:#fff;border:none;border-radius:4px;cursor:pointer">Assign</button>' +
+          '</div>';
+
+          panel.querySelector('.assign-driver-btn').addEventListener('click', function (e) {
+            e.stopPropagation();
+            var sel = document.getElementById('driverSelect-' + orderId);
+            if (!sel || !sel.value) return;
+            DataStore.createDriverAssignment({ order_id: orderId, driver_id: sel.value });
+            setTimeout(function () { loadDriverPanel(orderId); }, 500);
+          });
+        }
+      });
+    });
+  }
+
+  // ── Photo Grid ─────────────────────────────────────────
+  function loadPhotoGrid(orderId) {
+    var grid = document.getElementById('photoGrid-' + orderId);
+    if (!grid) return;
+    DataStore.getPhotos(orderId).then(function (photos) {
+      if (photos.length === 0) {
+        grid.innerHTML = '<span style="color:rgba(240,232,220,0.4);font-size:12px">No photos uploaded</span>';
+        return;
+      }
+      grid.innerHTML = '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+        photos.map(function (p) {
+          return '<div style="position:relative">' +
+            '<img src="' + p.url + '" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid rgba(240,232,220,0.1)" loading="lazy">' +
+            '<button class="delete-photo-btn" data-photo="' + p.id + '" style="position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:#e74c3c;color:#fff;border:none;font-size:10px;cursor:pointer;line-height:18px">&times;</button>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+      grid.querySelectorAll('.delete-photo-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          DataStore.deletePhoto(btn.dataset.photo);
+          setTimeout(function () { loadPhotoGrid(orderId); }, 500);
+        });
+      });
+    });
+  }
+
+  // ── Audit Trail ────────────────────────────────────────
+  function loadAuditTrail(orderId) {
+    var trail = document.getElementById('auditTrail-' + orderId);
+    if (!trail) return;
+    DataStore.getAuditLog('order', orderId).then(function (entries) {
+      if (entries.length === 0) {
+        trail.innerHTML = '<span style="color:rgba(240,232,220,0.4);font-size:12px">No activity recorded</span>';
+        return;
+      }
+      trail.innerHTML = entries.slice(0, 10).map(function (e) {
+        return '<div style="font-size:11px;color:rgba(240,232,220,0.5);padding:3px 0;border-bottom:1px solid rgba(240,232,220,0.04)">' +
+          '<strong>' + (e.user_name || 'System') + '</strong> ' + e.action +
+          (e.new_value ? ' → ' + e.new_value : '') +
+          '<span style="float:right;font-size:10px">' + (e.created_at || '').slice(0, 16) + '</span>' +
+        '</div>';
+      }).join('');
     });
   }
 

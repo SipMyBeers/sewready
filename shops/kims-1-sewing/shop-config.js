@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'kims-1-sewing',
   name: 'Kim\'s #1 Sewing & Dry Cleaning',
   tagline: 'Professional uniform alterations & dry cleaning. AR 670-1 compliant. Trusted by soldiers at Fort Liberty.',

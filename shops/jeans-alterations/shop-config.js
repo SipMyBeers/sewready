@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'jeans-alterations',
   name: 'Jean\'s Alterations',
   tagline: 'Reliable alterations you can trust. Serving soldiers with care.',

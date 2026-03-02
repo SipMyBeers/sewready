@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'aaa-tailor',
   name: 'AAA Tailor Shop',
   tagline: 'First-class tailoring. A+ service for military uniforms.',

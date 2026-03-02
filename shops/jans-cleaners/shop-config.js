@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'jans-cleaners',
   name: 'Jan\'s Cleaners & Alterations',
   tagline: 'Professional cleaning and alterations. Trusted by Fort Liberty soldiers.',

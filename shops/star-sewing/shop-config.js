@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'star-sewing',
   name: 'STAR Sewing & Cleaners',
   tagline: 'Full-service sewing and cleaning for military uniforms. Fast turnaround near Fort Liberty.',

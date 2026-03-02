@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'make-it-fit',
   name: 'Make It Fit',
   tagline: 'Custom fitting and alterations. Making uniforms fit perfectly.',

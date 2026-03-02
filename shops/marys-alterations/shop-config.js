@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'marys-alterations',
   name: 'Mary\'s Alterations',
   tagline: 'Personalized alterations with attention to detail. AR 670-1 compliant.',

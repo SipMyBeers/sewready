@@ -8,6 +8,9 @@ const _CUST_PREFIX = (typeof shopConfig !== 'undefined' && shopConfig.slug)
   ? shopConfig.slug : 'sewready';
 function _ck(base) { return _CUST_PREFIX + '-' + base; }
 
+// ── Tier Gating ────────────────────────────────────────────
+const _SHOP_TIER = (typeof shopConfig !== 'undefined' && shopConfig.tier) || 'full';
+
 // ── Globals ─────────────────────────────────────────────────
 let currentSession = null;
 
@@ -113,6 +116,7 @@ function saveCustomers(arr) {
 }
 
 function openAuth() {
+  if (_SHOP_TIER === 'storefront') return; // no auth for storefront tier
   document.getElementById('authOverlay').style.display = 'flex';
   switchAuthTab('signin');
 }
@@ -132,14 +136,38 @@ function signIn() {
   const email = document.getElementById('siEmail').value.trim().toLowerCase();
   const pass = document.getElementById('siPassword').value;
   if (!email || !pass) { showToast('Enter email and password'); return; }
-  const custs = getCustomers();
-  const user = custs.find(c => c.email.toLowerCase() === email && c.password === pass);
-  if (!user) { showToast('Invalid email or password'); return; }
-  currentSession = user;
-  localStorage.setItem(_ck('session'), JSON.stringify(user));
-  closeAuth();
-  switchToDashboard();
-  showToast('Welcome back, ' + user.name + '!');
+
+  const shopSlug = (typeof shopConfig !== 'undefined' && shopConfig.slug) ? shopConfig.slug : 'sewready';
+
+  // Try API auth first, fall back to localStorage
+  fetch('/api/customers/auth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ shop_slug: shopSlug, email: email, password: pass })
+  })
+  .then(function (r) {
+    if (r.ok) return r.json();
+    throw new Error('api-fail');
+  })
+  .then(function (user) {
+    user.password = pass; // keep for local cache
+    currentSession = user;
+    localStorage.setItem(_ck('session'), JSON.stringify(user));
+    closeAuth();
+    switchToDashboard();
+    showToast('Welcome back, ' + user.name + '!');
+  })
+  .catch(function () {
+    // Fallback to localStorage auth
+    const custs = getCustomers();
+    const user = custs.find(c => c.email.toLowerCase() === email && c.password === pass);
+    if (!user) { showToast('Invalid email or password'); return; }
+    currentSession = user;
+    localStorage.setItem(_ck('session'), JSON.stringify(user));
+    closeAuth();
+    switchToDashboard();
+    showToast('Welcome back, ' + user.name + '!');
+  });
 }
 
 function signOut() {
@@ -166,6 +194,14 @@ function createAccount() {
   closeAuth();
   switchToDashboard();
   showToast('Account created! Welcome, ' + name);
+
+  // Persist to D1
+  var shopSlug = (typeof shopConfig !== 'undefined' && shopConfig.slug) ? shopConfig.slug : 'sewready';
+  fetch('/api/customers', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(Object.assign({ shop_slug: shopSlug }, newCust))
+  }).catch(function () { /* offline — localStorage has the data */ });
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -189,6 +225,10 @@ function switchToDashboard() {
 
 function updateNavAuth() {
   const nav = document.getElementById('navAuth');
+  if (_SHOP_TIER === 'storefront') {
+    nav.innerHTML = ''; // no auth UI for storefront tier
+    return;
+  }
   if (currentSession) {
     nav.innerHTML =
       '<div class="cust-nav-user">' +
@@ -201,6 +241,10 @@ function updateNavAuth() {
 }
 
 function handleBookAppt() {
+  if (_SHOP_TIER === 'storefront') {
+    showToast('Online ordering is not available for this shop. Please visit in person or call us!');
+    return;
+  }
   if (currentSession) {
     switchToDashboard();
     setTimeout(() => {
@@ -213,6 +257,10 @@ function handleBookAppt() {
 }
 
 function handleMakeOrder() {
+  if (_SHOP_TIER === 'storefront') {
+    showToast('Online ordering is not available for this shop. Please visit in person or call us!');
+    return;
+  }
   if (currentSession) {
     switchToDashboard();
     setTimeout(() => {
@@ -824,22 +872,79 @@ function renderStep3(el) {
     '<textarea class="cust-textarea" id="wizNotes" placeholder="...">' + orderNotes + '</textarea>' +
   '</div>';
 
-  // D. Driver pickup banner
-  html += '<div class="cust-driver-banner" onclick="showDriverComingSoon()">' +
-    '<div class="cust-driver-banner-icon">&#128666;</div>' +
-    '<div class="cust-driver-banner-text">' +
-      '<strong>' + t('wizard.driverBannerTitle') + '</strong>' +
-      '<span>' + t('wizard.driverBannerSub') + '</span>' +
+  // D. Driver pickup / delivery scheduling
+  html += '<div class="cust-driver-section" style="margin-top:16px;padding:16px;border-radius:12px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15)">' +
+    '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:12px">' +
+      '<input type="checkbox" id="wizDriverToggle" ' + (window._wizDriverRequested ? 'checked' : '') + ' style="width:18px;height:18px;accent-color:#a855f7">' +
+      '<span style="font-weight:600">&#128666; ' + t('wizard.driverBannerTitle') + '</span>' +
+    '</label>' +
+    '<div id="wizDriverFields" style="display:' + (window._wizDriverRequested ? 'block' : 'none') + '">' +
+      '<div class="cust-form-group" style="margin-bottom:10px">' +
+        '<label>' + t('wizard.pickupAddress') + '</label>' +
+        '<input type="text" class="cust-input" id="wizPickupAddr" placeholder="' + t('wizard.pickupAddressPlaceholder') + '" value="' + (window._wizPickupAddr || '') + '">' +
+      '</div>' +
+      '<div style="display:flex;gap:8px">' +
+        '<div class="cust-form-group" style="flex:1">' +
+          '<label>' + t('wizard.pickupDate') + '</label>' +
+          '<input type="date" class="cust-input" id="wizPickupDate" value="' + (window._wizPickupDate || '') + '">' +
+        '</div>' +
+        '<div class="cust-form-group" style="flex:1">' +
+          '<label>' + t('wizard.pickupTime') + '</label>' +
+          '<input type="time" class="cust-input" id="wizPickupTime" value="' + (window._wizPickupTime || '') + '">' +
+        '</div>' +
+      '</div>' +
     '</div>' +
-    '<div class="cust-driver-banner-arrow">&#8250;</div>' +
+  '</div>';
+
+  // E. Photo upload
+  html += '<div class="cust-form-group" style="margin-top:16px">' +
+    '<label>' + t('wizard.photoUpload') + '</label>' +
+    '<p style="font-size:12px;color:rgba(240,232,220,0.5);margin:4px 0 8px">' + t('wizard.photoUploadSub') + '</p>' +
+    '<input type="file" id="wizPhotoInput" accept="image/*" capture="environment" multiple ' +
+      'style="padding:8px;border-radius:8px;border:1px solid rgba(240,232,220,0.1);background:rgba(240,232,220,0.06);color:#f0e8dc;width:100%;box-sizing:border-box">' +
+    '<div id="wizPhotoPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div>' +
   '</div>';
 
   el.innerHTML = html;
   buildCustomerCalendar();
+  attachStep3Handlers();
 }
 
-function showDriverComingSoon() {
-  showToast(t('wizard.driverComingSoon'));
+// Driver toggle + photo preview handlers (attached after render)
+function attachStep3Handlers() {
+  var toggle = document.getElementById('wizDriverToggle');
+  var fields = document.getElementById('wizDriverFields');
+  if (toggle && fields) {
+    toggle.addEventListener('change', function () {
+      window._wizDriverRequested = toggle.checked;
+      fields.style.display = toggle.checked ? 'block' : 'none';
+    });
+  }
+  // Save driver fields on change
+  ['wizPickupAddr', 'wizPickupDate', 'wizPickupTime'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', function () { window['_' + id] = el.value; });
+  });
+  // Photo preview
+  var photoInput = document.getElementById('wizPhotoInput');
+  if (photoInput) {
+    photoInput.addEventListener('change', function () {
+      var preview = document.getElementById('wizPhotoPreview');
+      if (!preview) return;
+      window._wizPhotos = Array.from(photoInput.files).slice(0, 5);
+      preview.innerHTML = '';
+      window._wizPhotos.forEach(function (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var img = document.createElement('img');
+          img.src = e.target.result;
+          img.style.cssText = 'width:60px;height:60px;object-fit:cover;border-radius:8px;border:1px solid rgba(240,232,220,0.1)';
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  }
 }
 
 // ── Step 4: Review ──────────────────────────────────────────
@@ -907,6 +1012,10 @@ function renderStep4(el) {
 
 // ── Submit Order ────────────────────────────────────────────
 function submitOrder() {
+  if (_SHOP_TIER === 'storefront') {
+    showToast('Online ordering is not available for this shop.');
+    return;
+  }
   const selectedSvcs = orderServices.map(id => services.find(s => s.id === id)).filter(Boolean);
   const total = selectedSvcs.reduce((sum, s) => sum + s.price, 0);
   const totalTime = selectedSvcs.reduce((sum, s) => sum + parseDuration(s.time), 0);
@@ -977,7 +1086,35 @@ function submitOrder() {
   if (scheduledBlock) orderData.scheduledBlock = scheduledBlock;
 
   const incoming = DataStore.createIncoming(orderData);
-  showToast(t('wizard.orderSubmitted', { id: incoming.id }));
+
+  // Show confirmation modal with print option instead of just a toast
+  var confirmHtml =
+    '<div class="cust-confirm-overlay" id="orderConfirmOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px">' +
+      '<div style="background:var(--bg-surface,#161d2f);border-radius:12px;padding:32px;max-width:400px;width:100%;text-align:center;border:1px solid var(--glass-border,rgba(240,232,220,.08))">' +
+        '<div style="font-size:48px;margin-bottom:12px">&#10003;</div>' +
+        '<h3 style="margin:0 0 8px;color:var(--accent-green,#22c55e)">Order Submitted!</h3>' +
+        '<p style="color:var(--text-muted,#999);font-size:14px;margin:0 0 8px">Order <strong>' + incoming.id + '</strong> has been received.</p>' +
+        '<p style="color:var(--text-muted,#999);font-size:13px;margin:0 0 20px">We\'ll notify you when it\'s ready.</p>' +
+        '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+          '<button onclick="if(typeof printCustomerConfirmation===\'function\'){var o=' + JSON.stringify({
+            id: incoming.id,
+            customer: orderData.customer,
+            phone: orderData.phone,
+            email: orderData.email,
+            uniform: orderData.uniform,
+            deadline: orderData.deadline,
+            modifications: orderData.modifications,
+            costs: orderData.costs,
+            scheduledBlock: orderData.scheduledBlock || null
+          }).replace(/'/g, "\\'") + ';printCustomerConfirmation(o)}" class="cust-btn-primary" style="padding:10px 20px;font-size:14px;cursor:pointer">&#128424; Print Confirmation</button>' +
+          '<button onclick="document.getElementById(\'orderConfirmOverlay\').remove()" class="cust-btn-secondary" style="padding:10px 20px;font-size:14px;cursor:pointer">Close</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  var confirmDiv = document.createElement('div');
+  confirmDiv.innerHTML = confirmHtml;
+  document.body.appendChild(confirmDiv.firstChild);
+
   renderWizard();
   renderWelcome();
   renderMyOrders();
@@ -1536,13 +1673,44 @@ function addUserMessage(text) {
   msgs.scrollTop = msgs.scrollHeight;
 }
 
+// Chat conversation history for AI context
+let _chatHistory = [];
+
 function sendChat() {
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if (!text) return;
   addUserMessage(text);
   input.value = '';
-  setTimeout(() => processUserInput(text), 300);
+  _chatHistory.push({ role: 'user', content: text });
+  if (_chatHistory.length > 20) _chatHistory = _chatHistory.slice(-10);
+  processUserInputAI(text);
+}
+
+function processUserInputAI(text) {
+  // Try AI endpoint first, fall back to keyword matching
+  fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      shop_slug: _CUST_PREFIX,
+      message: text,
+      history: _chatHistory.slice(-8)
+    })
+  })
+  .then(function (r) { return r.ok ? r.json() : null; })
+  .then(function (data) {
+    if (data && data.reply) {
+      addBotMessage(data.reply);
+      _chatHistory.push({ role: 'assistant', content: data.reply });
+      if (_chatHistory.length > 20) _chatHistory = _chatHistory.slice(-10);
+    } else {
+      processUserInputFallback(text);
+    }
+  })
+  .catch(function () {
+    processUserInputFallback(text);
+  });
 }
 
 function matchesAny(text, keywords) {
@@ -1550,7 +1718,7 @@ function matchesAny(text, keywords) {
   return keywords.some(k => lower.includes(k));
 }
 
-function processUserInput(text) {
+function processUserInputFallback(text) {
   const lower = text.toLowerCase();
 
   // Hours / schedule
@@ -1797,28 +1965,200 @@ function applyShopConfig() {
 
 // ══════════════════════════════════════════════════════════════
 //  INIT
+// ── Helper to get shop config safely ─────────────────────────
+function _getShopCfg() {
+  if (typeof shopConfig !== 'undefined') return shopConfig;
+  if (typeof DataStore !== 'undefined') return DataStore.getShopConfig();
+  return { name: 'SewReady', address: '', phone: '', email: '', tagline: '' };
+}
+
+// ── Contact Form Submission ──────────────────────────────────
+function submitContactForm() {
+  var name = document.getElementById('cfName').value.trim();
+  var phone = document.getElementById('cfPhone').value.trim();
+  var email = document.getElementById('cfEmail').value.trim();
+  var message = document.getElementById('cfMessage').value.trim();
+  var btn = document.getElementById('cfSubmitBtn');
+
+  if (!name || !message) {
+    showToast('Please enter your name and message.');
+    return;
+  }
+
+  var slug = (typeof shopConfig !== 'undefined' && shopConfig.slug) ? shopConfig.slug : 'sewready';
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ shop_slug: slug, name: name, phone: phone, email: email, message: message })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(res) {
+    if (res.ok) {
+      showToast('Message sent! We\'ll get back to you soon.');
+      document.getElementById('cfName').value = '';
+      document.getElementById('cfPhone').value = '';
+      document.getElementById('cfEmail').value = '';
+      document.getElementById('cfMessage').value = '';
+    } else {
+      showToast(res.error || 'Failed to send message. Please call us instead.');
+    }
+  })
+  .catch(function() {
+    showToast('Failed to send message. Please call us instead.');
+  })
+  .finally(function() {
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  });
+}
+
+// ── Google Maps Embed ────────────────────────────────────────
+function renderGoogleMapsEmbed() {
+  var cfg = _getShopCfg();
+  var addr = cfg.address || '';
+  var container = document.getElementById('shopMapEmbed');
+  if (!container || !addr) return;
+  container.innerHTML =
+    '<iframe width="100%" height="300" frameborder="0" style="border:0;border-radius:12px" loading="lazy" allowfullscreen ' +
+    'src="https://maps.google.com/maps?q=' + encodeURIComponent(addr) + '&output=embed"></iframe>';
+}
+
+// ── SEO: JSON-LD Structured Data ─────────────────────────────
+function injectSEOMetadata() {
+  var cfg = _getShopCfg();
+  if (!cfg.name) return;
+
+  // Open Graph tags
+  var ogTags = {
+    'og:title': cfg.name + ' — SewReady',
+    'og:description': cfg.tagline || 'Professional uniform alterations & embroidery',
+    'og:type': 'business.business'
+  };
+  Object.keys(ogTags).forEach(function(prop) {
+    if (!document.querySelector('meta[property="' + prop + '"]')) {
+      var meta = document.createElement('meta');
+      meta.setAttribute('property', prop);
+      meta.setAttribute('content', ogTags[prop]);
+      document.head.appendChild(meta);
+    }
+  });
+
+  // Meta description
+  if (cfg.tagline && !document.querySelector('meta[name="description"]')) {
+    var desc = document.createElement('meta');
+    desc.name = 'description';
+    desc.content = cfg.tagline;
+    document.head.appendChild(desc);
+  }
+
+  // JSON-LD LocalBusiness schema
+  var hours = cfg.shopHours || {};
+  var dayMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var openingHours = [];
+  for (var d = 0; d < 7; d++) {
+    var h = hours[d];
+    if (h && h.start && h.end) {
+      openingHours.push(dayMap[d].slice(0, 2) + ' ' + h.start + '-' + h.end);
+    }
+  }
+
+  var ld = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    'name': cfg.name,
+    'description': cfg.tagline || '',
+    'address': cfg.address || '',
+    'telephone': cfg.phone || '',
+    'email': cfg.email || ''
+  };
+  if (openingHours.length) ld.openingHours = openingHours;
+
+  var script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(ld);
+  document.head.appendChild(script);
+}
+
 // ══════════════════════════════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', () => {
   applyShopConfig();
-  seedDemoAccounts();
 
-  // Check for existing session
-  const saved = localStorage.getItem(_ck('session'));
-  if (saved) {
-    currentSession = JSON.parse(saved);
-    switchToDashboard();
-  } else {
+  // ── Storefront tier: show polished landing with CTAs ──────
+  if (_SHOP_TIER === 'storefront') {
+    var scfg = _getShopCfg();
+    // Hide auth overlay, dashboard, order tracker, store inventory, cart
+    var authOv = document.getElementById('authOverlay');
+    if (authOv) authOv.style.display = 'none';
+    var dashEl = document.getElementById('custDashboard');
+    if (dashEl) dashEl.style.display = 'none';
+    var trackerEl = document.getElementById('tracker');
+    if (trackerEl) trackerEl.style.display = 'none';
+    var invEl = document.getElementById('storeInventory');
+    if (invEl) invEl.style.display = 'none';
+    var cartBtn = document.querySelector('.cust-cart-btn');
+    if (cartBtn) cartBtn.style.display = 'none';
+    var navSignIn = document.getElementById('navSignIn');
+    if (navSignIn) navSignIn.style.display = 'none';
+
+    // Hide "Track" and "Supplies" nav links
+    document.querySelectorAll('.cust-nav-link').forEach(function(link) {
+      var href = link.getAttribute('href') || '';
+      if (href === '#tracker' || href === '#storeInventory') link.style.display = 'none';
+    });
+
+    // Replace hero CTAs with storefront-specific ones
+    var heroCtaEl = document.querySelector('.cust-hero-ctas');
+    if (heroCtaEl) {
+      var phone = scfg.phone || '';
+      var phoneDigits = phone.replace(/\D/g, '');
+      var addr = scfg.address || '';
+      heroCtaEl.innerHTML =
+        (phoneDigits ? '<a href="tel:' + phoneDigits + '" class="cust-btn-primary" style="font-size:16px;padding:14px 28px">&#128222; Call Now</a>' : '') +
+        (addr ? '<a href="https://maps.google.com/maps?q=' + encodeURIComponent(addr) + '" target="_blank" class="cust-btn-secondary" style="font-size:16px;padding:14px 28px">&#128205; Get Directions</a>' : '') +
+        '<button class="cust-btn-secondary" onclick="document.getElementById(\'contactForm\').scrollIntoView({behavior:\'smooth\'})" style="font-size:16px;padding:14px 28px">&#9993; Send Message</button>';
+    }
+
+    // Add "Contact" to nav links
+    var navLinksEl = document.getElementById('custNavLinks');
+    if (navLinksEl) {
+      var contactLink = document.createElement('a');
+      contactLink.href = '#contactForm';
+      contactLink.className = 'cust-nav-link';
+      contactLink.textContent = 'Contact';
+      navLinksEl.appendChild(contactLink);
+    }
+
     switchToLanding();
+  } else {
+    seedDemoAccounts();
+    // Check for existing session
+    const saved = localStorage.getItem(_ck('session'));
+    if (saved) {
+      currentSession = JSON.parse(saved);
+      switchToDashboard();
+    } else {
+      switchToLanding();
+    }
   }
 
   // Render landing page content
   renderPublicServices();
-  renderStoreInventory();
+  if (_SHOP_TIER !== 'storefront') renderStoreInventory();
   renderBigCalendar();
   renderTeam();
   renderShopHours();
-  updateCartBadge();
+  if (_SHOP_TIER !== 'storefront') updateCartBadge();
+
+  // Google Maps embed (all tiers)
+  renderGoogleMapsEmbed();
+
+  // SEO metadata (all tiers)
+  injectSEOMetadata();
 
   // Big calendar nav buttons
   document.getElementById('bigcalPrev').addEventListener('click', bigcalPrevMonth);

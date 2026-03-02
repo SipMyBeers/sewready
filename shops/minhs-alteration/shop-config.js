@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'minhs-alteration',
   name: 'Minh\'s Alteration Shop',
   tagline: 'Expert alterations for military and civilian clothing. Fast turnaround.',

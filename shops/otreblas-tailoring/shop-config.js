@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'otreblas-tailoring',
   name: 'Otrebla\'s Tailoring',
   tagline: 'Expert tailoring for military and formal wear. Precision alterations near Fort Liberty.',

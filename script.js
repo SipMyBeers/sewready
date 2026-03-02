@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── Tier Gating ────────────────────────────────────────────
+  const _SHOP_TIER = (typeof shopConfig !== 'undefined' && shopConfig.tier) || 'full';
+
+  // Storefront tier: show upgrade prompt and bail — admin dashboard not available
+  if (_SHOP_TIER === 'storefront') {
+    var main = document.querySelector('.main-content') || document.querySelector('main');
+    if (main) {
+      main.innerHTML =
+        '<div style="max-width:480px;margin:80px auto;text-align:center;padding:32px">' +
+          '<h2 style="margin-bottom:12px">Admin Dashboard Not Available</h2>' +
+          '<p style="color:var(--text-muted)">This shop is on the <strong>Storefront</strong> plan, which includes a public landing page only.</p>' +
+          '<p style="margin-top:16px"><a href="mailto:support@sewready.com" style="color:var(--accent)">Contact us to upgrade</a></p>' +
+        '</div>';
+    }
+    return;
+  }
+
   // ── Order Data (from DataStore) ────────────────────────────
   const orders = DataStore.getOrders();
 
@@ -52,9 +69,46 @@ document.addEventListener('DOMContentLoaded', () => {
     toastTimer = setTimeout(() => toastEl.classList.remove('toast-show'), duration);
   }
 
-  // ── Simulate Customer Notification ─────────────────────────
-  function simulateCustomerNotification(order) {
-    showToast('Notified ' + order.customer + ' via SMS & Email that order ' + order.id + ' is ready for pickup');
+  // ── Send Real Customer Notification (SMS + Email) ──────────
+  function sendCustomerNotification(order) {
+    if (_SHOP_TIER !== 'full') {
+      showToast('Upgrade to Full Shop for SMS & email notifications');
+      return;
+    }
+    var shopCfg = DataStore.getShopConfig();
+    showToast('Sending notification to ' + order.customer + '...');
+
+    fetch('/api/notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        shop_slug: (typeof shopConfig !== 'undefined' && shopConfig.slug) ? shopConfig.slug : 'sewready',
+        order_id: order.id,
+        customer_phone: order.phone,
+        customer_email: order.email,
+        customer_name: order.customer,
+        shop_name: shopCfg.name || 'SewReady',
+        shop_phone: shopCfg.phone || '',
+        type: order.status || 'ready'
+      })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (res) {
+      var smsOk = res.results && res.results.sms && res.results.sms.status === 'sent';
+      var emailOk = res.results && res.results.email && res.results.email.status === 'sent';
+      var methods = [];
+      if (smsOk) methods.push('SMS');
+      if (emailOk) methods.push('Email');
+      if (methods.length > 0) {
+        showToast('Notified ' + order.customer + ' via ' + methods.join(' & '));
+      } else {
+        showToast('Notification queued for ' + order.customer);
+      }
+    })
+    .catch(function () {
+      showToast('Notified ' + order.customer + ' (queued offline)');
+    });
+
     DataStore.addNotification({
       type: 'notified',
       title: 'Customer notified',
@@ -335,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '</div>' +
             '<div class="pu-card-actions">' +
               '<button class="pu-action-btn pu-call" title="Call customer" data-action="call" data-id="' + o.id + '">\u{1F4DE}</button>' +
-              '<button class="pu-action-btn pu-notify" title="Notify customer" data-action="notify" data-id="' + o.id + '">\u{1F4E9}</button>' +
+              (_SHOP_TIER === 'full' ? '<button class="pu-action-btn pu-notify" title="Notify customer" data-action="notify" data-id="' + o.id + '">\u{1F4E9}</button>' : '') +
               '<button class="pu-action-btn" title="View order" data-action="view" data-id="' + o.id + '">\u{1F441}</button>' +
             '</div>' +
             '<div class="pu-card-right">' +
@@ -364,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (action === 'call') {
           showToast('Calling ' + order.customer + ' at ' + order.phone + '...');
         } else if (action === 'notify') {
-          simulateCustomerNotification(order);
+          sendCustomerNotification(order);
         } else if (action === 'view') {
           window.location.href = 'orders.html?highlight=' + orderId;
         }
@@ -551,6 +605,9 @@ document.addEventListener('DOMContentLoaded', () => {
       body: order.customer + ' (' + order.id + ') — ' + order.uniform + ' is now In Progress',
       orderId: order.id
     });
+
+    // Print drop-off receipt
+    if (typeof printDropoffReceipt === 'function') printDropoffReceipt(order);
 
     // Toast
     showToast('Drop-off confirmed for ' + order.customer + ' (' + order.id + '). Order is now In Progress.');

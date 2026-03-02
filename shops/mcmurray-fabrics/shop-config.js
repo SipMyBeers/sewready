@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'mcmurray-fabrics',
   name: 'McMurray Fabrics',
   tagline: 'Fabric supply and alterations. Everything you need for uniform care.',

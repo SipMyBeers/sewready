@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'perfit',
   name: 'Perfit',
   tagline: 'Perfect fit, every time. Military uniform tailoring specialists.',

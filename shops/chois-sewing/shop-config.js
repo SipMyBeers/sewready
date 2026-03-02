@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'chois-sewing',
   name: 'Choi\'s Sewing & Cleaning',
   tagline: 'Expert sewing and cleaning services. Trusted by Fort Liberty service members.',

@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'sues-sewing',
   name: 'Sue\'s Sewing & Laundry',
   tagline: 'Sewing, alterations, and laundry services for military personnel near Fort Liberty.',

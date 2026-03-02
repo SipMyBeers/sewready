@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'one-stop-sewing',
   name: 'One Stop Sewing & Cleaning',
   tagline: 'Your one-stop shop for sewing, cleaning, and uniform services near Fort Liberty.',

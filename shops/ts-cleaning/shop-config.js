@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'ts-cleaning',
   name: 'T & S Cleaning',
   tagline: 'Professional cleaning services for military and civilian garments.',

@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'pak-cleaners',
   name: 'Pak Cleaners',
   tagline: 'Professional dry cleaning and uniform care. Trusted by the military community.',

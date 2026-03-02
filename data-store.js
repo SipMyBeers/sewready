@@ -24,6 +24,38 @@ const DataStore = (function () {
     incoming:     SHOP_PREFIX + '-incoming'
   };
 
+  // ── API Sync Layer ───────────────────────────────────────
+  const API_BASE = '/api';
+
+  function _apiPost(path, data) {
+    return fetch(API_BASE + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ shop_slug: SHOP_PREFIX }, data))
+    }).catch(function () { /* offline — silent fail, localStorage has the data */ });
+  }
+
+  function _apiPatch(path, data) {
+    return fetch(API_BASE + path, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ shop_slug: SHOP_PREFIX }, data))
+    }).catch(function () {});
+  }
+
+  function _apiGet(path) {
+    var sep = path.indexOf('?') === -1 ? '?' : '&';
+    return fetch(API_BASE + path + sep + 'shop=' + encodeURIComponent(SHOP_PREFIX))
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .catch(function () { return []; });
+  }
+
+  function _apiDelete(path) {
+    return fetch(API_BASE + path + '?shop=' + encodeURIComponent(SHOP_PREFIX), {
+      method: 'DELETE'
+    }).catch(function () {});
+  }
+
   // ── Internal State ────────────────────────────────────────
   let _orders = [];
   let _employees = [];
@@ -354,6 +386,57 @@ const DataStore = (function () {
     if (!localStorage.getItem(KEYS.shopConfig)) _save(KEYS.shopConfig, _shopConfig);
     if (!localStorage.getItem(KEYS.notifications)) _save(KEYS.notifications, _notifications);
     if (!localStorage.getItem(KEYS.incoming)) _save(KEYS.incoming, _incoming);
+
+    // Background sync from D1 — fetches server data and merges (D1 wins for conflicts)
+    syncFromServer();
+  }
+
+  function syncFromServer() {
+    // Orders — merge by ID, D1 wins
+    _apiGet('/orders').then(function (serverOrders) {
+      if (!serverOrders || !serverOrders.length) return;
+      var idMap = {};
+      _orders.forEach(function (o) { idMap[o.id] = o; });
+      serverOrders.forEach(function (o) { idMap[o.id] = o; });
+      _orders = Object.values(idMap);
+      _save(KEYS.orders, _orders);
+      _reassignGlobals();
+      _emit('orders-synced', _orders);
+    });
+
+    // Incoming
+    _apiGet('/incoming').then(function (serverIncoming) {
+      if (!serverIncoming || !serverIncoming.length) return;
+      var idMap = {};
+      _incoming.forEach(function (o) { idMap[o.id] = o; });
+      serverIncoming.forEach(function (o) { idMap[o.id] = o; });
+      _incoming = Object.values(idMap);
+      _save(KEYS.incoming, _incoming);
+      _emit('incoming-synced', _incoming);
+    });
+
+    // Customers
+    _apiGet('/customers').then(function (serverCusts) {
+      if (!serverCusts || !serverCusts.length) return;
+      var idMap = {};
+      _customers.forEach(function (c) { idMap[c.id] = c; });
+      serverCusts.forEach(function (c) { idMap[c.id] = c; });
+      _customers = Object.values(idMap);
+      _save(KEYS.customers, _customers);
+      _emit('customers-synced', _customers);
+    });
+
+    // Notifications
+    _apiGet('/notifications').then(function (serverNotifs) {
+      if (!serverNotifs || !serverNotifs.length) return;
+      var idMap = {};
+      _notifications.forEach(function (n) { idMap[n.id] = n; });
+      serverNotifs.forEach(function (n) { idMap[n.id] = n; });
+      _notifications = Object.values(idMap);
+      _notifications.sort(function (a, b) { return (b.time || 0) - (a.time || 0); });
+      _save(KEYS.notifications, _notifications);
+      _emit('notifications-synced', _notifications);
+    });
   }
 
   // ── Orders ────────────────────────────────────────────────
@@ -418,6 +501,7 @@ const DataStore = (function () {
     }
 
     _emit('order-created', order);
+    _apiPost('/orders', order);
     return order;
   }
 
@@ -435,6 +519,7 @@ const DataStore = (function () {
     _save(KEYS.orders, _orders);
     _reassignGlobals();
     _emit('order-updated', order);
+    _apiPatch('/orders/' + id, order);
     return order;
   }
 
@@ -453,6 +538,7 @@ const DataStore = (function () {
     _save(KEYS.orders, _orders);
     _reassignGlobals();
     _emit('order-status-changed', { order, prev, status });
+    _apiPatch('/orders/' + id, order);
     return order;
   }
 
@@ -599,6 +685,7 @@ const DataStore = (function () {
     _customers.push(cust);
     _save(KEYS.customers, _customers);
     _emit('customer-added', cust);
+    _apiPost('/customers', cust);
     return cust;
   }
 
@@ -635,6 +722,7 @@ const DataStore = (function () {
     });
 
     _emit('incoming-created', incoming);
+    _apiPost('/incoming', incoming);
     return incoming;
   }
 
@@ -656,6 +744,7 @@ const DataStore = (function () {
     const order = _createOrderSilent(orderData);
 
     _emit('incoming-received', { incoming: inc, order: order });
+    _apiPost('/incoming/' + id + '/receive', { order_id: order.id });
     return order;
   }
 
@@ -663,6 +752,7 @@ const DataStore = (function () {
     _incoming = _incoming.filter(o => o.id !== id);
     _save(KEYS.incoming, _incoming);
     _emit('incoming-dismissed', id);
+    _apiPost('/incoming/' + id + '/dismiss', {});
   }
 
   // Create order without auto-notification (used by receiveIncoming)
@@ -701,6 +791,7 @@ const DataStore = (function () {
     _save(KEYS.orders, _orders);
     _reassignGlobals();
     _emit('order-created', order);
+    _apiPost('/orders', order);
     return order;
   }
 
@@ -716,6 +807,7 @@ const DataStore = (function () {
     _notifications.unshift(notif);
     _save(KEYS.notifications, _notifications);
     _emit('notification-added', notif);
+    _apiPost('/notifications', notif);
     return notif;
   }
 
@@ -724,12 +816,14 @@ const DataStore = (function () {
     if (n) {
       n.read = true;
       _save(KEYS.notifications, _notifications);
+      _apiPatch('/notifications/' + id, { read: true });
     }
   }
 
   function markAllRead() {
     _notifications.forEach(n => { n.read = true; });
     _save(KEYS.notifications, _notifications);
+    _apiPost('/notifications/read-all', {});
   }
 
   function dismissNotification(id) {
@@ -737,7 +831,61 @@ const DataStore = (function () {
     if (idx > -1) {
       _notifications.splice(idx, 1);
       _save(KEYS.notifications, _notifications);
+      _apiDelete('/notifications/' + id);
     }
+  }
+
+  // ── Drivers ──────────────────────────────────────────────
+  function getDrivers() {
+    return _apiGet('/drivers').then(function (r) { return r || []; });
+  }
+  function createDriver(data) {
+    return _apiPost('/drivers', data).then(function (r) { return r ? r.json() : null; });
+  }
+  function updateDriver(id, data) {
+    return _apiPatch('/drivers/' + id, data).then(function (r) { return r ? r.json() : null; });
+  }
+  function deleteDriver(id) {
+    return _apiDelete('/drivers/' + id);
+  }
+
+  // ── Driver Assignments ─────────────────────────────────
+  function getDriverAssignments(orderId) {
+    var path = '/driver-assignments';
+    if (orderId) path += '?order_id=' + encodeURIComponent(orderId);
+    return _apiGet(path).then(function (r) { return r || []; });
+  }
+  function createDriverAssignment(data) {
+    return _apiPost('/driver-assignments', data).then(function (r) { return r ? r.json() : null; });
+  }
+  function updateDriverAssignment(id, data) {
+    return _apiPatch('/driver-assignments/' + id, data).then(function (r) { return r ? r.json() : null; });
+  }
+
+  // ── Photos ─────────────────────────────────────────────
+  function getPhotos(orderId) {
+    var path = '/photos';
+    if (orderId) path += '?order_id=' + encodeURIComponent(orderId);
+    return _apiGet(path).then(function (r) { return r || []; });
+  }
+  function uploadPhoto(formData) {
+    formData.append('shop_slug', SHOP_PREFIX);
+    return fetch(API_BASE + '/photos/upload', {
+      method: 'POST',
+      body: formData
+    }).then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+  }
+  function deletePhoto(photoId) {
+    return _apiDelete('/photos?id=' + photoId);
+  }
+
+  // ── Audit Log ──────────────────────────────────────────
+  function getAuditLog(entityType, entityId) {
+    var path = '/audit';
+    if (entityType) path += '&entity_type=' + encodeURIComponent(entityType);
+    if (entityId) path += '&entity_id=' + encodeURIComponent(entityId);
+    return _apiGet(path).then(function (r) { return r || []; });
   }
 
   // ── Event System ──────────────────────────────────────────
@@ -825,9 +973,26 @@ const DataStore = (function () {
     markRead: markRead,
     markAllRead: markAllRead,
     dismissNotification: dismissNotification,
+    // Drivers
+    getDrivers: getDrivers,
+    createDriver: createDriver,
+    updateDriver: updateDriver,
+    deleteDriver: deleteDriver,
+    // Driver Assignments
+    getDriverAssignments: getDriverAssignments,
+    createDriverAssignment: createDriverAssignment,
+    updateDriverAssignment: updateDriverAssignment,
+    // Photos
+    getPhotos: getPhotos,
+    uploadPhoto: uploadPhoto,
+    deletePhoto: deletePhoto,
+    // Audit
+    getAuditLog: getAuditLog,
     // Events
     on: on,
     off: off,
+    // Sync
+    syncFromServer: syncFromServer,
     // Reset
     resetAll: resetAll
   };

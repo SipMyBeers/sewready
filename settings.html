@@ -6,6 +6,11 @@
   <title>SewReady — Settings</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#a855f7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css">
 </head>
 <body>
   <!-- Header -->
@@ -64,6 +69,10 @@
         <a href="calendar.html" class="nav-item">
           <span class="nav-icon">&#128197;</span>
           <span class="nav-label">Calendar</span>
+        </a>
+        <a href="analytics.html" class="nav-item">
+          <span class="nav-icon">&#128200;</span>
+          <span class="nav-label" data-i18n="admin.analytics">Analytics</span>
         </a>
         <a href="settings.html" class="nav-item active">
           <span class="nav-icon">&#9881;</span>
@@ -167,6 +176,55 @@
             <div class="sched-closed-add">
               <input type="date" id="newClosedDate">
               <button type="button" id="addClosedDateBtn">Add</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Driver Setup -->
+        <section class="settings-section">
+          <h2 class="settings-section-title" data-i18n="admin.driverSetup">Driver Setup</h2>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px" data-i18n="admin.driverSetupSub">Manage drivers for pickup and delivery service.</p>
+          <div id="driverSetup">
+            <span style="color:var(--text-muted);font-size:12px">Loading drivers...</span>
+          </div>
+        </section>
+
+        <!-- Billing & Plan -->
+        <section class="settings-section" id="billingSection">
+          <h2 class="settings-section-title">Billing & Plan</h2>
+          <div id="billingContent">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+              <span style="font-size:14px;color:var(--text-muted)">Current Plan:</span>
+              <span class="billing-tier-badge" id="billingTierBadge" style="display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:600">Loading...</span>
+              <span class="billing-status" id="billingStatus" style="font-size:12px;color:var(--text-muted)"></span>
+            </div>
+            <div id="billingPastDueWarning" style="display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#ef4444">
+              Payment failed. Please update your payment method to avoid service interruption.
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button type="button" class="snipcart-add-item btn-billing-upgrade" id="billingUpgradeOnline"
+                data-item-id="plan-online"
+                data-item-name="SewReady Online Orders Plan"
+                data-item-price="79.00"
+                data-item-url="/packages.html"
+                data-item-description="Online ordering, employee management, inventory, calendar, receipt printing — $79/mo"
+                data-item-payment-interval="Month"
+                data-item-payment-interval-count="1"
+                data-item-shippable="false"
+                data-item-max-quantity="1"
+                style="padding:8px 18px;font-size:13px;background:var(--accent,#a855f7);color:#fff;border:none;border-radius:6px;cursor:pointer;display:none">Upgrade to Online — $79/mo</button>
+              <button type="button" class="snipcart-add-item btn-billing-upgrade" id="billingUpgradeFull"
+                data-item-id="plan-full"
+                data-item-name="SewReady Full Shop Plan"
+                data-item-price="149.00"
+                data-item-url="/packages.html"
+                data-item-description="Everything in Online plus SMS, email, automated alerts, SOP library, analytics — $149/mo"
+                data-item-payment-interval="Month"
+                data-item-payment-interval-count="1"
+                data-item-shippable="false"
+                data-item-max-quantity="1"
+                style="padding:8px 18px;font-size:13px;background:var(--accent,#a855f7);color:#fff;border:none;border-radius:6px;cursor:pointer;display:none">Upgrade to Full — $149/mo</button>
+              <button type="button" class="snipcart-checkout" id="billingManageBtn" style="padding:8px 18px;font-size:13px;background:var(--border,rgba(240,232,220,.08));color:var(--text,#f0e8dc);border:none;border-radius:6px;cursor:pointer;display:none">Manage Billing</button>
             </div>
           </div>
         </section>
@@ -303,5 +361,8 @@
   <script src="data-store.js"></script>
   <script src="user-switch.js"></script>
   <script src="settings.js"></script>
+  <div hidden id="snipcart" data-api-key="Y2QzMWQ1NWQtNjc3NC00MDY1LThkMmQtY2ZmNzg5ZDkwMWE2NjM5MDc5MTUyNTMxMDc3MzE4" data-config-modal-style="side"></div>
+  <script src="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js"></script>
+  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>
 </body>
 </html>

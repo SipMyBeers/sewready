@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'jin-sewing',
   name: 'Jin Sewing',
   tagline: 'Precision sewing for military uniforms. Fast, reliable, regulation-compliant.',

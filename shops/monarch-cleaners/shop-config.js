@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'monarch-cleaners',
   name: 'Monarch Cleaners',
   tagline: 'Premium cleaning and embroidery services. Serving the Fort Liberty community.',

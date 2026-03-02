@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'kims-speedy',
   name: 'Kim\'s Speedy Sewing Shop',
   tagline: 'Fast, reliable uniform sewing. Same-day service available near Fort Liberty.',

@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'lees-alterations',
   name: 'Lee\'s Alterations & Sewing',
   tagline: 'Quality alterations and sewing for military uniforms. AR 670-1 compliant work.',

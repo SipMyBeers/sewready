@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'lees-tailors',
   name: 'Lee\'s Tailors',
   tagline: 'Professional tailoring for military and formal wear. Excellence in every stitch.',

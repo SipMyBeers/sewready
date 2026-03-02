@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'sf-sewing',
   name: 'S & F Sewing And Alterations',
   tagline: 'Full-service sewing and alterations. Serving Fort Liberty with pride.',

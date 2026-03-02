@@ -3,6 +3,7 @@
 // ══════════════════════════════════════════════════════════════
 
 const shopConfig = {
+  tier: 'full',
   slug: 'nans-cleaners',
   name: 'Nan\'s Cleaners',
   tagline: 'Reliable cleaning and pressing. Military uniforms our specialty.',
