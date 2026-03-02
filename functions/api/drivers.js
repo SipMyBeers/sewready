@@ -23,18 +23,31 @@ export async function onRequestGet(context) {
   }
 }
 
-// POST /api/drivers — create driver
+// POST /api/drivers — create driver (with optional email + invite token)
 export async function onRequestPost(context) {
   try {
-    const { shop_slug, name, phone, vehicle } = await context.request.json();
+    const { shop_slug, name, phone, vehicle, email } = await context.request.json();
     if (!shop_slug || !name) return json({ error: 'shop_slug and name required' }, 400);
 
     const id = crypto.randomUUID();
-    await context.env.DB.prepare(
-      'INSERT INTO drivers (id, shop_slug, name, phone, vehicle) VALUES (?, ?, ?, ?, ?)'
-    ).bind(id, shop_slug, name, phone || null, vehicle || null).run();
+    let resetToken = null;
+    let resetExpires = null;
 
-    return json({ id, shop_slug, name, phone, vehicle, active: 1 }, 201);
+    if (email) {
+      // Generate invite token (24h expiry)
+      resetToken = crypto.randomUUID();
+      resetExpires = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+    }
+
+    await context.env.DB.prepare(
+      'INSERT INTO drivers (id, shop_slug, name, phone, vehicle, email, reset_token, reset_expires) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+    ).bind(id, shop_slug, name, phone || null, vehicle || null, email ? email.toLowerCase() : null, resetToken, resetExpires).run();
+
+    const result = { id, shop_slug, name, phone, vehicle, email: email || null, active: 1 };
+    if (resetToken) {
+      result.invite_token = resetToken;
+    }
+    return json(result, 201);
   } catch (err) {
     return json({ error: 'Failed to create driver' }, 500);
   }

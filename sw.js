@@ -20,6 +20,7 @@ const PRECACHE = [
   '/data-store.js',
   '/admin-auth.js',
   '/auth-gate.js',
+  '/driver-app.js',
 ];
 
 // Install — pre-cache static assets

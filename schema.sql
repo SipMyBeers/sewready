@@ -228,3 +228,10 @@ CREATE TABLE IF NOT EXISTS rate_limits (
 );
 
 CREATE INDEX IF NOT EXISTS idx_rate_limits_key ON rate_limits(key);
+
+-- ── Phase 5A: Driver Auth Columns ─────────────────────────────
+-- ALTER TABLE drivers ADD COLUMN email TEXT;
+-- ALTER TABLE drivers ADD COLUMN password_hash TEXT;
+-- ALTER TABLE drivers ADD COLUMN reset_token TEXT;
+-- ALTER TABLE drivers ADD COLUMN reset_expires TEXT;
+-- CREATE UNIQUE INDEX IF NOT EXISTS idx_drivers_email ON drivers(shop_slug, email);
