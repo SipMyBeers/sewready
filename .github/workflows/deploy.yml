@@ -10,12 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Apply D1 schema
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: d1 execute sewready-db --remote --file=schema.sql
+      # D1 schema is applied manually via: npx wrangler d1 execute sewready-db --remote --file=schema.sql
+      # CI token lacks D1 write permissions, so schema changes are run locally with OAuth.
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
