@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewReady — Military Uniform Alterations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../customer.css">
+</head>
+<body class="cust-body">
+
+  <!-- ── Top Info Bar ────────────────────────────────────────── -->
+  <div class="cust-topbar">
+    <div class="cust-topbar-inner">
+      <div class="cust-topbar-info">
+        <span class="cust-topbar-addr">&#128205; 123 Bragg Blvd, Fayetteville, NC 28301</span>
+        <span class="cust-topbar-sep">|</span>
+        <span class="cust-topbar-phone">&#128222; (555) 867-5309</span>
+      </div>
+      <div class="cust-topbar-actions">
+        <a href="tel:5558675309" class="cust-topbar-btn cust-topbar-btn-call">&#128222; Call Now</a>
+        <a href="https://maps.google.com" target="_blank" class="cust-topbar-btn cust-topbar-btn-dir">&#128205; Get Directions</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Sticky Nav ────────────────────────────────────────── -->
+  <nav class="cust-nav" id="custNav">
+    <div class="cust-nav-inner">
+      <div class="cust-nav-brand">
+        <span class="cust-brand-icon">&#9986;</span>
+        <span class="cust-brand-name">SewReady</span>
+      </div>
+      <div class="cust-nav-links" id="custNavLinks">
+        <a href="#services" class="cust-nav-link" data-i18n="nav.services">Services</a>
+        <a href="#storeInventory" class="cust-nav-link" data-i18n="nav.supplies">Supplies</a>
+        <a href="#about" class="cust-nav-link" data-i18n="nav.about">About</a>
+      </div>
+      <div class="cust-nav-right">
+        <button class="cust-lang-toggle" id="langToggle" onclick="toggleLanguage()" title="Switch language">EN | 한</button>
+        <button class="cust-cart-btn" onclick="toggleCartDrawer()" title="Cart">
+          &#128722;
+          <span class="cust-cart-badge" id="cartBadge" style="display:none">0</span>
+        </button>
+        <div class="cust-nav-auth" id="navAuth">
+          <button class="cust-btn-primary cust-btn-sm" id="navSignIn" onclick="openAuth()" data-i18n="nav.signin">Sign In</button>
+        </div>
+        <button class="cust-hamburger" id="custHamburger" aria-label="Menu">&#9776;</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Landing Page ──────────────────────────────────────── -->
+  <div id="custLanding">
+
+    <!-- Hero -->
+    <section class="cust-hero">
+      <!-- Cherry Blossom Petals -->
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cherry-petal"></div>
+      <div class="cust-hero-content">
+        <h1 class="cust-hero-title" data-i18n="hero.title">Military-Grade Sewing.<br>Mission-Ready Uniforms.</h1>
+        <p class="cust-hero-sub" data-i18n="hero.sub">Professional uniform alterations &amp; embroidery. AR 670-1 compliant. Trusted by soldiers at Fort Liberty.</p>
+        <div class="cust-hero-ctas">
+          <button class="cust-btn-primary" onclick="document.getElementById('tracker').scrollIntoView({behavior:'smooth'})" data-i18n="hero.track">Track My Order</button>
+          <button class="cust-btn-secondary" onclick="handleMakeOrder()" data-i18n="hero.order">Make an Order</button>
+          <button class="cust-btn-secondary" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" data-i18n="hero.team">Meet the Team</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Big Calendar + Hours -->
+    <section class="cust-bigcal-section" id="heroCal">
+      <h2 class="cust-section-title" style="text-align:center" data-i18n="schedule.title">Our Schedule</h2>
+      <p class="cust-section-sub" style="text-align:center" data-i18n="schedule.sub">See when we're open. Click a day to book an appointment.</p>
+      <div class="cust-bigcal-layout">
+        <div class="cust-bigcal-card">
+          <div class="cust-bigcal-header">
+            <button class="cust-bigcal-nav" id="bigcalPrev">&#9664;</button>
+            <span class="cust-bigcal-month" id="bigcalMonth"></span>
+            <button class="cust-bigcal-nav" id="bigcalNext">&#9654;</button>
+          </div>
+          <div class="cust-bigcal-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="cust-bigcal-grid" id="bigcalGrid"></div>
+        </div>
+        <div class="cust-bigcal-sidebar">
+          <div class="cust-bigcal-hours-card">
+            <h3 class="cust-card-title" data-i18n="schedule.hours">Shop Hours</h3>
+            <ul class="cust-hours-list" id="custHours"></ul>
+          </div>
+          <div class="cust-bigcal-hours-card">
+            <h3 class="cust-card-title" data-i18n="schedule.location">Location</h3>
+            <p class="cust-location-addr">123 Bragg Blvd<br>Fayetteville, NC 28301</p>
+            <p class="cust-location-detail">&#128222; (555) 867-5309</p>
+            <p class="cust-location-detail">&#9993; info@sewready.com</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Order Tracker -->
+    <section class="cust-section" id="tracker">
+      <h2 class="cust-section-title" data-i18n="tracker.title">Track Your Order</h2>
+      <p class="cust-section-sub" data-i18n="tracker.sub">No account needed. Enter your order number and phone to check status.</p>
+      <div class="cust-tracker-form">
+        <input type="text" id="trackOrderId" class="cust-input" data-i18n-placeholder="tracker.orderPlaceholder" placeholder="Order # (e.g. SR-001)">
+        <input type="text" id="trackPhone" class="cust-input" data-i18n-placeholder="tracker.phonePlaceholder" placeholder="Phone (e.g. (555) 201-4488)">
+        <button class="cust-btn-primary" onclick="trackOrder()" data-i18n="tracker.btn">Track</button>
+      </div>
+      <div id="trackResult"></div>
+    </section>
+
+    <!-- Trust Signals -->
+    <section class="cust-section cust-trust">
+      <div class="cust-trust-grid">
+        <div class="cust-trust-item">
+          <span class="cust-trust-num">500+</span>
+          <span class="cust-trust-label" data-i18n="trust.orders">Orders Completed</span>
+        </div>
+        <div class="cust-trust-item">
+          <span class="cust-trust-num">AR 670-1</span>
+          <span class="cust-trust-label" data-i18n="trust.compliant">Compliant</span>
+        </div>
+        <div class="cust-trust-item">
+          <span class="cust-trust-num">24hr</span>
+          <span class="cust-trust-label" data-i18n="trust.rush">Rush Available</span>
+        </div>
+        <div class="cust-trust-item">
+          <span class="cust-trust-num">4.9&#9733;</span>
+          <span class="cust-trust-label" data-i18n="trust.rating">Rating</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Showcase -->
+    <section class="cust-section" id="services">
+      <h2 class="cust-section-title" data-i18n="services.title">Our Services</h2>
+      <p class="cust-section-sub" data-i18n="services.sub">55 services across 5 categories. Everything your uniform needs.</p>
+      <div class="cust-filter-pills" id="svcFilterPills"></div>
+      <div class="cust-svc-grid" id="custSvcGrid"></div>
+    </section>
+
+    <!-- Store Inventory -->
+    <section class="cust-section" id="storeInventory">
+      <h2 class="cust-section-title" data-i18n="inventory.title">Supplies &amp; Inventory</h2>
+      <p class="cust-section-sub" data-i18n="inventory.sub">35 items in stock. Tapes, patches, insignia, badges, and more.</p>
+      <div class="cust-filter-pills" id="invFilterPills"></div>
+      <div class="cust-inv-grid" id="custInvGrid"></div>
+    </section>
+
+    <!-- Meet the Team -->
+    <section class="cust-section" id="about">
+      <h2 class="cust-section-title" data-i18n="team.title">Meet the Team</h2>
+      <p class="cust-section-sub" data-i18n="team.sub">Skilled professionals dedicated to keeping you mission-ready.</p>
+      <div class="cust-team-grid" id="custTeam"></div>
+      <div class="cust-story">
+        <p>Maria's Alterations has been serving military personnel for over 15 years. Located just outside the gate, we specialize in AR 670-1 compliant uniform services — from quick name tape sew-ons to complete AGSU setups. Every stitch meets regulation standards.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="cust-footer">
+      <p>&copy; 2026 SewReady — Maria's Alterations. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- ── Customer Dashboard ────────────────────────────────── -->
+  <div id="custDashboard" style="display:none">
+
+    <!-- Welcome Bar -->
+    <div class="cust-welcome-bar" id="custWelcome"></div>
+
+    <!-- My Orders -->
+    <section class="cust-dash-section">
+      <h2 class="cust-section-title" data-i18n="dash.myOrders">My Orders</h2>
+      <div id="custMyOrders"></div>
+    </section>
+
+    <!-- Place New Order -->
+    <section class="cust-dash-section">
+      <h2 class="cust-section-title" data-i18n="dash.newOrder">Place New Order</h2>
+      <div class="cust-card" id="custNewOrder">
+        <div class="cust-wizard-steps" id="wizardSteps"></div>
+        <div id="wizardContent"></div>
+        <div class="cust-wizard-nav" id="wizardNav"></div>
+      </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="cust-dash-section cust-quick-actions">
+      <a href="tel:5558675309" class="cust-btn-secondary">&#128222; Call Shop</a>
+      <a href="https://maps.google.com" target="_blank" class="cust-btn-secondary">&#128205; Get Directions</a>
+    </section>
+  </div>
+
+  <!-- ── Auth Modal ────────────────────────────────────────── -->
+  <div class="cust-auth-overlay" id="authOverlay" style="display:none">
+    <div class="cust-auth-modal">
+      <button class="cust-auth-close" onclick="closeAuth()">&times;</button>
+      <div class="cust-auth-tabs">
+        <button class="cust-auth-tab active" id="tabSignIn" onclick="switchAuthTab('signin')" data-i18n="auth.signin">Sign In</button>
+        <button class="cust-auth-tab" id="tabCreate" onclick="switchAuthTab('create')" data-i18n="auth.create">Create Account</button>
+      </div>
+
+      <!-- Sign In -->
+      <div id="authSignIn">
+        <div class="cust-form-group">
+          <label>Email</label>
+          <input type="email" id="siEmail" class="cust-input" placeholder="rodriguez.j@army.mil">
+        </div>
+        <div class="cust-form-group">
+          <label>Password</label>
+          <input type="password" id="siPassword" class="cust-input" placeholder="Enter password">
+        </div>
+        <button class="cust-btn-primary cust-btn-full" onclick="signIn()" data-i18n="auth.signinBtn">Sign In</button>
+        <p class="cust-auth-hint">Demo: rodriguez.j@army.mil / demo123</p>
+      </div>
+
+      <!-- Create Account -->
+      <div id="authCreate" style="display:none">
+        <div class="cust-form-group">
+          <label>Full Name (with rank)</label>
+          <input type="text" id="caName" class="cust-input" placeholder="SGT Rodriguez">
+        </div>
+        <div class="cust-form-group">
+          <label>Phone</label>
+          <input type="tel" id="caPhone" class="cust-input" placeholder="(555) 000-0000">
+        </div>
+        <div class="cust-form-group">
+          <label>Email</label>
+          <input type="email" id="caEmail" class="cust-input" placeholder="name@army.mil">
+        </div>
+        <div class="cust-form-group">
+          <label>Password</label>
+          <input type="password" id="caPassword" class="cust-input" placeholder="Create password">
+        </div>
+        <div class="cust-form-group">
+          <label>Unit (optional)</label>
+          <input type="text" id="caUnit" class="cust-input" placeholder="82nd Airborne">
+        </div>
+        <button class="cust-btn-primary cust-btn-full" onclick="createAccount()" data-i18n="auth.createBtn">Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Cart Drawer ────────────────────────────────────────── -->
+  <div class="cust-cart-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+  <div class="cust-cart-drawer" id="cartDrawer">
+    <div class="cust-cart-drawer-header">
+      <h3>Your Cart</h3>
+      <button class="cust-cart-drawer-close" onclick="closeCartDrawer()">&times;</button>
+    </div>
+    <div class="cust-cart-drawer-items" id="cartItems"></div>
+    <div class="cust-cart-drawer-footer" id="cartFooter">
+      <div class="cust-cart-total">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="cust-btn-primary cust-btn-full" onclick="checkoutFromCart()">Checkout</button>
+    </div>
+  </div>
+
+  <!-- ── Chat Widget ──────────────────────────────────────── -->
+  <button class="cust-chat-fab" id="chatFab" onclick="toggleChat()" title="Chat with us">&#128172;</button>
+  <div class="cust-chat-panel" id="chatPanel" style="display:none">
+    <div class="cust-chat-header">
+      <span class="cust-chat-header-title">&#9986; SewReady Assistant</span>
+      <button class="cust-chat-header-close" onclick="toggleChat()">&times;</button>
+    </div>
+    <div class="cust-chat-messages" id="chatMessages"></div>
+    <div class="cust-chat-quick" id="chatQuick"></div>
+    <div class="cust-chat-input-bar">
+      <input type="text" class="cust-chat-input" id="chatInput" placeholder="Ask about services, hours, orders..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="cust-chat-send" onclick="sendChat()">&#10148;</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="cust-toast" id="custToast"></div>
+
+  <script src="../../translations.js"></script>
+  <script src="shop-config.js"></script>
+  <script src="../../services-data.js"></script>
+  <script src="../../inventory-data.js"></script>
+  <script src="../../data-store.js"></script>
+  <script src="../../customer.js"></script>
+</body>
+</html>
