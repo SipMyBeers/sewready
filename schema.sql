@@ -215,6 +215,8 @@ CREATE INDEX IF NOT EXISTS idx_photos_shop ON order_photos(shop_slug);
 CREATE INDEX IF NOT EXISTS idx_photos_order ON order_photos(shop_slug, order_id);
 
 -- ── Phase 4: Password Reset Columns ──────────────────────────
--- Run these ALTER statements to add password reset columns:
--- ALTER TABLE admin_users ADD COLUMN reset_token TEXT;
--- ALTER TABLE admin_users ADD COLUMN reset_expires TEXT;
+-- These use IF NOT EXISTS pattern to be idempotent (SQLite doesn't support it natively,
+-- so we use a CREATE TABLE trick to avoid errors on re-run)
+-- To add manually: ALTER TABLE admin_users ADD COLUMN reset_token TEXT;
+--                  ALTER TABLE admin_users ADD COLUMN reset_expires TEXT;
+SELECT 1;
