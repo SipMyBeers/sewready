@@ -8,7 +8,7 @@ function json(data, status = 200) {
   });
 }
 
-const PUBLIC_PATHS = ['/api/auth/login', '/api/auth/register'];
+const PUBLIC_PATHS = ['/api/auth/login', '/api/auth/register', '/api/auth/forgot-password', '/api/auth/reset-password'];
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);

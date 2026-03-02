@@ -323,6 +323,26 @@
           </div>
         </section>
 
+        <!-- Data Export -->
+        <section class="settings-section">
+          <h2 class="settings-section-title">Data Export</h2>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Download your data as CSV files. Your data is yours — export anytime.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="button" onclick="exportData('orders')" style="padding:8px 18px;font-size:13px;background:var(--glass-hover);color:var(--text);border:1px solid var(--glass-border);border-radius:6px;cursor:pointer">Export Orders</button>
+            <button type="button" onclick="exportData('customers')" style="padding:8px 18px;font-size:13px;background:var(--glass-hover);color:var(--text);border:1px solid var(--glass-border);border-radius:6px;cursor:pointer">Export Customers</button>
+            <button type="button" onclick="exportData('analytics')" style="padding:8px 18px;font-size:13px;background:var(--glass-hover);color:var(--text);border:1px solid var(--glass-border);border-radius:6px;cursor:pointer">Export Analytics</button>
+          </div>
+        </section>
+
+        <!-- Legal -->
+        <section class="settings-section">
+          <h2 class="settings-section-title">Legal</h2>
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <a href="/legal/terms.html" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:14px">Terms of Service &rarr;</a>
+            <a href="/legal/privacy.html" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:14px">Privacy Policy &rarr;</a>
+          </div>
+        </section>
+
         <!-- Account -->
         <section class="settings-section">
           <h2 class="settings-section-title">Account</h2>
@@ -361,6 +381,13 @@
   <script src="data-store.js"></script>
   <script src="user-switch.js"></script>
   <script src="settings.js"></script>
+  <script>
+  function exportData(type) {
+    var slug = (typeof shopConfig !== 'undefined' && shopConfig.slug) ? shopConfig.slug : '';
+    if (!slug) { alert('Shop not configured'); return; }
+    window.open('/api/export?shop=' + encodeURIComponent(slug) + '&type=' + type, '_blank');
+  }
+  </script>
   <div hidden id="snipcart" data-api-key="Y2QzMWQ1NWQtNjc3NC00MDY1LThkMmQtY2ZmNzg5ZDkwMWE2NjM5MDc5MTUyNTMxMDc3MzE4" data-config-modal-style="side"></div>
   <script src="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js"></script>
   <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>

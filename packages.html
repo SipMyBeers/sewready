@@ -142,9 +142,10 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <div class="nav-links">
     <a href="#pricing">Pricing</a>
     <a href="#hardware">Hardware</a>
-    <a href="#setup">Setup Guide</a>
+    <a href="/demo.html">Try Demo</a>
+    <a href="/guide.html">Guide</a>
   </div>
-  <a class="nav-cta" href="#contactSection">Get Started Free</a>
+  <a class="nav-cta" href="/onboard.html">Get Started Free</a>
   <button class="snipcart-checkout nav-cart" style="background:none;border:1px solid var(--glass-border);color:var(--text);padding:8px 16px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">&#128722; Cart (<span class="snipcart-items-count">0</span>)</button>
 </nav>
 
@@ -183,7 +184,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>SEO optimized</li>
       <li>Mobile-responsive design</li>
     </ul>
-    <a class="card-cta secondary" href="#contactSection">Get Started Free</a>
+    <a class="card-cta secondary" href="/onboard.html">Get Started Free</a>
   </div>
 
   <!-- Online Orders ($79/mo) -->
@@ -498,6 +499,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <!-- ── Footer ───────────────────────────────────────────── -->
 <footer class="pkg-footer">
   &copy; 2026 SewReady &mdash; Built for military alteration shops near Fort Liberty
+  <br><a href="/legal/terms.html" style="color:var(--text-dim)">Terms of Service</a> &middot; <a href="/legal/privacy.html" style="color:var(--text-dim)">Privacy Policy</a> &middot; <a href="/guide.html" style="color:var(--text-dim)">Quick-Start Guide</a>
 </footer>
 
 <script>
@@ -514,8 +516,18 @@ function handleDemoSubmit(e) {
     notes: document.getElementById('cNotes').value
   };
 
-  // In production, POST to a form handler / API
-  console.log('Demo request:', data);
+  // Submit to contact API
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      shop_slug: 'sewready',
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+      message: 'Shop: ' + data.shop + '\nInterested in: ' + (data.package || 'Not sure yet') + '\n' + (data.notes || '')
+    })
+  }).catch(function () {});
 
   form.style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SewReady — One-Pager</title>
+<style>
+/* ── Print-optimized one-pager ─────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+:root{--blue:#3a6ea5;--cyan:#06b6d4;--green:#10b981;--dark:#0e1528;--card:#141d33;--text:#f0e8dc;--muted:rgba(240,232,220,.6);--dim:rgba(240,232,220,.35);--border:rgba(240,232,220,.08)}
+
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--dark);color:var(--text);min-height:100vh}
+
+/* Screen layout */
+.pitch-wrap{max-width:800px;margin:0 auto;padding:40px 24px}
+.pitch-header{text-align:center;margin-bottom:40px}
+.pitch-header .logo{font-size:36px;font-weight:800;margin-bottom:4px}
+.pitch-header .logo em{font-style:normal;color:var(--cyan)}
+.pitch-header .tagline{font-size:18px;color:var(--muted);line-height:1.5;max-width:600px;margin:0 auto}
+
+.pitch-highlight{background:var(--card);border:2px solid var(--cyan);border-radius:12px;padding:24px 28px;text-align:center;margin-bottom:32px}
+.pitch-highlight p{font-size:17px;line-height:1.6;margin:0;font-weight:500}
+.pitch-highlight strong{color:var(--cyan)}
+
+.pitch-problem{margin-bottom:32px}
+.pitch-problem h2{font-size:20px;font-weight:700;margin:0 0 12px;color:var(--cyan)}
+.pitch-problem .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pitch-problem .item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:13px}
+.pitch-problem .icon{font-size:20px}
+
+.pitch-features{margin-bottom:32px}
+.pitch-features h2{font-size:20px;font-weight:700;margin:0 0 16px;color:var(--cyan)}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.feat-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center}
+.feat-item .fi{font-size:24px;margin-bottom:6px}
+.feat-item .fn{font-size:13px;font-weight:600}
+.feat-item .fd{font-size:11px;color:var(--muted);margin-top:2px}
+
+.pitch-pricing{margin-bottom:32px}
+.pitch-pricing h2{font-size:20px;font-weight:700;margin:0 0 16px;color:var(--cyan)}
+.price-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.price-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.price-box.featured{border:2px solid var(--blue)}
+.price-box .pn{font-size:15px;font-weight:700;margin-bottom:4px}
+.price-box .pp{font-size:24px;font-weight:800;color:var(--cyan)}
+.price-box .pd{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+.pitch-roi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:32px}
+.pitch-roi h2{font-size:18px;font-weight:700;margin:0 0 12px;color:var(--green)}
+.roi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center}
+.roi-num{font-size:28px;font-weight:800;color:var(--green)}
+.roi-label{font-size:12px;color:var(--muted);margin-top:2px}
+
+.pitch-cta{text-align:center;padding:24px 0}
+.pitch-cta h2{font-size:22px;font-weight:700;margin:0 0 8px}
+.pitch-cta p{font-size:14px;color:var(--muted);margin:0 0 8px}
+.pitch-cta .url{font-size:16px;font-weight:700;color:var(--cyan)}
+.pitch-cta .phone{font-size:14px;color:var(--muted);margin-top:4px}
+
+.pitch-footer{text-align:center;font-size:11px;color:var(--dim);padding:16px;border-top:1px solid var(--border)}
+
+.no-print{margin-bottom:24px;text-align:center}
+.print-btn{background:var(--blue);color:#fff;border:none;padding:10px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
+
+/* ── Print styles ──────────────────────────────────────── */
+@media print{
+  body{background:#fff;color:#111;font-size:11px}
+  .no-print{display:none!important}
+  .pitch-wrap{padding:0;max-width:100%}
+  .pitch-header .logo{color:#111}
+  .pitch-header .logo em{color:#3a6ea5}
+  .pitch-header .tagline{color:#555}
+  .pitch-highlight{border-color:#3a6ea5;background:#f0f7ff}
+  .pitch-highlight p{color:#111}
+  .pitch-highlight strong{color:#3a6ea5}
+  .pitch-problem h2,.pitch-features h2,.pitch-pricing h2{color:#3a6ea5}
+  .pitch-problem .item,.feat-item,.price-box,.pitch-roi{background:#f8f9fa;border:1px solid #ddd}
+  .pitch-problem .item{color:#333}
+  .feat-item .fn{color:#111}
+  .feat-item .fd,.price-box .pd,.roi-label{color:#666}
+  .price-box .pp,.roi-num,.pitch-cta .url{color:#3a6ea5}
+  .pitch-roi h2{color:#10b981}
+  .roi-num{color:#10b981}
+  .price-box.featured{border-color:#3a6ea5}
+  .pitch-cta h2{color:#111}
+  .pitch-cta p{color:#555}
+  .pitch-footer{color:#999;border-color:#ddd}
+  @page{margin:0.5in;size:letter}
+}
+</style>
+</head>
+<body>
+
+<div class="pitch-wrap">
+
+<div class="no-print">
+  <button class="print-btn" onclick="window.print()">Print One-Pager</button>
+  <a style="color:rgba(240,232,220,.5);text-decoration:none;font-size:13px;margin-left:12px" href="/pitch-ko.html">&#127472;&#127479; Korean Version</a>
+</div>
+
+<!-- Header -->
+<div class="pitch-header">
+  <div class="logo">Sew<em>Ready</em></div>
+  <p class="tagline">The all-in-one digital platform built specifically for military alteration shops</p>
+</div>
+
+<!-- Value Prop -->
+<div class="pitch-highlight">
+  <p>SewReady replaces your paper ticket system with a <strong>complete digital shop</strong> — order tracking, customer notifications, online ordering, and bilingual support — for <strong>less than $5/day</strong>.</p>
+</div>
+
+<!-- Problem -->
+<div class="pitch-problem">
+  <h2>The Problem With Paper Tickets</h2>
+  <div class="grid">
+    <div class="item"><span class="icon">&#128196;</span> Lost orders and misplaced tickets</div>
+    <div class="item"><span class="icon">&#9888;</span> Missed deadlines and angry soldiers</div>
+    <div class="item"><span class="icon">&#128222;</span> Hours spent calling customers for pickup</div>
+    <div class="item"><span class="icon">&#128683;</span> No-show pickups clogging your rack</div>
+  </div>
+</div>
+
+<!-- Features -->
+<div class="pitch-features">
+  <h2>What SewReady Does</h2>
+  <div class="feat-grid">
+    <div class="feat-item">
+      <div class="fi">&#128203;</div>
+      <div class="fn">Order Management</div>
+      <div class="fd">Full lifecycle tracking with AR 670-1 checklists</div>
+    </div>
+    <div class="feat-item">
+      <div class="fi">&#128241;</div>
+      <div class="fn">Online Ordering</div>
+      <div class="fd">Customers order from their phone</div>
+    </div>
+    <div class="feat-item">
+      <div class="fi">&#128172;</div>
+      <div class="fn">SMS & Email Alerts</div>
+      <div class="fd">Auto-notify when orders are ready</div>
+    </div>
+    <div class="feat-item">
+      <div class="fi">&#127468;&#127463; &#127472;&#127479;</div>
+      <div class="fn">Bilingual</div>
+      <div class="fd">Full Korean/English interface</div>
+    </div>
+    <div class="feat-item">
+      <div class="fi">&#128424;</div>
+      <div class="fn">Receipt & Labels</div>
+      <div class="fd">Print receipts and garment tags</div>
+    </div>
+    <div class="feat-item">
+      <div class="fi">&#128200;</div>
+      <div class="fn">Analytics</div>
+      <div class="fd">Revenue, orders, turnaround times</div>
+    </div>
+    <div class="feat-item">
+      <div class="fi">&#128666;</div>
+      <div class="fn">Driver Pickup</div>
+      <div class="fd">Coordinate delivery drivers</div>
+    </div>
+    <div class="feat-item">
+      <div class="fi">&#129302;</div>
+      <div class="fn">AI Chat</div>
+      <div class="fd">Automated customer support</div>
+    </div>
+    <div class="feat-item">
+      <div class="fi">&#128247;</div>
+      <div class="fn">Order Photos</div>
+      <div class="fd">Before & after documentation</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pricing -->
+<div class="pitch-pricing">
+  <h2>Simple Pricing</h2>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="pn">Storefront</div>
+      <div class="pp">Free</div>
+      <div class="pd">Website, services display, Google Maps, contact form</div>
+    </div>
+    <div class="price-box featured">
+      <div class="pn">Online Orders</div>
+      <div class="pp">$79/mo</div>
+      <div class="pd">+ Online ordering, tracking, employees, inventory, receipts</div>
+    </div>
+    <div class="price-box">
+      <div class="pn">Full Shop</div>
+      <div class="pp">$149/mo</div>
+      <div class="pd">+ SMS/email alerts, analytics, drivers, SOP library</div>
+    </div>
+  </div>
+</div>
+
+<!-- ROI -->
+<div class="pitch-roi">
+  <h2>The Math Works</h2>
+  <div class="roi-grid">
+    <div>
+      <div class="roi-num">2 hrs</div>
+      <div class="roi-label">Saved per day<br>(no more phone calls & paper)</div>
+    </div>
+    <div>
+      <div class="roi-num">$450</div>
+      <div class="roi-label">Monthly labor savings<br>(2 hrs &times; $15/hr &times; 30 days)</div>
+    </div>
+    <div>
+      <div class="roi-num">$301</div>
+      <div class="roi-label">Net monthly savings<br>($450 saved &minus; $149 plan)</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="pitch-cta">
+  <h2>Ready to Try It?</h2>
+  <p>Start free — no credit card required. Live in 15 minutes.</p>
+  <div class="url">sewing.ranger-beers.com/demo.html</div>
+  <div class="phone">Questions? support@sewready.com</div>
+</div>
+
+<!-- Stats -->
+<div class="pitch-footer">
+  30+ shops running on SewReady &middot; 5,000+ orders managed &middot; Built for military alteration shops near Fort Liberty
+</div>
+
+</div>
+
+</body>
+</html>
