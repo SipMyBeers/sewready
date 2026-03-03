@@ -120,11 +120,41 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .detail-cta-row a:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(91,164,164,.35)}
 
 /* Step headers */
-.step-header{display:flex;align-items:center;justify-content:center;gap:16px;margin:64px 0 8px}
-.step-number{width:40px;height:40px;border-radius:50%;background:var(--accent-cyan);color:#fff;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-header h2{font-size:28px;font-weight:700;margin:0}
+.step-header{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 8px}
+.step-number{width:36px;height:36px;border-radius:50%;background:var(--accent-cyan);color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-header h2{font-size:22px;font-weight:700;margin:0}
+
+/* 3-column steps row */
+.steps-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;max-width:1200px;margin:48px auto 0;padding:0 24px;align-items:start}
+.step-column{display:flex;flex-direction:column;gap:0}
+.step-column .section-sub{font-size:13px;margin:0 0 16px}
+.step-column .pricing-grid{display:flex;flex-direction:column;gap:16px;max-width:none;padding:0}
+.step-column .price-card{padding:24px 20px}
+.step-column .price-card .price-amount{font-size:28px}
+.step-column .price-card h3{font-size:18px}
+.step-column .price-card .tier-desc{font-size:12px;margin:0 0 12px}
+.step-column .price-card ul{margin:0 0 16px}
+.step-column .price-card li{font-size:13px;padding:4px 0}
+.step-column .price-card .card-cta{padding:10px;font-size:13px}
+.step-column .package-detail{max-width:none;padding:0}
+.step-column .detail-inner{padding:20px;margin-top:16px}
+.step-column .detail-header h3{font-size:16px}
+.step-column .detail-features{grid-template-columns:1fr;gap:12px;margin-bottom:16px}
+.step-column .detail-feature{padding:14px}
+.step-column .detail-feature .feat-icon{font-size:24px;margin-bottom:4px}
+.step-column .detail-feature .feat-name{font-size:13px}
+.step-column .detail-feature .feat-desc{font-size:12px}
+.step-column .detail-previews{grid-template-columns:1fr;gap:12px;margin-bottom:16px}
+.step-column .detail-iframe-wrap iframe{height:250px}
+.step-column .see-included-btn{font-size:12px;padding:8px}
 
 /* Mobile */
+@media(max-width:960px){
+  .steps-row{grid-template-columns:1fr;max-width:600px}
+  .step-column .pricing-grid{gap:20px}
+  .step-header{margin-top:48px}
+  .step-column:first-child .step-header{margin-top:0}
+}
 @media(max-width:640px){
   .included-card .included-features{grid-template-columns:1fr}
   .pkg-nav{padding:12px 16px}
@@ -151,7 +181,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="pkg-hero">
   <h1>Your Shop, Fully Equipped</h1>
-  <p>Build your package in three steps &mdash; choose your software, pick a plan, and add hardware.</p>
+  <p>Build your package in three steps &mdash; choose your bundle, pick a plan, and add hardware.</p>
 </section>
 
 <!-- ── Included Storefront ─────────────────────────────── -->
@@ -171,10 +201,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-<!-- ── Step 1 — Choose Your Software ──────────────────── -->
+<div class="steps-row">
+
+<div class="step-column">
+<!-- ── Step 1 — Choose Your Bundle ────────────────────── -->
 <div class="step-header" id="packages">
   <span class="step-number">1</span>
-  <h2>Choose Your Software</h2>
+  <h2>Choose Your Bundle</h2>
 </div>
 <p class="section-sub">Choose the level of build that fits your shop</p>
 
@@ -202,7 +235,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/"
       data-item-description="Custom branded website build with Google Maps, SEO, contact form, services configuration, mobile-responsive design"
       data-item-shippable="false"
-      data-item-max-quantity="1">Buy &mdash; $500</button>
+      data-item-max-quantity="1">Choose This</button>
   </div>
 
   <!-- Site + Online Orders -->
@@ -230,7 +263,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/"
       data-item-description="Everything in Site Setup plus online ordering, customer accounts, order tracking, employee management, inventory, calendar, receipt & label printing"
       data-item-shippable="false"
-      data-item-max-quantity="1">Buy &mdash; $1,200</button>
+      data-item-max-quantity="1">Choose This</button>
   </div>
 
   <!-- Full Platform -->
@@ -258,7 +291,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/"
       data-item-description="Everything in Site + Online Orders plus SMS & email notifications, automated alerts, SOP library, driver coordination, analytics, priority support"
       data-item-shippable="false"
-      data-item-max-quantity="1">Buy &mdash; $2,000</button>
+      data-item-max-quantity="1">Choose This</button>
   </div>
 
 </div>
@@ -461,6 +494,9 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
+</div><!-- /step-column 1 -->
+
+<div class="step-column">
 <!-- ── Step 2 — Choose Your Plan ──────────────────────── -->
 <div class="step-header" id="services">
   <span class="step-number">2</span>
@@ -508,7 +544,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-payment-interval="Month"
       data-item-payment-interval-count="1"
       data-item-shippable="false"
-      data-item-max-quantity="1">Subscribe &mdash; $49/mo</button>
+      data-item-max-quantity="1">Choose This</button>
   </div>
 
   <!-- Standard -->
@@ -534,7 +570,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-payment-interval="Month"
       data-item-payment-interval-count="1"
       data-item-shippable="false"
-      data-item-max-quantity="1">Subscribe &mdash; $100/mo</button>
+      data-item-max-quantity="1">Choose This</button>
   </div>
 
   <!-- Premium -->
@@ -560,7 +596,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-payment-interval="Month"
       data-item-payment-interval-count="1"
       data-item-shippable="false"
-      data-item-max-quantity="1">Subscribe &mdash; $250/mo</button>
+      data-item-max-quantity="1">Choose This</button>
   </div>
 
 </div>
@@ -695,6 +731,9 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
+</div><!-- /step-column 2 -->
+
+<div class="step-column">
 <!-- ── Step 3 — Choose Your Hardware ─────────────────── -->
 <div class="step-header" id="hardware">
   <span class="step-number">3</span>
@@ -736,7 +775,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/"
       data-item-description="iPad counter mount + Epson TM-T20III thermal receipt printer"
       data-item-weight="4500"
-      data-item-max-quantity="5">Buy &mdash; $249</button>
+      data-item-max-quantity="5">Choose This</button>
   </div>
 
   <!-- Pro Kit -->
@@ -759,7 +798,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/"
       data-item-description="iPad counter mount + Epson TM-T20III receipt printer + Brother QL-820NWB label printer"
       data-item-weight="6000"
-      data-item-max-quantity="5">Buy &mdash; $399</button>
+      data-item-max-quantity="5">Choose This</button>
   </div>
 
   <!-- Full Kit -->
@@ -782,7 +821,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/"
       data-item-description="iPad mount + receipt printer + label printer + barcode scanner"
       data-item-weight="7000"
-      data-item-max-quantity="5">Buy &mdash; $479</button>
+      data-item-max-quantity="5">Choose This</button>
   </div>
 
 </div>
@@ -865,6 +904,9 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
   </div>
 </div>
+
+</div><!-- /step-column 3 -->
+</div><!-- /steps-row -->
 
 <!-- ── Individual Hardware ────────────────────────────── -->
 <h2 class="section-title">Individual Hardware</h2>
