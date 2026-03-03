@@ -90,14 +90,15 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .demo-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 .demo-card .demo-desc{padding:10px 14px;font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
 
-/* Fullscreen Demo Overlay */
-.demo-fullscreen-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;display:none;flex-direction:column}
+/* Demo Expand Overlay */
+.demo-fullscreen-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:none;align-items:center;justify-content:center;cursor:pointer}
 .demo-fullscreen-overlay.open{display:flex}
+.demo-fs-modal{width:92%;height:85%;max-width:1400px;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:0 24px 80px rgba(0,0,0,.6);cursor:default}
 .demo-fullscreen-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:rgba(14,21,40,.95);border-bottom:1px solid var(--glass-border)}
 .demo-fullscreen-bar .demo-fs-title{font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
 .demo-fullscreen-bar .demo-fs-close{background:none;border:1px solid var(--glass-border);color:var(--text-muted);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .demo-fullscreen-bar .demo-fs-close:hover{background:var(--glass-hover);color:var(--text)}
-.demo-fullscreen-overlay iframe{flex:1;width:100%;border:none;background:var(--bg-deep)}
+.demo-fs-modal iframe{flex:1;width:100%;border:none;background:var(--bg-deep)}
 
 /* Footer */
 .pkg-footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--text-dim);border-top:1px solid var(--border)}
@@ -906,12 +907,14 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- Fullscreen Demo Overlay -->
-<div class="demo-fullscreen-overlay" id="demoFullscreen">
-  <div class="demo-fullscreen-bar">
-    <span class="demo-fs-title" id="demoFsTitle"></span>
-    <button class="demo-fs-close" onclick="closeDemoFullscreen()">&times;</button>
+<div class="demo-fullscreen-overlay" id="demoFullscreen" onclick="if(event.target===this)closeDemoFullscreen()">
+  <div class="demo-fs-modal">
+    <div class="demo-fullscreen-bar">
+      <span class="demo-fs-title" id="demoFsTitle"></span>
+      <button class="demo-fs-close" onclick="closeDemoFullscreen()">&times;</button>
+    </div>
+    <iframe id="demoFsIframe"></iframe>
   </div>
-  <iframe id="demoFsIframe"></iframe>
 </div>
 
 <div hidden id="snipcart" data-api-key="Y2QzMWQ1NWQtNjc3NC00MDY1LThkMmQtY2ZmNzg5ZDkwMWE2NjM5MDc5MTUyNTMxMDc3MzE4" data-config-modal-style="side"></div>
