@@ -81,14 +81,23 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .hw-card .hw-includes li{font-size:13px;padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
 .hw-card .hw-includes li::before{content:'\2713';color:var(--accent-green);font-weight:700}
 
-/* Individual Hardware */
-.hw-item-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1060px;margin:0 auto;padding:0 24px}
-.hw-item{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;text-align:center}
-.hw-item .hw-emoji{font-size:48px;margin-bottom:12px}
-.hw-item h4{font-size:16px;margin:0 0 4px}
-.hw-item .hw-model{font-size:12px;color:var(--text-muted);margin:0 0 8px}
-.hw-item .hw-item-price{font-size:20px;font-weight:800;color:var(--accent-cyan);margin:0 0 8px}
-.hw-item .hw-spec{font-size:12px;color:var(--text-muted);line-height:1.5}
+/* Demo Cards */
+.demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:20px}
+.demo-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden}
+.demo-card .demo-label{padding:8px 14px;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--glass-border)}
+.demo-card iframe{width:100%;height:280px;border:none;background:var(--bg-deep);display:block}
+.demo-card{cursor:pointer;transition:all .25s}
+.demo-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.demo-card .demo-desc{padding:10px 14px;font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
+
+/* Fullscreen Demo Overlay */
+.demo-fullscreen-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;display:none;flex-direction:column}
+.demo-fullscreen-overlay.open{display:flex}
+.demo-fullscreen-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:rgba(14,21,40,.95);border-bottom:1px solid var(--glass-border)}
+.demo-fullscreen-bar .demo-fs-title{font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
+.demo-fullscreen-bar .demo-fs-close{background:none;border:1px solid var(--glass-border);color:var(--text-muted);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.demo-fullscreen-bar .demo-fs-close:hover{background:var(--glass-hover);color:var(--text)}
+.demo-fullscreen-overlay iframe{flex:1;width:100%;border:none;background:var(--bg-deep)}
 
 /* Footer */
 .pkg-footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--text-dim);border-top:1px solid var(--border)}
@@ -104,7 +113,6 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .detail-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
 .detail-feature{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:16px;transition:all .25s}
 .detail-feature:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.detail-feature .feat-icon{font-size:28px;margin-bottom:6px}
 .detail-feature .feat-name{font-size:14px;font-weight:700;margin-bottom:3px}
 .detail-feature .feat-desc{font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
 .detail-previews{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
@@ -149,6 +157,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   .detail-features{grid-template-columns:1fr}
   .detail-previews{grid-template-columns:1fr}
   .detail-inner{padding:20px}
+  .demo-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -294,43 +303,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Site Setup &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-setup-site')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-icon">&#127760;</div>
-        <div class="feat-name">Custom Branded Website</div>
-        <p class="feat-desc">Your shop gets a unique, professional website with your business name, logo, colors, and story front and center.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128205;</div>
-        <div class="feat-name">Google Maps Integration</div>
-        <p class="feat-desc">Embedded map showing your shop location. Customers can get directions with one tap.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128269;</div>
-        <div class="feat-name">SEO &amp; Structured Data</div>
-        <p class="feat-desc">Your shop appears in Google search results with rich snippets &mdash; hours, location, reviews, and services.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128221;</div>
-        <div class="feat-name">Contact Form</div>
-        <p class="feat-desc">Customers can send you messages directly from your website. Submissions go straight to your email.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128336;</div>
-        <div class="feat-name">Services &amp; Hours Config</div>
-        <p class="feat-desc">Display your alteration services, pricing, and business hours in a clean, organized layout.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128241;</div>
-        <div class="feat-name">Mobile-Responsive Design</div>
-        <p class="feat-desc">Looks great on phones, tablets, and desktops. Most of your customers will find you on mobile.</p>
-      </div>
-    </div>
-    <div class="detail-previews">
-      <h4>Live Preview</h4>
-      <div class="detail-iframe-wrap" style="grid-column:1/-1">
-        <div class="iframe-label">Customer Storefront</div>
+    <div class="demo-grid" style="grid-template-columns:1fr">
+      <div class="demo-card">
+        <div class="demo-label">Customer Storefront</div>
         <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe>
+        <p class="demo-desc">Your custom branded website with Google Maps, services &amp; hours display, contact form, SEO, and mobile-responsive design.</p>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -345,65 +322,31 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Site + Online Orders &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-setup-online')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-icon">&#127760;</div>
-        <div class="feat-name">Full Website Build</div>
-        <p class="feat-desc">Everything from Site Setup &mdash; branded website with maps, SEO, contact form, and services display.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128722;</div>
-        <div class="feat-name">Online Order Wizard</div>
-        <p class="feat-desc">Customers select garments, alterations, and measurements through a guided step-by-step form.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128100;</div>
-        <div class="feat-name">Customer Accounts &amp; Login</div>
-        <p class="feat-desc">Returning customers log in to see order history, track progress, and reorder quickly.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128203;</div>
-        <div class="feat-name">Order Tracking Dashboard</div>
-        <p class="feat-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128101;</div>
-        <div class="feat-name">Employee Management</div>
-        <p class="feat-desc">Add your team, assign roles, and track who's working on which orders.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128230;</div>
-        <div class="feat-name">Inventory Tracking</div>
-        <p class="feat-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128197;</div>
-        <div class="feat-name">Calendar &amp; Scheduling</div>
-        <p class="feat-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128424;</div>
-        <div class="feat-name">Receipt &amp; Label Printing</div>
-        <p class="feat-desc">Print customer receipts and garment tags with order ID, name, and QR codes.</p>
-      </div>
-    </div>
-    <div class="detail-previews">
-      <h4>Live Preview</h4>
-      <div class="detail-iframe-wrap">
-        <div class="iframe-label">Customer Storefront</div>
+    <div class="demo-grid">
+      <div class="demo-card">
+        <div class="demo-label">Customer Storefront</div>
         <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe>
+        <p class="demo-desc">Branded website with Google Maps, services, contact form, and mobile-responsive design.</p>
       </div>
-      <div class="detail-iframe-wrap">
-        <div class="iframe-label">Orders Dashboard</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders" loading="lazy"></iframe>
+      <div class="demo-card">
+        <div class="demo-label">Orders Dashboard</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
-      <div class="detail-iframe-wrap">
-        <div class="iframe-label">Calendar View</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar" loading="lazy"></iframe>
+      <div class="demo-card">
+        <div class="demo-label">Calendar &amp; Scheduling</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
       </div>
-      <div class="detail-iframe-wrap">
-        <div class="iframe-label">Inventory</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory" loading="lazy"></iframe>
+      <div class="demo-card">
+        <div class="demo-label">Inventory Tracking</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Employee Management</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">Add your team, assign roles, and track who's working on which orders.</p>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -418,65 +361,36 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Full Platform &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-setup-full')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-icon">&#128722;</div>
-        <div class="feat-name">Complete Online System</div>
-        <p class="feat-desc">Everything from Site + Online Orders &mdash; website, ordering, accounts, dashboard, employees, inventory, calendar, printing.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128172;</div>
-        <div class="feat-name">SMS Notifications</div>
-        <p class="feat-desc">Automatic text messages to customers when orders are received, in progress, and ready for pickup.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128231;</div>
-        <div class="feat-name">Email Notifications</div>
-        <p class="feat-desc">Professional email updates at every stage. Customers always know their order status.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128276;</div>
-        <div class="feat-name">Automated Pickup Alerts</div>
-        <p class="feat-desc">When an order is marked complete, the customer gets an instant pickup notification.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128218;</div>
-        <div class="feat-name">SOP Library</div>
-        <p class="feat-desc">Standard operating procedures for your team. Training docs, checklists, and process guides.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128663;</div>
-        <div class="feat-name">Driver Pickup Coordination</div>
-        <p class="feat-desc">Manage driver routes and pickups for shops that offer delivery or base pickup service.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#128202;</div>
-        <div class="feat-name">Cost &amp; Revenue Analytics</div>
-        <p class="feat-desc">Track revenue, costs, turnaround times, and customer metrics with visual dashboards.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-icon">&#11088;</div>
-        <div class="feat-name">Priority Setup Support</div>
-        <p class="feat-desc">Dedicated setup assistance. We build your shop, import your data, and get you live fast.</p>
-      </div>
-    </div>
-    <div class="detail-previews">
-      <h4>Live Preview</h4>
-      <div class="detail-iframe-wrap">
-        <div class="iframe-label">Customer Storefront</div>
+    <div class="demo-grid">
+      <div class="demo-card">
+        <div class="demo-label">Customer Storefront</div>
         <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe>
+        <p class="demo-desc">Branded website with Google Maps, services, contact form, and mobile-responsive design.</p>
       </div>
-      <div class="detail-iframe-wrap">
-        <div class="iframe-label">Orders Dashboard</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders" loading="lazy"></iframe>
+      <div class="demo-card">
+        <div class="demo-label">Orders Dashboard</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
-      <div class="detail-iframe-wrap">
-        <div class="iframe-label">Analytics</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics" loading="lazy"></iframe>
+      <div class="demo-card">
+        <div class="demo-label">Analytics</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">Track revenue, costs, turnaround times, and customer metrics with visual dashboards.</p>
       </div>
-      <div class="detail-iframe-wrap">
-        <div class="iframe-label">SOP Library</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library" loading="lazy"></iframe>
+      <div class="demo-card">
+        <div class="demo-label">SOP Library</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">Standard operating procedures, training docs, checklists, and process guides for your team.</p>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Driver Coordination</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/driver?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">Manage driver routes and pickups for shops that offer delivery or base pickup service.</p>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Calendar &amp; Scheduling</div>
+        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe>
+        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -598,22 +512,18 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
     <div class="detail-features">
       <div class="detail-feature">
-        <div class="feat-icon">&#128421;</div>
         <div class="feat-name">Hosting Included</div>
         <p class="feat-desc">Your site is hosted on managed cloud infrastructure at no charge. Always online, always fast.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128274;</div>
         <div class="feat-name">SSL Certificate</div>
         <p class="feat-desc">HTTPS encryption keeps customer data safe and builds trust with your visitors.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128218;</div>
         <div class="feat-name">Self-Service Docs &amp; Guides</div>
         <p class="feat-desc">Step-by-step documentation to set up and manage your shop on your own schedule.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128231;</div>
         <div class="feat-name">Community Email Support</div>
         <p class="feat-desc">Get help from the SewReady community and team via email. Best-effort response times.</p>
       </div>
@@ -629,22 +539,18 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
     <div class="detail-features">
       <div class="detail-feature">
-        <div class="feat-icon">&#128421;</div>
         <div class="feat-name">Hosting &amp; Maintenance</div>
         <p class="feat-desc">Your site stays live and fast on managed cloud hosting with regular updates and security patches.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128274;</div>
         <div class="feat-name">SSL Certificate</div>
         <p class="feat-desc">HTTPS encryption keeps customer data safe and builds trust with your visitors.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128225;</div>
         <div class="feat-name">Uptime Monitoring</div>
         <p class="feat-desc">We monitor your site 24/7 and get alerted instantly if anything goes down.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128231;</div>
         <div class="feat-name">Basic Email Support</div>
         <p class="feat-desc">Reach us via email for questions, issues, or change requests. Response within 24 hours.</p>
       </div>
@@ -660,22 +566,18 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
     <div class="detail-features">
       <div class="detail-feature">
-        <div class="feat-icon">&#128421;</div>
         <div class="feat-name">Everything in Basic</div>
         <p class="feat-desc">Hosting, SSL, uptime monitoring, and email support &mdash; all included.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128172;</div>
         <div class="feat-name">SMS &amp; Email Notifications</div>
         <p class="feat-desc">Automated customer notifications via text and email at every order stage.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128276;</div>
         <div class="feat-name">Automated Pickup Alerts</div>
         <p class="feat-desc">Customers get notified the moment their order is ready for pickup.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128202;</div>
         <div class="feat-name">Monthly Analytics Reports</div>
         <p class="feat-desc">We send you a monthly summary of orders, revenue, and performance metrics.</p>
       </div>
@@ -691,27 +593,22 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
     <div class="detail-features">
       <div class="detail-feature">
-        <div class="feat-icon">&#128421;</div>
         <div class="feat-name">Everything in Standard</div>
         <p class="feat-desc">Hosting, monitoring, notifications, alerts, and analytics reports &mdash; all included.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128295;</div>
         <div class="feat-name">Ongoing Site Updates</div>
         <p class="feat-desc">We handle design changes, new pages, and feature requests as your shop grows.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#11088;</div>
         <div class="feat-name">Priority Support</div>
         <p class="feat-desc">Jump to the front of the line. Same-day response for urgent issues.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128736;</div>
         <div class="feat-name">Full Platform Maintenance</div>
         <p class="feat-desc">Database optimization, performance tuning, and proactive issue resolution.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#9999;</div>
         <div class="feat-name">Content Updates on Request</div>
         <p class="feat-desc">Need to change your hours, add a service, or update pricing? Just ask.</p>
       </div>
@@ -821,12 +718,10 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
     <div class="detail-features">
       <div class="detail-feature">
-        <div class="feat-icon">&#128241;</div>
         <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
         <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128424;</div>
         <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
         <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
       </div>
@@ -842,17 +737,14 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
     <div class="detail-features">
       <div class="detail-feature">
-        <div class="feat-icon">&#128241;</div>
         <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
         <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128424;</div>
         <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
         <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#127991;</div>
         <div class="feat-name">Label Printer (Brother QL-820NWB)</div>
         <p class="feat-desc">WiFi + Bluetooth. Print garment tags with order ID, customer name, QR code.</p>
       </div>
@@ -868,22 +760,18 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
     <div class="detail-features">
       <div class="detail-feature">
-        <div class="feat-icon">&#128241;</div>
         <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
         <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128424;</div>
         <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
         <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#127991;</div>
         <div class="feat-name">Label Printer (Brother QL-820NWB)</div>
         <p class="feat-desc">WiFi + Bluetooth. Print garment tags with order ID, customer name, QR code.</p>
       </div>
       <div class="detail-feature">
-        <div class="feat-icon">&#128270;</div>
         <div class="feat-name">Barcode Scanner (Tera HW0002)</div>
         <p class="feat-desc">USB plug-and-play. Scan order labels to instantly pull up order details.</p>
       </div>
@@ -892,54 +780,6 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 </div>
 
 </div><!-- /wizard-step-3 -->
-
-<!-- ── Individual Hardware ────────────────────────────── -->
-<h2 class="section-title">Individual Hardware</h2>
-<p class="section-sub">Or pick individual items that fit your setup</p>
-
-<div class="hw-item-grid">
-
-  <div class="hw-item">
-    <div class="hw-emoji">&#128241;</div>
-    <h4>Tablet</h4>
-    <p class="hw-model">iPad 10th Gen or Samsung Galaxy Tab A9</p>
-    <div class="hw-item-price">~$159 &ndash; $349</div>
-    <p class="hw-spec">10" display, perfect for counter use. Runs SewReady in the browser &mdash; no app needed.</p>
-  </div>
-
-  <div class="hw-item">
-    <div class="hw-emoji">&#128424;</div>
-    <h4>Receipt Printer</h4>
-    <p class="hw-model">Epson TM-T20III</p>
-    <div class="hw-item-price">~$200</div>
-    <p class="hw-spec">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
-  </div>
-
-  <div class="hw-item">
-    <div class="hw-emoji">&#127991;</div>
-    <h4>Label Printer</h4>
-    <p class="hw-model">Brother QL-820NWB</p>
-    <div class="hw-item-price">~$150</div>
-    <p class="hw-spec">WiFi + Bluetooth. Print garment tags with order ID, customer name, QR code.</p>
-  </div>
-
-  <div class="hw-item">
-    <div class="hw-emoji">&#128270;</div>
-    <h4>Barcode Scanner</h4>
-    <p class="hw-model">Tera HW0002</p>
-    <div class="hw-item-price">~$30</div>
-    <p class="hw-spec">USB plug-and-play. Scan order labels to instantly pull up order details.</p>
-  </div>
-
-  <div class="hw-item">
-    <div class="hw-emoji">&#128187;</div>
-    <h4>Tablet Stand</h4>
-    <p class="hw-model">AboveTEK Counter Mount</p>
-    <div class="hw-item-price">~$30</div>
-    <p class="hw-spec">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
-  </div>
-
-</div>
 
 <!-- ── Footer ───────────────────────────────────────────── -->
 <footer class="pkg-footer">
@@ -1031,7 +871,48 @@ function collapseCard() {
     });
   });
 }
+
+// ── Fullscreen Demo ──────────────────────────────────────
+function openDemoFullscreen(label, url) {
+  document.getElementById('demoFsTitle').textContent = label;
+  document.getElementById('demoFsIframe').src = url;
+  document.getElementById('demoFullscreen').classList.add('open');
+}
+
+function closeDemoFullscreen() {
+  var overlay = document.getElementById('demoFullscreen');
+  overlay.classList.remove('open');
+  document.getElementById('demoFsIframe').src = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeDemoFullscreen();
+});
+
+// Attach click handlers to all demo cards
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.demo-card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      // Don't trigger if clicking a link inside the card
+      if (e.target.closest('a')) return;
+      var label = card.querySelector('.demo-label');
+      var iframe = card.querySelector('iframe');
+      if (!iframe) return;
+      var url = iframe.src || iframe.getAttribute('data-src');
+      if (url) openDemoFullscreen(label ? label.textContent : 'Demo', url);
+    });
+  });
+});
 </script>
+
+<!-- Fullscreen Demo Overlay -->
+<div class="demo-fullscreen-overlay" id="demoFullscreen">
+  <div class="demo-fullscreen-bar">
+    <span class="demo-fs-title" id="demoFsTitle"></span>
+    <button class="demo-fs-close" onclick="closeDemoFullscreen()">&times;</button>
+  </div>
+  <iframe id="demoFsIframe"></iframe>
+</div>
 
 <div hidden id="snipcart" data-api-key="Y2QzMWQ1NWQtNjc3NC00MDY1LThkMmQtY2ZmNzg5ZDkwMWE2NjM5MDc5MTUyNTMxMDc3MzE4" data-config-modal-style="side"></div>
 <script src="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js"></script>

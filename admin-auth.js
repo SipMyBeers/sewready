@@ -311,6 +311,14 @@
 
   // ── Main Flow ────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
+    // Preview mode — skip login for demo iframes
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('preview') === '1') {
+      window.currentUser = { id: 'preview', name: 'Preview', role: 'viewer', shop_slug: slug };
+      revealPage();
+      return;
+    }
+
     // Check for password reset token first
     if (checkResetToken()) return;
 
