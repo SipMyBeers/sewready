@@ -39,7 +39,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .included-card .included-features li::before{content:'\2713';color:var(--accent-green);font-weight:700;font-size:12px}
 
 /* Pricing Grid */
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:1100px;margin:0 auto;padding:0 24px}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:100%;margin:0 auto;padding:0 24px}
 .price-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px 18px;position:relative;transition:all .25s;display:flex;flex-direction:column}
 .price-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 .price-card.featured{border:2px solid var(--accent-blue);box-shadow:var(--glow-blue)}
@@ -117,12 +117,8 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .detail-cta-row a:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(91,164,164,.35)}
 
 /* Card expand behavior */
-.price-card{cursor:pointer}
-.pricing-grid.has-expanded{grid-template-columns:1fr}
-.pricing-grid.has-expanded .price-card{display:none}
-.pricing-grid.has-expanded .price-card.expanded{display:flex;border:2px solid var(--accent-cyan);box-shadow:0 0 30px rgba(91,164,164,.15)}
-.card-collapse{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--accent-cyan);font-size:13px;font-weight:600;cursor:pointer;padding:6px 0;margin-bottom:8px;transition:color .2s}
-.card-collapse:hover{color:var(--text)}
+.price-card{cursor:pointer;transition:all .25s}
+.price-card.expanded{border:2px solid var(--accent-cyan);box-shadow:0 0 30px rgba(91,164,164,.15)}
 
 /* Step headers */
 .step-header{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 4px}
@@ -140,7 +136,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .wiz-label.done{color:var(--accent-green)}
 .wiz-line{flex:1;height:2px;background:var(--glass-border);margin:0 10px;margin-bottom:16px;transition:background .3s}
 .wiz-line.done{background:var(--accent-green)}
-.wizard-step{display:none;max-width:1100px;margin:0 auto;padding:0 24px}
+.wizard-step{display:none;max-width:100%;margin:0 auto;padding:0 24px}
 .wizard-step.active{display:block}
 .wizard-back{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--text-muted);font-size:13px;cursor:pointer;padding:4px 0;margin-bottom:4px;transition:color .2s}
 .wizard-back:hover{color:var(--text)}
@@ -995,12 +991,27 @@ function updateProgress() {
 function expandCard(card, event) {
   var detailId = card.getAttribute('data-detail');
   if (!detailId) return;
-  var grid = card.closest('.pricing-grid');
-  if (grid.classList.contains('has-expanded')) return;
 
-  grid.classList.add('has-expanded');
+  // If this card is already expanded, collapse it
+  if (card.classList.contains('expanded')) {
+    collapseCard();
+    return;
+  }
+
+  // Collapse any other expanded card in this step first
+  var step = card.closest('.wizard-step');
+  if (step) {
+    step.querySelectorAll('.price-card.expanded').forEach(function(c) { c.classList.remove('expanded'); });
+    step.querySelectorAll('.package-detail.open').forEach(function(p) {
+      p.classList.remove('open');
+      p.querySelectorAll('iframe[src]').forEach(function(f) {
+        f.setAttribute('data-src', f.src);
+        f.removeAttribute('src');
+      });
+    });
+  }
+
   card.classList.add('expanded');
-
   var panel = document.getElementById(detailId);
   if (panel) {
     panel.classList.add('open');
@@ -1011,22 +1022,14 @@ function expandCard(card, event) {
 }
 
 function collapseCard() {
-  var expanded = document.querySelector('.price-card.expanded');
-  if (!expanded) return;
-  var grid = expanded.closest('.pricing-grid');
-  grid.classList.remove('has-expanded');
-  expanded.classList.remove('expanded');
-
-  var step = expanded.closest('.wizard-step');
-  if (step) {
-    step.querySelectorAll('.package-detail.open').forEach(function(p) {
-      p.classList.remove('open');
-      p.querySelectorAll('iframe[src]').forEach(function(f) {
-        f.setAttribute('data-src', f.src);
-        f.removeAttribute('src');
-      });
+  document.querySelectorAll('.price-card.expanded').forEach(function(c) { c.classList.remove('expanded'); });
+  document.querySelectorAll('.package-detail.open').forEach(function(p) {
+    p.classList.remove('open');
+    p.querySelectorAll('iframe[src]').forEach(function(f) {
+      f.setAttribute('data-src', f.src);
+      f.removeAttribute('src');
     });
-  }
+  });
 }
 </script>
 
