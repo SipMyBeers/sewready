@@ -18,7 +18,7 @@ const PRECACHE = [
   '/services-data.js',
   '/inventory-data.js',
   '/data-store.js',
-  '/admin-auth.js',
+  '/admin-auth.js?v=2',
   '/auth-gate.js',
   '/driver-app.js',
 ];
