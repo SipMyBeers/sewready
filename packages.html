@@ -100,6 +100,35 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .demo-fullscreen-bar .demo-fs-close:hover{background:var(--glass-hover);color:var(--text)}
 .demo-fs-modal iframe{flex:1;width:100%;border:none;background:var(--bg-deep)}
 
+/* Visual Mockup Cards */
+.visual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:20px}
+.visual-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden}
+.visual-card .visual-header{padding:10px 16px;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--glass-border)}
+.visual-card .visual-body{padding:20px 16px;min-height:180px}
+.visual-card .visual-caption{padding:10px 16px;font-size:12px;color:var(--text-muted);line-height:1.5;border-top:1px solid var(--glass-border)}
+.mock-stat{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(240,232,220,.06)}
+.mock-stat:last-child{border-bottom:none}
+.mock-stat .stat-icon{font-size:20px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(91,164,164,.1);flex-shrink:0}
+.mock-stat .stat-label{font-size:12px;color:var(--text-muted)}
+.mock-stat .stat-value{font-size:15px;font-weight:700;color:var(--text)}
+.mock-notif{background:rgba(91,164,164,.08);border:1px solid rgba(91,164,164,.15);border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:12px;line-height:1.5}
+.mock-notif:last-child{margin-bottom:0}
+.mock-notif .notif-from{font-weight:700;color:var(--accent-cyan);font-size:11px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
+.mock-notif .notif-body{color:var(--text)}
+.mock-notif .notif-time{color:var(--text-dim);font-size:11px;margin-top:4px}
+.mock-bar-chart{display:flex;align-items:flex-end;gap:6px;height:100px;padding-top:12px}
+.mock-bar{flex:1;background:linear-gradient(to top,var(--accent-cyan),rgba(91,164,164,.3));border-radius:4px 4px 0 0;transition:height .3s}
+.mock-bar-label{text-align:center;font-size:10px;color:var(--text-dim);margin-top:4px}
+
+/* Product Cards */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:20px}
+.product-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden;text-align:center}
+.product-card .product-img{height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(240,232,220,.03),rgba(91,164,164,.06));padding:16px}
+.product-card .product-img img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+.product-card .product-info{padding:12px 16px;border-top:1px solid var(--glass-border)}
+.product-card .product-name{font-size:14px;font-weight:700;margin:0 0 2px}
+.product-card .product-spec{font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
+
 /* Footer */
 .pkg-footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--text-dim);border-top:1px solid var(--border)}
 
@@ -304,7 +333,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Site Setup &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-setup-site')">&times;</button>
     </div>
-    <div class="demo-grid" style="grid-template-columns:1fr">
+    <div class="demo-grid">
       <div class="demo-card">
         <div class="demo-label">Customer Storefront</div>
         <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe>
@@ -511,22 +540,26 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Free Plan &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-svc-free')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-name">Hosting Included</div>
-        <p class="feat-desc">Your site is hosted on managed cloud infrastructure at no charge. Always online, always fast.</p>
+    <div class="visual-grid">
+      <div class="visual-card">
+        <div class="visual-header">Cloud Hosting</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#9729;</div><div><div class="stat-label">Infrastructure</div><div class="stat-value">Cloudflare Edge Network</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9889;</div><div><div class="stat-label">Global CDN</div><div class="stat-value">300+ edge locations</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127760;</div><div><div class="stat-label">Custom Domain</div><div class="stat-value">yourshop.sewready.com</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">SSL Certificate</div><div class="stat-value">Auto-renewed HTTPS</div></div></div>
+        </div>
+        <div class="visual-caption">Your site runs on enterprise-grade infrastructure at no charge. Always online, always fast.</div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">SSL Certificate</div>
-        <p class="feat-desc">HTTPS encryption keeps customer data safe and builds trust with your visitors.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-name">Self-Service Docs &amp; Guides</div>
-        <p class="feat-desc">Step-by-step documentation to set up and manage your shop on your own schedule.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-name">Community Email Support</div>
-        <p class="feat-desc">Get help from the SewReady community and team via email. Best-effort response times.</p>
+      <div class="visual-card">
+        <div class="visual-header">Self-Service Support</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128214;</div><div><div class="stat-label">Setup Guides</div><div class="stat-value">Step-by-step walkthroughs</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127891;</div><div><div class="stat-label">Video Tutorials</div><div class="stat-value">Every feature covered</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128172;</div><div><div class="stat-label">Community Support</div><div class="stat-value">Email &mdash; best effort</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128736;</div><div><div class="stat-label">Self-Managed</div><div class="stat-value">Full admin access</div></div></div>
+        </div>
+        <div class="visual-caption">Docs, guides, and community email support to help you manage your shop independently.</div>
       </div>
     </div>
   </div>
@@ -538,22 +571,26 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Basic Service &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-svc-basic')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-name">Hosting &amp; Maintenance</div>
-        <p class="feat-desc">Your site stays live and fast on managed cloud hosting with regular updates and security patches.</p>
+    <div class="visual-grid">
+      <div class="visual-card">
+        <div class="visual-header">Managed Hosting</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#9729;</div><div><div class="stat-label">Cloud Hosting</div><div class="stat-value">Fully managed for you</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">SSL Certificate</div><div class="stat-value">Auto-renewed HTTPS</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128736;</div><div><div class="stat-label">Maintenance</div><div class="stat-value">Updates &amp; security patches</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128230;</div><div><div class="stat-label">Backups</div><div class="stat-value">Daily automated backups</div></div></div>
+        </div>
+        <div class="visual-caption">We handle hosting, updates, and security patches so you can focus on your shop.</div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">SSL Certificate</div>
-        <p class="feat-desc">HTTPS encryption keeps customer data safe and builds trust with your visitors.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-name">Uptime Monitoring</div>
-        <p class="feat-desc">We monitor your site 24/7 and get alerted instantly if anything goes down.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-name">Basic Email Support</div>
-        <p class="feat-desc">Reach us via email for questions, issues, or change requests. Response within 24 hours.</p>
+      <div class="visual-card">
+        <div class="visual-header">Uptime Monitoring</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon" style="background:rgba(46,204,113,.1);color:#2ecc71">&#9679;</div><div><div class="stat-label">Current Status</div><div class="stat-value" style="color:#2ecc71">All Systems Online</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128200;</div><div><div class="stat-label">Uptime (30 days)</div><div class="stat-value">99.98%</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9201;</div><div><div class="stat-label">Avg Response Time</div><div class="stat-value">142ms</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Email Support</div><div class="stat-value">Within 24 hours</div></div></div>
+        </div>
+        <div class="visual-caption">24/7 monitoring with instant alerts if anything goes down. Email support within one business day.</div>
       </div>
     </div>
   </div>
@@ -565,22 +602,65 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Standard Service &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-svc-standard')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-name">Everything in Basic</div>
-        <p class="feat-desc">Hosting, SSL, uptime monitoring, and email support &mdash; all included.</p>
+    <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">Everything in Basic, plus automated notifications and monthly reporting.</p>
+    <div class="visual-grid">
+      <div class="visual-card">
+        <div class="visual-header">SMS Notifications</div>
+        <div class="visual-body" style="padding:14px">
+          <div class="mock-notif">
+            <div class="notif-from">&#128241; Text to Customer</div>
+            <div class="notif-body">Hi Sarah! Your hem repair is ready for pickup at AAA Tailor. Open Mon-Sat 9am-6pm. Reply STOP to opt out.</div>
+            <div class="notif-time">Sent automatically when status &rarr; Ready</div>
+          </div>
+          <div class="mock-notif">
+            <div class="notif-from">&#128241; Text to Customer</div>
+            <div class="notif-body">Thanks for visiting AAA Tailor! Your order #1042 has been received. Estimated ready date: Mar 8. We'll text you when it's done!</div>
+            <div class="notif-time">Sent automatically on new order</div>
+          </div>
+        </div>
+        <div class="visual-caption">Customers get automatic text updates at every stage &mdash; intake, in-progress, and ready for pickup.</div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">SMS &amp; Email Notifications</div>
-        <p class="feat-desc">Automated customer notifications via text and email at every order stage.</p>
+      <div class="visual-card">
+        <div class="visual-header">Email Notifications</div>
+        <div class="visual-body" style="padding:14px">
+          <div class="mock-notif">
+            <div class="notif-from">&#128231; Pickup Ready Email</div>
+            <div class="notif-body">Your order is ready! 2 items completed at AAA Tailor Shop. Visit us Mon-Sat 9am-6pm to pick up. Bring your receipt or order number #1042.</div>
+            <div class="notif-time">Branded HTML email with your shop logo</div>
+          </div>
+          <div class="mock-notif">
+            <div class="notif-from">&#128231; Daily Summary to Owner</div>
+            <div class="notif-body">Today: 6 new orders, 4 completed, 2 pickups. Revenue: $340. 12 active orders in queue.</div>
+            <div class="notif-time">Sent to you every morning at 8am</div>
+          </div>
+        </div>
+        <div class="visual-caption">Professional branded emails to customers plus daily business summaries sent to you.</div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Automated Pickup Alerts</div>
-        <p class="feat-desc">Customers get notified the moment their order is ready for pickup.</p>
+      <div class="visual-card">
+        <div class="visual-header">Monthly Analytics Report</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128176;</div><div><div class="stat-label">Monthly Revenue</div><div class="stat-value">$4,280</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Orders Completed</div><div class="stat-value">142 orders</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9201;</div><div><div class="stat-label">Avg Turnaround</div><div class="stat-value">2.4 days</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#11088;</div><div><div class="stat-label">Customer Rating</div><div class="stat-value">4.9 / 5.0</div></div></div>
+        </div>
+        <div class="visual-caption">We email you a monthly summary of revenue, orders, turnaround times, and performance trends.</div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Monthly Analytics Reports</div>
-        <p class="feat-desc">We send you a monthly summary of orders, revenue, and performance metrics.</p>
+      <div class="visual-card">
+        <div class="visual-header">Automated Pickup Alerts</div>
+        <div class="visual-body" style="padding:14px">
+          <div class="mock-notif">
+            <div class="notif-from">&#128276; Auto-Trigger</div>
+            <div class="notif-body">When you mark an order "Ready" &rarr; customer gets an SMS + email instantly. No manual work needed.</div>
+            <div class="notif-time">Zero-touch notification workflow</div>
+          </div>
+          <div class="mock-notif">
+            <div class="notif-from">&#128276; Reminder (3 days)</div>
+            <div class="notif-body">If not picked up in 3 days, a gentle reminder is sent automatically: "Your order is still waiting at the shop!"</div>
+            <div class="notif-time">Configurable reminder intervals</div>
+          </div>
+        </div>
+        <div class="visual-caption">One click to "Ready" and the customer is notified. Auto-reminders if they forget to pick up.</div>
       </div>
     </div>
   </div>
@@ -592,26 +672,65 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Premium Service &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-svc-premium')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-name">Everything in Standard</div>
-        <p class="feat-desc">Hosting, monitoring, notifications, alerts, and analytics reports &mdash; all included.</p>
+    <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">Everything in Standard, plus hands-on management &mdash; we handle it all.</p>
+    <div class="visual-grid">
+      <div class="visual-card">
+        <div class="visual-header">Priority Support</div>
+        <div class="visual-body" style="padding:14px">
+          <div class="mock-notif">
+            <div class="notif-from" style="color:#e74c3c">&#128680; Urgent Request</div>
+            <div class="notif-body">"My checkout page isn't loading for customers!"</div>
+            <div class="notif-time">Submitted 9:14 AM</div>
+          </div>
+          <div class="mock-notif">
+            <div class="notif-from" style="color:#2ecc71">&#9989; Resolved</div>
+            <div class="notif-body">Fixed &mdash; a script conflict was blocking the form. Deployed fix and verified on mobile + desktop.</div>
+            <div class="notif-time">Resolved 10:02 AM &mdash; same day</div>
+          </div>
+        </div>
+        <div class="visual-caption">Same-day response for urgent issues. You're never waiting in a queue.</div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Ongoing Site Updates</div>
-        <p class="feat-desc">We handle design changes, new pages, and feature requests as your shop grows.</p>
+      <div class="visual-card">
+        <div class="visual-header">Ongoing Site Updates</div>
+        <div class="visual-body" style="padding:14px">
+          <div class="mock-notif">
+            <div class="notif-from">&#127912; Design Change</div>
+            <div class="notif-body">"Can you add a Holiday Hours banner to our site this week?"</div>
+            <div class="notif-time">Done within 24 hours</div>
+          </div>
+          <div class="mock-notif">
+            <div class="notif-from">&#128640; New Feature</div>
+            <div class="notif-body">"We want to add a photo gallery of our work to the storefront."</div>
+            <div class="notif-time">Scoped, built, and deployed for you</div>
+          </div>
+        </div>
+        <div class="visual-caption">Design changes, new pages, feature requests &mdash; just ask and we build it.</div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Priority Support</div>
-        <p class="feat-desc">Jump to the front of the line. Same-day response for urgent issues.</p>
+      <div class="visual-card">
+        <div class="visual-header">Full Platform Maintenance</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon" style="background:rgba(46,204,113,.1)">&#128737;</div><div><div class="stat-label">Database Optimization</div><div class="stat-value">Automated weekly</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9889;</div><div><div class="stat-label">Performance Tuning</div><div class="stat-value">Proactive monitoring</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">Security Updates</div><div class="stat-value">Applied same-day</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128230;</div><div><div class="stat-label">Backups</div><div class="stat-value">Hourly + on-demand</div></div></div>
+        </div>
+        <div class="visual-caption">Database optimization, performance tuning, security patches &mdash; all proactive, no action needed from you.</div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Full Platform Maintenance</div>
-        <p class="feat-desc">Database optimization, performance tuning, and proactive issue resolution.</p>
-      </div>
-      <div class="detail-feature">
-        <div class="feat-name">Content Updates on Request</div>
-        <p class="feat-desc">Need to change your hours, add a service, or update pricing? Just ask.</p>
+      <div class="visual-card">
+        <div class="visual-header">Content Updates on Request</div>
+        <div class="visual-body" style="padding:14px">
+          <div class="mock-notif">
+            <div class="notif-from">&#128221; Quick Update</div>
+            <div class="notif-body">"Change our hours to 8am-7pm on weekdays and add 'Leather Repair' to our services list."</div>
+            <div class="notif-time">Updated within hours, no tech skills needed</div>
+          </div>
+          <div class="mock-notif">
+            <div class="notif-from">&#128176; Pricing Change</div>
+            <div class="notif-body">"Update hem pricing to $15 for pants and $20 for formal wear."</div>
+            <div class="notif-time">Updated across all pages instantly</div>
+          </div>
+        </div>
+        <div class="visual-caption">Hours, services, pricing, photos &mdash; just email us what to change and it's done.</div>
       </div>
     </div>
   </div>
@@ -717,14 +836,20 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Essential Kit &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-hw-essential')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
-        <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">iPad Counter Mount</div>
+          <p class="product-spec">AboveTEK TS-138W. Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
+        </div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
-        <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/receipt-printer.jpg" alt="Epson TM-T20III Receipt Printer" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">Thermal Receipt Printer</div>
+          <p class="product-spec">Epson TM-T20III. USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -736,18 +861,27 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Pro Kit &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-hw-pro')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
-        <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">iPad Counter Mount</div>
+          <p class="product-spec">AboveTEK TS-138W. Adjustable angle, anti-theft lock.</p>
+        </div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
-        <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/receipt-printer.jpg" alt="Epson TM-T20III Receipt Printer" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">Thermal Receipt Printer</div>
+          <p class="product-spec">Epson TM-T20III. USB + Ethernet. 80mm thermal paper.</p>
+        </div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Label Printer (Brother QL-820NWB)</div>
-        <p class="feat-desc">WiFi + Bluetooth. Print garment tags with order ID, customer name, QR code.</p>
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/label-printer.png" alt="Brother QL-820NWB Label Printer" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">Label Printer</div>
+          <p class="product-spec">Brother QL-820NWB. WiFi + Bluetooth. Print garment tags with order ID, name, QR code.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -759,22 +893,34 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Full Kit &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-hw-full')">&times;</button>
     </div>
-    <div class="detail-features">
-      <div class="detail-feature">
-        <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
-        <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">iPad Counter Mount</div>
+          <p class="product-spec">AboveTEK TS-138W. Adjustable angle, anti-theft lock.</p>
+        </div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
-        <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/receipt-printer.jpg" alt="Epson TM-T20III Receipt Printer" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">Thermal Receipt Printer</div>
+          <p class="product-spec">Epson TM-T20III. USB + Ethernet. 80mm thermal paper.</p>
+        </div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Label Printer (Brother QL-820NWB)</div>
-        <p class="feat-desc">WiFi + Bluetooth. Print garment tags with order ID, customer name, QR code.</p>
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/label-printer.png" alt="Brother QL-820NWB Label Printer" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">Label Printer</div>
+          <p class="product-spec">Brother QL-820NWB. WiFi + Bluetooth. Print garment tags.</p>
+        </div>
       </div>
-      <div class="detail-feature">
-        <div class="feat-name">Barcode Scanner (Tera HW0002)</div>
-        <p class="feat-desc">USB plug-and-play. Scan order labels to instantly pull up order details.</p>
+      <div class="product-card">
+        <div class="product-img"><img src="/img/hardware/barcode-scanner.jpg" alt="Tera HW0002 Barcode Scanner" loading="lazy"></div>
+        <div class="product-info">
+          <div class="product-name">Barcode Scanner</div>
+          <p class="product-spec">Tera HW0002. USB plug-and-play. Scan order labels to pull up details instantly.</p>
+        </div>
       </div>
     </div>
   </div>

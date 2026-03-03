@@ -11,3 +11,7 @@
   Cache-Control: public, max-age=86400
 /*.js
   Cache-Control: public, max-age=86400
+
+# Auth script must not be cached aggressively
+/admin-auth.js
+  Cache-Control: public, max-age=0, must-revalidate
