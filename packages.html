@@ -169,7 +169,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .step-header h2{font-size:22px;font-weight:700;margin:0}
 
 /* Wizard */
-.wizard-progress{display:flex;align-items:center;justify-content:center;gap:0;max-width:400px;margin:0 auto 16px;padding:0 24px}
+.wizard-progress{display:flex;align-items:center;justify-content:center;gap:0;max-width:560px;margin:0 auto 16px;padding:0 24px}
 .wiz-group{display:flex;flex-direction:column;align-items:center;gap:3px}
 .wiz-dot{width:32px;height:32px;border-radius:50%;background:var(--glass);border:2px solid var(--glass-border);color:var(--text-muted);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
 .wiz-dot.active{background:var(--accent-cyan);border-color:var(--accent-cyan);color:#fff}
@@ -183,6 +183,40 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .wizard-step.active{display:block}
 .wizard-back{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--text-muted);font-size:13px;cursor:pointer;padding:4px 0;margin-bottom:4px;transition:color .2s}
 .wizard-back:hover{color:var(--text)}
+
+/* Demo Grid Category Headers */
+.demo-grid h4{grid-column:1/-1;font-size:12px;font-weight:700;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 0;padding-bottom:4px;border-bottom:1px solid var(--border)}
+.demo-grid h4:first-child{margin-top:0}
+
+/* What's New separator on bundle cards */
+.price-card li.whats-new{border-bottom:none;color:var(--accent-cyan);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:8px 0 2px;opacity:.7}
+.price-card li.whats-new::before{content:'';display:none}
+
+/* Wizard selection labels */
+.wiz-selection{font-size:10px;color:var(--accent-cyan);white-space:nowrap;max-width:80px;overflow:hidden;text-overflow:ellipsis;text-align:center;opacity:0;transition:opacity .3s}
+.wiz-selection.visible{opacity:1}
+
+/* Step 4 Summary */
+.summary-layout{max-width:900px;margin:0 auto}
+.summary-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;margin-bottom:16px}
+.summary-card h3{font-size:16px;margin:0 0 16px;color:var(--accent-cyan)}
+.cost-table{width:100%;border-collapse:collapse}
+.cost-table td{padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
+.cost-table td:last-child{text-align:right;font-weight:600}
+.cost-table tr.total td{border-top:2px solid var(--accent-cyan);font-weight:700;font-size:16px;color:var(--accent-cyan)}
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.analysis-stat{text-align:center;padding:20px;background:rgba(91,164,164,.06);border-radius:var(--radius)}
+.analysis-stat .stat-num{font-size:28px;font-weight:800;color:var(--accent-cyan)}
+.analysis-stat .stat-desc{font-size:12px;color:var(--text-muted);margin-top:4px}
+.feature-checklist{columns:2;column-gap:24px;list-style:none;padding:0}
+.feature-checklist li{font-size:13px;padding:4px 0;break-inside:avoid;display:flex;align-items:center;gap:6px}
+.feature-checklist li::before{content:'\2713';color:var(--accent-green);font-weight:700}
+.summary-checkout{display:block;width:100%;max-width:400px;margin:24px auto 0;padding:14px;border:none;border-radius:12px;background:var(--accent-cyan);color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
+.summary-checkout:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(91,164,164,.35)}
+.timeline-steps{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
+.timeline-step{flex:1;text-align:center;padding:16px 8px;background:rgba(91,164,164,.06);border-radius:var(--radius)}
+.timeline-step .tl-day{font-size:20px;font-weight:800;color:var(--accent-cyan)}
+.timeline-step .tl-label{font-size:11px;color:var(--text-muted);margin-top:4px}
 
 /* Mobile */
 @media(max-width:640px){
@@ -234,11 +268,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 <!-- ── Wizard Progress ────────────────────────────────── -->
 <div class="wizard-progress">
-  <div class="wiz-group"><div class="wiz-dot active" id="wdot1">1</div><div class="wiz-label active" id="wlab1">Bundle</div></div>
+  <div class="wiz-group"><div class="wiz-dot active" id="wdot1">1</div><div class="wiz-label active" id="wlab1">Bundle</div><div class="wiz-selection" id="wsel1"></div></div>
   <div class="wiz-line" id="wline1"></div>
-  <div class="wiz-group"><div class="wiz-dot" id="wdot2">2</div><div class="wiz-label" id="wlab2">Plan</div></div>
+  <div class="wiz-group"><div class="wiz-dot" id="wdot2">2</div><div class="wiz-label" id="wlab2">Plan</div><div class="wiz-selection" id="wsel2"></div></div>
   <div class="wiz-line" id="wline2"></div>
-  <div class="wiz-group"><div class="wiz-dot" id="wdot3">3</div><div class="wiz-label" id="wlab3">Hardware</div></div>
+  <div class="wiz-group"><div class="wiz-dot" id="wdot3">3</div><div class="wiz-label" id="wlab3">Hardware</div><div class="wiz-selection" id="wsel3"></div></div>
+  <div class="wiz-line" id="wline3"></div>
+  <div class="wiz-group"><div class="wiz-dot" id="wdot4">4</div><div class="wiz-label" id="wlab4">Summary</div><div class="wiz-selection" id="wsel4"></div></div>
 </div>
 
 <!-- ── Step 1 — Choose Your Bundle ────────────────────── -->
@@ -273,7 +309,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li class="locked">SMS &amp; email notifications</li>
       <li class="locked">Analytics &amp; reporting</li>
     </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Site Setup','$500');event.stopPropagation()"
       data-item-id="setup-site"
       data-item-name="SewReady Site Setup"
       data-item-price="500.00"
@@ -292,6 +328,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-period">One-time payment</div>
     <ul>
       <li>Everything in Site Setup</li>
+      <li class="whats-new">What's New:</li>
       <li>Online order wizard</li>
       <li>Customer accounts &amp; login</li>
       <li>Order tracking dashboard</li>
@@ -306,7 +343,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li class="locked">Driver pickup coordination</li>
       <li class="locked">Cost &amp; revenue analytics</li>
     </ul>
-    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(1);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(1,'Site + Online Orders','$1,200');event.stopPropagation()"
       data-item-id="setup-online"
       data-item-name="SewReady Site + Online Orders Setup"
       data-item-price="1200.00"
@@ -324,6 +361,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-period">One-time payment</div>
     <ul>
       <li>Everything in Site + Online Orders</li>
+      <li class="whats-new">What's New:</li>
       <li>SMS notifications (Twilio)</li>
       <li>Email notifications (Resend)</li>
       <li>Automated pickup alerts</li>
@@ -333,7 +371,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Priority setup support</li>
     </ul>
     <p style="font-size:12px;color:var(--text-muted);margin:0 0 16px;font-style:italic">Hardware sold separately</p>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Full Platform','$2,000');event.stopPropagation()"
       data-item-id="setup-full"
       data-item-name="SewReady Full Platform Setup"
       data-item-price="2000.00"
@@ -354,9 +392,9 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </div>
     <div class="demo-grid">
       <div class="demo-card">
-        <div class="demo-label">Customer Storefront</div>
+        <div class="demo-label">Public Website</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your custom branded website with Google Maps, services &amp; hours display, contact form, SEO, and mobile-responsive design.</p>
+        <p class="demo-desc">Your custom branded public website with Google Maps, services &amp; hours display, contact form, SEO, and mobile-responsive design.</p>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -372,11 +410,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <button class="detail-close" onclick="collapseCard('detail-setup-online')">&times;</button>
     </div>
     <div class="demo-grid">
+      <h4>Public Website</h4>
       <div class="demo-card">
-        <div class="demo-label">Customer Storefront</div>
+        <div class="demo-label">Public Website</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Branded website with Google Maps, services, contact form, and mobile-responsive design.</p>
+        <p class="demo-desc">Branded public website with Google Maps, services, contact form, and mobile-responsive design.</p>
       </div>
+      <h4>Employee Portal</h4>
       <div class="demo-card">
         <div class="demo-label">Orders Dashboard</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
@@ -411,16 +451,40 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <button class="detail-close" onclick="collapseCard('detail-setup-full')">&times;</button>
     </div>
     <div class="demo-grid">
+      <h4>Public Website</h4>
       <div class="demo-card">
-        <div class="demo-label">Customer Storefront</div>
+        <div class="demo-label">Public Website</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Branded website with Google Maps, services, contact form, and mobile-responsive design.</p>
+        <p class="demo-desc">Branded public website with Google Maps, services, contact form, and mobile-responsive design.</p>
       </div>
+      <h4>Employee Portal</h4>
       <div class="demo-card">
         <div class="demo-label">Orders Dashboard</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
+      <div class="demo-card">
+        <div class="demo-label">Calendar &amp; Scheduling</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Inventory Tracking</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Employee Management</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">Add your team, assign roles, and track who's working on which orders.</p>
+      </div>
+      <h4>Driver Web App</h4>
+      <div class="demo-card">
+        <div class="demo-label">Driver Coordination</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/driver?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">Manage driver routes and pickups for shops that offer delivery or base pickup service.</p>
+      </div>
+      <h4>Analytics &amp; Operations</h4>
       <div class="demo-card">
         <div class="demo-label">Analytics</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe></div>
@@ -430,16 +494,6 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="demo-label">SOP Library</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Standard operating procedures, training docs, checklists, and process guides for your team.</p>
-      </div>
-      <div class="demo-card">
-        <div class="demo-label">Driver Coordination</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/driver?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Manage driver routes and pickups for shops that offer delivery or base pickup service.</p>
-      </div>
-      <div class="demo-card">
-        <div class="demo-label">Calendar &amp; Scheduling</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -468,20 +522,20 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-row"><span class="price-amount">$0</span><span class="price-label">/month</span></div>
     <div class="price-period">No credit card required</div>
     <ul>
-      <li>Hosting included</li>
-      <li>SSL certificate</li>
-      <li>Self-service docs &amp; guides</li>
-      <li>Community email support</li>
-      <li class="locked">Managed maintenance</li>
-      <li class="locked">Uptime monitoring</li>
-      <li class="locked">SMS &amp; email notifications</li>
-      <li class="locked">Google/Waze/Apple Maps management</li>
-      <li class="locked">Automated pickup alerts</li>
-      <li class="locked">Monthly analytics reports</li>
-      <li class="locked">Priority support</li>
-      <li class="locked">Ongoing site updates</li>
+      <li>Website hosting</li>
+      <li>Secure website (HTTPS)</li>
+      <li>Help guides &amp; tutorials</li>
+      <li>Email support</li>
+      <li class="locked">We handle updates for you</li>
+      <li class="locked">24/7 website monitoring</li>
+      <li class="locked">Text &amp; email alerts to customers</li>
+      <li class="locked">Google, Waze &amp; Apple Maps setup</li>
+      <li class="locked">Automatic "order ready" texts</li>
+      <li class="locked">Monthly business report</li>
+      <li class="locked">Same-day support</li>
+      <li class="locked">Website changes on request</li>
     </ul>
-    <button class="card-cta secondary" onclick="wizardChoose(2);event.stopPropagation()" style="width:100%">Choose This</button>
+    <button class="card-cta secondary" onclick="wizardChoose(2,'Free','$0/mo');event.stopPropagation()" style="width:100%">Choose This</button>
   </div>
 
   <!-- Basic -->
@@ -491,19 +545,19 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-row"><span class="price-amount">$49</span><span class="price-label">/month</span></div>
     <div class="price-period">Billed monthly</div>
     <ul>
-      <li>Hosting &amp; maintenance</li>
-      <li>SSL certificate</li>
-      <li>Uptime monitoring</li>
-      <li>Basic email support</li>
-      <li class="locked">SMS &amp; email notifications</li>
-      <li class="locked">Google/Waze/Apple Maps management</li>
-      <li class="locked">Automated pickup alerts</li>
-      <li class="locked">Monthly analytics reports</li>
-      <li class="locked">Priority support</li>
-      <li class="locked">Ongoing site updates</li>
-      <li class="locked">Content updates on request</li>
+      <li>Website hosting</li>
+      <li>Secure website (HTTPS)</li>
+      <li>24/7 website monitoring</li>
+      <li>Email support</li>
+      <li class="locked">Text &amp; email alerts to customers</li>
+      <li class="locked">Google, Waze &amp; Apple Maps setup</li>
+      <li class="locked">Automatic "order ready" texts</li>
+      <li class="locked">Monthly business report</li>
+      <li class="locked">Same-day support</li>
+      <li class="locked">Website changes on request</li>
+      <li class="locked">We update your info for you</li>
     </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2,'Basic','$49/mo');event.stopPropagation()"
       data-item-id="svc-basic"
       data-item-name="SewReady Basic Monthly Service"
       data-item-price="49.00"
@@ -524,16 +578,16 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-period">Billed monthly</div>
     <ul>
       <li>Everything in Basic</li>
-      <li>SMS &amp; email notifications</li>
-      <li>Google/Waze/Apple Maps management</li>
-      <li>Automated pickup alerts</li>
-      <li>Monthly analytics reports</li>
-      <li class="locked">Ongoing site updates</li>
-      <li class="locked">Priority support (same-day)</li>
-      <li class="locked">Full platform maintenance</li>
-      <li class="locked">Content updates on request</li>
+      <li>Text &amp; email alerts to customers</li>
+      <li>Google, Waze &amp; Apple Maps setup</li>
+      <li>Automatic "order ready" texts</li>
+      <li>Monthly business report</li>
+      <li class="locked">Website changes on request</li>
+      <li class="locked">Same-day support</li>
+      <li class="locked">Full tech maintenance</li>
+      <li class="locked">We update your info for you</li>
     </ul>
-    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(2);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(2,'Standard','$100/mo');event.stopPropagation()"
       data-item-id="svc-standard"
       data-item-name="SewReady Standard Monthly Service"
       data-item-price="100.00"
@@ -553,13 +607,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-period">Billed monthly</div>
     <ul>
       <li>Everything in Standard</li>
-      <li>Google/Waze/Apple Maps management</li>
-      <li>Ongoing site updates &amp; customizations</li>
-      <li>Priority support (same-day)</li>
-      <li>Full platform maintenance</li>
-      <li>Content updates on request</li>
+      <li>Google, Waze &amp; Apple Maps setup</li>
+      <li>Website changes on request</li>
+      <li>Same-day support</li>
+      <li>Full tech maintenance</li>
+      <li>We update your info for you</li>
     </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2,'Premium','$250/mo');event.stopPropagation()"
       data-item-id="svc-premium"
       data-item-name="SewReady Premium Monthly Service"
       data-item-price="250.00"
@@ -820,7 +874,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Browser-based &mdash; no app install</li>
       <li>BYOD (bring your own device)</li>
     </ul>
-    <button class="card-cta secondary" onclick="wizardChoose(3);event.stopPropagation()" style="width:100%">Choose This</button>
+    <button class="card-cta secondary" onclick="wizardChoose(3,'No Hardware','$0');event.stopPropagation()" style="width:100%">Choose This</button>
   </div>
 
   <!-- Essential Kit -->
@@ -835,7 +889,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li class="locked">Label printer (Brother QL-820NWB)</li>
       <li class="locked">Barcode scanner (Tera HW0002)</li>
     </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3,'Essential Kit','$249');event.stopPropagation()"
       data-item-id="hw-essential"
       data-item-name="SewReady Essential Kit"
       data-item-price="249.00"
@@ -858,7 +912,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Label printer (Brother QL-820NWB)</li>
       <li class="locked">Barcode scanner (Tera HW0002)</li>
     </ul>
-    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(3);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(3,'Pro Kit','$399');event.stopPropagation()"
       data-item-id="hw-pro"
       data-item-name="SewReady Pro Kit"
       data-item-price="399.00"
@@ -880,7 +934,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Label printer (Brother QL-820NWB)</li>
       <li>Barcode scanner (Tera HW0002)</li>
     </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3);event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3,'Full Kit','$479');event.stopPropagation()"
       data-item-id="hw-full"
       data-item-name="SewReady Full Kit"
       data-item-price="479.00"
@@ -1020,6 +1074,17 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 </div><!-- /wizard-step-3 -->
 
+<!-- ── Step 4 — Summary & Analysis ─────────────────────── -->
+<div class="wizard-step" data-step="4" id="wizard-step-4">
+  <button class="wizard-back" onclick="goToStep(3)">&larr; Back to Hardware</button>
+  <div class="step-header">
+    <span class="step-number">4</span>
+    <h2>Your Package Summary</h2>
+  </div>
+  <p class="section-sub">Review your selections and see what this means for your shop</p>
+  <div id="summaryContent"></div>
+</div>
+
 <!-- ── Footer ───────────────────────────────────────────── -->
 <footer class="pkg-footer">
   &copy; 2026 SewReady &mdash; Built for military alteration shops near Fort Liberty
@@ -1028,6 +1093,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 <script>
 var currentStep = 1;
+window.wizardSelections = {};
 
 function goToStep(n) {
   document.querySelectorAll('.wizard-step').forEach(function(s) { s.classList.remove('active'); });
@@ -1035,21 +1101,28 @@ function goToStep(n) {
   if (target) target.classList.add('active');
   currentStep = n;
   updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function wizardChoose(step) {
+function wizardChoose(step, name, price) {
+  window.wizardSelections[step] = {name: name, price: price};
+  var sel = document.getElementById('wsel' + step);
+  if (sel) {
+    sel.textContent = name + ' ' + price;
+    sel.classList.add('visible');
+  }
   if (step < 3) {
     setTimeout(function() { goToStep(step + 1); }, 300);
   } else {
     setTimeout(function() {
-      updateProgress();
-      document.querySelector('.snipcart-checkout').click();
+      goToStep(4);
+      populateSummary();
     }, 300);
   }
 }
 
 function updateProgress() {
-  for (var i = 1; i <= 3; i++) {
+  for (var i = 1; i <= 4; i++) {
     var dot = document.getElementById('wdot' + i);
     var lab = document.getElementById('wlab' + i);
     var line = document.getElementById('wline' + i);
@@ -1065,6 +1138,103 @@ function updateProgress() {
       lab.classList.add('active');
     } else { dot.textContent = i; }
   }
+}
+
+function populateSummary() {
+  var s = window.wizardSelections;
+  var bundle = s[1] || {name:'—',price:'$0'};
+  var plan = s[2] || {name:'—',price:'$0/mo'};
+  var hw = s[3] || {name:'—',price:'$0'};
+
+  // Parse prices
+  function parsePrice(p) { return parseInt((p||'0').replace(/[^0-9]/g,''),10)||0; }
+  var bundleCost = parsePrice(bundle.price);
+  var planCost = parsePrice(plan.price);
+  var hwCost = parsePrice(hw.price);
+  var firstMonth = bundleCost + planCost + hwCost;
+  var monthly = planCost;
+
+  // Feature lists by bundle tier
+  var bundleFeatures = {
+    'Site Setup': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design'],
+    'Site + Online Orders': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Online order wizard','Customer accounts & login','Order tracking dashboard','Employee management','Inventory tracking','Calendar & scheduling','Receipt & label printing'],
+    'Full Platform': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Online order wizard','Customer accounts & login','Order tracking dashboard','Employee management','Inventory tracking','Calendar & scheduling','Receipt & label printing','SMS notifications','Email notifications','Automated pickup alerts','SOP library','Driver pickup coordination','Cost & revenue analytics']
+  };
+  var planFeatures = {
+    'Free': ['Website hosting','Secure website (HTTPS)','Help guides & tutorials','Email support'],
+    'Basic': ['Website hosting','Secure website (HTTPS)','24/7 website monitoring','Email support'],
+    'Standard': ['Website hosting','Secure website (HTTPS)','24/7 website monitoring','Email support','Text & email alerts to customers','Google, Waze & Apple Maps setup','Automatic order-ready texts','Monthly business report'],
+    'Premium': ['Website hosting','Secure website (HTTPS)','24/7 website monitoring','Same-day support','Text & email alerts to customers','Google, Waze & Apple Maps setup','Automatic order-ready texts','Monthly business report','Website changes on request','Full tech maintenance','We update your info for you']
+  };
+
+  var allFeatures = (bundleFeatures[bundle.name]||[]).concat(planFeatures[plan.name]||[]);
+  // Dedupe
+  var seen = {};
+  allFeatures = allFeatures.filter(function(f) { if(seen[f]) return false; seen[f]=true; return true; });
+
+  // Analysis numbers by bundle tier
+  var tierData = {
+    'Site Setup': {newCustomers:'10–20',mapsViews:'200+',retention:'—',timeSaved:'2 hrs',noShows:'—',laborSave:'—',rev3:'5–10%',rev6:'10–15%',rev12:'15–25%',days:3},
+    'Site + Online Orders': {newCustomers:'20–40',mapsViews:'500+',retention:'15–25%',timeSaved:'5 hrs',noShows:'—',laborSave:'$200–400',rev3:'10–20%',rev6:'20–35%',rev12:'30–50%',days:5},
+    'Full Platform': {newCustomers:'30–60',mapsViews:'800+',retention:'25–40%',timeSaved:'8 hrs',noShows:'30–50%',laborSave:'$400–800',rev3:'15–30%',rev6:'30–50%',rev12:'50–80%',days:7}
+  };
+  var td = tierData[bundle.name] || tierData['Site Setup'];
+
+  var html = '<div class="summary-layout">';
+
+  // Cost Breakdown
+  html += '<div class="summary-card"><h3>Cost Breakdown</h3>';
+  html += '<table class="cost-table">';
+  html += '<tr><td>Bundle — ' + bundle.name + '</td><td>' + bundle.price + ' (one-time)</td></tr>';
+  html += '<tr><td>Plan — ' + plan.name + '</td><td>' + plan.price + (planCost>0?' (monthly)':' (free)') + '</td></tr>';
+  html += '<tr><td>Hardware — ' + hw.name + '</td><td>' + hw.price + (hwCost>0?' (one-time)':' (none)') + '</td></tr>';
+  html += '<tr class="total"><td>First Month Total</td><td>$' + firstMonth.toLocaleString() + '</td></tr>';
+  if(monthly > 0) html += '<tr><td>Monthly After That</td><td>$' + monthly + '/mo</td></tr>';
+  html += '</table></div>';
+
+  // What You're Getting
+  html += '<div class="summary-card"><h3>What You\'re Getting</h3>';
+  html += '<ul class="feature-checklist">';
+  allFeatures.forEach(function(f) { html += '<li>' + f + '</li>'; });
+  html += '</ul></div>';
+
+  // Customer Outreach Analysis
+  html += '<div class="summary-card"><h3>Customer Outreach Analysis</h3>';
+  html += '<div class="analysis-grid">';
+  html += '<div class="analysis-stat"><div class="stat-num">' + td.newCustomers + '</div><div class="stat-desc">Estimated new customers/month from online presence</div></div>';
+  html += '<div class="analysis-stat"><div class="stat-num">' + td.mapsViews + '</div><div class="stat-desc">Monthly Maps views (Google, Waze, Apple)</div></div>';
+  if(td.retention !== '—') html += '<div class="analysis-stat"><div class="stat-num">' + td.retention + '</div><div class="stat-desc">Repeat customer retention from SMS alerts</div></div>';
+  if(td.noShows !== '—') html += '<div class="analysis-stat"><div class="stat-num">' + td.noShows + '</div><div class="stat-desc">Reduction in missed pickups from auto-reminders</div></div>';
+  html += '</div></div>';
+
+  // Cost Savings
+  html += '<div class="summary-card"><h3>Cost Savings</h3>';
+  html += '<div class="analysis-grid">';
+  html += '<div class="analysis-stat"><div class="stat-num">' + td.timeSaved + '</div><div class="stat-desc">Time saved per week from automation</div></div>';
+  if(td.laborSave !== '—') html += '<div class="analysis-stat"><div class="stat-num">' + td.laborSave + '</div><div class="stat-desc">Estimated monthly labor savings</div></div>';
+  html += '</div></div>';
+
+  // Expected Growth
+  html += '<div class="summary-card"><h3>Expected Growth</h3>';
+  html += '<div class="analysis-grid">';
+  html += '<div class="analysis-stat"><div class="stat-num">' + td.rev3 + '</div><div class="stat-desc">Projected revenue increase (3 months)</div></div>';
+  html += '<div class="analysis-stat"><div class="stat-num">' + td.rev6 + '</div><div class="stat-desc">Projected revenue increase (6 months)</div></div>';
+  html += '<div class="analysis-stat"><div class="stat-num">' + td.rev12 + '</div><div class="stat-desc">Projected revenue increase (12 months)</div></div>';
+  html += '</div></div>';
+
+  // Setup Timeline
+  html += '<div class="summary-card"><h3>Setup Timeline</h3>';
+  html += '<div class="timeline-steps">';
+  html += '<div class="timeline-step"><div class="tl-day">Day 1</div><div class="tl-label">Onboarding call & info gathering</div></div>';
+  html += '<div class="timeline-step"><div class="tl-day">Day 2–' + Math.max(td.days-1,2) + '</div><div class="tl-label">Build & configure your platform</div></div>';
+  html += '<div class="timeline-step"><div class="tl-day">Day ' + td.days + '</div><div class="tl-label">Review, launch & go live</div></div>';
+  html += '</div></div>';
+
+  // Checkout button
+  html += '<button class="summary-checkout" onclick="document.querySelector(\'.snipcart-checkout\').click()">Proceed to Checkout</button>';
+  html += '</div>';
+
+  document.getElementById('summaryContent').innerHTML = html;
 }
 
 function expandCard(card, event) {

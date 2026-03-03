@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Parse employee ID from URL ──────────────────────────────
   const params = new URLSearchParams(window.location.search);
-  const empId = params.get('id');
+  let empId = params.get('id');
+  if (!empId && params.get('preview') === '1') empId = 'emp-1';
   const emp = employees.find(e => e.id === empId);
 
   if (!emp) {

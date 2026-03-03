@@ -41,7 +41,12 @@ const shopHours = {
 };
 
 const closedDates = [];
-const sharedOrders = [];
+var sharedOrders = [
+  { id: 'ORD-1041', customer: 'Sarah Mitchell', uniform: 'ASU Jacket — Sleeve Shorten', status: 'in-progress', scheduledBlock: { date: '2026-03-01', startTime: '09:00', endTime: '10:30', employeeId: 'emp-1' }},
+  { id: 'ORD-1042', customer: 'James Rivera', uniform: 'ACU Pants — Hem', status: 'received', scheduledBlock: { date: '2026-03-01', startTime: '11:00', endTime: '12:00', employeeId: 'emp-1' }},
+  { id: 'ORD-1043', customer: 'Maria Chen', uniform: 'Dress Blues — Taper', status: 'ready', scheduledBlock: { date: '2026-03-02', startTime: '09:30', endTime: '11:00', employeeId: 'emp-1' }},
+  { id: 'ORD-1044', customer: 'Kevin Brooks', uniform: 'PT Shorts — Waist Take-In', status: 'received', scheduledBlock: { date: '2026-03-02', startTime: '13:00', endTime: '14:00', employeeId: 'emp-1' }}
+];
 
 function parseTime(str) {
   const [h, m] = str.split(':').map(Number);
