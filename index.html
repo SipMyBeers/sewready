@@ -120,41 +120,27 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .detail-cta-row a:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(91,164,164,.35)}
 
 /* Step headers */
-.step-header{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 8px}
-.step-number{width:36px;height:36px;border-radius:50%;background:var(--accent-cyan);color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-header h2{font-size:22px;font-weight:700;margin:0}
+.step-header{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 0 8px}
+.step-number{width:40px;height:40px;border-radius:50%;background:var(--accent-cyan);color:#fff;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-header h2{font-size:28px;font-weight:700;margin:0}
 
-/* 3-column steps row */
-.steps-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;max-width:1200px;margin:48px auto 0;padding:0 24px;align-items:start}
-.step-column{display:flex;flex-direction:column;gap:0}
-.step-column .section-sub{font-size:13px;margin:0 0 16px}
-.step-column .pricing-grid{display:flex;flex-direction:column;gap:16px;max-width:none;padding:0}
-.step-column .price-card{padding:24px 20px}
-.step-column .price-card .price-amount{font-size:28px}
-.step-column .price-card h3{font-size:18px}
-.step-column .price-card .tier-desc{font-size:12px;margin:0 0 12px}
-.step-column .price-card ul{margin:0 0 16px}
-.step-column .price-card li{font-size:13px;padding:4px 0}
-.step-column .price-card .card-cta{padding:10px;font-size:13px}
-.step-column .package-detail{max-width:none;padding:0}
-.step-column .detail-inner{padding:20px;margin-top:16px}
-.step-column .detail-header h3{font-size:16px}
-.step-column .detail-features{grid-template-columns:1fr;gap:12px;margin-bottom:16px}
-.step-column .detail-feature{padding:14px}
-.step-column .detail-feature .feat-icon{font-size:24px;margin-bottom:4px}
-.step-column .detail-feature .feat-name{font-size:13px}
-.step-column .detail-feature .feat-desc{font-size:12px}
-.step-column .detail-previews{grid-template-columns:1fr;gap:12px;margin-bottom:16px}
-.step-column .detail-iframe-wrap iframe{height:250px}
-.step-column .see-included-btn{font-size:12px;padding:8px}
+/* Wizard */
+.wizard-progress{display:flex;align-items:center;justify-content:center;gap:0;max-width:480px;margin:0 auto 48px;padding:0 24px}
+.wiz-group{display:flex;flex-direction:column;align-items:center;gap:4px}
+.wiz-dot{width:38px;height:38px;border-radius:50%;background:var(--glass);border:2px solid var(--glass-border);color:var(--text-muted);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.wiz-dot.active{background:var(--accent-cyan);border-color:var(--accent-cyan);color:#fff}
+.wiz-dot.done{background:var(--accent-green);border-color:var(--accent-green);color:#fff}
+.wiz-label{font-size:12px;color:var(--text-muted);transition:all .3s;white-space:nowrap}
+.wiz-label.active{color:var(--text);font-weight:600}
+.wiz-label.done{color:var(--accent-green)}
+.wiz-line{flex:1;height:2px;background:var(--glass-border);margin:0 12px;margin-bottom:20px;transition:background .3s}
+.wiz-line.done{background:var(--accent-green)}
+.wizard-step{display:none;max-width:1060px;margin:0 auto;padding:0 24px}
+.wizard-step.active{display:block}
+.wizard-back{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--text-muted);font-size:14px;cursor:pointer;padding:8px 0;margin-bottom:8px;transition:color .2s}
+.wizard-back:hover{color:var(--text)}
 
 /* Mobile */
-@media(max-width:960px){
-  .steps-row{grid-template-columns:1fr;max-width:600px}
-  .step-column .pricing-grid{gap:20px}
-  .step-header{margin-top:48px}
-  .step-column:first-child .step-header{margin-top:0}
-}
 @media(max-width:640px){
   .included-card .included-features{grid-template-columns:1fr}
   .pkg-nav{padding:12px 16px}
@@ -201,10 +187,17 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-<div class="steps-row">
+<!-- ── Wizard Progress ────────────────────────────────── -->
+<div class="wizard-progress">
+  <div class="wiz-group"><div class="wiz-dot active" id="wdot1">1</div><div class="wiz-label active" id="wlab1">Bundle</div></div>
+  <div class="wiz-line" id="wline1"></div>
+  <div class="wiz-group"><div class="wiz-dot" id="wdot2">2</div><div class="wiz-label" id="wlab2">Plan</div></div>
+  <div class="wiz-line" id="wline2"></div>
+  <div class="wiz-group"><div class="wiz-dot" id="wdot3">3</div><div class="wiz-label" id="wlab3">Hardware</div></div>
+</div>
 
-<div class="step-column">
 <!-- ── Step 1 — Choose Your Bundle ────────────────────── -->
+<div class="wizard-step active" data-step="1" id="wizard-step-1">
 <div class="step-header" id="packages">
   <span class="step-number">1</span>
   <h2>Choose Your Bundle</h2>
@@ -228,7 +221,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Mobile-responsive design</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-setup-site')">See What's Included</button>
-    <button class="snipcart-add-item card-cta secondary"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1)"
       data-item-id="setup-site"
       data-item-name="SewReady Site Setup"
       data-item-price="500.00"
@@ -256,7 +249,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Receipt &amp; label printing</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-setup-online')">See What's Included</button>
-    <button class="snipcart-add-item card-cta primary"
+    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(1)"
       data-item-id="setup-online"
       data-item-name="SewReady Site + Online Orders Setup"
       data-item-price="1200.00"
@@ -284,7 +277,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-setup-full')">See What's Included</button>
     <p style="font-size:12px;color:var(--text-muted);margin:0 0 16px;font-style:italic">Hardware sold separately</p>
-    <button class="snipcart-add-item card-cta secondary"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1)"
       data-item-id="setup-full"
       data-item-name="SewReady Full Platform Setup"
       data-item-price="2000.00"
@@ -494,10 +487,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-</div><!-- /step-column 1 -->
+</div><!-- /wizard-step-1 -->
 
-<div class="step-column">
 <!-- ── Step 2 — Choose Your Plan ──────────────────────── -->
+<div class="wizard-step" data-step="2" id="wizard-step-2">
+<button class="wizard-back" onclick="goToStep(1)">&larr; Back to Bundles</button>
 <div class="step-header" id="services">
   <span class="step-number">2</span>
   <h2>Choose Your Plan</h2>
@@ -519,7 +513,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Community email support</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-svc-free')">See What's Included</button>
-    <a href="/demo.html" class="card-cta secondary" style="display:block;width:100%;text-align:center;box-sizing:border-box">Get Started</a>
+    <button class="card-cta secondary" onclick="wizardChoose(2)" style="width:100%">Choose This</button>
   </div>
 
   <!-- Basic -->
@@ -535,7 +529,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Basic email support</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-svc-basic')">See What's Included</button>
-    <button class="snipcart-add-item card-cta secondary"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2)"
       data-item-id="svc-basic"
       data-item-name="SewReady Basic Monthly Service"
       data-item-price="49.00"
@@ -561,7 +555,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Monthly analytics reports</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-svc-standard')">See What's Included</button>
-    <button class="snipcart-add-item card-cta primary"
+    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(2)"
       data-item-id="svc-standard"
       data-item-name="SewReady Standard Monthly Service"
       data-item-price="100.00"
@@ -587,7 +581,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Content updates on request</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-svc-premium')">See What's Included</button>
-    <button class="snipcart-add-item card-cta secondary"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2)"
       data-item-id="svc-premium"
       data-item-name="SewReady Premium Monthly Service"
       data-item-price="250.00"
@@ -731,10 +725,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-</div><!-- /step-column 2 -->
+</div><!-- /wizard-step-2 -->
 
-<div class="step-column">
 <!-- ── Step 3 — Choose Your Hardware ─────────────────── -->
+<div class="wizard-step" data-step="3" id="wizard-step-3">
+<button class="wizard-back" onclick="goToStep(2)">&larr; Back to Plans</button>
 <div class="step-header" id="hardware">
   <span class="step-number">3</span>
   <h2>Choose Your Hardware</h2>
@@ -754,7 +749,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Browser-based &mdash; no app install</li>
       <li>BYOD (bring your own device)</li>
     </ul>
-    <span class="card-cta secondary" style="display:block;width:100%;text-align:center;box-sizing:border-box;padding:12px;border-radius:10px;font-weight:600;font-size:14px;background:var(--glass-hover);color:var(--text);border:1px solid var(--glass-border)">Continue without hardware</span>
+    <button class="card-cta secondary" onclick="wizardChoose(3)" style="width:100%">Choose This</button>
   </div>
 
   <!-- Essential Kit -->
@@ -768,7 +763,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Thermal receipt printer (Epson TM-T20III)</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-hw-essential')">See What's Included</button>
-    <button class="snipcart-add-item card-cta secondary"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3)"
       data-item-id="hw-essential"
       data-item-name="SewReady Essential Kit"
       data-item-price="249.00"
@@ -791,7 +786,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Label printer (Brother QL-820NWB)</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-hw-pro')">See What's Included</button>
-    <button class="snipcart-add-item card-cta primary"
+    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(3)"
       data-item-id="hw-pro"
       data-item-name="SewReady Pro Kit"
       data-item-price="399.00"
@@ -814,7 +809,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Barcode scanner (Tera HW0002)</li>
     </ul>
     <button class="see-included-btn" onclick="toggleDetail('detail-hw-full')">See What's Included</button>
-    <button class="snipcart-add-item card-cta secondary"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3)"
       data-item-id="hw-full"
       data-item-name="SewReady Full Kit"
       data-item-price="479.00"
@@ -905,8 +900,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-</div><!-- /step-column 3 -->
-</div><!-- /steps-row -->
+</div><!-- /wizard-step-3 -->
 
 <!-- ── Individual Hardware ────────────────────────────── -->
 <h2 class="section-title">Individual Hardware</h2>
@@ -963,6 +957,61 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 </footer>
 
 <script>
+var currentStep = 1;
+
+function goToStep(n) {
+  // Hide all steps
+  document.querySelectorAll('.wizard-step').forEach(function(s) { s.classList.remove('active'); });
+  // Show target step
+  var target = document.getElementById('wizard-step-' + n);
+  if (target) target.classList.add('active');
+  currentStep = n;
+  updateProgress();
+  // Scroll to top of wizard
+  setTimeout(function() {
+    var prog = document.querySelector('.wizard-progress');
+    if (prog) prog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+}
+
+function wizardChoose(step) {
+  if (step < 3) {
+    // Brief delay so Snipcart can process the click, then advance
+    setTimeout(function() { goToStep(step + 1); }, 300);
+  } else {
+    // Step 3 is the last step — open cart
+    setTimeout(function() {
+      // Mark step 3 done in progress
+      updateProgress();
+      document.querySelector('.snipcart-checkout').click();
+    }, 300);
+  }
+}
+
+function updateProgress() {
+  for (var i = 1; i <= 3; i++) {
+    var dot = document.getElementById('wdot' + i);
+    var lab = document.getElementById('wlab' + i);
+    var line = document.getElementById('wline' + i);
+    dot.classList.remove('active', 'done');
+    lab.classList.remove('active', 'done');
+    if (line) line.classList.remove('done');
+
+    if (i < currentStep) {
+      dot.classList.add('done');
+      dot.textContent = '\u2713';
+      lab.classList.add('done');
+      if (line) line.classList.add('done');
+    } else if (i === currentStep) {
+      dot.classList.add('active');
+      dot.textContent = i;
+      lab.classList.add('active');
+    } else {
+      dot.textContent = i;
+    }
+  }
+}
+
 function toggleDetail(id) {
   var panel = document.getElementById(id);
   if (!panel) return;
@@ -972,55 +1021,38 @@ function toggleDetail(id) {
   // Close all panels in the same section
   document.querySelectorAll('.package-detail[data-section="' + section + '"]').forEach(function(p) {
     p.classList.remove('open');
-    // Clear iframe src when closing to save resources
     p.querySelectorAll('iframe[src]').forEach(function(f) {
       f.setAttribute('data-src', f.src);
       f.removeAttribute('src');
     });
   });
 
-  // Deactivate all buttons in the same section's pricing grid
-  var grids = document.querySelectorAll('.pricing-grid');
-  grids.forEach(function(grid) {
-    var nextSibling = grid.nextElementSibling;
-    while (nextSibling && nextSibling.classList.contains('package-detail')) {
-      if (nextSibling.getAttribute('data-section') === section) {
-        grid.querySelectorAll('.see-included-btn').forEach(function(btn) {
-          btn.classList.remove('active');
-          btn.textContent = 'See What\u2019s Included';
-        });
-        break;
-      }
-      nextSibling = nextSibling.nextElementSibling;
-    }
-  });
+  // Deactivate all see-included buttons in the same wizard step
+  var step = panel.closest('.wizard-step');
+  if (step) {
+    step.querySelectorAll('.see-included-btn').forEach(function(btn) {
+      btn.classList.remove('active');
+      btn.textContent = 'See What\u2019s Included';
+    });
+  }
 
   if (!isOpen) {
     panel.classList.add('open');
-
-    // Lazy-load iframes
     panel.querySelectorAll('iframe[data-src]').forEach(function(f) {
       if (!f.src) f.src = f.getAttribute('data-src');
     });
 
     // Activate the matching button
-    var btnIndex = Array.from(document.querySelectorAll('.package-detail[data-section="' + section + '"]')).indexOf(panel);
-    grids.forEach(function(grid) {
-      var nextSibling = grid.nextElementSibling;
-      while (nextSibling && nextSibling.classList.contains('package-detail')) {
-        if (nextSibling.getAttribute('data-section') === section) {
-          var btns = grid.querySelectorAll('.see-included-btn');
-          if (btns[btnIndex]) {
-            btns[btnIndex].classList.add('active');
-            btns[btnIndex].textContent = 'Hide Details';
-          }
-          break;
-        }
-        nextSibling = nextSibling.nextElementSibling;
+    var panels = step ? Array.from(step.querySelectorAll('.package-detail[data-section="' + section + '"]')) : [];
+    var btnIndex = panels.indexOf(panel);
+    if (step && btnIndex >= 0) {
+      var btns = step.querySelectorAll('.see-included-btn');
+      if (btns[btnIndex]) {
+        btns[btnIndex].classList.add('active');
+        btns[btnIndex].textContent = 'Hide Details';
       }
-    });
+    }
 
-    // Smooth scroll to the panel
     setTimeout(function() {
       panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
