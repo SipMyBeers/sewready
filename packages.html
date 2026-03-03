@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SewReady — Plans, Pricing & Hardware</title>
+<title>SewReady — Packages, Services & Hardware</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css">
 <style>
@@ -18,23 +18,25 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .pkg-nav .nav-links{display:flex;gap:24px;align-items:center}
 .pkg-nav .nav-links a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
 .pkg-nav .nav-links a:hover{color:var(--text)}
-.pkg-nav .nav-cta{background:var(--accent-blue);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
-.pkg-nav .nav-cta:hover{transform:translateY(-1px);box-shadow:var(--glow-blue)}
 
 /* Hero */
 .pkg-hero{text-align:center;padding:80px 24px 48px;max-width:800px;margin:0 auto}
 .pkg-hero h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.15;margin:0 0 16px;background:linear-gradient(135deg,var(--text),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .pkg-hero p{font-size:18px;color:var(--text-muted);margin:0;line-height:1.6}
 
-/* Stats Bar */
-.stats-bar{display:flex;justify-content:center;gap:48px;padding:24px;flex-wrap:wrap;margin-bottom:32px}
-.stat-item{text-align:center}
-.stat-item .stat-num{font-size:28px;font-weight:800;color:var(--accent-cyan)}
-.stat-item .stat-label{font-size:13px;color:var(--text-muted);margin-top:4px}
-
 /* Section Titles */
 .section-title{text-align:center;font-size:28px;font-weight:700;margin:64px 0 8px}
 .section-sub{text-align:center;font-size:15px;color:var(--text-muted);margin:0 0 40px}
+
+/* Included Banner */
+.included-banner{max-width:720px;margin:0 auto 48px;padding:0 24px}
+.included-card{background:var(--glass);border:2px solid var(--accent-green);border-radius:var(--radius);padding:32px 28px;position:relative}
+.included-card .badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent-green);color:#fff;font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.included-card h3{font-size:22px;margin:12px 0 4px;text-align:center}
+.included-card .tier-desc{font-size:14px;color:var(--text-muted);margin:0 0 20px;text-align:center}
+.included-card .included-features{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;list-style:none;padding:0;margin:0}
+.included-card .included-features li{font-size:14px;padding:6px 0;display:flex;align-items:center;gap:8px}
+.included-card .included-features li::before{content:'\2713';color:var(--accent-green);font-weight:700;font-size:14px}
 
 /* Pricing Grid */
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1060px;margin:0 auto;padding:0 24px}
@@ -58,7 +60,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .price-card .card-cta.secondary:hover{background:var(--glass-strong)}
 
 /* Feature Comparison */
-.compare-wrap{max-width:900px;margin:0 auto;padding:0 24px;overflow-x:auto}
+.compare-wrap{max-width:1060px;margin:0 auto;padding:0 24px;overflow-x:auto}
 .compare-table{width:100%;border-collapse:collapse;font-size:14px}
 .compare-table th,.compare-table td{padding:12px 16px;border-bottom:1px solid var(--border);text-align:center}
 .compare-table th:first-child,.compare-table td:first-child{text-align:left}
@@ -88,47 +90,12 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .hw-item .hw-item-price{font-size:20px;font-weight:800;color:var(--accent-cyan);margin:0 0 8px}
 .hw-item .hw-spec{font-size:12px;color:var(--text-muted);line-height:1.5}
 
-/* Setup Guide */
-.setup-section{max-width:720px;margin:0 auto;padding:0 24px}
-.setup-steps{counter-reset:step}
-.setup-step{position:relative;padding:20px 24px 20px 64px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);margin-bottom:12px;counter-increment:step}
-.setup-step::before{content:counter(step);position:absolute;left:20px;top:20px;width:32px;height:32px;background:var(--accent-blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
-.setup-step h4{margin:0 0 4px;font-size:15px}
-.setup-step p{margin:0;font-size:13px;color:var(--text-muted);line-height:1.5}
-
-/* Testimonials */
-.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1060px;margin:0 auto;padding:0 24px}
-.testi-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:28px}
-.testi-card .quote{font-size:15px;line-height:1.6;margin:0 0 16px;font-style:italic;color:var(--text)}
-.testi-card .author{font-size:13px;font-weight:600;color:var(--accent-cyan)}
-.testi-card .shop{font-size:12px;color:var(--text-muted)}
-
-/* CTA Section */
-.cta-section{text-align:center;padding:64px 24px 80px;max-width:600px;margin:0 auto}
-.cta-section h2{font-size:32px;font-weight:800;margin:0 0 12px}
-.cta-section p{font-size:16px;color:var(--text-muted);margin:0 0 32px}
-.cta-btn{display:inline-block;background:var(--accent-blue);color:#fff;border:none;padding:16px 40px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:var(--glow-blue)}
-
-/* Contact Form */
-.contact-section{max-width:560px;margin:0 auto;padding:0 24px 80px}
-.contact-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:32px}
-.contact-card .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.contact-card .full{grid-column:1/-1}
-.contact-card label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
-.contact-card input,.contact-card select,.contact-card textarea{width:100%;background:var(--bg-surface);color:var(--text);border:1px solid var(--glass-border);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit}
-.contact-card textarea{resize:vertical;min-height:80px}
-.contact-card input:focus,.contact-card select:focus,.contact-card textarea:focus{outline:none;border-color:var(--accent-blue);box-shadow:0 0 0 3px rgba(58,110,165,.15)}
-.contact-card .submit-btn{display:block;width:100%;margin-top:20px;padding:14px;background:var(--accent-blue);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
-.contact-card .submit-btn:hover{transform:translateY(-1px);box-shadow:var(--glow-blue)}
-
 /* Footer */
 .pkg-footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--text-dim);border-top:1px solid var(--border)}
 
 /* Mobile */
 @media(max-width:640px){
-  .stats-bar{gap:24px}
-  .contact-card .form-grid{grid-template-columns:1fr}
+  .included-card .included-features{grid-template-columns:1fr}
   .pkg-nav{padding:12px 16px}
   .pkg-nav .nav-links{display:none}
 }
@@ -140,144 +107,238 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <nav class="pkg-nav">
   <div class="brand">Sew<span>Ready</span></div>
   <div class="nav-links">
-    <a href="#pricing">Pricing</a>
+    <a href="#packages">Packages</a>
     <a href="#hardware">Hardware</a>
-    <a href="/demo.html">Try Demo</a>
-    <a href="/guide.html">Guide</a>
+    <a href="/admin/login">Admin Login</a>
   </div>
-  <a class="nav-cta" href="/onboard.html">Get Started Free</a>
-  <button class="snipcart-checkout nav-cart" style="background:none;border:1px solid var(--glass-border);color:var(--text);padding:8px 16px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">&#128722; Cart (<span class="snipcart-items-count">0</span>)</button>
+  <button class="snipcart-checkout" style="background:none;border:1px solid var(--glass-border);color:var(--text);padding:8px 16px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">&#128722; Cart (<span class="snipcart-items-count">0</span>)</button>
 </nav>
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="pkg-hero">
-  <h1>Grow Your Sewing Business with SewReady</h1>
-  <p>The all-in-one platform built for military alteration shops. Online ordering, real-time tracking, and automated customer notifications — all white-labeled for your brand. Start free.</p>
+  <h1>Your Shop, Fully Equipped</h1>
+  <p>Choose a setup package for your branded SewReady site, pick a monthly service level, and add hardware. Everything you need to run your alteration shop online.</p>
 </section>
 
-<!-- ── Stats Bar ────────────────────────────────────────── -->
-<div class="stats-bar">
-  <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">Shops Served</div></div>
-  <div class="stat-item"><div class="stat-num">5,000+</div><div class="stat-label">Orders Managed</div></div>
-  <div class="stat-item"><div class="stat-num">Free</div><div class="stat-label">Storefront Tier</div></div>
-  <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Online Ordering</div></div>
+<!-- ── Included Storefront ─────────────────────────────── -->
+<div class="included-banner">
+  <div class="included-card">
+    <div class="badge">Included with Every Shop</div>
+    <h3>Storefront</h3>
+    <p class="tier-desc">Every SewReady shop gets a professional web presence at no extra charge</p>
+    <ul class="included-features">
+      <li>Custom branded website</li>
+      <li>Google Maps integration</li>
+      <li>Click-to-call button</li>
+      <li>Services &amp; hours display</li>
+      <li>SEO &amp; structured data</li>
+      <li>Mobile-responsive design</li>
+    </ul>
+  </div>
 </div>
 
-<!-- ── Pricing ──────────────────────────────────────────── -->
-<h2 class="section-title" id="pricing">Simple, Transparent Pricing</h2>
-<p class="section-sub">Start free, upgrade when you're ready</p>
+<!-- ── One-Time Setup Packages ─────────────────────────── -->
+<h2 class="section-title" id="packages">One-Time Setup Packages</h2>
+<p class="section-sub">Choose the level of build that fits your shop</p>
 
 <div class="pricing-grid">
 
-  <!-- Storefront (Free) -->
+  <!-- Site Setup -->
   <div class="price-card">
-    <h3>Storefront</h3>
-    <p class="tier-desc">Google-ready web presence for your shop</p>
-    <div class="price-row"><span class="price-amount">Free</span></div>
-    <div class="price-period">$0/month forever</div>
+    <h3>Site Setup</h3>
+    <p class="tier-desc">Professional branded website, ready to go</p>
+    <div class="price-row"><span class="price-amount">$500</span></div>
+    <div class="price-period">One-time payment</div>
     <ul>
-      <li>Custom branded landing page</li>
-      <li>Google Maps embed</li>
-      <li>Click-to-call button</li>
-      <li>Services & hours display</li>
+      <li>Custom branded website build</li>
+      <li>Google Maps integration</li>
+      <li>SEO &amp; structured data</li>
       <li>Contact form</li>
-      <li>SEO optimized</li>
+      <li>Services &amp; hours configuration</li>
       <li>Mobile-responsive design</li>
     </ul>
-    <a class="card-cta secondary" href="/onboard.html">Get Started Free</a>
+    <button class="snipcart-add-item card-cta secondary"
+      data-item-id="setup-site"
+      data-item-name="SewReady Site Setup"
+      data-item-price="500.00"
+      data-item-url="/packages.html"
+      data-item-description="Custom branded website build with Google Maps, SEO, contact form, services configuration, mobile-responsive design"
+      data-item-shippable="false"
+      data-item-max-quantity="1">Buy &mdash; $500</button>
   </div>
 
-  <!-- Online Orders ($79/mo) -->
+  <!-- Site + Online Orders -->
   <div class="price-card featured">
     <div class="badge">Most Popular</div>
-    <h3>Online Orders</h3>
-    <p class="tier-desc">Accept orders online, manage from anywhere</p>
-    <div class="price-row"><span class="price-amount">$79</span><span class="price-label">/month</span></div>
-    <div class="price-period">Everything in Free, plus:</div>
+    <h3>Site + Online Orders</h3>
+    <p class="tier-desc">Full site build with online ordering system</p>
+    <div class="price-row"><span class="price-amount">$1,200</span></div>
+    <div class="price-period">One-time payment</div>
     <ul>
+      <li>Everything in Site Setup</li>
       <li>Online order wizard</li>
-      <li>Customer accounts & login</li>
+      <li>Customer accounts &amp; login</li>
       <li>Order tracking dashboard</li>
       <li>Employee management</li>
       <li>Inventory tracking</li>
-      <li>Calendar & scheduling</li>
-      <li>Receipt & label printing</li>
+      <li>Calendar &amp; scheduling</li>
+      <li>Receipt &amp; label printing</li>
     </ul>
     <button class="snipcart-add-item card-cta primary"
-      data-item-id="plan-online"
-      data-item-name="SewReady Online Orders Plan"
-      data-item-price="79.00"
+      data-item-id="setup-online"
+      data-item-name="SewReady Site + Online Orders Setup"
+      data-item-price="1200.00"
       data-item-url="/packages.html"
-      data-item-description="Online ordering, employee management, inventory, calendar, receipt printing — $79/mo"
-      data-item-payment-interval="Month"
-      data-item-payment-interval-count="1"
+      data-item-description="Everything in Site Setup plus online ordering, customer accounts, order tracking, employee management, inventory, calendar, receipt & label printing"
       data-item-shippable="false"
-      data-item-max-quantity="1">Subscribe — $79/mo</button>
+      data-item-max-quantity="1">Buy &mdash; $1,200</button>
   </div>
 
-  <!-- Full Shop ($149/mo) -->
+  <!-- Full Platform -->
   <div class="price-card">
-    <h3>Full Shop</h3>
-    <p class="tier-desc">Complete automation with SMS & email</p>
-    <div class="price-row"><span class="price-amount">$149</span><span class="price-label">/month</span></div>
-    <div class="price-period">Everything in Online, plus:</div>
+    <h3>Full Platform</h3>
+    <p class="tier-desc">Complete automation with notifications &amp; analytics</p>
+    <div class="price-row"><span class="price-amount">$2,000</span></div>
+    <div class="price-period">One-time payment</div>
     <ul>
+      <li>Everything in Site + Online Orders</li>
       <li>SMS notifications (Twilio)</li>
       <li>Email notifications (Resend)</li>
       <li>Automated pickup alerts</li>
-      <li>SOP library & training docs</li>
+      <li>SOP library</li>
       <li>Driver pickup coordination</li>
-      <li>Cost & revenue analytics</li>
-      <li>Priority support</li>
+      <li>Cost &amp; revenue analytics</li>
+      <li>Priority setup support</li>
+    </ul>
+    <p style="font-size:12px;color:var(--text-muted);margin:0 0 16px;font-style:italic">Hardware sold separately</p>
+    <button class="snipcart-add-item card-cta secondary"
+      data-item-id="setup-full"
+      data-item-name="SewReady Full Platform Setup"
+      data-item-price="2000.00"
+      data-item-url="/packages.html"
+      data-item-description="Everything in Site + Online Orders plus SMS & email notifications, automated alerts, SOP library, driver coordination, analytics, priority support"
+      data-item-shippable="false"
+      data-item-max-quantity="1">Buy &mdash; $2,000</button>
+  </div>
+
+</div>
+
+<!-- ── Monthly Services ────────────────────────────────── -->
+<h2 class="section-title" id="services">Monthly Services</h2>
+<p class="section-sub">Ongoing hosting, maintenance, and support</p>
+
+<div class="pricing-grid">
+
+  <!-- Basic -->
+  <div class="price-card">
+    <h3>Basic</h3>
+    <p class="tier-desc">Hosting and maintenance essentials</p>
+    <div class="price-row"><span class="price-amount">$49</span><span class="price-label">/month</span></div>
+    <div class="price-period">Billed monthly</div>
+    <ul>
+      <li>Hosting &amp; maintenance</li>
+      <li>SSL certificate</li>
+      <li>Uptime monitoring</li>
+      <li>Basic email support</li>
     </ul>
     <button class="snipcart-add-item card-cta secondary"
-      data-item-id="plan-full"
-      data-item-name="SewReady Full Shop Plan"
-      data-item-price="149.00"
+      data-item-id="svc-basic"
+      data-item-name="SewReady Basic Monthly Service"
+      data-item-price="49.00"
       data-item-url="/packages.html"
-      data-item-description="Everything in Online plus SMS, email, automated alerts, SOP library, analytics — $149/mo"
+      data-item-description="Hosting, maintenance, SSL, uptime monitoring, basic email support — $49/mo"
       data-item-payment-interval="Month"
       data-item-payment-interval-count="1"
       data-item-shippable="false"
-      data-item-max-quantity="1">Subscribe — $149/mo</button>
+      data-item-max-quantity="1">Subscribe &mdash; $49/mo</button>
+  </div>
+
+  <!-- Standard -->
+  <div class="price-card featured">
+    <div class="badge">Recommended</div>
+    <h3>Standard</h3>
+    <p class="tier-desc">Notifications and monthly reporting</p>
+    <div class="price-row"><span class="price-amount">$100</span><span class="price-label">/month</span></div>
+    <div class="price-period">Billed monthly</div>
+    <ul>
+      <li>Everything in Basic</li>
+      <li>SMS &amp; email notifications</li>
+      <li>Automated pickup alerts</li>
+      <li>Monthly analytics reports</li>
+    </ul>
+    <button class="snipcart-add-item card-cta primary"
+      data-item-id="svc-standard"
+      data-item-name="SewReady Standard Monthly Service"
+      data-item-price="100.00"
+      data-item-url="/packages.html"
+      data-item-description="Everything in Basic plus SMS & email notifications, automated pickup alerts, monthly analytics — $100/mo"
+      data-item-payment-interval="Month"
+      data-item-payment-interval-count="1"
+      data-item-shippable="false"
+      data-item-max-quantity="1">Subscribe &mdash; $100/mo</button>
+  </div>
+
+  <!-- Premium -->
+  <div class="price-card">
+    <h3>Premium</h3>
+    <p class="tier-desc">Full-service management and priority support</p>
+    <div class="price-row"><span class="price-amount">$250</span><span class="price-label">/month</span></div>
+    <div class="price-period">Billed monthly</div>
+    <ul>
+      <li>Everything in Standard</li>
+      <li>Ongoing site updates &amp; customizations</li>
+      <li>Priority support</li>
+      <li>Full platform maintenance</li>
+      <li>Content updates on request</li>
+    </ul>
+    <button class="snipcart-add-item card-cta secondary"
+      data-item-id="svc-premium"
+      data-item-name="SewReady Premium Monthly Service"
+      data-item-price="250.00"
+      data-item-url="/packages.html"
+      data-item-description="Everything in Standard plus ongoing site updates, priority support, full platform maintenance, content updates on request — $250/mo"
+      data-item-payment-interval="Month"
+      data-item-payment-interval-count="1"
+      data-item-shippable="false"
+      data-item-max-quantity="1">Subscribe &mdash; $250/mo</button>
   </div>
 
 </div>
 
 <!-- ── Feature Comparison ───────────────────────────────── -->
 <h2 class="section-title">Feature Comparison</h2>
-<p class="section-sub">Everything included at a glance</p>
+<p class="section-sub">What's included in each setup package</p>
 
 <div class="compare-wrap">
 <table class="compare-table">
   <thead>
-    <tr><th></th><th>Storefront<br><small style="color:var(--accent-green)">Free</small></th><th>Online<br><small style="color:var(--accent-cyan)">$79/mo</small></th><th>Full Shop<br><small style="color:var(--accent-cyan)">$149/mo</small></th></tr>
+    <tr><th></th><th>Site Setup<br><small style="color:var(--accent-cyan)">$500</small></th><th>Site + Online Orders<br><small style="color:var(--accent-cyan)">$1,200</small></th><th>Full Platform<br><small style="color:var(--accent-cyan)">$2,000</small></th></tr>
   </thead>
   <tbody>
     <tr class="feat-head"><td colspan="4">Web Presence</td></tr>
     <tr><td>Custom branded website</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Google Maps embed</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Google Maps integration</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
     <tr><td>Contact form</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>SEO & JSON-LD structured data</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Mobile-optimized</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>SEO &amp; structured data</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Mobile-responsive design</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
     <tr class="feat-head"><td colspan="4">Online Ordering</td></tr>
-    <tr><td>Customer order wizard</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Customer accounts</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Order tracking</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Appointment scheduling</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Receipt & label printing</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Online order wizard</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Customer accounts &amp; login</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Order tracking dashboard</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Receipt &amp; label printing</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
     <tr class="feat-head"><td colspan="4">Shop Management</td></tr>
     <tr><td>Employee management</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
     <tr><td>Inventory tracking</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Calendar & scheduling</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Cost & revenue tracking</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr class="feat-head"><td colspan="4">Notifications</td></tr>
-    <tr><td>SMS notifications</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Email notifications</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Calendar &amp; scheduling</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Cost &amp; revenue analytics</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
+    <tr class="feat-head"><td colspan="4">Notifications &amp; Automation</td></tr>
+    <tr><td>SMS notifications (Twilio)</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Email notifications (Resend)</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
     <tr><td>Automated pickup alerts</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr class="feat-head"><td colspan="4">Billing</td></tr>
-    <tr><td>Online billing & checkout</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Self-service plan management</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Driver pickup coordination</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
+    <tr class="feat-head"><td colspan="4">Support</td></tr>
+    <tr><td>SOP library</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
+    <tr><td>Priority setup support</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
   </tbody>
 </table>
 </div>
@@ -303,7 +364,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/packages.html"
       data-item-description="iPad counter mount + Epson TM-T20III thermal receipt printer"
       data-item-weight="4500"
-      data-item-max-quantity="5">Buy — $249</button>
+      data-item-max-quantity="5">Buy &mdash; $249</button>
   </div>
 
   <div class="hw-card bundle" style="border-color:var(--accent-blue)">
@@ -322,7 +383,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/packages.html"
       data-item-description="iPad counter mount + Epson TM-T20III receipt printer + Brother QL-820NWB label printer"
       data-item-weight="6000"
-      data-item-max-quantity="5">Buy — $399</button>
+      data-item-max-quantity="5">Buy &mdash; $399</button>
   </div>
 
   <div class="hw-card bundle">
@@ -342,13 +403,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-url="/packages.html"
       data-item-description="iPad mount + receipt printer + label printer + barcode scanner"
       data-item-weight="7000"
-      data-item-max-quantity="5">Buy — $479</button>
+      data-item-max-quantity="5">Buy &mdash; $479</button>
   </div>
 
 </div>
 
 <!-- ── Individual Hardware ────────────────────────────── -->
-<h2 class="section-title">Recommended Hardware</h2>
+<h2 class="section-title">Individual Hardware</h2>
 <p class="section-sub">Or pick individual items that fit your setup</p>
 
 <div class="hw-item-grid">
@@ -358,7 +419,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <h4>Tablet</h4>
     <p class="hw-model">iPad 10th Gen or Samsung Galaxy Tab A9</p>
     <div class="hw-item-price">~$159 &ndash; $349</div>
-    <p class="hw-spec">10" display, perfect for counter use. Runs SewReady in the browser — no app needed.</p>
+    <p class="hw-spec">10" display, perfect for counter use. Runs SewReady in the browser &mdash; no app needed.</p>
   </div>
 
   <div class="hw-item">
@@ -395,145 +456,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 </div>
 
-<!-- ── Setup Guide ─────────────────────────────────────── -->
-<h2 class="section-title" id="setup">Setup Guide</h2>
-<p class="section-sub">Get up and running in under 30 minutes</p>
-
-<div class="setup-section">
-  <div class="setup-steps">
-    <div class="setup-step">
-      <h4>Sign Up Free</h4>
-      <p>Create your SewReady account. Your custom storefront goes live immediately with your shop name, address, hours, and services.</p>
-    </div>
-    <div class="setup-step">
-      <h4>Set Up Your Dashboard</h4>
-      <p>Upgrade to Online or Full to unlock the admin dashboard. Add employees, configure services, set your schedule, and import inventory.</p>
-    </div>
-    <div class="setup-step">
-      <h4>Connect Hardware</h4>
-      <p>Plug in your receipt printer and label printer via USB. SewReady uses browser-based printing — just click "Print Receipt" from any order.</p>
-    </div>
-    <div class="setup-step">
-      <h4>Share Your Link</h4>
-      <p>Your shop gets a permanent URL at sewing.ranger-beers.com/shops/your-shop/. Share it on Google Business, social media, and at your counter.</p>
-    </div>
-    <div class="setup-step">
-      <h4>Start Taking Orders</h4>
-      <p>Customers place orders online or walk in. You manage everything from the dashboard. Receipts print automatically. Notifications go out when orders are ready.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ── Testimonials ─────────────────────────────────────── -->
-<h2 class="section-title">What Shop Owners Say</h2>
-<p class="section-sub">Trusted by alteration shops across the Fort Liberty area</p>
-
-<div class="testimonials">
-  <div class="testi-card">
-    <p class="quote">"Since adding online ordering through SewReady, my walk-in traffic increased by 30%. Soldiers find me on Google and place orders before they even come in. Setup was painless."</p>
-    <div class="author">Maria S.</div>
-    <div class="shop">Maria's Alterations, Fayetteville</div>
-  </div>
-  <div class="testi-card">
-    <p class="quote">"The automated text notifications are a game-changer. I used to spend 20 minutes a day calling customers to tell them their uniforms were ready. Now it just happens."</p>
-    <div class="author">Jin K.</div>
-    <div class="shop">Jin's Sewing, Spring Lake</div>
-  </div>
-  <div class="testi-card">
-    <p class="quote">"The free storefront brought in customers I never would have found. When I saw the volume, upgrading to the full plan was a no-brainer."</p>
-    <div class="author">Connie T.</div>
-    <div class="shop">Connie's Sewing, Southern Pines</div>
-  </div>
-</div>
-
-<!-- ── CTA ─────────────────────────────────────────────── -->
-<div class="cta-section" id="contactSection">
-  <h2>Ready to Grow Your Shop?</h2>
-  <p>Start with a free storefront — no credit card required. Upgrade anytime.</p>
-</div>
-
-<div class="contact-section">
-  <div class="contact-card">
-    <form id="demoForm" onsubmit="return handleDemoSubmit(event)">
-      <div class="form-grid">
-        <div>
-          <label for="cName">Your Name *</label>
-          <input type="text" id="cName" required>
-        </div>
-        <div>
-          <label for="cShop">Shop Name *</label>
-          <input type="text" id="cShop" required>
-        </div>
-        <div>
-          <label for="cPhone">Phone *</label>
-          <input type="tel" id="cPhone" required>
-        </div>
-        <div>
-          <label for="cEmail">Email *</label>
-          <input type="email" id="cEmail" required>
-        </div>
-        <div class="full">
-          <label for="cPackage">Interested In</label>
-          <select id="cPackage">
-            <option value="">Not sure yet</option>
-            <option value="storefront">Storefront (Free)</option>
-            <option value="online">Online Orders ($79/mo)</option>
-            <option value="full">Full Shop ($149/mo)</option>
-          </select>
-        </div>
-        <div class="full">
-          <label for="cNotes">Anything else?</label>
-          <textarea id="cNotes" placeholder="Tell us about your shop, questions, etc."></textarea>
-        </div>
-      </div>
-      <button type="submit" class="submit-btn">Get Started Free</button>
-    </form>
-    <div id="formSuccess" style="display:none;text-align:center;padding:32px 0">
-      <div style="font-size:48px;margin-bottom:12px">&#10003;</div>
-      <h3 style="margin:0 0 8px;color:var(--accent-green)">Request Received!</h3>
-      <p style="color:var(--text-muted);margin:0">We'll be in touch within 24 hours to get you set up.</p>
-    </div>
-  </div>
-</div>
-
 <!-- ── Footer ───────────────────────────────────────────── -->
 <footer class="pkg-footer">
   &copy; 2026 SewReady &mdash; Built for military alteration shops near Fort Liberty
-  <br><a href="/legal/terms.html" style="color:var(--text-dim)">Terms of Service</a> &middot; <a href="/legal/privacy.html" style="color:var(--text-dim)">Privacy Policy</a> &middot; <a href="/guide.html" style="color:var(--text-dim)">Quick-Start Guide</a>
+  <br><a href="/legal/terms.html" style="color:var(--text-dim)">Terms of Service</a> &middot; <a href="/legal/privacy.html" style="color:var(--text-dim)">Privacy Policy</a>
 </footer>
-
-<script>
-// ── Demo Form ───────────────────────────────────────────
-function handleDemoSubmit(e) {
-  e.preventDefault();
-  var form = document.getElementById('demoForm');
-  var data = {
-    name: document.getElementById('cName').value,
-    shop: document.getElementById('cShop').value,
-    phone: document.getElementById('cPhone').value,
-    email: document.getElementById('cEmail').value,
-    package: document.getElementById('cPackage').value,
-    notes: document.getElementById('cNotes').value
-  };
-
-  // Submit to contact API
-  fetch('/api/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      shop_slug: 'sewready',
-      name: data.name,
-      phone: data.phone,
-      email: data.email,
-      message: 'Shop: ' + data.shop + '\nInterested in: ' + (data.package || 'Not sure yet') + '\n' + (data.notes || '')
-    })
-  }).catch(function () {});
-
-  form.style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
-  return false;
-}
-</script>
 
 <div hidden id="snipcart" data-api-key="Y2QzMWQ1NWQtNjc3NC00MDY1LThkMmQtY2ZmNzg5ZDkwMWE2NjM5MDc5MTUyNTMxMDc3MzE4" data-config-modal-style="side"></div>
 <script src="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js"></script>
