@@ -53,6 +53,8 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .price-card ul{list-style:none;padding:0;margin:0 0 12px;flex:1}
 .price-card li{font-size:13px;padding:3px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
 .price-card li::before{content:'\2713';color:var(--accent-green);font-weight:700;font-size:13px}
+.price-card li.locked{color:var(--text-dim);opacity:.45}
+.price-card li.locked::before{content:'\1F512';color:var(--text-dim);font-size:11px}
 .price-card .card-cta{display:block;width:100%;text-align:center;padding:10px;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
 .price-card .card-cta.primary{background:var(--accent-blue);color:#fff}
 .price-card .card-cta.primary:hover{box-shadow:var(--glow-blue);transform:translateY(-1px)}
@@ -85,7 +87,10 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:20px}
 .demo-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden}
 .demo-card .demo-label{padding:8px 14px;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--glass-border)}
-.demo-card iframe{width:100%;height:280px;border:none;background:var(--bg-deep);display:block}
+.demo-card .demo-iframe-wrap{width:100%;height:225px;overflow:hidden;position:relative}
+.demo-card iframe{width:1280px;height:900px;border:none;background:var(--bg-deep);display:block;transform:scale(.25);transform-origin:0 0;position:absolute;top:0;left:0;pointer-events:none}
+.demo-card .demo-iframe-wrap::after{content:'Click to expand';position:absolute;bottom:8px;right:10px;font-size:10px;color:var(--text-dim);opacity:0;transition:opacity .2s;pointer-events:none;z-index:1}
+.demo-card:hover .demo-iframe-wrap::after{opacity:1}
 .demo-card{cursor:pointer;transition:all .25s}
 .demo-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 .demo-card .demo-desc{padding:10px 14px;font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
@@ -259,6 +264,14 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Contact form</li>
       <li>Services &amp; hours configuration</li>
       <li>Mobile-responsive design</li>
+      <li class="locked">Online order wizard</li>
+      <li class="locked">Customer accounts &amp; login</li>
+      <li class="locked">Order tracking dashboard</li>
+      <li class="locked">Employee management</li>
+      <li class="locked">Inventory tracking</li>
+      <li class="locked">Calendar &amp; scheduling</li>
+      <li class="locked">SMS &amp; email notifications</li>
+      <li class="locked">Analytics &amp; reporting</li>
     </ul>
     <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1);event.stopPropagation()"
       data-item-id="setup-site"
@@ -286,6 +299,12 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Inventory tracking</li>
       <li>Calendar &amp; scheduling</li>
       <li>Receipt &amp; label printing</li>
+      <li class="locked">SMS notifications (Twilio)</li>
+      <li class="locked">Email notifications (Resend)</li>
+      <li class="locked">Automated pickup alerts</li>
+      <li class="locked">SOP library</li>
+      <li class="locked">Driver pickup coordination</li>
+      <li class="locked">Cost &amp; revenue analytics</li>
     </ul>
     <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(1);event.stopPropagation()"
       data-item-id="setup-online"
@@ -336,7 +355,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="demo-grid">
       <div class="demo-card">
         <div class="demo-label">Customer Storefront</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
         <p class="demo-desc">Your custom branded website with Google Maps, services &amp; hours display, contact form, SEO, and mobile-responsive design.</p>
       </div>
     </div>
@@ -355,27 +374,27 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="demo-grid">
       <div class="demo-card">
         <div class="demo-label">Customer Storefront</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
         <p class="demo-desc">Branded website with Google Maps, services, contact form, and mobile-responsive design.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">Orders Dashboard</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">Calendar &amp; Scheduling</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">Inventory Tracking</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">Employee Management</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Add your team, assign roles, and track who's working on which orders.</p>
       </div>
     </div>
@@ -394,32 +413,32 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="demo-grid">
       <div class="demo-card">
         <div class="demo-label">Customer Storefront</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
         <p class="demo-desc">Branded website with Google Maps, services, contact form, and mobile-responsive design.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">Orders Dashboard</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">Analytics</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Track revenue, costs, turnaround times, and customer metrics with visual dashboards.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">SOP Library</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Standard operating procedures, training docs, checklists, and process guides for your team.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">Driver Coordination</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/driver?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/driver?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage driver routes and pickups for shops that offer delivery or base pickup service.</p>
       </div>
       <div class="demo-card">
         <div class="demo-label">Calendar &amp; Scheduling</div>
-        <iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
       </div>
     </div>
@@ -453,6 +472,14 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>SSL certificate</li>
       <li>Self-service docs &amp; guides</li>
       <li>Community email support</li>
+      <li class="locked">Managed maintenance</li>
+      <li class="locked">Uptime monitoring</li>
+      <li class="locked">SMS &amp; email notifications</li>
+      <li class="locked">Google/Waze/Apple Maps management</li>
+      <li class="locked">Automated pickup alerts</li>
+      <li class="locked">Monthly analytics reports</li>
+      <li class="locked">Priority support</li>
+      <li class="locked">Ongoing site updates</li>
     </ul>
     <button class="card-cta secondary" onclick="wizardChoose(2);event.stopPropagation()" style="width:100%">Choose This</button>
   </div>
@@ -468,6 +495,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>SSL certificate</li>
       <li>Uptime monitoring</li>
       <li>Basic email support</li>
+      <li class="locked">SMS &amp; email notifications</li>
+      <li class="locked">Google/Waze/Apple Maps management</li>
+      <li class="locked">Automated pickup alerts</li>
+      <li class="locked">Monthly analytics reports</li>
+      <li class="locked">Priority support</li>
+      <li class="locked">Ongoing site updates</li>
+      <li class="locked">Content updates on request</li>
     </ul>
     <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2);event.stopPropagation()"
       data-item-id="svc-basic"
@@ -491,8 +525,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <ul>
       <li>Everything in Basic</li>
       <li>SMS &amp; email notifications</li>
+      <li>Google/Waze/Apple Maps management</li>
       <li>Automated pickup alerts</li>
       <li>Monthly analytics reports</li>
+      <li class="locked">Ongoing site updates</li>
+      <li class="locked">Priority support (same-day)</li>
+      <li class="locked">Full platform maintenance</li>
+      <li class="locked">Content updates on request</li>
     </ul>
     <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(2);event.stopPropagation()"
       data-item-id="svc-standard"
@@ -514,8 +553,9 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-period">Billed monthly</div>
     <ul>
       <li>Everything in Standard</li>
+      <li>Google/Waze/Apple Maps management</li>
       <li>Ongoing site updates &amp; customizations</li>
-      <li>Priority support</li>
+      <li>Priority support (same-day)</li>
       <li>Full platform maintenance</li>
       <li>Content updates on request</li>
     </ul>
@@ -662,6 +702,16 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         </div>
         <div class="visual-caption">One click to "Ready" and the customer is notified. Auto-reminders if they forget to pick up.</div>
       </div>
+      <div class="visual-card">
+        <div class="visual-header">Google / Waze / Apple Maps</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Google Business Profile</div><div class="stat-value">Listing managed &amp; optimized</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128663;</div><div><div class="stat-label">Waze Listing</div><div class="stat-value">Drive-to directions for customers</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127823;</div><div><div class="stat-label">Apple Maps</div><div class="stat-value">Place card with hours &amp; photos</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#11088;</div><div><div class="stat-label">Review Monitoring</div><div class="stat-value">Alerts on new reviews</div></div></div>
+        </div>
+        <div class="visual-caption">We keep your shop visible on all major maps platforms. Hours, photos, and reviews &mdash; all managed for you.</div>
+      </div>
     </div>
   </div>
 </div>
@@ -732,6 +782,16 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         </div>
         <div class="visual-caption">Hours, services, pricing, photos &mdash; just email us what to change and it's done.</div>
       </div>
+      <div class="visual-card">
+        <div class="visual-header">Google / Waze / Apple Maps</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Google Business Profile</div><div class="stat-value">Fully managed &amp; optimized</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128663;</div><div><div class="stat-label">Waze Listing</div><div class="stat-value">Drive-to directions for customers</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127823;</div><div><div class="stat-label">Apple Maps</div><div class="stat-value">Place card with hours &amp; photos</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#11088;</div><div><div class="stat-label">Review Monitoring &amp; Alerts</div><div class="stat-value">Respond to reviews for you</div></div></div>
+        </div>
+        <div class="visual-caption">Full maps management across all platforms. We update hours, respond to reviews, and keep your listing optimized.</div>
+      </div>
     </div>
   </div>
 </div>
@@ -750,7 +810,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <div class="pricing-grid">
 
   <!-- No Hardware -->
-  <div class="price-card" onclick="event.stopPropagation()">
+  <div class="price-card" data-detail="detail-hw-none" onclick="expandCard(this,event)">
     <h3>No Hardware</h3>
     <p class="tier-desc">I already have what I need</p>
     <div class="price-row"><span class="price-amount">$0</span></div>
@@ -760,7 +820,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Browser-based &mdash; no app install</li>
       <li>BYOD (bring your own device)</li>
     </ul>
-    <button class="card-cta secondary" onclick="wizardChoose(3)" style="width:100%">Choose This</button>
+    <button class="card-cta secondary" onclick="wizardChoose(3);event.stopPropagation()" style="width:100%">Choose This</button>
   </div>
 
   <!-- Essential Kit -->
@@ -772,6 +832,8 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <ul>
       <li>iPad counter mount (AboveTEK)</li>
       <li>Thermal receipt printer (Epson TM-T20III)</li>
+      <li class="locked">Label printer (Brother QL-820NWB)</li>
+      <li class="locked">Barcode scanner (Tera HW0002)</li>
     </ul>
     <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3);event.stopPropagation()"
       data-item-id="hw-essential"
@@ -794,6 +856,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>iPad counter mount (AboveTEK)</li>
       <li>Thermal receipt printer (Epson TM-T20III)</li>
       <li>Label printer (Brother QL-820NWB)</li>
+      <li class="locked">Barcode scanner (Tera HW0002)</li>
     </ul>
     <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(3);event.stopPropagation()"
       data-item-id="hw-pro"
@@ -830,6 +893,35 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 </div>
 
 <!-- ── Hardware Detail Panels ─────────────────────────── -->
+<div class="package-detail" id="detail-hw-none" data-section="hw">
+  <div class="detail-inner">
+    <div class="detail-header">
+      <h3>What You'll Need</h3>
+      <button class="detail-close" onclick="collapseCard('detail-hw-none')">&times;</button>
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">SewReady is browser-based &mdash; no app to install. Here's what you need to run it:</p>
+    <div class="visual-grid">
+      <div class="visual-card">
+        <div class="visual-header">Required</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128187;</div><div><div class="stat-label">Tablet, Laptop, or Desktop</div><div class="stat-value">Any modern browser (Chrome, Safari, Edge)</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128246;</div><div><div class="stat-label">Internet Connection</div><div class="stat-value">WiFi or cellular data</div></div></div>
+        </div>
+        <div class="visual-caption">That's it &mdash; open your browser, log in, and you're running your shop.</div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-header">Recommended (Optional)</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128424;</div><div><div class="stat-label">Receipt Printer</div><div class="stat-value">Any ESC/POS thermal printer</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127991;</div><div><div class="stat-label">Label Printer</div><div class="stat-value">For garment tags with QR codes</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">iPad or Tablet Stand</div><div class="stat-value">Counter mount for walk-in intake</div></div></div>
+        </div>
+        <div class="visual-caption">These speed up your workflow but aren't required. You can always add hardware later.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="package-detail" id="detail-hw-essential" data-section="hw">
   <div class="detail-inner">
     <div class="detail-header">
