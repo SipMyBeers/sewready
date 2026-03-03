@@ -7,12 +7,21 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css">
 <style>
+/* ── Korean Flag Theme ────────────────────────────────── */
+:root{--bg-deep:#0a0a0a;--bg-surface:#111111;--text:#f5f5f5;--text-muted:rgba(245,245,245,.55);--text-dim:rgba(245,245,245,.28);--accent-cyan:#0047a0;--accent-blue:#0047a0;--accent-green:#c73240;--glass:rgba(255,255,255,.06);--glass-hover:rgba(255,255,255,.10);--glass-border:rgba(255,255,255,.10);--glass-strong:rgba(255,255,255,.14);--border:rgba(255,255,255,.08);--glow-blue:0 0 20px rgba(0,71,160,.3);--shadow:0 4px 24px rgba(0,0,0,.5)}
+.hangul{display:block;font-size:13px;color:var(--accent-cyan);font-weight:400;letter-spacing:1px;opacity:.7;margin-top:2px}
+h1 .hangul{font-size:15px;-webkit-text-fill-color:var(--accent-cyan)}
+.taeguk{display:inline-block;width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#c73240 50%,#0047a0 50%);position:relative;vertical-align:middle;margin:8px auto;transform:rotate(-15deg)}
+.taeguk::before,.taeguk::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;left:7px}
+.taeguk::before{top:0;background:#0047a0}
+.taeguk::after{bottom:0;background:#c73240}
+
 /* ── Packages Page ─────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-deep);color:var(--text);min-height:100vh}
 
 /* Nav */
-.pkg-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(14,21,40,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.pkg-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(10,10,10,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .pkg-nav .brand{font-size:20px;font-weight:700;color:var(--accent-cyan);letter-spacing:-.5px}
 .pkg-nav .brand span{color:var(--text)}
 .pkg-nav .nav-links{display:flex;gap:24px;align-items:center}
@@ -69,7 +78,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .compare-table thead th{font-size:13px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .compare-table .check{color:var(--accent-green);font-size:18px;font-weight:700}
 .compare-table .dash{color:var(--text-dim)}
-.compare-table .feat-head{font-weight:700;color:var(--accent-cyan);background:rgba(91,164,164,.06);font-size:13px;text-transform:uppercase;letter-spacing:.3px}
+.compare-table .feat-head{font-weight:700;color:var(--accent-cyan);background:rgba(0,71,160,.06);font-size:13px;text-transform:uppercase;letter-spacing:.3px}
 
 /* Hardware Section */
 .hw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1060px;margin:0 auto;padding:0 24px}
@@ -99,7 +108,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .demo-fullscreen-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:none;align-items:center;justify-content:center;cursor:pointer}
 .demo-fullscreen-overlay.open{display:flex}
 .demo-fs-modal{width:92%;height:85%;max-width:1400px;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:0 24px 80px rgba(0,0,0,.6);cursor:default}
-.demo-fullscreen-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:rgba(14,21,40,.95);border-bottom:1px solid var(--glass-border)}
+.demo-fullscreen-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:rgba(10,10,10,.95);border-bottom:1px solid var(--glass-border)}
 .demo-fullscreen-bar .demo-fs-title{font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
 .demo-fullscreen-bar .demo-fs-close{background:none;border:1px solid var(--glass-border);color:var(--text-muted);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .demo-fullscreen-bar .demo-fs-close:hover{background:var(--glass-hover);color:var(--text)}
@@ -111,24 +120,24 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .visual-card .visual-header{padding:10px 16px;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--glass-border)}
 .visual-card .visual-body{padding:20px 16px;min-height:180px}
 .visual-card .visual-caption{padding:10px 16px;font-size:12px;color:var(--text-muted);line-height:1.5;border-top:1px solid var(--glass-border)}
-.mock-stat{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(240,232,220,.06)}
+.mock-stat{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .mock-stat:last-child{border-bottom:none}
-.mock-stat .stat-icon{font-size:20px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(91,164,164,.1);flex-shrink:0}
+.mock-stat .stat-icon{font-size:20px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(0,71,160,.1);flex-shrink:0}
 .mock-stat .stat-label{font-size:12px;color:var(--text-muted)}
 .mock-stat .stat-value{font-size:15px;font-weight:700;color:var(--text)}
-.mock-notif{background:rgba(91,164,164,.08);border:1px solid rgba(91,164,164,.15);border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:12px;line-height:1.5}
+.mock-notif{background:rgba(0,71,160,.08);border:1px solid rgba(0,71,160,.15);border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:12px;line-height:1.5}
 .mock-notif:last-child{margin-bottom:0}
 .mock-notif .notif-from{font-weight:700;color:var(--accent-cyan);font-size:11px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
 .mock-notif .notif-body{color:var(--text)}
 .mock-notif .notif-time{color:var(--text-dim);font-size:11px;margin-top:4px}
 .mock-bar-chart{display:flex;align-items:flex-end;gap:6px;height:100px;padding-top:12px}
-.mock-bar{flex:1;background:linear-gradient(to top,var(--accent-cyan),rgba(91,164,164,.3));border-radius:4px 4px 0 0;transition:height .3s}
+.mock-bar{flex:1;background:linear-gradient(to top,var(--accent-cyan),rgba(0,71,160,.3));border-radius:4px 4px 0 0;transition:height .3s}
 .mock-bar-label{text-align:center;font-size:10px;color:var(--text-dim);margin-top:4px}
 
 /* Product Cards */
 .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:20px}
 .product-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden;text-align:center}
-.product-card .product-img{height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(240,232,220,.03),rgba(91,164,164,.06));padding:16px}
+.product-card .product-img{height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(0,71,160,.06));padding:16px}
 .product-card .product-img img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
 .product-card .product-info{padding:12px 16px;border-top:1px solid var(--glass-border)}
 .product-card .product-name{font-size:14px;font-weight:700;margin:0 0 2px}
@@ -157,11 +166,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .detail-iframe-wrap iframe{width:100%;height:320px;border:none;background:var(--bg-deep);display:block}
 .detail-cta-row{text-align:center;padding-top:8px}
 .detail-cta-row a{display:inline-block;padding:10px 28px;border-radius:10px;font-weight:600;font-size:13px;text-decoration:none;background:var(--accent-cyan);color:#fff;transition:all .2s}
-.detail-cta-row a:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(91,164,164,.35)}
+.detail-cta-row a:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,71,160,.35)}
 
 /* Card expand behavior */
 .price-card{cursor:pointer;transition:all .25s}
-.price-card.expanded{border:2px solid var(--accent-cyan);box-shadow:0 0 30px rgba(91,164,164,.15)}
+.price-card.expanded{border:2px solid var(--accent-cyan);box-shadow:0 0 30px rgba(0,71,160,.15)}
 
 /* Step headers */
 .step-header{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 4px}
@@ -205,18 +214,47 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .cost-table td:last-child{text-align:right;font-weight:600}
 .cost-table tr.total td{border-top:2px solid var(--accent-cyan);font-weight:700;font-size:16px;color:var(--accent-cyan)}
 .analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.analysis-stat{text-align:center;padding:20px;background:rgba(91,164,164,.06);border-radius:var(--radius)}
+.analysis-stat{text-align:center;padding:20px;background:rgba(0,71,160,.06);border-radius:var(--radius)}
 .analysis-stat .stat-num{font-size:28px;font-weight:800;color:var(--accent-cyan)}
 .analysis-stat .stat-desc{font-size:12px;color:var(--text-muted);margin-top:4px}
 .feature-checklist{columns:2;column-gap:24px;list-style:none;padding:0}
 .feature-checklist li{font-size:13px;padding:4px 0;break-inside:avoid;display:flex;align-items:center;gap:6px}
 .feature-checklist li::before{content:'\2713';color:var(--accent-green);font-weight:700}
 .summary-checkout{display:block;width:100%;max-width:400px;margin:24px auto 0;padding:14px;border:none;border-radius:12px;background:var(--accent-cyan);color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
-.summary-checkout:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(91,164,164,.35)}
+.summary-checkout:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,71,160,.35)}
 .timeline-steps{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
-.timeline-step{flex:1;text-align:center;padding:16px 8px;background:rgba(91,164,164,.06);border-radius:var(--radius)}
+.timeline-step{flex:1;text-align:center;padding:16px 8px;background:rgba(0,71,160,.06);border-radius:var(--radius)}
 .timeline-step .tl-day{font-size:20px;font-weight:800;color:var(--accent-cyan)}
 .timeline-step .tl-label{font-size:11px;color:var(--text-muted);margin-top:4px}
+
+/* Selections Row */
+.selections-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.sel-col{text-align:center;padding:14px 8px;background:rgba(255,255,255,.04);border-radius:var(--radius);border:1px solid var(--glass-border)}
+.sel-col .sel-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.sel-col .sel-name{font-size:14px;font-weight:700;color:var(--text)}
+.sel-col .sel-price{font-size:13px;color:var(--accent-cyan);font-weight:600;margin-top:2px}
+.totals-row{display:flex;justify-content:space-between;padding:14px 0;border-top:2px solid var(--accent-cyan);margin-top:8px}
+.totals-row .total-box{text-align:center;flex:1}
+.totals-row .total-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+.totals-row .total-amount{font-size:24px;font-weight:800;color:var(--accent-cyan)}
+
+/* Revenue Stats */
+.revenue-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.revenue-stat{text-align:center;padding:20px;background:rgba(0,71,160,.06);border-radius:var(--radius);border:1px solid rgba(0,71,160,.12)}
+.revenue-stat .rev-num{font-size:28px;font-weight:800;color:var(--accent-cyan)}
+.revenue-stat .rev-label{font-size:12px;color:var(--text-muted);margin-top:4px}
+
+/* Upgrade Scales */
+.upgrade-scale{margin-bottom:16px}
+.upgrade-scale .scale-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
+.upgrade-scale .scale-label span:first-child{font-weight:600;color:var(--text)}
+.upgrade-scale .scale-label span:last-child{color:var(--accent-cyan);font-weight:700}
+.scale-track{height:24px;background:rgba(255,255,255,.06);border-radius:12px;position:relative;overflow:visible}
+.scale-fill{height:100%;border-radius:12px;background:linear-gradient(90deg,#c73240,#0047a0);transition:width .6s ease}
+.scale-ghost{position:absolute;top:0;height:100%;border-radius:12px;background:rgba(0,71,160,.12);border-right:2px dashed rgba(0,71,160,.5)}
+.scale-ticks{display:flex;justify-content:space-between;font-size:9px;color:var(--text-dim);margin-top:3px;padding:0 2px}
+.scale-upgrade-hint{font-size:10px;color:var(--text-dim);margin-top:2px;font-style:italic}
+.max-tier-msg{text-align:center;padding:20px;color:var(--accent-cyan);font-weight:600;font-size:14px}
 
 /* Mobile */
 @media(max-width:640px){
@@ -245,14 +283,15 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="pkg-hero">
-  <h1>Your Shop, Fully Equipped</h1>
+  <h1>Your Shop, Fully Equipped<span class="hangul">완벽한 매장 준비</span></h1>
+  <div class="taeguk" style="display:block;margin:8px auto"></div>
   <p>Build your package in three steps &mdash; choose your bundle, pick a plan, and add hardware.</p>
 </section>
 
 <!-- ── Included Storefront ─────────────────────────────── -->
 <div class="included-banner">
   <div class="included-card">
-    <div class="badge">Included with Every Shop</div>
+    <div class="badge">모든 매장 포함 — Included with Every Shop</div>
     <h3>Storefront</h3>
     <p class="tier-desc">Every SewReady shop gets a professional web presence at no extra charge</p>
     <ul class="included-features">
@@ -281,7 +320,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <div class="wizard-step active" data-step="1" id="wizard-step-1">
 <div class="step-header" id="packages">
   <span class="step-number">1</span>
-  <h2>Choose Your Bundle</h2>
+  <h2>Choose Your Bundle<span class="hangul">번들 선택</span></h2>
 </div>
 <p class="section-sub">Choose the level of build that fits your shop</p>
 
@@ -509,7 +548,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <button class="wizard-back" onclick="goToStep(1)">&larr; Back to Bundles</button>
 <div class="step-header" id="services">
   <span class="step-number">2</span>
-  <h2>Choose Your Plan</h2>
+  <h2>Choose Your Plan<span class="hangul">플랜 선택</span></h2>
 </div>
 <p class="section-sub">Ongoing hosting, maintenance, and support</p>
 
@@ -857,7 +896,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <button class="wizard-back" onclick="goToStep(2)">&larr; Back to Plans</button>
 <div class="step-header" id="hardware">
   <span class="step-number">3</span>
-  <h2>Choose Your Hardware</h2>
+  <h2>Choose Your Hardware<span class="hangul">하드웨어 선택</span></h2>
 </div>
 <p class="section-sub">Everything you need to run SewReady in your shop</p>
 
@@ -1079,7 +1118,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <button class="wizard-back" onclick="goToStep(3)">&larr; Back to Hardware</button>
   <div class="step-header">
     <span class="step-number">4</span>
-    <h2>Your Package Summary</h2>
+    <h2>Your Package Summary<span class="hangul">패키지 요약</span></h2>
   </div>
   <p class="section-sub">Review your selections and see what this means for your shop</p>
   <div id="summaryContent"></div>
@@ -1146,7 +1185,6 @@ function populateSummary() {
   var plan = s[2] || {name:'—',price:'$0/mo'};
   var hw = s[3] || {name:'—',price:'$0'};
 
-  // Parse prices
   function parsePrice(p) { return parseInt((p||'0').replace(/[^0-9]/g,''),10)||0; }
   var bundleCost = parsePrice(bundle.price);
   var planCost = parsePrice(plan.price);
@@ -1168,66 +1206,100 @@ function populateSummary() {
   };
 
   var allFeatures = (bundleFeatures[bundle.name]||[]).concat(planFeatures[plan.name]||[]);
-  // Dedupe
   var seen = {};
   allFeatures = allFeatures.filter(function(f) { if(seen[f]) return false; seen[f]=true; return true; });
 
-  // Analysis numbers by bundle tier
-  var tierData = {
-    'Site Setup': {newCustomers:'10–20',mapsViews:'200+',retention:'—',timeSaved:'2 hrs',noShows:'—',laborSave:'—',rev3:'5–10%',rev6:'10–15%',rev12:'15–25%',days:3},
-    'Site + Online Orders': {newCustomers:'20–40',mapsViews:'500+',retention:'15–25%',timeSaved:'5 hrs',noShows:'—',laborSave:'$200–400',rev3:'10–20%',rev6:'20–35%',rev12:'30–50%',days:5},
-    'Full Platform': {newCustomers:'30–60',mapsViews:'800+',retention:'25–40%',timeSaved:'8 hrs',noShows:'30–50%',laborSave:'$400–800',rev3:'15–30%',rev6:'30–50%',rev12:'50–80%',days:7}
+  // Revenue projections by bundle tier
+  var revenueData = {
+    'Site Setup': {moLow:'$500',moHigh:'$1,000',yrLow:'$6,000',yrHigh:'$12,000'},
+    'Site + Online Orders': {moLow:'$1,500',moHigh:'$3,000',yrLow:'$18,000',yrHigh:'$36,000'},
+    'Full Platform': {moLow:'$3,000',moHigh:'$5,000',yrLow:'$36,000',yrHigh:'$60,000'}
   };
-  var td = tierData[bundle.name] || tierData['Site Setup'];
+  var rev = revenueData[bundle.name] || revenueData['Site Setup'];
+
+  // Impact scale percentages by tier
+  var scaleData = {
+    'Site Setup':          {customers:33, time:25, revenue:20, retention:0},
+    'Site + Online Orders':{customers:66, time:62, revenue:50, retention:50},
+    'Full Platform':       {customers:100,time:100,revenue:100,retention:100}
+  };
+  var sc = scaleData[bundle.name] || scaleData['Site Setup'];
+  var isMax = bundle.name === 'Full Platform';
+  // Next tier ghost percentages
+  var nextTier = {
+    'Site Setup':          {customers:66, time:62, revenue:50, retention:50, label:'Site + Online Orders'},
+    'Site + Online Orders':{customers:100,time:100,revenue:100,retention:100,label:'Full Platform'}
+  };
+  var nt = nextTier[bundle.name] || null;
+
+  // Timeline days
+  var dayMap = {'Site Setup':3,'Site + Online Orders':5,'Full Platform':7};
+  var days = dayMap[bundle.name] || 3;
 
   var html = '<div class="summary-layout">';
 
-  // Cost Breakdown
-  html += '<div class="summary-card"><h3>Cost Breakdown</h3>';
-  html += '<table class="cost-table">';
-  html += '<tr><td>Bundle — ' + bundle.name + '</td><td>' + bundle.price + ' (one-time)</td></tr>';
-  html += '<tr><td>Plan — ' + plan.name + '</td><td>' + plan.price + (planCost>0?' (monthly)':' (free)') + '</td></tr>';
-  html += '<tr><td>Hardware — ' + hw.name + '</td><td>' + hw.price + (hwCost>0?' (one-time)':' (none)') + '</td></tr>';
-  html += '<tr class="total"><td>First Month Total</td><td>$' + firstMonth.toLocaleString() + '</td></tr>';
-  if(monthly > 0) html += '<tr><td>Monthly After That</td><td>$' + monthly + '/mo</td></tr>';
-  html += '</table></div>';
+  // Card 1: Your Selections (combined)
+  html += '<div class="summary-card"><h3>Your Selections</h3>';
+  html += '<div class="selections-row">';
+  html += '<div class="sel-col"><div class="sel-label">Bundle</div><div class="sel-name">' + bundle.name + '</div><div class="sel-price">' + bundle.price + '</div></div>';
+  html += '<div class="sel-col"><div class="sel-label">Plan</div><div class="sel-name">' + plan.name + '</div><div class="sel-price">' + plan.price + '</div></div>';
+  html += '<div class="sel-col"><div class="sel-label">Hardware</div><div class="sel-name">' + hw.name + '</div><div class="sel-price">' + hw.price + '</div></div>';
+  html += '</div>';
+  html += '<div class="totals-row">';
+  html += '<div class="total-box"><div class="total-label">First Month</div><div class="total-amount">$' + firstMonth.toLocaleString() + '</div></div>';
+  html += '<div class="total-box"><div class="total-label">Monthly After</div><div class="total-amount">' + (monthly > 0 ? '$' + monthly + '/mo' : 'Free') + '</div></div>';
+  html += '</div></div>';
 
-  // What You're Getting
+  // Card 2: What You're Getting
   html += '<div class="summary-card"><h3>What You\'re Getting</h3>';
   html += '<ul class="feature-checklist">';
   allFeatures.forEach(function(f) { html += '<li>' + f + '</li>'; });
   html += '</ul></div>';
 
-  // Customer Outreach Analysis
-  html += '<div class="summary-card"><h3>Customer Outreach Analysis</h3>';
-  html += '<div class="analysis-grid">';
-  html += '<div class="analysis-stat"><div class="stat-num">' + td.newCustomers + '</div><div class="stat-desc">Estimated new customers/month from online presence</div></div>';
-  html += '<div class="analysis-stat"><div class="stat-num">' + td.mapsViews + '</div><div class="stat-desc">Monthly Maps views (Google, Waze, Apple)</div></div>';
-  if(td.retention !== '—') html += '<div class="analysis-stat"><div class="stat-num">' + td.retention + '</div><div class="stat-desc">Repeat customer retention from SMS alerts</div></div>';
-  if(td.noShows !== '—') html += '<div class="analysis-stat"><div class="stat-num">' + td.noShows + '</div><div class="stat-desc">Reduction in missed pickups from auto-reminders</div></div>';
+  // Card 3: Revenue Impact
+  html += '<div class="summary-card"><h3>Revenue Impact</h3>';
+  html += '<div class="revenue-stats">';
+  html += '<div class="revenue-stat"><div class="rev-num">+' + rev.moLow + '–' + rev.moHigh.replace('$','') + '</div><div class="rev-label">Monthly Revenue Increase</div></div>';
+  html += '<div class="revenue-stat"><div class="rev-num">+' + rev.yrLow + '–' + rev.yrHigh.replace('$','') + '</div><div class="rev-label">Yearly Revenue Increase</div></div>';
   html += '</div></div>';
 
-  // Cost Savings
-  html += '<div class="summary-card"><h3>Cost Savings</h3>';
-  html += '<div class="analysis-grid">';
-  html += '<div class="analysis-stat"><div class="stat-num">' + td.timeSaved + '</div><div class="stat-desc">Time saved per week from automation</div></div>';
-  if(td.laborSave !== '—') html += '<div class="analysis-stat"><div class="stat-num">' + td.laborSave + '</div><div class="stat-desc">Estimated monthly labor savings</div></div>';
-  html += '</div></div>';
+  // Card 4: Impact Analysis — upgrade scales
+  html += '<div class="summary-card"><h3>Impact Analysis</h3>';
+  if (isMax) {
+    html += '<div class="max-tier-msg">Maximum tier — you\'re getting everything</div>';
+  } else {
+    // Helper to build a scale bar
+    function scaleBar(label, pct, ghostPct, tierLabel) {
+      var h = '<div class="upgrade-scale">';
+      h += '<div class="scale-label"><span>' + label + '</span><span>' + pct + '%</span></div>';
+      h += '<div class="scale-track">';
+      h += '<div class="scale-fill" style="width:' + pct + '%"></div>';
+      if (ghostPct > pct) {
+        h += '<div class="scale-ghost" style="left:' + pct + '%;width:' + (ghostPct - pct) + '%"></div>';
+      }
+      h += '</div>';
+      h += '<div class="scale-ticks"><span>Site Setup</span><span>Site + Online</span><span>Full Platform</span></div>';
+      if (ghostPct > pct) {
+        h += '<div class="scale-upgrade-hint">Upgrade to ' + tierLabel + ' for ' + ghostPct + '%</div>';
+      }
+      h += '</div>';
+      return h;
+    }
+    html += scaleBar('New Customers/Month', sc.customers, nt ? nt.customers : sc.customers, nt ? nt.label : '');
+    html += scaleBar('Time Saved/Week', sc.time, nt ? nt.time : sc.time, nt ? nt.label : '');
+    html += scaleBar('Monthly Revenue Boost', sc.revenue, nt ? nt.revenue : sc.revenue, nt ? nt.label : '');
+    if (sc.retention > 0) {
+      html += scaleBar('Customer Retention', sc.retention, nt ? nt.retention : sc.retention, nt ? nt.label : '');
+    }
+  }
+  html += '</div>';
 
-  // Expected Growth
-  html += '<div class="summary-card"><h3>Expected Growth</h3>';
-  html += '<div class="analysis-grid">';
-  html += '<div class="analysis-stat"><div class="stat-num">' + td.rev3 + '</div><div class="stat-desc">Projected revenue increase (3 months)</div></div>';
-  html += '<div class="analysis-stat"><div class="stat-num">' + td.rev6 + '</div><div class="stat-desc">Projected revenue increase (6 months)</div></div>';
-  html += '<div class="analysis-stat"><div class="stat-num">' + td.rev12 + '</div><div class="stat-desc">Projected revenue increase (12 months)</div></div>';
-  html += '</div></div>';
-
-  // Setup Timeline
+  // Card 5: Setup Timeline
   html += '<div class="summary-card"><h3>Setup Timeline</h3>';
   html += '<div class="timeline-steps">';
   html += '<div class="timeline-step"><div class="tl-day">Day 1</div><div class="tl-label">Onboarding call & info gathering</div></div>';
-  html += '<div class="timeline-step"><div class="tl-day">Day 2–' + Math.max(td.days-1,2) + '</div><div class="tl-label">Build & configure your platform</div></div>';
-  html += '<div class="timeline-step"><div class="tl-day">Day ' + td.days + '</div><div class="tl-label">Review, launch & go live</div></div>';
+  html += '<div class="timeline-step"><div class="tl-day">Day 2–' + Math.max(days-1,2) + '</div><div class="tl-label">Build & configure your platform</div></div>';
+  html += '<div class="timeline-step"><div class="tl-day">Day ' + days + '</div><div class="tl-label">Review, launch & go live</div></div>';
   html += '</div></div>';
 
   // Checkout button
