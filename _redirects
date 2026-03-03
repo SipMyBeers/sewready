@@ -1,4 +1,11 @@
 # Cloudflare Pages redirects
+
+# Admin login
+/admin/login /admin/index.html 200
+/admin/login/ /admin/index.html 200
+/admin /admin/index.html 301
+/admin/ /admin/index.html 200
+
 # Public customer page is the default for each shop
 /shops/aaa-tailor/ /shops/aaa-tailor/customer.html 200
 /shops/aaa-tailor /shops/aaa-tailor/customer.html 301

@@ -119,6 +119,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .detail-cta-row a{display:inline-block;padding:12px 32px;border-radius:10px;font-weight:600;font-size:14px;text-decoration:none;background:var(--accent-cyan);color:#fff;transition:all .2s}
 .detail-cta-row a:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(91,164,164,.35)}
 
+/* Step headers */
+.step-header{display:flex;align-items:center;justify-content:center;gap:16px;margin:64px 0 8px}
+.step-number{width:40px;height:40px;border-radius:50%;background:var(--accent-cyan);color:#fff;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-header h2{font-size:28px;font-weight:700;margin:0}
+
 /* Mobile */
 @media(max-width:640px){
   .included-card .included-features{grid-template-columns:1fr}
@@ -146,7 +151,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="pkg-hero">
   <h1>Your Shop, Fully Equipped</h1>
-  <p>Choose a setup package for your branded SewReady site, pick a monthly service level, and add hardware. Everything you need to run your alteration shop online.</p>
+  <p>Build your package in three steps &mdash; choose your software, pick a plan, and add hardware.</p>
 </section>
 
 <!-- ── Included Storefront ─────────────────────────────── -->
@@ -166,8 +171,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-<!-- ── One-Time Setup Packages ─────────────────────────── -->
-<h2 class="section-title" id="packages">One-Time Setup Packages</h2>
+<!-- ── Step 1 — Choose Your Software ──────────────────── -->
+<div class="step-header" id="packages">
+  <span class="step-number">1</span>
+  <h2>Choose Your Software</h2>
+</div>
 <p class="section-sub">Choose the level of build that fits your shop</p>
 
 <div class="pricing-grid">
@@ -453,11 +461,30 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-<!-- ── Monthly Services ────────────────────────────────── -->
-<h2 class="section-title" id="services">Monthly Services</h2>
+<!-- ── Step 2 — Choose Your Plan ──────────────────────── -->
+<div class="step-header" id="services">
+  <span class="step-number">2</span>
+  <h2>Choose Your Plan</h2>
+</div>
 <p class="section-sub">Ongoing hosting, maintenance, and support</p>
 
 <div class="pricing-grid">
+
+  <!-- Free -->
+  <div class="price-card">
+    <h3>Free</h3>
+    <p class="tier-desc">Get started at no cost</p>
+    <div class="price-row"><span class="price-amount">$0</span><span class="price-label">/month</span></div>
+    <div class="price-period">No credit card required</div>
+    <ul>
+      <li>Hosting included</li>
+      <li>SSL certificate</li>
+      <li>Self-service docs &amp; guides</li>
+      <li>Community email support</li>
+    </ul>
+    <button class="see-included-btn" onclick="toggleDetail('detail-svc-free')">See What's Included</button>
+    <a href="/demo.html" class="card-cta secondary" style="display:block;width:100%;text-align:center;box-sizing:border-box">Get Started</a>
+  </div>
 
   <!-- Basic -->
   <div class="price-card">
@@ -539,6 +566,37 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 </div>
 
 <!-- ── Monthly Detail Panels ───────────────────────────── -->
+<div class="package-detail" id="detail-svc-free" data-section="svc">
+  <div class="detail-inner">
+    <div class="detail-header">
+      <h3>Free Plan &mdash; What's Included</h3>
+      <button class="detail-close" onclick="toggleDetail('detail-svc-free')">&times;</button>
+    </div>
+    <div class="detail-features">
+      <div class="detail-feature">
+        <div class="feat-icon">&#128421;</div>
+        <div class="feat-name">Hosting Included</div>
+        <p class="feat-desc">Your site is hosted on managed cloud infrastructure at no charge. Always online, always fast.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#128274;</div>
+        <div class="feat-name">SSL Certificate</div>
+        <p class="feat-desc">HTTPS encryption keeps customer data safe and builds trust with your visitors.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#128218;</div>
+        <div class="feat-name">Self-Service Docs &amp; Guides</div>
+        <p class="feat-desc">Step-by-step documentation to set up and manage your shop on your own schedule.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#128231;</div>
+        <div class="feat-name">Community Email Support</div>
+        <p class="feat-desc">Get help from the SewReady community and team via email. Best-effort response times.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="package-detail" id="detail-svc-basic" data-section="svc">
   <div class="detail-inner">
     <div class="detail-header">
@@ -637,58 +695,40 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-<!-- ── Feature Comparison ───────────────────────────────── -->
-<h2 class="section-title">Feature Comparison</h2>
-<p class="section-sub">What's included in each setup package</p>
-
-<div class="compare-wrap">
-<table class="compare-table">
-  <thead>
-    <tr><th></th><th>Site Setup<br><small style="color:var(--accent-cyan)">$500</small></th><th>Site + Online Orders<br><small style="color:var(--accent-cyan)">$1,200</small></th><th>Full Platform<br><small style="color:var(--accent-cyan)">$2,000</small></th></tr>
-  </thead>
-  <tbody>
-    <tr class="feat-head"><td colspan="4">Web Presence</td></tr>
-    <tr><td>Custom branded website</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Google Maps integration</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Contact form</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>SEO &amp; structured data</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Mobile-responsive design</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr class="feat-head"><td colspan="4">Online Ordering</td></tr>
-    <tr><td>Online order wizard</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Customer accounts &amp; login</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Order tracking dashboard</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Receipt &amp; label printing</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr class="feat-head"><td colspan="4">Shop Management</td></tr>
-    <tr><td>Employee management</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Inventory tracking</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Calendar &amp; scheduling</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Cost &amp; revenue analytics</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr class="feat-head"><td colspan="4">Notifications &amp; Automation</td></tr>
-    <tr><td>SMS notifications (Twilio)</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Email notifications (Resend)</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Automated pickup alerts</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Driver pickup coordination</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr class="feat-head"><td colspan="4">Support</td></tr>
-    <tr><td>SOP library</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-    <tr><td>Priority setup support</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-  </tbody>
-</table>
+<!-- ── Step 3 — Choose Your Hardware ─────────────────── -->
+<div class="step-header" id="hardware">
+  <span class="step-number">3</span>
+  <h2>Choose Your Hardware</h2>
 </div>
-
-<!-- ── Hardware Bundles ────────────────────────────────── -->
-<h2 class="section-title" id="hardware">Hardware Bundles</h2>
 <p class="section-sub">Everything you need to run SewReady in your shop</p>
 
-<div class="hw-grid">
+<div class="pricing-grid">
 
-  <div class="hw-card bundle">
+  <!-- No Hardware -->
+  <div class="price-card">
+    <h3>No Hardware</h3>
+    <p class="tier-desc">I already have what I need</p>
+    <div class="price-row"><span class="price-amount">$0</span></div>
+    <div class="price-period">Use your own devices</div>
+    <ul>
+      <li>Works on any tablet or laptop</li>
+      <li>Browser-based &mdash; no app install</li>
+      <li>BYOD (bring your own device)</li>
+    </ul>
+    <span class="card-cta secondary" style="display:block;width:100%;text-align:center;box-sizing:border-box;padding:12px;border-radius:10px;font-weight:600;font-size:14px;background:var(--glass-hover);color:var(--text);border:1px solid var(--glass-border)">Continue without hardware</span>
+  </div>
+
+  <!-- Essential Kit -->
+  <div class="price-card">
     <h3>Essential Kit</h3>
-    <p class="hw-desc">Get started with the basics</p>
-    <div class="hw-price">$249</div>
-    <ul class="hw-includes">
+    <p class="tier-desc">Get started with the basics</p>
+    <div class="price-row"><span class="price-amount">$249</span></div>
+    <div class="price-period">One-time purchase</div>
+    <ul>
       <li>iPad counter mount (AboveTEK)</li>
       <li>Thermal receipt printer (Epson TM-T20III)</li>
     </ul>
+    <button class="see-included-btn" onclick="toggleDetail('detail-hw-essential')">See What's Included</button>
     <button class="snipcart-add-item card-cta secondary"
       data-item-id="hw-essential"
       data-item-name="SewReady Essential Kit"
@@ -699,15 +739,19 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-max-quantity="5">Buy &mdash; $249</button>
   </div>
 
-  <div class="hw-card bundle" style="border-color:var(--accent-blue)">
+  <!-- Pro Kit -->
+  <div class="price-card featured">
+    <div class="badge">Most Popular</div>
     <h3>Pro Kit</h3>
-    <p class="hw-desc">Add label printing for garment tags</p>
-    <div class="hw-price">$399</div>
-    <ul class="hw-includes">
+    <p class="tier-desc">Add label printing for garment tags</p>
+    <div class="price-row"><span class="price-amount">$399</span></div>
+    <div class="price-period">One-time purchase</div>
+    <ul>
       <li>iPad counter mount (AboveTEK)</li>
       <li>Thermal receipt printer (Epson TM-T20III)</li>
       <li>Label printer (Brother QL-820NWB)</li>
     </ul>
+    <button class="see-included-btn" onclick="toggleDetail('detail-hw-pro')">See What's Included</button>
     <button class="snipcart-add-item card-cta primary"
       data-item-id="hw-pro"
       data-item-name="SewReady Pro Kit"
@@ -718,16 +762,19 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-max-quantity="5">Buy &mdash; $399</button>
   </div>
 
-  <div class="hw-card bundle">
+  <!-- Full Kit -->
+  <div class="price-card">
     <h3>Full Kit</h3>
-    <p class="hw-desc">Complete setup with barcode scanning</p>
-    <div class="hw-price">$479</div>
-    <ul class="hw-includes">
+    <p class="tier-desc">Complete setup with barcode scanning</p>
+    <div class="price-row"><span class="price-amount">$479</span></div>
+    <div class="price-period">One-time purchase</div>
+    <ul>
       <li>iPad counter mount (AboveTEK)</li>
       <li>Thermal receipt printer (Epson TM-T20III)</li>
       <li>Label printer (Brother QL-820NWB)</li>
       <li>Barcode scanner (Tera HW0002)</li>
     </ul>
+    <button class="see-included-btn" onclick="toggleDetail('detail-hw-full')">See What's Included</button>
     <button class="snipcart-add-item card-cta secondary"
       data-item-id="hw-full"
       data-item-name="SewReady Full Kit"
@@ -738,6 +785,85 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-max-quantity="5">Buy &mdash; $479</button>
   </div>
 
+</div>
+
+<!-- ── Hardware Detail Panels ─────────────────────────── -->
+<div class="package-detail" id="detail-hw-essential" data-section="hw">
+  <div class="detail-inner">
+    <div class="detail-header">
+      <h3>Essential Kit &mdash; What's Included</h3>
+      <button class="detail-close" onclick="toggleDetail('detail-hw-essential')">&times;</button>
+    </div>
+    <div class="detail-features">
+      <div class="detail-feature">
+        <div class="feat-icon">&#128241;</div>
+        <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
+        <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#128424;</div>
+        <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
+        <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="package-detail" id="detail-hw-pro" data-section="hw">
+  <div class="detail-inner">
+    <div class="detail-header">
+      <h3>Pro Kit &mdash; What's Included</h3>
+      <button class="detail-close" onclick="toggleDetail('detail-hw-pro')">&times;</button>
+    </div>
+    <div class="detail-features">
+      <div class="detail-feature">
+        <div class="feat-icon">&#128241;</div>
+        <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
+        <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#128424;</div>
+        <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
+        <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#127991;</div>
+        <div class="feat-name">Label Printer (Brother QL-820NWB)</div>
+        <p class="feat-desc">WiFi + Bluetooth. Print garment tags with order ID, customer name, QR code.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="package-detail" id="detail-hw-full" data-section="hw">
+  <div class="detail-inner">
+    <div class="detail-header">
+      <h3>Full Kit &mdash; What's Included</h3>
+      <button class="detail-close" onclick="toggleDetail('detail-hw-full')">&times;</button>
+    </div>
+    <div class="detail-features">
+      <div class="detail-feature">
+        <div class="feat-icon">&#128241;</div>
+        <div class="feat-name">iPad Counter Mount (AboveTEK)</div>
+        <p class="feat-desc">Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#128424;</div>
+        <div class="feat-name">Thermal Receipt Printer (Epson TM-T20III)</div>
+        <p class="feat-desc">USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#127991;</div>
+        <div class="feat-name">Label Printer (Brother QL-820NWB)</div>
+        <p class="feat-desc">WiFi + Bluetooth. Print garment tags with order ID, customer name, QR code.</p>
+      </div>
+      <div class="detail-feature">
+        <div class="feat-icon">&#128270;</div>
+        <div class="feat-name">Barcode Scanner (Tera HW0002)</div>
+        <p class="feat-desc">USB plug-and-play. Scan order labels to instantly pull up order details.</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ── Individual Hardware ────────────────────────────── -->
