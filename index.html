@@ -105,6 +105,16 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .demo-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 .demo-card .demo-desc{padding:10px 14px;font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
 
+/* Mobile Phone Simulator Frame */
+.demo-card.phone-frame .demo-iframe-wrap{display:flex;justify-content:center;align-items:center;background:var(--bg-deep);padding:16px 0;height:auto}
+.demo-card.phone-frame .phone-shell{width:180px;height:340px;border:3px solid #555;border-radius:24px;overflow:hidden;position:relative;background:#000;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.demo-card.phone-frame .phone-shell::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:40px;height:5px;background:#333;border-radius:4px;z-index:2}
+.demo-card.phone-frame .phone-shell iframe{width:390px;height:844px;border:none;transform:scale(.4615);transform-origin:0 0;position:absolute;top:16px;left:0;pointer-events:none}
+
+/* Horizontal demo grid for package detail panels */
+.demo-grid-horizontal{display:flex;overflow-x:auto;gap:16px;padding-bottom:12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.demo-grid-horizontal .demo-card{min-width:280px;max-width:320px;flex-shrink:0;scroll-snap-align:start}
+
 /* Demo Expand Overlay */
 .demo-fullscreen-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:none;align-items:center;justify-content:center;cursor:pointer}
 .demo-fullscreen-overlay.open{display:flex}
@@ -513,6 +523,31 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
         <p class="demo-desc">Your custom branded public website with Google Maps, services &amp; hours display, contact form, SEO, and mobile-responsive design.</p>
       </div>
+      <div class="demo-card" data-feature="google-maps"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Google Maps Integration</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?view=about" loading="lazy"></iframe></div>
+        <p class="demo-desc">Customers find your shop easily with embedded Google Maps and one-click directions.</p>
+      </div>
+      <div class="demo-card" data-feature="contact-form"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Contact Form</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?openContact=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">Customers can send inquiries directly from your website. You get notified instantly.</p>
+      </div>
+      <div class="demo-card" data-feature="services-hours"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Services &amp; Hours</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?scroll=heroCal" loading="lazy"></iframe></div>
+        <p class="demo-desc">Your services, pricing, and business hours are clearly displayed for customers.</p>
+      </div>
+      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">SEO &amp; Structured Data</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/seo-demo.html" loading="lazy"></iframe></div>
+        <p class="demo-desc">Your site is optimized to appear in local search results with rich snippets.</p>
+      </div>
+      <div class="demo-card phone-frame" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Mobile-Responsive Design</div>
+        <div class="demo-iframe-wrap"><div class="phone-shell"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div></div>
+        <p class="demo-desc">Your website looks great on phones, tablets, and desktops &mdash; no pinching or zooming.</p>
+      </div>
       <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Calendar &amp; Scheduling</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
@@ -522,31 +557,6 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="demo-label">Inventory Tracking</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
-      </div>
-      <div class="demo-card" data-feature="google-maps"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Google Maps Integration</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers find your shop easily with embedded Google Maps and one-click directions.</p>
-      </div>
-      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SEO &amp; Structured Data</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your site is optimized to appear in local search results with rich snippets.</p>
-      </div>
-      <div class="demo-card" data-feature="contact-form"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Contact Form</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers can send inquiries directly from your website. You get notified instantly.</p>
-      </div>
-      <div class="demo-card" data-feature="services-hours"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Services &amp; Hours</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your services, pricing, and business hours are clearly displayed for customers.</p>
-      </div>
-      <div class="demo-card" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Mobile-Responsive Design</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your website looks great on phones, tablets, and desktops &mdash; no pinching or zooming.</p>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -572,16 +582,6 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
-      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Calendar &amp; Scheduling</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
-      </div>
-      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Inventory Tracking</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
-      </div>
       <div class="demo-card" data-feature="employee-management"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Employee Management</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
@@ -589,27 +589,27 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       </div>
       <div class="demo-card" data-feature="google-maps"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Google Maps Integration</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?view=about" loading="lazy"></iframe></div>
         <p class="demo-desc">Customers find your shop easily with embedded Google Maps.</p>
-      </div>
-      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SEO &amp; Structured Data</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Appear in local search results with rich snippets and structured data.</p>
       </div>
       <div class="demo-card" data-feature="contact-form"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Contact Form</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?openContact=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Customers send inquiries directly. You get notified instantly.</p>
       </div>
       <div class="demo-card" data-feature="services-hours"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Services &amp; Hours</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?scroll=heroCal" loading="lazy"></iframe></div>
         <p class="demo-desc">Services, pricing, and hours clearly displayed for customers.</p>
       </div>
-      <div class="demo-card" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
+      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">SEO &amp; Structured Data</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/seo-demo.html" loading="lazy"></iframe></div>
+        <p class="demo-desc">Appear in local search results with rich snippets and structured data.</p>
+      </div>
+      <div class="demo-card phone-frame" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Mobile-Responsive</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
+        <div class="demo-iframe-wrap"><div class="phone-shell"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div></div>
         <p class="demo-desc">Looks great on every screen size.</p>
       </div>
       <div class="demo-card" data-feature="online-order-wizard"><span class="card-type-badge live-demo">Live Demo</span>
@@ -626,6 +626,16 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="demo-label">Receipt &amp; Label Printing</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Print receipts and garment labels with QR codes for easy tracking.</p>
+      </div>
+      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Calendar &amp; Scheduling</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
+      </div>
+      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Inventory Tracking</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -651,16 +661,6 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
-      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Calendar &amp; Scheduling</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
-      </div>
-      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Inventory Tracking</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
-      </div>
       <div class="demo-card" data-feature="employee-management"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Employee Management</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
@@ -683,27 +683,27 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       </div>
       <div class="demo-card" data-feature="google-maps"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Google Maps Integration</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?view=about" loading="lazy"></iframe></div>
         <p class="demo-desc">Customers find your shop easily with embedded Google Maps.</p>
-      </div>
-      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SEO &amp; Structured Data</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Appear in local search results with rich snippets.</p>
       </div>
       <div class="demo-card" data-feature="contact-form"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Contact Form</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?openContact=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Customers send inquiries directly from your site.</p>
       </div>
       <div class="demo-card" data-feature="services-hours"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Services &amp; Hours</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/?scroll=heroCal" loading="lazy"></iframe></div>
         <p class="demo-desc">Services, pricing, and hours clearly displayed.</p>
       </div>
-      <div class="demo-card" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
+      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">SEO &amp; Structured Data</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/seo-demo.html" loading="lazy"></iframe></div>
+        <p class="demo-desc">Appear in local search results with rich snippets.</p>
+      </div>
+      <div class="demo-card phone-frame" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Mobile-Responsive</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
+        <div class="demo-iframe-wrap"><div class="phone-shell"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div></div>
         <p class="demo-desc">Looks great on every screen size.</p>
       </div>
       <div class="demo-card" data-feature="online-order-wizard"><span class="card-type-badge live-demo">Live Demo</span>
@@ -750,6 +750,16 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="demo-label">Priority Setup Support</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Dedicated setup support with same-day response times.</p>
+      </div>
+      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Calendar &amp; Scheduling</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
+      </div>
+      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Inventory Tracking</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
       </div>
     </div>
     <div class="detail-cta-row">

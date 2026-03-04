@@ -2642,4 +2642,32 @@ document.addEventListener('DOMContentLoaded', () => {
       renderWizardNav();
     }
   });
+
+  // ── URL Param Handling (for demo iframe centering) ──────────
+  var params = new URLSearchParams(window.location.search);
+
+  // ?view=about — switch to About Us page (for Google Maps demo)
+  if (params.get('view') === 'about') {
+    switchToAbout();
+    // Scroll to map section after a short delay for render
+    setTimeout(function() {
+      var mapEl = document.getElementById('aboutMapEmbed');
+      if (mapEl) mapEl.scrollIntoView({ behavior: 'auto', block: 'center' });
+    }, 300);
+  }
+
+  // ?openContact=1 — open the contact card modal
+  if (params.get('openContact') === '1') {
+    switchToLanding();
+    setTimeout(function() { openContactModal(); }, 300);
+  }
+
+  // ?scroll=heroCal — scroll to the calendar/hours section
+  if (params.get('scroll') === 'heroCal') {
+    switchToLanding();
+    setTimeout(function() {
+      var calEl = document.getElementById('heroCal');
+      if (calEl) calEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }, 300);
+  }
 });
