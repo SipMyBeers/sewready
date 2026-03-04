@@ -16,6 +16,15 @@ const shopConfig = {
     secondary: '#1c2833',
     accent: '#ffeb3b'
   },
+  established: 2014,
+  website: 'https://aaatailor.com',
+  socials: {
+    facebook: 'https://facebook.com/aaatailor',
+    instagram: 'https://instagram.com/aaatailor',
+    google: 'https://g.page/aaatailor',
+    yelp: '',
+    tiktok: ''
+  },
   story: 'AAA Tailor Shop delivers first-class tailoring services. Al takes pride in providing A+ work for every military uniform.',
   trustSignals: {
     orders: '500+',

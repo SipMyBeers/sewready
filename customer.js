@@ -222,18 +222,24 @@ function createAccount() {
 //  VIEW SWITCHING
 // ══════════════════════════════════════════════════════════════
 
-function switchToLanding() {
-  document.getElementById('custLanding').style.display = 'block';
+function _hideAllPages() {
+  document.getElementById('custLanding').style.display = 'none';
   document.getElementById('custDashboard').style.display = 'none';
   document.getElementById('custShopPage').style.display = 'none';
+  var about = document.getElementById('custAboutPage');
+  if (about) about.style.display = 'none';
+}
+
+function switchToLanding() {
+  _hideAllPages();
+  document.getElementById('custLanding').style.display = 'block';
   updateNavAuth();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function switchToDashboard() {
-  document.getElementById('custLanding').style.display = 'none';
+  _hideAllPages();
   document.getElementById('custDashboard').style.display = 'block';
-  document.getElementById('custShopPage').style.display = 'none';
   updateNavAuth();
   renderWelcome();
   renderMyOrders();
@@ -241,9 +247,15 @@ function switchToDashboard() {
 }
 
 function switchToShop() {
-  document.getElementById('custLanding').style.display = 'none';
-  document.getElementById('custDashboard').style.display = 'none';
+  _hideAllPages();
   document.getElementById('custShopPage').style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function switchToAbout() {
+  _hideAllPages();
+  var about = document.getElementById('custAboutPage');
+  if (about) about.style.display = 'block';
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
@@ -1568,13 +1580,127 @@ function resolveCartItem(c) {
 
 // ── Item Customization ──────────────────────────────────────
 // Items that require customization before adding to cart
+const _RANK_OPTIONS = ['PVT','PV2','PFC','SPC','CPL','SGT','SSG','SFC','MSG','1SG','SGM','CSM','SMA',
+  '2LT','1LT','CPT','MAJ','LTC','COL','BG','MG','LTG','GEN'];
+
 const CUSTOMIZABLE_ITEMS = {
+  // ── Services ──────────────────────────────────────────────
+  'SVC-001': {
+    title: 'Name Tape — Creation (OCP)',
+    fields: [
+      { key: 'nameText', label: 'Name', type: 'text', placeholder: 'e.g. RODRIGUEZ', required: true }
+    ]
+  },
   'SVC-002': {
     title: 'Custom Nametape',
     fields: [
       { key: 'nameText', label: 'Name', type: 'text', placeholder: 'e.g. RODRIGUEZ', required: true },
       { key: 'pattern', label: 'Pattern', type: 'select', options: ['OCP', 'UCP'], required: true },
       { key: 'velcro', label: 'Backing', type: 'select', options: ['Velcro (Hook & Loop)', 'Sew-On (No Velcro)'], required: true }
+    ]
+  },
+  'SVC-003': {
+    title: 'Name Tape — Creation (AGSU)',
+    fields: [
+      { key: 'nameText', label: 'Name', type: 'text', placeholder: 'e.g. RODRIGUEZ', required: true }
+    ]
+  },
+  'SVC-012': {
+    title: 'Rank Insignia — Attach (H&L)',
+    fields: [
+      { key: 'rank', label: 'Rank', type: 'select', options: _RANK_OPTIONS, required: true }
+    ]
+  },
+  'SVC-013': {
+    title: 'Rank Insignia — Sew On',
+    fields: [
+      { key: 'rank', label: 'Rank', type: 'select', options: _RANK_OPTIONS, required: true }
+    ]
+  },
+  'SVC-014': {
+    title: 'Unit Patch (SSI) — Sew On',
+    fields: [
+      { key: 'unitName', label: 'Unit Name', type: 'text', placeholder: 'e.g. 82nd Airborne', required: true }
+    ]
+  },
+  'SVC-015': {
+    title: 'Combat Patch — Sew On',
+    fields: [
+      { key: 'unitName', label: 'Unit Name', type: 'text', placeholder: 'e.g. 101st Airborne', required: true }
+    ]
+  },
+  'SVC-017': {
+    title: 'Skill Badge — Sew On',
+    fields: [
+      { key: 'badgeType', label: 'Badge Type', type: 'select', options: ['Airborne Wings','Air Assault','Pathfinder','Ranger','CIB'], required: true }
+    ]
+  },
+  'SVC-018': {
+    title: 'Tab — Sew On',
+    fields: [
+      { key: 'tabType', label: 'Tab Type', type: 'select', options: ['Ranger','Airborne','Sapper','Special Forces'], required: true }
+    ]
+  },
+  'SVC-023': {
+    title: 'AGSU Nameplate — Attach',
+    fields: [
+      { key: 'nameText', label: 'Name', type: 'text', placeholder: 'e.g. RODRIGUEZ', required: true }
+    ]
+  },
+  'SVC-050': {
+    title: 'AGSU Trousers — Hem',
+    fields: [
+      { key: 'inseam', label: 'Inseam Length', type: 'text', placeholder: 'e.g. 30 inches', required: true }
+    ]
+  },
+  'SVC-051': {
+    title: 'ASU Trousers — Hem',
+    fields: [
+      { key: 'inseam', label: 'Inseam Length', type: 'text', placeholder: 'e.g. 30 inches', required: true }
+    ]
+  },
+  'SVC-052': {
+    title: 'OCP Trousers — Hem',
+    fields: [
+      { key: 'inseam', label: 'Inseam Length', type: 'text', placeholder: 'e.g. 30 inches', required: true }
+    ]
+  },
+  'SVC-054': {
+    title: 'Jacket — Take In / Let Out',
+    fields: [
+      { key: 'direction', label: 'Direction', type: 'select', options: ['Take In','Let Out'], required: true },
+      { key: 'amount', label: 'Amount', type: 'text', placeholder: 'e.g. 1 inch', required: true }
+    ]
+  },
+  'SVC-055': {
+    title: 'Sleeve Shortening',
+    fields: [
+      { key: 'desiredLength', label: 'Desired Length', type: 'text', placeholder: 'e.g. 24 inches', required: true }
+    ]
+  },
+  // ── Inventory ─────────────────────────────────────────────
+  'INV-001': {
+    title: 'Name Tape (OCP)',
+    fields: [
+      { key: 'nameText', label: 'Name', type: 'text', placeholder: 'e.g. RODRIGUEZ', required: true }
+    ]
+  },
+  'INV-003': {
+    title: 'Name Tape (AGSU)',
+    fields: [
+      { key: 'nameText', label: 'Name', type: 'text', placeholder: 'e.g. RODRIGUEZ', required: true }
+    ]
+  },
+  'INV-004': {
+    title: 'Rank Insignia — Hook & Loop',
+    fields: [
+      { key: 'rank', label: 'Rank', type: 'select', options: _RANK_OPTIONS, required: true }
+    ]
+  },
+  'INV-005': {
+    title: 'Rank Insignia — Pin-on (AGSU)',
+    fields: [
+      { key: 'rank', label: 'Rank', type: 'select', options: _RANK_OPTIONS, required: true }
     ]
   }
 };
@@ -1628,7 +1754,11 @@ function confirmCustomize() {
   if (!valid) { showToast('Please fill in all required fields'); return; }
 
   // Build a display label with customization details
-  var label = config.title + ' (' + customData.nameText.toUpperCase() + ', ' + customData.pattern + ', ' + customData.velcro + ')';
+  var parts = config.fields.map(function(f) {
+    var v = customData[f.key] || '';
+    return f.key === 'nameText' ? v.toUpperCase() : v;
+  }).filter(Boolean);
+  var label = config.title + (parts.length ? ' (' + parts.join(', ') + ')' : '');
 
   // Add to cart with custom data
   cart.push({ type: type, id: id, qty: 1, custom: customData, customLabel: label });
@@ -2047,20 +2177,63 @@ function applyShopConfig() {
   const brandEl = document.querySelector('.cust-brand-name');
   if (brandEl && sc.name) brandEl.textContent = sc.name;
 
-  // Contact modal + tel links
+  // Contact card
+  var cardName = document.getElementById('contactCardName');
+  if (cardName && sc.name) cardName.textContent = sc.name;
+
   if (sc.address) {
-    var addrEl = document.getElementById('contactModalAddr');
-    if (addrEl) addrEl.innerHTML = '&#128205; ' + sc.address;
+    var mapsUrl = 'https://maps.google.com/maps?q=' + encodeURIComponent(sc.address);
+    var cardAddr = document.getElementById('contactCardAddr');
+    if (cardAddr) cardAddr.href = mapsUrl;
+    var cardAddrText = document.getElementById('contactCardAddrText');
+    if (cardAddrText) cardAddrText.textContent = sc.address;
     var dirBtn = document.getElementById('contactModalDirBtn');
-    if (dirBtn) dirBtn.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(sc.address);
+    if (dirBtn) dirBtn.href = mapsUrl;
   }
   if (sc.phone) {
-    var phoneEl = document.getElementById('contactModalPhone');
-    if (phoneEl) phoneEl.innerHTML = '&#128222; ' + sc.phone;
     const digits = sc.phone.replace(/\D/g, '');
+    var cardPhone = document.getElementById('contactCardPhone');
+    if (cardPhone) cardPhone.href = 'tel:' + digits;
+    var cardPhoneText = document.getElementById('contactCardPhoneText');
+    if (cardPhoneText) cardPhoneText.textContent = sc.phone;
     document.querySelectorAll('a[href^="tel:"]').forEach(a => {
       a.href = 'tel:' + digits;
     });
+  }
+  if (sc.email) {
+    var cardEmail = document.getElementById('contactCardEmail');
+    if (cardEmail) cardEmail.href = 'mailto:' + sc.email;
+    var cardEmailText = document.getElementById('contactCardEmailText');
+    if (cardEmailText) cardEmailText.textContent = sc.email;
+  }
+
+  // Social links — hide icons with no URL
+  if (sc.socials) {
+    var socialMap = { facebook: 'socialFacebook', instagram: 'socialInstagram', google: 'socialGoogle', yelp: 'socialYelp', tiktok: 'socialTiktok' };
+    Object.keys(socialMap).forEach(function(key) {
+      var el = document.getElementById(socialMap[key]);
+      if (!el) return;
+      if (sc.socials[key]) {
+        el.href = sc.socials[key];
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+    // Also populate about page socials
+    var aboutSocials = document.getElementById('aboutSocials');
+    if (aboutSocials) {
+      Object.keys(socialMap).forEach(function(key) {
+        var el = aboutSocials.querySelector('#about' + key.charAt(0).toUpperCase() + key.slice(1));
+        if (!el) return;
+        if (sc.socials[key]) {
+          el.href = sc.socials[key];
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    }
   }
 
   // Hero title / subtitle
@@ -2104,6 +2277,71 @@ function applyShopConfig() {
     if (sc.themeColors.secondary) root.setProperty('--bg-deep', sc.themeColors.secondary);
     if (sc.themeColors.accent) root.setProperty('--accent-yellow', sc.themeColors.accent);
   }
+}
+
+// ── About Us Page ────────────────────────────────────────────
+function renderAboutPage() {
+  var cfg = _getShopCfg();
+  var nameEl = document.getElementById('aboutShopName');
+  if (nameEl) nameEl.textContent = cfg.name || 'SewReady';
+
+  var estEl = document.getElementById('aboutEst');
+  if (estEl && cfg.established) {
+    estEl.textContent = 'Est. ' + cfg.established;
+    estEl.style.display = '';
+  }
+
+  var storyEl = document.getElementById('aboutStory');
+  if (storyEl) storyEl.textContent = cfg.story || '';
+
+  var ownerEl = document.getElementById('aboutOwner');
+  var ownerSection = document.getElementById('aboutOwnerSection');
+  if (ownerEl && cfg.owner) {
+    ownerEl.textContent = cfg.owner;
+  } else if (ownerSection) {
+    ownerSection.style.display = 'none';
+  }
+
+  // Hours
+  var hoursList = document.getElementById('aboutHours');
+  if (hoursList && typeof shopHours !== 'undefined') {
+    var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var html = '';
+    for (var d = 0; d < 7; d++) {
+      var h = shopHours[d];
+      if (h && h.start && h.end) {
+        html += '<li><span class="day">' + dayNames[d] + '</span><span class="hours">' + formatTime(h.start) + ' - ' + formatTime(h.end) + '</span></li>';
+      } else {
+        html += '<li class="closed"><span class="day">' + dayNames[d] + '</span><span class="hours">Closed</span></li>';
+      }
+    }
+    hoursList.innerHTML = html;
+  }
+
+  // Location
+  if (cfg.address) {
+    var mapsUrl = 'https://maps.google.com/maps?q=' + encodeURIComponent(cfg.address);
+    var addrEl = document.getElementById('aboutAddr');
+    if (addrEl) { addrEl.textContent = cfg.address; addrEl.href = mapsUrl; }
+    var mapEmbed = document.getElementById('aboutMapEmbed');
+    if (mapEmbed) {
+      mapEmbed.innerHTML = '<iframe width="100%" height="250" frameborder="0" style="border:0;border-radius:12px" loading="lazy" allowfullscreen ' +
+        'src="https://maps.google.com/maps?q=' + encodeURIComponent(cfg.address) + '&output=embed"></iframe>';
+    }
+  }
+
+  // Contact
+  if (cfg.phone) {
+    var digits = cfg.phone.replace(/\D/g, '');
+    var phoneEl = document.getElementById('aboutPhone');
+    if (phoneEl) { phoneEl.textContent = cfg.phone; phoneEl.href = 'tel:' + digits; }
+  }
+  if (cfg.email) {
+    var emailEl = document.getElementById('aboutEmail');
+    if (emailEl) { emailEl.textContent = cfg.email; emailEl.href = 'mailto:' + cfg.email; }
+  }
+
+  // Socials (populated by applyShopConfig socials block)
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -2296,6 +2534,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTeam();
   renderShopHours();
   if (_SHOP_TIER !== 'storefront') updateCartBadge();
+
+  // About page
+  renderAboutPage();
 
   // Google Maps embed (all tiers)
   renderGoogleMapsEmbed();
