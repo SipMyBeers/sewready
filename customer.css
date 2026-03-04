@@ -753,6 +753,64 @@
   margin-top: 14px;
 }
 
+/* ── Auth Modal: Divider + Track Section ─────────────────── */
+.cust-auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 16px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+.cust-auth-divider::before,
+.cust-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border);
+}
+.cust-auth-divider span {
+  padding: 0 12px;
+}
+.cust-auth-track h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+.cust-auth-track .cust-input {
+  margin-bottom: 10px;
+}
+
+/* ── Shop Page: Back Button ──────────────────────────────── */
+.cust-shop-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  margin: 110px 0 0 24px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+}
+.cust-shop-back:hover {
+  background: var(--accent-blue);
+  color: var(--white);
+  border-color: var(--accent-blue);
+}
+
+/* ── Hero Subtitle ───────────────────────────────────────── */
+.cust-hero-sub {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin: 8px 0 24px;
+  font-weight: 400;
+}
+
 /* ── Dashboard ───────────────────────────────────────────── */
 .cust-welcome-bar {
   max-width: 1100px;

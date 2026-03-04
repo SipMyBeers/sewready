@@ -12,7 +12,7 @@
 <body class="cust-body">
 
   <!-- ── Online Orders Banner ────────────────────────────────── -->
-  <div class="cust-orders-banner" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+  <div class="cust-orders-banner" onclick="switchToShop()">
     <span class="cust-orders-banner-text"><strong>ONLINE ORDERS NOW AVAILABLE!</strong></span>
     <span class="cust-orders-banner-cta">Shop Now &rarr;</span>
   </div>
@@ -40,8 +40,8 @@
         <span class="cust-brand-name">SewReady</span>
       </div>
       <div class="cust-nav-links" id="custNavLinks">
-        <a href="#" class="cust-nav-link" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})" data-i18n="nav.home">HOME</a>
-        <a href="#services" class="cust-nav-link" onclick="event.preventDefault();document.getElementById('services').scrollIntoView({behavior:'smooth'})" data-i18n="nav.shop">SHOP NOW</a>
+        <a href="#" class="cust-nav-link" onclick="event.preventDefault();switchToLanding()" data-i18n="nav.home">HOME</a>
+        <a href="#" class="cust-nav-link" onclick="event.preventDefault();switchToShop()" data-i18n="nav.shop">SHOP NOW</a>
       </div>
       <div class="cust-nav-right">
         <button class="cust-lang-toggle" id="langToggle" onclick="toggleLanguage()" title="Switch language">EN | 한</button>
@@ -79,9 +79,10 @@
       <div class="cherry-petal"></div>
       <div class="cherry-petal"></div>
       <div class="cust-hero-content">
-        <h1 class="cust-hero-title" data-i18n="hero.title">Military-Grade Sewing.<br>Mission-Ready Uniforms.</h1>
+        <h1 class="cust-hero-title" data-i18n="hero.title">ORDER ONLINE NOW</h1>
+        <p class="cust-hero-sub" data-i18n="hero.sub">Military-Grade Sewing. Mission-Ready Uniforms.</p>
         <div class="cust-hero-ctas">
-          <button class="cust-btn-primary" onclick="document.getElementById('tracker').scrollIntoView({behavior:'smooth'})" data-i18n="hero.track">Track My Order</button>
+          <button class="cust-btn-primary" onclick="openAuth()" data-i18n="hero.track">Track My Order</button>
           <button class="cust-btn-secondary" onclick="handleMakeOrder()" data-i18n="hero.order">Make an Order</button>
         </div>
       </div>
@@ -141,34 +142,6 @@
       </div>
     </section>
 
-    <!-- Quick Order Tracker -->
-    <section class="cust-section" id="tracker">
-      <h2 class="cust-section-title" data-i18n="tracker.title">Track Your Order</h2>
-      <p class="cust-section-sub" data-i18n="tracker.sub">No account needed. Enter your order number and phone to check status.</p>
-      <div class="cust-tracker-form">
-        <input type="text" id="trackOrderId" class="cust-input" data-i18n-placeholder="tracker.orderPlaceholder" placeholder="Order # (e.g. SR-001)">
-        <input type="text" id="trackPhone" class="cust-input" data-i18n-placeholder="tracker.phonePlaceholder" placeholder="Phone (e.g. (555) 201-4488)">
-        <button class="cust-btn-primary" onclick="trackOrder()" data-i18n="tracker.btn">Track</button>
-      </div>
-      <div id="trackResult"></div>
-    </section>
-
-    <!-- Services Showcase -->
-    <section class="cust-section" id="services">
-      <h2 class="cust-section-title" data-i18n="services.title">Our Services</h2>
-      <p class="cust-section-sub" data-i18n="services.sub">55 services across 5 categories. Everything your uniform needs.</p>
-      <div class="cust-filter-pills" id="svcFilterPills"></div>
-      <div class="cust-svc-grid" id="custSvcGrid"></div>
-    </section>
-
-    <!-- Store Inventory -->
-    <section class="cust-section" id="storeInventory">
-      <h2 class="cust-section-title" data-i18n="inventory.title">Supplies &amp; Inventory</h2>
-      <p class="cust-section-sub" data-i18n="inventory.sub">35 items in stock. Tapes, patches, insignia, badges, and more.</p>
-      <div class="cust-filter-pills" id="invFilterPills"></div>
-      <div class="cust-inv-grid" id="custInvGrid"></div>
-    </section>
-
     <!-- Contact Form -->
     <section class="cust-section" id="contactForm">
       <h2 class="cust-section-title">Get In Touch</h2>
@@ -211,6 +184,27 @@
       <p>&copy; 2026 SewReady &mdash; Maria's Alterations. All rights reserved.</p>
       <p style="margin-top:8px;font-size:11px"><a href="/legal/terms.html" style="color:var(--text-dim)">Terms</a> &middot; <a href="/legal/privacy.html" style="color:var(--text-dim)">Privacy</a></p>
     </footer>
+  </div>
+
+  <!-- ── Shop Page (Services + Inventory) ─────────────────── -->
+  <div id="custShopPage" style="display:none">
+    <button class="cust-shop-back" onclick="switchToLanding()">&larr; Back to Home</button>
+
+    <!-- Services Showcase -->
+    <section class="cust-section" id="services">
+      <h2 class="cust-section-title" data-i18n="services.title">Our Services</h2>
+      <p class="cust-section-sub" data-i18n="services.sub">55 services across 5 categories. Everything your uniform needs.</p>
+      <div class="cust-filter-pills" id="svcFilterPills"></div>
+      <div class="cust-svc-grid" id="custSvcGrid"></div>
+    </section>
+
+    <!-- Store Inventory -->
+    <section class="cust-section" id="storeInventory">
+      <h2 class="cust-section-title" data-i18n="inventory.title">Supplies &amp; Inventory</h2>
+      <p class="cust-section-sub" data-i18n="inventory.sub">35 items in stock. Tapes, patches, insignia, badges, and more.</p>
+      <div class="cust-filter-pills" id="invFilterPills"></div>
+      <div class="cust-inv-grid" id="custInvGrid"></div>
+    </section>
   </div>
 
   <!-- ── Customer Dashboard ────────────────────────────────── -->
@@ -263,6 +257,15 @@
         </div>
         <button class="cust-btn-primary cust-btn-full" onclick="signIn()" data-i18n="auth.signinBtn">Sign In</button>
         <p class="cust-auth-hint">Demo: rodriguez.j@army.mil / demo123</p>
+
+        <div class="cust-auth-divider"><span>or</span></div>
+        <div class="cust-auth-track">
+          <h4>Track Without Signing In</h4>
+          <input type="text" id="authTrackOrderId" class="cust-input" placeholder="Order # (e.g. SR-001)">
+          <input type="text" id="authTrackPhone" class="cust-input" placeholder="Phone #">
+          <button class="cust-btn-secondary cust-btn-full" onclick="trackOrderFromAuth()">Track Order</button>
+          <div id="authTrackResult"></div>
+        </div>
       </div>
 
       <!-- Create Account -->
@@ -329,6 +332,7 @@
 
   <script src="../../translations.js"></script>
   <script src="shop-config.js"></script>
+  <script src="../../shared-data.js"></script>
   <script src="../../services-data.js"></script>
   <script src="../../inventory-data.js"></script>
   <script src="../../data-store.js"></script>

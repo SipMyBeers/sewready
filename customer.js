@@ -218,16 +218,26 @@ function createAccount() {
 function switchToLanding() {
   document.getElementById('custLanding').style.display = 'block';
   document.getElementById('custDashboard').style.display = 'none';
+  document.getElementById('custShopPage').style.display = 'none';
   updateNavAuth();
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function switchToDashboard() {
   document.getElementById('custLanding').style.display = 'none';
   document.getElementById('custDashboard').style.display = 'block';
+  document.getElementById('custShopPage').style.display = 'none';
   updateNavAuth();
   renderWelcome();
   renderMyOrders();
   renderWizard();
+}
+
+function switchToShop() {
+  document.getElementById('custLanding').style.display = 'none';
+  document.getElementById('custDashboard').style.display = 'none';
+  document.getElementById('custShopPage').style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function updateNavAuth() {
@@ -275,8 +285,7 @@ function handleMakeOrder() {
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   } else {
-    const el = document.getElementById('storeInventory');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    switchToShop();
   }
 }
 
@@ -377,6 +386,7 @@ function renderPublicServices() {
 // ── Team ────────────────────────────────────────────────────
 function renderTeam() {
   const grid = document.getElementById('custTeam');
+  if (!grid) return;
   grid.innerHTML = employees.map(emp =>
     '<a href="employee.html?id=' + emp.id + '" class="cust-team-card" style="text-decoration:none;color:inherit">' +
       '<div class="cust-team-avatar" style="background:' + emp.color + '">' + emp.name.charAt(0) + '</div>' +
@@ -410,6 +420,38 @@ function trackOrder() {
 
   if (!orderId || !phone) {
     showToast(t('tracker.enterBoth'));
+    return;
+  }
+
+  const order = sharedOrders.find(o => o.id === orderId && o.phone === phone);
+  if (!order) {
+    result.innerHTML = '<div class="cust-track-not-found">' + t('tracker.notFound') + '</div>';
+    return;
+  }
+
+  result.innerHTML =
+    '<div class="cust-track-result">' +
+      '<div class="cust-track-header">' +
+        '<span class="cust-track-id">' + order.id + '</span>' +
+        '<span class="cust-track-uniform">' + order.uniform + '</span>' +
+      '</div>' +
+      renderTimeline(order.status) +
+      '<div style="margin-top:12px">' +
+        '<div style="font-size:13px;color:var(--text-muted)"><strong>Customer:</strong> ' + order.customer + '</div>' +
+        '<div style="font-size:13px;color:var(--text-muted)"><strong>Deadline:</strong> ' + order.deadline + '</div>' +
+        '<div style="font-size:13px;color:var(--text-muted)"><strong>Services:</strong> ' + order.modifications.join(', ') + '</div>' +
+      '</div>' +
+    '</div>';
+}
+
+// ── Auth Modal Order Tracker ─────────────────────────────────
+function trackOrderFromAuth() {
+  const orderId = document.getElementById('authTrackOrderId').value.trim().toUpperCase();
+  const phone = document.getElementById('authTrackPhone').value.trim();
+  const result = document.getElementById('authTrackResult');
+
+  if (!orderId || !phone) {
+    showToast('Enter order number and phone');
     return;
   }
 
@@ -1751,8 +1793,8 @@ function processUserInputFallback(text) {
 
   // Track order
   if (matchesAny(lower, ['track', 'order status', 'my order', 'where is my'])) {
-    addBotMessage('You can track your order in the <strong>Order Tracker</strong> section at the top of the page. Just enter your order number and phone number.');
-    document.getElementById('tracker').scrollIntoView({ behavior: 'smooth' });
+    addBotMessage('You can track your order by clicking <strong>Track My Order</strong> in the hero section. Enter your order number and phone number in the sign-in modal.');
+    openAuth();
     renderQuickReplies(['Show services', 'What are your hours?']);
     return;
   }
@@ -1781,7 +1823,7 @@ function processUserInputFallback(text) {
   // Inventory / stock
   if (matchesAny(lower, ['stock', 'inventory', 'supplies', 'what do you have', 'in stock', 'supply'])) {
     addBotMessage('We have <strong>35 items</strong> in stock across ' + invCategories.length + ' categories: ' + invCategories.join(', ') + '.<br><br>Check the <strong>Supplies & Inventory</strong> section to browse and add items to your cart.');
-    document.getElementById('storeInventory').scrollIntoView({ behavior: 'smooth' });
+    switchToShop();
     renderQuickReplies(['Patches in stock', 'Badges available', 'Show services']);
     return;
   }
