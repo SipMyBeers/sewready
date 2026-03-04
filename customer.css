@@ -264,59 +264,11 @@
   flex-wrap: wrap;
 }
 
-/* ── Hero Compact Contact ───────────────────────────────── */
-.cust-hero-compact {
-  margin-top: 28px;
-  width: 100%;
-  max-width: 640px;
-}
-.cust-hero-info-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-}
-.cust-hero-info-sep {
-  color: var(--glass-border);
-}
-.cust-hero-info-call,
-.cust-hero-info-dir {
-  font-size: 11px;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--accent-blue);
-  transition: color .2s;
-}
-.cust-hero-info-call:hover,
-.cust-hero-info-dir:hover {
-  color: var(--white);
-}
-.cust-hero-mini-form {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.cust-hero-mini-form .cust-input-sm {
-  height: 34px;
-  padding: 0 10px;
-  font-size: 12px;
-  flex: 1;
-  min-width: 90px;
-  max-width: 140px;
-  border-radius: 8px;
-}
-.cust-hero-mini-form .cust-btn-sm {
-  height: 34px;
-  padding: 0 16px;
-  font-size: 12px;
-  border-radius: 8px;
-  white-space: nowrap;
+/* ── Contact Modal ───────────────────────────────────────── */
+.cust-contact-modal-info p {
+  font-size: 15px;
+  color: var(--text-primary);
+  margin: 8px 0;
 }
 
 /* ── Sections ────────────────────────────────────────────── */

@@ -71,22 +71,8 @@
           <button class="cust-btn-secondary" onclick="handleMakeOrder()" data-i18n="hero.order">Make an Order</button>
         </div>
 
-        <!-- Compact Contact Info + Form -->
-        <div class="cust-hero-compact">
-          <div class="cust-hero-info-bar">
-            <span class="cust-hero-info-addr">&#128205; 123 Bragg Blvd, Fayetteville, NC 28301</span>
-            <span class="cust-hero-info-sep">|</span>
-            <span class="cust-hero-info-phone">&#128222; (555) 867-5309</span>
-            <a href="tel:5558675309" class="cust-hero-info-call">Call</a>
-            <a href="https://maps.google.com" target="_blank" class="cust-hero-info-dir">Directions</a>
-          </div>
-          <div class="cust-hero-mini-form" id="contactForm">
-            <input type="text" id="cfName" class="cust-input cust-input-sm" placeholder="Name">
-            <input type="tel" id="cfPhone" class="cust-input cust-input-sm" placeholder="Phone">
-            <input type="email" id="cfEmail" class="cust-input cust-input-sm" placeholder="Email">
-            <input type="text" id="cfMessage" class="cust-input cust-input-sm" placeholder="Message">
-            <button class="cust-btn-primary cust-btn-sm" onclick="submitContactForm()" id="cfSubmitBtn">Send</button>
-          </div>
+        <div style="margin-top:20px">
+          <button class="cust-btn-secondary" onclick="openContactModal()">Contact Now</button>
         </div>
       </div>
     </section>
@@ -267,6 +253,22 @@
           <input type="text" id="caUnit" class="cust-input" placeholder="82nd Airborne">
         </div>
         <button class="cust-btn-primary cust-btn-full" onclick="createAccount()" data-i18n="auth.createBtn">Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Contact Modal ────────────────────────────────────── -->
+  <div class="cust-auth-overlay" id="contactOverlay" style="display:none">
+    <div class="cust-auth-modal">
+      <button class="cust-auth-close" onclick="closeContactModal()">&times;</button>
+      <h3 style="font-size:18px;font-weight:600;color:var(--accent-gold);margin:0 0 16px">Contact Us</h3>
+      <div class="cust-contact-modal-info">
+        <p class="cust-contact-modal-addr" id="contactModalAddr">&#128205; 123 Bragg Blvd, Fayetteville, NC 28301</p>
+        <p class="cust-contact-modal-phone" id="contactModalPhone">&#128222; (555) 867-5309</p>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <a href="tel:5558675309" class="cust-btn-primary cust-btn-full" id="contactModalCallBtn">&#128222; Call Now</a>
+        <a href="https://maps.google.com" target="_blank" class="cust-btn-secondary cust-btn-full" id="contactModalDirBtn">&#128205; Get Directions</a>
       </div>
     </div>
   </div>

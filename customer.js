@@ -122,6 +122,13 @@ function saveCustomers(arr) {
   localStorage.setItem(_ck('customers'), JSON.stringify(arr));
 }
 
+function openContactModal() {
+  document.getElementById('contactOverlay').style.display = 'flex';
+}
+function closeContactModal() {
+  document.getElementById('contactOverlay').style.display = 'none';
+}
+
 function openAuth() {
   if (_SHOP_TIER === 'storefront') return; // no auth for storefront tier
   document.getElementById('authOverlay').style.display = 'flex';
@@ -2040,27 +2047,20 @@ function applyShopConfig() {
   const brandEl = document.querySelector('.cust-brand-name');
   if (brandEl && sc.name) brandEl.textContent = sc.name;
 
-  // Hero info bar
+  // Contact modal + tel links
   if (sc.address) {
-    document.querySelectorAll('.cust-hero-info-addr').forEach(el => {
-      el.innerHTML = '&#128205; ' + sc.address;
-    });
+    var addrEl = document.getElementById('contactModalAddr');
+    if (addrEl) addrEl.innerHTML = '&#128205; ' + sc.address;
+    var dirBtn = document.getElementById('contactModalDirBtn');
+    if (dirBtn) dirBtn.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(sc.address);
   }
   if (sc.phone) {
-    document.querySelectorAll('.cust-hero-info-phone').forEach(el => {
-      el.innerHTML = '&#128222; ' + sc.phone;
-    });
-    // Update tel: links with digits only
+    var phoneEl = document.getElementById('contactModalPhone');
+    if (phoneEl) phoneEl.innerHTML = '&#128222; ' + sc.phone;
     const digits = sc.phone.replace(/\D/g, '');
     document.querySelectorAll('a[href^="tel:"]').forEach(a => {
       a.href = 'tel:' + digits;
     });
-    // Update directions link
-    if (sc.address) {
-      document.querySelectorAll('.cust-hero-info-dir').forEach(a => {
-        a.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(sc.address);
-      });
-    }
   }
 
   // Hero title / subtitle
@@ -2346,6 +2346,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close customize modal on overlay click
   document.getElementById('customizeOverlay').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeCustomize();
+  });
+
+  // Close contact modal on overlay click
+  document.getElementById('contactOverlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeContactModal();
   });
 
   // Enter key handlers for auth forms
