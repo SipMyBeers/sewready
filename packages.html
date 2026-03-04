@@ -58,7 +58,8 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .price-card .price-row{display:flex;align-items:baseline;gap:4px;margin-bottom:2px}
 .price-card .price-amount{font-size:28px;font-weight:800;color:var(--text)}
 .price-card .price-label{font-size:12px;color:var(--text-muted)}
-.price-card .price-period{font-size:13px;color:var(--accent-cyan);font-weight:600;margin-bottom:12px}
+.price-card .price-period{font-size:13px;color:var(--accent-cyan);font-weight:600;margin-bottom:4px}
+.revenue-share-line{font-size:13px;color:var(--accent-green);font-weight:700;margin-bottom:12px;letter-spacing:.2px}
 .price-card ul{list-style:none;padding:0;margin:0 0 12px;flex:1}
 .price-card li{font-size:13px;padding:3px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
 .price-card li::before{content:'\2713';color:var(--accent-green);font-weight:700;font-size:13px}
@@ -254,7 +255,53 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .scale-ghost{position:absolute;top:0;height:100%;border-radius:12px;background:rgba(0,71,160,.12);border-right:2px dashed rgba(0,71,160,.5)}
 .scale-ticks{display:flex;justify-content:space-between;font-size:9px;color:var(--text-dim);margin-top:3px;padding:0 2px}
 .scale-upgrade-hint{font-size:10px;color:var(--text-dim);margin-top:2px;font-style:italic}
-.max-tier-msg{text-align:center;padding:20px;color:var(--accent-cyan);font-weight:600;font-size:14px}
+/* Revenue Hero */
+.revenue-hero{background:linear-gradient(135deg,rgba(0,71,160,.15),rgba(199,50,64,.10));border:2px solid rgba(0,71,160,.25);border-radius:var(--radius);padding:40px 32px;margin-bottom:20px;text-align:center}
+.revenue-hero .hero-subtitle{font-size:14px;color:var(--text-muted);margin:0 0 24px;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.revenue-hero .hero-numbers{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.revenue-hero .hero-stat{padding:20px}
+.revenue-hero .hero-stat .hero-num{font-size:36px;font-weight:800;color:var(--accent-cyan);line-height:1.1}
+.revenue-hero .hero-stat .hero-label{font-size:13px;color:var(--text-muted);margin-top:6px}
+
+/* ROI Comparison */
+.roi-comparison{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:28px;margin-bottom:20px}
+.roi-comparison h3{font-size:16px;margin:0 0 20px;color:var(--accent-cyan);text-align:center}
+.roi-columns{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;margin-bottom:20px}
+.roi-col{text-align:center;padding:24px 16px;border-radius:var(--radius)}
+.roi-col.invest{background:rgba(199,50,64,.08);border:1px solid rgba(199,50,64,.15)}
+.roi-col.earn{background:rgba(0,71,160,.08);border:1px solid rgba(0,71,160,.15)}
+.roi-col .roi-col-title{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;font-weight:600}
+.roi-col .roi-col-amount{font-size:28px;font-weight:800}
+.roi-col.invest .roi-col-amount{color:#c73240}
+.roi-col.earn .roi-col-amount{color:var(--accent-cyan)}
+.roi-col .roi-col-detail{font-size:12px;color:var(--text-muted);margin-top:4px}
+.roi-vs{font-size:24px;font-weight:800;color:var(--text-dim)}
+.roi-badge{display:inline-block;background:linear-gradient(135deg,var(--accent-cyan),#c73240);color:#fff;font-size:20px;font-weight:800;padding:10px 24px;border-radius:12px;margin:0 auto 16px;text-align:center}
+.roi-badge-wrap{text-align:center;margin-bottom:16px}
+.guarantee-callout{background:rgba(199,50,64,.06);border:1px solid rgba(199,50,64,.12);border-radius:var(--radius);padding:14px 20px;text-align:center;font-size:13px;color:var(--text);font-weight:600}
+.guarantee-callout span{color:#c73240}
+.guarantee-note{font-size:11px;color:var(--text-dim);text-align:center;margin-top:8px;font-style:italic}
+
+/* Share Breakdown */
+.share-breakdown{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:28px;margin-bottom:20px}
+.share-breakdown h3{font-size:16px;margin:0 0 20px;color:var(--accent-cyan)}
+.share-math{margin-bottom:16px}
+.share-math .share-pct{font-size:20px;font-weight:800;color:var(--accent-cyan);margin-bottom:8px}
+.share-example{background:rgba(0,71,160,.06);border-radius:var(--radius);padding:16px;margin-bottom:16px;font-size:13px;line-height:1.8}
+.share-example .example-label{font-weight:700;color:var(--text);margin-bottom:4px}
+.share-example .example-math{color:var(--text-muted)}
+.share-scenarios{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.share-scenario{padding:16px;border-radius:var(--radius);text-align:center}
+.share-scenario.conservative{background:rgba(255,255,255,.04);border:1px solid var(--glass-border)}
+.share-scenario.best{background:rgba(0,71,160,.08);border:1px solid rgba(0,71,160,.15)}
+.share-scenario .scenario-title{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:600;margin-bottom:8px}
+.share-scenario .scenario-rev{font-size:22px;font-weight:800;color:var(--accent-cyan)}
+.share-scenario .scenario-share{font-size:13px;color:var(--text-muted);margin-top:4px}
+.share-scenario .scenario-annual{font-size:12px;color:var(--text-dim);margin-top:6px}
+
+/* Compact Selections */
+.selections-compact{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.selections-compact h3{font-size:14px;margin:0 0 12px;color:var(--text-muted)}
 
 /* Mobile */
 @media(max-width:640px){
@@ -265,6 +312,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   .detail-previews{grid-template-columns:1fr}
   .detail-inner{padding:20px}
   .demo-grid{grid-template-columns:1fr}
+  .revenue-hero .hero-numbers{grid-template-columns:1fr}
+  .roi-columns{grid-template-columns:1fr;gap:12px}
+  .roi-vs{transform:rotate(90deg)}
+  .share-scenarios{grid-template-columns:1fr}
+  .selections-row{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -288,6 +340,23 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <p>Build your package in three steps &mdash; choose your bundle, pick a plan, and add hardware.</p>
 </section>
 
+<!-- ── Revenue Share Info ───────────────────────────────── -->
+<div class="included-banner">
+  <div class="included-card" style="border-color:#c73240;background:rgba(199,50,64,0.08)">
+    <div class="badge" style="background:#c73240">&#128176; Performance-Based Pricing</div>
+    <h3>We Invest in Your Growth</h3>
+    <p class="tier-desc">We don't just build your site &mdash; we bring you customers. Our fee is tied to your success.</p>
+    <ul class="included-features" style="grid-template-columns:1fr 1fr 1fr">
+      <li>We drive new customers to your shop</li>
+      <li>You pay only 10% of revenue we bring</li>
+      <li>No upfront fees for customer acquisition</li>
+      <li>You only pay when you get paid</li>
+      <li>Aligned incentives &mdash; we win when you win</li>
+      <li>Transparent tracking &amp; reporting</li>
+    </ul>
+  </div>
+</div>
+
 <!-- ── Included Storefront ─────────────────────────────── -->
 <div class="included-banner">
   <div class="included-card">
@@ -301,6 +370,23 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Services &amp; hours display</li>
       <li>SEO &amp; structured data</li>
       <li>Mobile-responsive design</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── Manage From Anywhere Banner ─────────────────────── -->
+<div class="included-banner" style="margin-top:16px">
+  <div class="included-card" style="border-color:var(--accent-cyan)">
+    <div class="badge" style="background:var(--accent-cyan)">&#128241; Access From Anywhere</div>
+    <h3>Run Your Shop from Your Phone</h3>
+    <p class="tier-desc">Log in to your shop dashboard from any device — phone, tablet, or laptop</p>
+    <ul class="included-features" style="grid-template-columns:1fr 1fr 1fr">
+      <li>See incoming orders in real-time</li>
+      <li>View &amp; update the calendar</li>
+      <li>Manage inventory on the go</li>
+      <li>Track order status</li>
+      <li>Employee management</li>
+      <li>Review analytics</li>
     </ul>
   </div>
 </div>
@@ -330,8 +416,9 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <div class="price-card" data-detail="detail-setup-site" onclick="expandCard(this,event)">
     <h3>Site Setup</h3>
     <p class="tier-desc">Professional branded website, ready to go</p>
-    <div class="price-row"><span class="price-amount">$500</span></div>
-    <div class="price-period">One-time payment</div>
+    <div class="price-row"><span class="price-amount">$199</span></div>
+    <div class="price-period">One-time setup + revenue share</div>
+    <div class="revenue-share-line">then 8% of new revenue/mo</div>
     <ul>
       <li>Custom branded website build</li>
       <li>Google Maps integration</li>
@@ -348,10 +435,10 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li class="locked">SMS &amp; email notifications</li>
       <li class="locked">Analytics &amp; reporting</li>
     </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Site Setup','$500');event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Site Setup','$199');event.stopPropagation()"
       data-item-id="setup-site"
       data-item-name="SewReady Site Setup"
-      data-item-price="500.00"
+      data-item-price="199.00"
       data-item-url="/packages.html"
       data-item-description="Custom branded website build with Google Maps, SEO, contact form, services configuration, mobile-responsive design"
       data-item-shippable="false"
@@ -360,11 +447,12 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
   <!-- Site + Online Orders -->
   <div class="price-card featured" data-detail="detail-setup-online" onclick="expandCard(this,event)">
-    <div class="badge">Most Popular</div>
+    <div class="badge">Recommended</div>
     <h3>Site + Online Orders</h3>
     <p class="tier-desc">Full site build with online ordering system</p>
-    <div class="price-row"><span class="price-amount">$1,200</span></div>
-    <div class="price-period">One-time payment</div>
+    <div class="price-row"><span class="price-amount">$499</span></div>
+    <div class="price-period">One-time setup + revenue share</div>
+    <div class="revenue-share-line">then 10% of new revenue/mo</div>
     <ul>
       <li>Everything in Site Setup</li>
       <li class="whats-new">What's New:</li>
@@ -382,10 +470,10 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li class="locked">Driver pickup coordination</li>
       <li class="locked">Cost &amp; revenue analytics</li>
     </ul>
-    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(1,'Site + Online Orders','$1,200');event.stopPropagation()"
+    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(1,'Site + Online Orders','$499');event.stopPropagation()"
       data-item-id="setup-online"
       data-item-name="SewReady Site + Online Orders Setup"
-      data-item-price="1200.00"
+      data-item-price="499.00"
       data-item-url="/packages.html"
       data-item-description="Everything in Site Setup plus online ordering, customer accounts, order tracking, employee management, inventory, calendar, receipt & label printing"
       data-item-shippable="false"
@@ -396,8 +484,9 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <div class="price-card" data-detail="detail-setup-full" onclick="expandCard(this,event)">
     <h3>Full Platform</h3>
     <p class="tier-desc">Complete automation with notifications &amp; analytics</p>
-    <div class="price-row"><span class="price-amount">$2,000</span></div>
-    <div class="price-period">One-time payment</div>
+    <div class="price-row"><span class="price-amount">$799</span></div>
+    <div class="price-period">One-time setup + revenue share</div>
+    <div class="revenue-share-line">then 12% of new revenue/mo</div>
     <ul>
       <li>Everything in Site + Online Orders</li>
       <li class="whats-new">What's New:</li>
@@ -410,10 +499,10 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Priority setup support</li>
     </ul>
     <p style="font-size:12px;color:var(--text-muted);margin:0 0 16px;font-style:italic">Hardware sold separately</p>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Full Platform','$2,000');event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Full Platform','$799');event.stopPropagation()"
       data-item-id="setup-full"
       data-item-name="SewReady Full Platform Setup"
-      data-item-price="2000.00"
+      data-item-price="799.00"
       data-item-url="/packages.html"
       data-item-description="Everything in Site + Online Orders plus SMS & email notifications, automated alerts, SOP library, driver coordination, analytics, priority support"
       data-item-shippable="false"
@@ -940,7 +1029,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
   <!-- Pro Kit -->
   <div class="price-card featured" data-detail="detail-hw-pro" onclick="expandCard(this,event)">
-    <div class="badge">Most Popular</div>
+    <div class="badge">Recommended</div>
     <h3>Pro Kit</h3>
     <p class="tier-desc">Add label printing for garment tags</p>
     <div class="price-row"><span class="price-amount">$399</span></div>
@@ -1189,7 +1278,7 @@ function populateSummary() {
   var bundleCost = parsePrice(bundle.price);
   var planCost = parsePrice(plan.price);
   var hwCost = parsePrice(hw.price);
-  var firstMonth = bundleCost + planCost + hwCost;
+  var upfrontTotal = bundleCost + hwCost;
   var monthly = planCost;
 
   // Feature lists by bundle tier
@@ -1209,92 +1298,93 @@ function populateSummary() {
   var seen = {};
   allFeatures = allFeatures.filter(function(f) { if(seen[f]) return false; seen[f]=true; return true; });
 
-  // Revenue projections by bundle tier
+  // Revenue projections + share percentages by bundle tier
   var revenueData = {
-    'Site Setup': {moLow:'$500',moHigh:'$1,000',yrLow:'$6,000',yrHigh:'$12,000'},
-    'Site + Online Orders': {moLow:'$1,500',moHigh:'$3,000',yrLow:'$18,000',yrHigh:'$36,000'},
-    'Full Platform': {moLow:'$3,000',moHigh:'$5,000',yrLow:'$36,000',yrHigh:'$60,000'}
+    'Site Setup':          {moLow:500, moHigh:1000, yrLow:6000, yrHigh:12000, share:0.08},
+    'Site + Online Orders':{moLow:1500,moHigh:3000, yrLow:18000,yrHigh:36000, share:0.10},
+    'Full Platform':       {moLow:3000,moHigh:5000, yrLow:36000,yrHigh:60000, share:0.12}
   };
   var rev = revenueData[bundle.name] || revenueData['Site Setup'];
+  var sharePct = Math.round(rev.share * 100);
 
-  // Impact scale percentages by tier
-  var scaleData = {
-    'Site Setup':          {customers:33, time:25, revenue:20, retention:0},
-    'Site + Online Orders':{customers:66, time:62, revenue:50, retention:50},
-    'Full Platform':       {customers:100,time:100,revenue:100,retention:100}
-  };
-  var sc = scaleData[bundle.name] || scaleData['Site Setup'];
-  var isMax = bundle.name === 'Full Platform';
-  // Next tier ghost percentages
-  var nextTier = {
-    'Site Setup':          {customers:66, time:62, revenue:50, retention:50, label:'Site + Online Orders'},
-    'Site + Online Orders':{customers:100,time:100,revenue:100,retention:100,label:'Full Platform'}
-  };
-  var nt = nextTier[bundle.name] || null;
+  // Calculate ROI numbers
+  var estMonthlyShareLow = Math.round(rev.moLow * rev.share);
+  var estMonthlyShareHigh = Math.round(rev.moHigh * rev.share);
+  var totalMonthlyPayLow = monthly + estMonthlyShareLow;
+  var totalMonthlyPayHigh = monthly + estMonthlyShareHigh;
+  var roiRatio = totalMonthlyPayLow > 0 ? Math.round(rev.moLow / totalMonthlyPayLow) : 0;
 
   // Timeline days
   var dayMap = {'Site Setup':3,'Site + Online Orders':5,'Full Platform':7};
   var days = dayMap[bundle.name] || 3;
 
+  function fmt(n) { return '$' + n.toLocaleString(); }
+
   var html = '<div class="summary-layout">';
 
-  // Card 1: Your Selections (combined)
-  html += '<div class="summary-card"><h3>Your Selections</h3>';
+  // ── A. Revenue Hero ──
+  html += '<div class="revenue-hero">';
+  html += '<div class="hero-subtitle">Here\'s how much more your shop will earn</div>';
+  html += '<div class="hero-numbers">';
+  html += '<div class="hero-stat"><div class="hero-num">+' + fmt(rev.moLow) + '–' + rev.moHigh.toLocaleString() + '</div><div class="hero-label">Projected Monthly Revenue Increase</div></div>';
+  html += '<div class="hero-stat"><div class="hero-num">+' + fmt(rev.yrLow) + '–' + rev.yrHigh.toLocaleString() + '</div><div class="hero-label">Projected Annual Revenue Increase</div></div>';
+  html += '</div></div>';
+
+  // ── B. What You Pay vs What You Make ──
+  html += '<div class="roi-comparison"><h3>What You Pay vs What You Make</h3>';
+  html += '<div class="roi-columns">';
+  html += '<div class="roi-col invest">';
+  html += '<div class="roi-col-title">Your Investment</div>';
+  html += '<div class="roi-col-amount">' + fmt(totalMonthlyPayLow) + '–' + fmt(totalMonthlyPayHigh) + '</div>';
+  html += '<div class="roi-col-detail">' + fmt(upfrontTotal) + ' upfront + ' + fmt(estMonthlyShareLow) + '–' + fmt(estMonthlyShareHigh) + ' share/mo' + (monthly > 0 ? ' + ' + fmt(monthly) + ' plan/mo' : '') + '</div>';
+  html += '</div>';
+  html += '<div class="roi-vs">→</div>';
+  html += '<div class="roi-col earn">';
+  html += '<div class="roi-col-title">Your Revenue</div>';
+  html += '<div class="roi-col-amount">+' + fmt(rev.moLow) + '–' + fmt(rev.moHigh) + '</div>';
+  html += '<div class="roi-col-detail">Projected new monthly revenue</div>';
+  html += '</div>';
+  html += '</div>';
+  if (roiRatio > 1) {
+    html += '<div class="roi-badge-wrap"><div class="roi-badge">For every $1 you pay us, you earn $' + roiRatio + '</div></div>';
+  }
+  html += '<div class="guarantee-callout"><span>&#9888;</span> If we don\'t bring you revenue, you don\'t pay us</div>';
+  html += '<div class="guarantee-note">Revenue share only applies to new revenue generated through your SewReady platform</div>';
+  html += '</div>';
+
+  // ── C. Revenue Share Breakdown ──
+  html += '<div class="share-breakdown"><h3>Revenue Share Breakdown</h3>';
+  html += '<div class="share-math"><div class="share-pct">Your share rate: ' + sharePct + '% of new platform revenue</div></div>';
+  html += '<div class="share-example">';
+  html += '<div class="example-label">Example calculation (' + bundle.name + '):</div>';
+  html += '<div class="example-math">If your platform generates ' + fmt(rev.moLow) + '/mo in new revenue → you pay ' + fmt(estMonthlyShareLow) + '/mo (' + sharePct + '%), you keep ' + fmt(rev.moLow - estMonthlyShareLow) + '/mo</div>';
+  html += '</div>';
+  html += '<div class="share-scenarios">';
+  html += '<div class="share-scenario conservative"><div class="scenario-title">Conservative Estimate</div>';
+  html += '<div class="scenario-rev">+' + fmt(rev.moLow) + '/mo</div>';
+  html += '<div class="scenario-share">You pay ' + fmt(estMonthlyShareLow) + '/mo share</div>';
+  html += '<div class="scenario-annual">Annual: +' + fmt(rev.yrLow) + ' revenue, ' + fmt(estMonthlyShareLow * 12) + ' share</div></div>';
+  html += '<div class="share-scenario best"><div class="scenario-title">Best Case Estimate</div>';
+  html += '<div class="scenario-rev">+' + fmt(rev.moHigh) + '/mo</div>';
+  html += '<div class="scenario-share">You pay ' + fmt(estMonthlyShareHigh) + '/mo share</div>';
+  html += '<div class="scenario-annual">Annual: +' + fmt(rev.yrHigh) + ' revenue, ' + fmt(estMonthlyShareHigh * 12) + ' share</div></div>';
+  html += '</div></div>';
+
+  // ── D. Your Selections (compact) ──
+  html += '<div class="selections-compact"><h3>Your Selections</h3>';
   html += '<div class="selections-row">';
   html += '<div class="sel-col"><div class="sel-label">Bundle</div><div class="sel-name">' + bundle.name + '</div><div class="sel-price">' + bundle.price + '</div></div>';
   html += '<div class="sel-col"><div class="sel-label">Plan</div><div class="sel-name">' + plan.name + '</div><div class="sel-price">' + plan.price + '</div></div>';
   html += '<div class="sel-col"><div class="sel-label">Hardware</div><div class="sel-name">' + hw.name + '</div><div class="sel-price">' + hw.price + '</div></div>';
-  html += '</div>';
-  html += '<div class="totals-row">';
-  html += '<div class="total-box"><div class="total-label">First Month</div><div class="total-amount">$' + firstMonth.toLocaleString() + '</div></div>';
-  html += '<div class="total-box"><div class="total-label">Monthly After</div><div class="total-amount">' + (monthly > 0 ? '$' + monthly + '/mo' : 'Free') + '</div></div>';
   html += '</div></div>';
 
-  // Card 2: What You're Getting
+  // ── E. What You're Getting ──
   html += '<div class="summary-card"><h3>What You\'re Getting</h3>';
   html += '<ul class="feature-checklist">';
   allFeatures.forEach(function(f) { html += '<li>' + f + '</li>'; });
   html += '</ul></div>';
 
-  // Card 3: Revenue Impact
-  html += '<div class="summary-card"><h3>Revenue Impact</h3>';
-  html += '<div class="revenue-stats">';
-  html += '<div class="revenue-stat"><div class="rev-num">+' + rev.moLow + '–' + rev.moHigh.replace('$','') + '</div><div class="rev-label">Monthly Revenue Increase</div></div>';
-  html += '<div class="revenue-stat"><div class="rev-num">+' + rev.yrLow + '–' + rev.yrHigh.replace('$','') + '</div><div class="rev-label">Yearly Revenue Increase</div></div>';
-  html += '</div></div>';
-
-  // Card 4: Impact Analysis — upgrade scales
-  html += '<div class="summary-card"><h3>Impact Analysis</h3>';
-  if (isMax) {
-    html += '<div class="max-tier-msg">Maximum tier — you\'re getting everything</div>';
-  } else {
-    // Helper to build a scale bar
-    function scaleBar(label, pct, ghostPct, tierLabel) {
-      var h = '<div class="upgrade-scale">';
-      h += '<div class="scale-label"><span>' + label + '</span><span>' + pct + '%</span></div>';
-      h += '<div class="scale-track">';
-      h += '<div class="scale-fill" style="width:' + pct + '%"></div>';
-      if (ghostPct > pct) {
-        h += '<div class="scale-ghost" style="left:' + pct + '%;width:' + (ghostPct - pct) + '%"></div>';
-      }
-      h += '</div>';
-      h += '<div class="scale-ticks"><span>Site Setup</span><span>Site + Online</span><span>Full Platform</span></div>';
-      if (ghostPct > pct) {
-        h += '<div class="scale-upgrade-hint">Upgrade to ' + tierLabel + ' for ' + ghostPct + '%</div>';
-      }
-      h += '</div>';
-      return h;
-    }
-    html += scaleBar('New Customers/Month', sc.customers, nt ? nt.customers : sc.customers, nt ? nt.label : '');
-    html += scaleBar('Time Saved/Week', sc.time, nt ? nt.time : sc.time, nt ? nt.label : '');
-    html += scaleBar('Monthly Revenue Boost', sc.revenue, nt ? nt.revenue : sc.revenue, nt ? nt.label : '');
-    if (sc.retention > 0) {
-      html += scaleBar('Customer Retention', sc.retention, nt ? nt.retention : sc.retention, nt ? nt.label : '');
-    }
-  }
-  html += '</div>';
-
-  // Card 5: Setup Timeline
+  // ── F. Setup Timeline ──
   html += '<div class="summary-card"><h3>Setup Timeline</h3>';
   html += '<div class="timeline-steps">';
   html += '<div class="timeline-step"><div class="tl-day">Day 1</div><div class="tl-label">Onboarding call & info gathering</div></div>';
@@ -1302,8 +1392,8 @@ function populateSummary() {
   html += '<div class="timeline-step"><div class="tl-day">Day ' + days + '</div><div class="tl-label">Review, launch & go live</div></div>';
   html += '</div></div>';
 
-  // Checkout button
-  html += '<button class="summary-checkout" onclick="document.querySelector(\'.snipcart-checkout\').click()">Proceed to Checkout</button>';
+  // ── G. CTA Button ──
+  html += '<button class="summary-checkout" onclick="document.querySelector(\'.snipcart-checkout\').click()">Start Growing Your Revenue</button>';
   html += '</div>';
 
   document.getElementById('summaryContent').innerHTML = html;
