@@ -194,32 +194,11 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .preview-expand-btn{padding:3px 8px;border-radius:6px;background:var(--accent-cyan);color:#fff;font-size:9px;font-weight:700;border:none;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
 .preview-expand-btn:hover{box-shadow:var(--glow-blue)}
 
-/* Iframe container */
-.preview-iframe-wrap{position:relative;height:520px;overflow:hidden}
-.preview-iframe{width:420px;height:1200px;border:none;transform:scale(1);transform-origin:top left;pointer-events:none}
-.preview-iframe-wrap.expanded .preview-iframe{pointer-events:auto}
-
-/* Lock overlays on top of iframe */
-.preview-locks{position:absolute;top:0;left:0;width:420px;height:1200px;pointer-events:none;z-index:1}
-.pv-lock{position:absolute;left:8px;right:8px;pointer-events:auto;border-radius:8px;background:rgba(10,12,18,.75);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;padding:6px 10px;cursor:pointer;transition:all .25s;opacity:1}
-.pv-lock:hover{background:rgba(10,12,18,.85);border-color:var(--accent-cyan)}
-.pv-lock.hidden{opacity:0;pointer-events:none;transform:scale(.95)}
-.pv-lock-info{display:flex;align-items:center;gap:6px;min-width:0}
-.pv-lock-icon{font-size:12px;flex-shrink:0}
-.pv-lock-name{font-size:10px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pv-lock-btn{display:flex;align-items:center;gap:4px;padding:3px 8px;border-radius:5px;background:var(--accent-cyan);color:#fff;font-size:9px;font-weight:700;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .2s}
-.pv-lock-btn:hover{box-shadow:var(--glow-blue);transform:scale(1.03)}
-.pv-lock-btn .lock-price{opacity:.85}
-
-/* Expanded demo overlay */
-.demo-expanded{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);display:none;flex-direction:column}
-.demo-expanded.open{display:flex}
-.demo-expanded-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(20,24,32,.9);border-bottom:1px solid var(--border)}
-.demo-expanded-title{font-size:15px;font-weight:700;color:var(--text)}
-.demo-expanded-url{font-size:11px;color:var(--text-muted);font-family:monospace;margin-left:12px}
-.demo-expanded-close{padding:8px 16px;border-radius:8px;background:var(--glass-strong);border:1px solid var(--glass-border);color:var(--text);font-size:13px;font-weight:600;cursor:pointer}
-.demo-expanded-close:hover{background:var(--glass-hover)}
-.demo-expanded iframe{flex:1;width:100%;border:none;background:#fff}
+/* Iframe container — scrollable so user can see whole site */
+.preview-iframe-wrap{position:relative;height:520px;overflow-y:auto;overflow-x:hidden}
+.preview-iframe-wrap::-webkit-scrollbar{width:4px}
+.preview-iframe-wrap::-webkit-scrollbar-thumb{background:var(--glass-strong);border-radius:2px}
+.preview-iframe{width:420px;height:2500px;border:none;pointer-events:none}
 
 /* Price Summary */
 .sidebar-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;overflow:hidden}
@@ -367,9 +346,8 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="preview-url" id="previewUrl">yourshop.sewready.com</div>
         <button class="preview-expand-btn" onclick="expandDemoSite()">View Demo</button>
       </div>
-      <div class="preview-iframe-wrap">
-        <iframe class="preview-iframe" id="previewIframe" src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe>
-        <div class="preview-locks" id="previewLocks"></div>
+      <div class="preview-iframe-wrap" id="previewWrap">
+        <iframe class="preview-iframe" id="previewIframe" src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy" onload="onPreviewLoad()"></iframe>
       </div>
     </div>
 
@@ -394,25 +372,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   </div>
 </div>
 
-<!-- Feature Demo Fullscreen Overlay -->
+<!-- Demo Overlay (shared by feature demos + View Demo) -->
 <div class="demo-fullscreen" id="demoFullscreen">
   <div class="demo-fullscreen-bar">
     <div class="demo-fullscreen-title" id="demoFullTitle">Demo</div>
     <button class="demo-fullscreen-close" onclick="closeDemo()">Close</button>
   </div>
   <iframe id="demoFullIframe" src="about:blank"></iframe>
-</div>
-
-<!-- Expanded Site Demo Overlay -->
-<div class="demo-expanded" id="demoExpanded">
-  <div class="demo-expanded-bar">
-    <div>
-      <span class="demo-expanded-title">Live Site Demo</span>
-      <span class="demo-expanded-url" id="demoExpandedUrl">sewing.ranger-beers.com/shops/aaa-tailor/</span>
-    </div>
-    <button class="demo-expanded-close" onclick="closeDemoSite()">Close</button>
-  </div>
-  <iframe id="demoExpandedIframe" src="about:blank"></iframe>
 </div>
 
 <!-- Mobile Bottom Bar -->
@@ -825,74 +791,91 @@ function renderSetup() {
 /* ══════════════════════════════════════════════════════════
    LIVE PREVIEW
    ══════════════════════════════════════════════════════════ */
-function updatePreview() {
-  document.getElementById('previewUrl').textContent = getDomainPreview();
+/* Preview: inject CSS into the live-site iframe to grey out unselected features */
+var _previewReady = false;
 
-  // Lock overlay positions mapped to approximate Y positions on the live site
-  // Each entry: [featureId(s), label, price string, top px, height px]
-  var LOCK_MAP = [
-    [['maps'],             'Google Maps',              '$29',     520, 80],
-    [['contact'],          'Contact Form',             '$19',     610, 60],
-    [['services-display'], 'Services Display',         '$19',     680, 80],
-    [['seo'],              'SEO & Structured Data',    '$49',     100, 40],
-    [['customer-accounts'],'Customer Accounts',        '$49',     155, 36],
-    [['order-wizard'],     'Online Order Wizard',      '$99',     200, 50],
-    [['order-tracking'],   'Order Tracking',           '$49',     260, 50],
-    [['calendar'],         'Calendar & Scheduling',    '$49',     370, 140],
-    [['sms'],              'SMS Alerts',               '$49/mo',  770, 30],
-    [['email-notif'],      'Email Alerts',             '$29/mo',  805, 30],
-    [['auto-pickup'],      'Auto Pickup Alerts',       '$19/mo',  840, 30],
-    [['employee-mgmt'],    'Employee Management',      '$29',     880, 60],
-    [['inventory'],        'Inventory Tracking',       '$49',     950, 70],
-    [['receipt-printing'], 'Receipt Printing',         '$39',    1030, 40],
-    [['label-printing'],   'Label Printing',           '$39',    1075, 40],
-    [['analytics'],        'Analytics',                '$49',    1120, 60],
-    [['sop'],              'SOP Library',              '$29',     315, 45],
-    [['driver'],           'Driver Coordination',      '$39',     365, 0],
-    [['ai-leads'],         'AI Lead Generation',       'Rev share', 1185, 0],
-    [['marketing'],        'Marketing Campaigns',      'Rev share', 1185, 0]
-  ];
-
-  var locksEl = document.getElementById('previewLocks');
-  var html = '';
-
-  LOCK_MAP.forEach(function(entry) {
-    var ids = entry[0], label = entry[1], price = entry[2], top = entry[3], height = entry[4];
-    // Check if ANY of the feature ids are selected
-    var unlocked = false;
-    ids.forEach(function(id) { if (state.features.has(id)) unlocked = true; });
-    var hiddenCls = unlocked ? ' hidden' : '';
-    // Use first feature id for the unlock action
-    var primaryId = ids[0];
-    html += '<div class="pv-lock' + hiddenCls + '" style="top:' + top + 'px" onclick="unlockFeature(\'' + primaryId + '\')">';
-    html += '<div class="pv-lock-info"><span class="pv-lock-icon">&#128274;</span><span class="pv-lock-name">' + label + '</span></div>';
-    html += '<button class="pv-lock-btn" onclick="event.stopPropagation();unlockFeature(\'' + primaryId + '\')">Unlock <span class="lock-price">' + price + '</span></button>';
-    html += '</div>';
-  });
-
-  locksEl.innerHTML = html;
+function onPreviewLoad() {
+  _previewReady = true;
+  updatePreview();
 }
 
-function unlockFeature(featureId) {
-  // Check the feature checkbox on the left panel
-  var cb = document.getElementById('feat-' + featureId);
-  if (cb && !cb.checked) {
-    cb.checked = true;
-    toggleFeature(featureId, true);
+function updatePreview() {
+  document.getElementById('previewUrl').textContent = getDomainPreview();
+  if (!_previewReady) return;
+
+  var iframe = document.getElementById('previewIframe');
+  var doc;
+  try { doc = iframe.contentDocument || iframe.contentWindow.document; } catch(e) { return; }
+  if (!doc || !doc.head) return;
+
+  // Get or create our injected style tag
+  var style = doc.getElementById('cfg-preview-css');
+  if (!style) {
+    style = doc.createElement('style');
+    style.id = 'cfg-preview-css';
+    doc.head.appendChild(style);
   }
+
+  var locked = 'filter:grayscale(1)!important;opacity:.22!important;pointer-events:none!important;user-select:none!important;transition:all .4s ease!important';
+  var css = '';
+
+  // Map integration (map embed inside location card)
+  if (!state.features.has('maps')) {
+    css += '#shopMapEmbed{' + locked + '}\n';
+  }
+
+  // Contact form (Contact Now button in hero + location contact details)
+  if (!state.features.has('contact')) {
+    css += '.cust-hero-content>div:last-child{' + locked + '}\n';
+    css += '.cust-location-detail{' + locked + '}\n';
+  }
+
+  // SEO — no direct visual element on customer site, skip
+
+  // Services display (services showcase section)
+  if (!state.features.has('services-display')) {
+    css += '#services{' + locked + '}\n';
+  }
+
+  // Customer accounts (Sign In button in nav)
+  if (!state.features.has('customer-accounts')) {
+    css += '#navAuth{' + locked + '}\n';
+  }
+
+  // Order wizard (Make an Order button)
+  if (!state.features.has('order-wizard')) {
+    css += '.cust-hero-ctas .cust-btn-secondary{' + locked + '}\n';
+    css += '.cust-orders-banner{' + locked + '}\n';
+  }
+
+  // Order tracking (Track My Order button)
+  if (!state.features.has('order-tracking')) {
+    css += '.cust-hero-ctas .cust-btn-primary{' + locked + '}\n';
+  }
+
+  // Calendar & scheduling (entire calendar section)
+  if (!state.features.has('calendar')) {
+    css += '.cust-bigcal-section{' + locked + '}\n';
+  }
+
+  // Inventory tracking (store inventory section)
+  if (!state.features.has('inventory')) {
+    css += '#storeInventory{' + locked + '}\n';
+  }
+
+  // Chat FAB — grey out if no SMS/email selected
+  if (!state.features.has('sms') && !state.features.has('email-notif')) {
+    css += '.cust-chat-fab,.cust-chat-panel{' + locked + '}\n';
+  }
+
+  style.textContent = css;
 }
 
 function expandDemoSite() {
-  document.getElementById('demoExpandedIframe').src = 'https://sewing.ranger-beers.com/shops/aaa-tailor/';
-  document.getElementById('demoExpandedUrl').textContent = getDomainPreview();
-  document.getElementById('demoExpanded').classList.add('open');
+  document.getElementById('demoFullTitle').textContent = 'Live Site Demo';
+  document.getElementById('demoFullIframe').src = 'https://sewing.ranger-beers.com/shops/aaa-tailor/';
+  document.getElementById('demoFullscreen').classList.add('open');
   document.body.style.overflow = 'hidden';
-}
-
-function closeDemoSite() {
-  document.getElementById('demoExpanded').classList.remove('open');
-  document.getElementById('demoExpandedIframe').src = 'about:blank';
-  document.body.style.overflow = '';
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1174,7 +1157,6 @@ function closeDemo() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeDemo();
-    closeDemoSite();
   }
 });
 
