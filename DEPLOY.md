@@ -44,7 +44,13 @@ cd "/Users/beers/Desktop/Sewing Ops"
 # 1. Stage your changes
 git add customer.js customer.css customer.html   # (or whatever you changed)
 
-# 2. If you edited customer.html, sync to each shop directory:
+# 2. IMPORTANT: If you edited packages.html, sync to index.html
+#    The root URL (sewing.ranger-beers.com/) serves index.html, NOT packages.html.
+#    These two files must stay in sync or the live site won't reflect your changes.
+cp packages.html index.html
+git add packages.html index.html
+
+# 3. If you edited customer.html, sync to each shop directory:
 #    The shop copies use ../../ paths and include shop-config.js
 sed \
   -e 's|href="styles.css"|href="../../styles.css"|g' \
@@ -61,13 +67,13 @@ sed \
   | sed 's|<script src="../../translations.js"></script>|<script src="../../translations.js"></script>\n  <script src="shop-config.js"></script>|' \
   > shops/aaa-tailor/customer.html
 
-# 3. Stage synced shop files
+# 4. Stage synced shop files
 git add shops/aaa-tailor/customer.html
 
-# 4. Commit
+# 5. Commit
 git commit -m "Description of changes"
 
-# 5. Push — this triggers the CI deploy + cache purge
+# 6. Push — this triggers the CI deploy + cache purge
 git push origin master
 ```
 
@@ -142,6 +148,11 @@ To update the token:
 
 ```
 /Users/beers/Desktop/Sewing Ops/
+├── index.html             ← Landing/packages page (served at root URL /)
+├── packages.html          ← Source of truth for packages page
+│                            IMPORTANT: After editing packages.html,
+│                            run `cp packages.html index.html` to sync.
+│                            The root URL serves index.html, NOT packages.html.
 ├── customer.html          ← Main template (root-level)
 ├── customer.js            ← Customer portal logic
 ├── customer.css           ← Customer portal styles

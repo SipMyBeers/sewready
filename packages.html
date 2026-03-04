@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SewReady — Packages, Services & Setup</title>
+<title>SewReady — Build Your Package</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css">
 <style>
 /* ── Korean Flag Theme ────────────────────────────────── */
-:root{--bg-deep:#141820;--bg-surface:#1e1e2e;--text:#f5f5f5;--text-muted:rgba(245,245,245,.55);--text-dim:rgba(245,245,245,.28);--accent-cyan:#0047a0;--accent-blue:#0047a0;--accent-green:#c73240;--glass:rgba(255,255,255,.06);--glass-hover:rgba(255,255,255,.10);--glass-border:rgba(255,255,255,.10);--glass-strong:rgba(255,255,255,.14);--border:rgba(255,255,255,.08);--glow-blue:0 0 20px rgba(0,71,160,.3);--shadow:0 4px 24px rgba(0,0,0,.5)}
+:root{--bg-deep:#141820;--bg-surface:#1e1e2e;--text:#f5f5f5;--text-muted:rgba(245,245,245,.55);--text-dim:rgba(245,245,245,.28);--accent-cyan:#0047a0;--accent-blue:#0047a0;--accent-green:#c73240;--glass:rgba(255,255,255,.06);--glass-hover:rgba(255,255,255,.10);--glass-border:rgba(255,255,255,.10);--glass-strong:rgba(255,255,255,.14);--border:rgba(255,255,255,.08);--glow-blue:0 0 20px rgba(0,71,160,.3);--shadow:0 4px 24px rgba(0,0,0,.5);--radius:12px}
 .hangul{display:block;font-size:13px;color:var(--accent-cyan);font-weight:400;letter-spacing:1px;opacity:.7;margin-top:2px}
 h1 .hangul{font-size:15px;-webkit-text-fill-color:var(--accent-cyan)}
 .taeguk{display:inline-block;width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#c73240 50%,#0047a0 50%);position:relative;vertical-align:middle;margin:8px auto;transform:rotate(-15deg)}
@@ -16,7 +16,7 @@ h1 .hangul{font-size:15px;-webkit-text-fill-color:var(--accent-cyan)}
 .taeguk::before{top:0;background:#0047a0}
 .taeguk::after{bottom:0;background:#c73240}
 
-/* ── Packages Page ─────────────────────────────────────── */
+/* ── Base ─────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-deep);color:var(--text);min-height:100vh}
 
@@ -33,309 +33,182 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .pkg-hero h1{font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.15;margin:0 0 8px;background:linear-gradient(135deg,var(--text),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .pkg-hero p{font-size:15px;color:var(--text-muted);margin:0;line-height:1.5}
 
-/* Section Titles */
-.section-title{text-align:center;font-size:28px;font-weight:700;margin:64px 0 8px}
-.section-sub{text-align:center;font-size:14px;color:var(--text-muted);margin:0 0 16px}
-
-/* Included Banner */
-.included-banner{max-width:720px;margin:0 auto 16px;padding:0 24px}
-.included-card{background:var(--glass);border:2px solid var(--accent-green);border-radius:var(--radius);padding:16px 20px;position:relative}
-.included-card .badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--accent-green);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
-.included-card h3{font-size:16px;margin:8px 0 2px;text-align:center}
-.included-card .tier-desc{font-size:12px;color:var(--text-muted);margin:0 0 10px;text-align:center}
-.included-card .included-features{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 16px;list-style:none;padding:0;margin:0}
-.included-card .included-features li{font-size:12px;padding:3px 0;display:flex;align-items:center;gap:6px}
-.included-card .included-features li::before{content:'\2713';color:#2ecc71;font-weight:700;font-size:12px}
-
-/* Pricing Grid */
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:100%;margin:0 auto;padding:0 24px}
-.price-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px 18px;position:relative;transition:all .25s;display:flex;flex-direction:column}
-.price-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.price-card.featured{border:2px solid var(--accent-blue);box-shadow:var(--glow-blue)}
-.price-card .badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--accent-blue);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
-.price-card h3{font-size:18px;margin:6px 0 2px}
-.price-card .tier-desc{font-size:12px;color:var(--text-muted);margin:0 0 10px}
-.price-card .price-row{display:flex;align-items:baseline;gap:4px;margin-bottom:2px}
-.price-card .price-amount{font-size:28px;font-weight:800;color:var(--text)}
-.price-card .price-label{font-size:12px;color:var(--text-muted)}
-.price-card .price-period{font-size:13px;color:var(--accent-cyan);font-weight:600;margin-bottom:4px}
-.revenue-share-line{font-size:13px;color:var(--accent-green);font-weight:700;margin-bottom:12px;letter-spacing:.2px}
-.price-card ul{list-style:none;padding:0;margin:0 0 12px;flex:1}
-.price-card li{font-size:13px;padding:3px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
-.price-card li::before{content:'\2713';color:#2ecc71;font-weight:700;font-size:13px}
-.price-card li.locked{color:var(--text-dim);opacity:.45}
-.price-card li.locked::before{content:'\2717';color:#e74c3c;font-size:13px}
-.price-card .card-cta{display:block;width:100%;text-align:center;padding:10px;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
-.price-card .card-cta.primary{background:var(--accent-blue);color:#fff}
-.price-card .card-cta.primary:hover{box-shadow:var(--glow-blue);transform:translateY(-1px)}
-.price-card .card-cta.secondary{background:var(--glass-hover);color:var(--text);border:1px solid var(--glass-border)}
-.price-card .card-cta.secondary:hover{background:var(--glass-strong)}
-
-/* Feature Comparison */
-.compare-wrap{max-width:1060px;margin:0 auto;padding:0 24px;overflow-x:auto}
-.compare-table{width:100%;border-collapse:collapse;font-size:14px}
-.compare-table th,.compare-table td{padding:12px 16px;border-bottom:1px solid var(--border);text-align:center}
-.compare-table th:first-child,.compare-table td:first-child{text-align:left}
-.compare-table thead th{font-size:13px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.compare-table .check{color:#2ecc71;font-size:18px;font-weight:700}
-.compare-table .dash{color:var(--text-dim)}
-.compare-table .feat-head{font-weight:700;color:var(--accent-cyan);background:rgba(0,71,160,.06);font-size:13px;text-transform:uppercase;letter-spacing:.3px}
-
-/* Hardware Section */
-.hw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1060px;margin:0 auto;padding:0 24px}
-.hw-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:28px;transition:all .25s}
-.hw-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.hw-card.bundle{border:2px solid var(--accent-cyan)}
-.hw-card h3{font-size:18px;margin:0 0 4px}
-.hw-card .hw-desc{font-size:13px;color:var(--text-muted);margin:0 0 16px}
-.hw-card .hw-price{font-size:28px;font-weight:800;color:var(--accent-cyan);margin:0 0 16px}
-.hw-card .hw-includes{list-style:none;padding:0;margin:0 0 16px}
-.hw-card .hw-includes li{font-size:13px;padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.hw-card .hw-includes li::before{content:'\2713';color:#2ecc71;font-weight:700}
-
-/* Demo Cards */
-.demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:20px}
-.demo-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden}
-.demo-card .demo-label{padding:8px 14px;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--glass-border)}
-.demo-card .demo-iframe-wrap{width:100%;height:225px;overflow:hidden;position:relative}
-.demo-card iframe{width:1280px;height:900px;border:none;background:var(--bg-deep);display:block;transform:scale(.25);transform-origin:0 0;position:absolute;top:0;left:0;pointer-events:none}
-.demo-card .demo-iframe-wrap::after{content:'Click to expand';position:absolute;bottom:8px;right:10px;font-size:10px;color:var(--text-dim);opacity:0;transition:opacity .2s;pointer-events:none;z-index:1}
-.demo-card:hover .demo-iframe-wrap::after{opacity:1}
-.demo-card{cursor:pointer;transition:all .25s}
-.demo-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.demo-card .demo-desc{padding:10px 14px;font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
-
-/* Demo Expand Overlay */
-.demo-fullscreen-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:none;align-items:center;justify-content:center;cursor:pointer}
-.demo-fullscreen-overlay.open{display:flex}
-.demo-fs-modal{width:92%;height:85%;max-width:1400px;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:0 24px 80px rgba(0,0,0,.6);cursor:default}
-.demo-fullscreen-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:rgba(10,10,10,.95);border-bottom:1px solid var(--glass-border)}
-.demo-fullscreen-bar .demo-fs-title{font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
-.demo-fullscreen-bar .demo-fs-close{background:none;border:1px solid var(--glass-border);color:var(--text-muted);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.demo-fullscreen-bar .demo-fs-close:hover{background:var(--glass-hover);color:var(--text)}
-.demo-fs-modal iframe{flex:1;width:100%;border:none;background:var(--bg-deep)}
-
-/* Visual Mockup Cards */
-.visual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:20px}
-.visual-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden}
-.visual-card .visual-header{padding:10px 16px;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--glass-border)}
-.visual-card .visual-body{padding:20px 16px;min-height:180px}
-.visual-card .visual-caption{padding:10px 16px;font-size:12px;color:var(--text-muted);line-height:1.5;border-top:1px solid var(--glass-border)}
-.mock-stat{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-.mock-stat:last-child{border-bottom:none}
-.mock-stat .stat-icon{font-size:20px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(0,71,160,.1);flex-shrink:0}
-.mock-stat .stat-label{font-size:12px;color:var(--text-muted)}
-.mock-stat .stat-value{font-size:15px;font-weight:700;color:var(--text)}
-.mock-notif{background:rgba(0,71,160,.08);border:1px solid rgba(0,71,160,.15);border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:12px;line-height:1.5}
-.mock-notif:last-child{margin-bottom:0}
-.mock-notif .notif-from{font-weight:700;color:var(--accent-cyan);font-size:11px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
-.mock-notif .notif-body{color:var(--text)}
-.mock-notif .notif-time{color:var(--text-dim);font-size:11px;margin-top:4px}
-.mock-bar-chart{display:flex;align-items:flex-end;gap:6px;height:100px;padding-top:12px}
-.mock-bar{flex:1;background:linear-gradient(to top,var(--accent-cyan),rgba(0,71,160,.3));border-radius:4px 4px 0 0;transition:height .3s}
-.mock-bar-label{text-align:center;font-size:10px;color:var(--text-dim);margin-top:4px}
-
-/* Product Cards */
-.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:20px}
-.product-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden;text-align:center}
-.product-card .product-img{height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(0,71,160,.06));padding:16px}
-.product-card .product-img img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
-.product-card .product-info{padding:12px 16px;border-top:1px solid var(--glass-border)}
-.product-card .product-name{font-size:14px;font-weight:700;margin:0 0 2px}
-.product-card .product-spec{font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
-
 /* Footer */
 .pkg-footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--text-dim);border-top:1px solid var(--border)}
 
-/* ── Package Detail Panels (inline expand) ────────── */
-.package-detail{display:none;margin-top:16px}
-.package-detail.open{display:block}
-.detail-inner{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:28px}
-.detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.detail-header h3{font-size:20px;margin:0;color:var(--accent-cyan)}
-.detail-close{background:none;border:1px solid var(--glass-border);color:var(--text-muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.detail-close:hover{background:var(--glass-hover);color:var(--text)}
-.detail-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
-.detail-feature{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:16px;transition:all .25s}
-.detail-feature:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.detail-feature .feat-name{font-size:14px;font-weight:700;margin-bottom:3px}
-.detail-feature .feat-desc{font-size:12px;color:var(--text-muted);line-height:1.5;margin:0}
-.detail-previews{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-.detail-previews h4{grid-column:1/-1;font-size:14px;margin:0 0 4px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
-.detail-iframe-wrap{border:1px solid var(--glass-border);border-radius:var(--radius);overflow:hidden}
-.detail-iframe-wrap .iframe-label{padding:6px 12px;font-size:11px;font-weight:600;color:var(--text-muted);background:var(--glass);border-bottom:1px solid var(--glass-border);text-transform:uppercase;letter-spacing:.3px}
-.detail-iframe-wrap iframe{width:100%;height:320px;border:none;background:var(--bg-deep);display:block}
-.detail-cta-row{text-align:center;padding-top:8px}
-.detail-cta-row a{display:inline-block;padding:10px 28px;border-radius:10px;font-weight:600;font-size:13px;text-decoration:none;background:var(--accent-cyan);color:#fff;transition:all .2s}
-.detail-cta-row a:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,71,160,.35)}
+/* ── Configurator Layout ──────────────────────────────── */
+.configurator{display:grid;grid-template-columns:1fr 340px;gap:32px;max-width:1200px;margin:0 auto;padding:0 24px 64px;align-items:start}
+.config-main{min-width:0}
 
-/* Card expand behavior */
-.price-card{cursor:pointer;transition:all .25s}
-.price-card.expanded{border:2px solid var(--accent-cyan);box-shadow:0 0 30px rgba(0,71,160,.15)}
+/* Section Cards */
+.config-section{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;margin-bottom:24px}
+.config-section h2{font-size:18px;font-weight:700;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.config-section h2 .section-num{width:28px;height:28px;border-radius:50%;background:var(--accent-cyan);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.config-section .section-desc{font-size:13px;color:var(--text-muted);margin:0 0 16px}
 
-/* Step headers */
-.step-header{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 4px}
-.step-number{width:32px;height:32px;border-radius:50%;background:var(--accent-cyan);color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-header h2{font-size:22px;font-weight:700;margin:0}
+/* Shop Name Input */
+.shop-name-input{width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
+.shop-name-input:focus{border-color:var(--accent-cyan)}
+.shop-name-input::placeholder{color:var(--text-dim)}
 
-/* Wizard */
-.wizard-progress{display:flex;align-items:center;justify-content:center;gap:0;max-width:560px;margin:0 auto 16px;padding:0 24px}
-.wiz-group{display:flex;flex-direction:column;align-items:center;gap:3px}
-.wiz-dot{width:32px;height:32px;border-radius:50%;background:var(--glass);border:2px solid var(--glass-border);color:var(--text-muted);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
-.wiz-dot.active{background:var(--accent-cyan);border-color:var(--accent-cyan);color:#fff}
-.wiz-dot.done{background:var(--accent-green);border-color:var(--accent-green);color:#fff}
-.wiz-label{font-size:11px;color:var(--text-muted);transition:all .3s;white-space:nowrap}
-.wiz-label.active{color:var(--text);font-weight:600}
-.wiz-label.done{color:var(--accent-green)}
-.wiz-line{flex:1;height:2px;background:var(--glass-border);margin:0 10px;margin-bottom:16px;transition:background .3s}
-.wiz-line.done{background:var(--accent-green)}
-.wizard-step{display:none;max-width:100%;margin:0 auto;padding:0 24px}
-.wizard-step.active{display:block}
-.wizard-back{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--text-muted);font-size:13px;cursor:pointer;padding:4px 0;margin-bottom:4px;transition:color .2s}
-.wizard-back:hover{color:var(--text)}
+/* Domain Options */
+.domain-options{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.domain-option{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);cursor:pointer;transition:all .2s}
+.domain-option:hover{background:var(--glass-hover)}
+.domain-option.selected{border-color:var(--accent-cyan);background:rgba(0,71,160,.08)}
+.domain-option input[type="radio"]{accent-color:var(--accent-cyan);width:16px;height:16px;flex-shrink:0}
+.domain-option .domain-info{flex:1;min-width:0}
+.domain-option .domain-label{font-size:14px;font-weight:600}
+.domain-option .domain-preview{font-size:12px;color:var(--accent-cyan);margin-top:2px;font-family:monospace}
+.domain-option .domain-desc{font-size:11px;color:var(--text-muted);margin-top:2px}
+.domain-option .domain-price{font-size:14px;font-weight:700;color:var(--accent-cyan);white-space:nowrap}
 
-/* Demo Grid Category Headers */
-.demo-grid h4{grid-column:1/-1;font-size:12px;font-weight:700;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 0;padding-bottom:4px;border-bottom:1px solid var(--border)}
-.demo-grid h4:first-child{margin-top:0}
+/* Feature Groups */
+.feature-group{margin-bottom:16px}
+.feature-group:last-child{margin-bottom:0}
+.feature-group-title{font-size:12px;font-weight:700;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.feature-group-title .monthly-tag{font-size:10px;color:var(--accent-green);font-weight:600;text-transform:none;letter-spacing:0;margin-left:8px}
 
-/* Horizontal demo grid */
-.demo-grid-horizontal{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 0 16px;-webkit-overflow-scrolling:touch}
-.demo-grid-horizontal::-webkit-scrollbar{height:6px}
-.demo-grid-horizontal::-webkit-scrollbar-track{background:var(--glass);border-radius:3px}
-.demo-grid-horizontal::-webkit-scrollbar-thumb{background:var(--accent-cyan);border-radius:3px}
-.demo-grid-horizontal>.demo-card,.demo-grid-horizontal>.visual-card{min-width:300px;max-width:340px;flex-shrink:0;scroll-snap-align:start}
+/* Feature Rows */
+.feature-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;transition:background .15s;cursor:pointer;user-select:none}
+.feature-row:hover{background:var(--glass-hover)}
+.feature-row input[type="checkbox"]{accent-color:var(--accent-cyan);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.feature-row .feat-name{flex:1;font-size:14px;min-width:0}
+.feature-row .feat-price{font-size:14px;font-weight:600;color:var(--accent-cyan);white-space:nowrap}
+.feature-row.included{opacity:.7}
+.feature-row.included .feat-name{color:var(--text-muted)}
+.feature-row.included .feat-price{color:var(--text-dim);font-weight:400}
+.feature-row .revenue-share-tag{font-size:11px;color:var(--accent-green);font-weight:600}
 
-/* Feature highlight on hover */
-.price-card li[data-feature].feature-highlight{color:var(--accent-cyan);transform:translateX(4px);transition:all .2s;text-shadow:0 0 8px rgba(0,71,160,.4)}
+/* Plan Cards */
+.plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.plan-card{padding:16px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);cursor:pointer;transition:all .2s;text-align:center;position:relative}
+.plan-card:hover{background:var(--glass-hover)}
+.plan-card.selected{border-color:var(--accent-cyan);background:rgba(0,71,160,.08)}
+.plan-card.recommended{border:2px solid var(--accent-cyan)}
+.plan-card .plan-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--accent-cyan);color:#fff;font-size:9px;font-weight:700;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.plan-card .plan-name{font-size:16px;font-weight:700;margin:0 0 4px}
+.plan-card .plan-price{font-size:24px;font-weight:800;color:var(--accent-cyan)}
+.plan-card .plan-period{font-size:12px;color:var(--text-muted)}
+.plan-card .plan-features{list-style:none;padding:0;margin:10px 0 0;text-align:left}
+.plan-card .plan-features li{font-size:12px;padding:3px 0;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.plan-card .plan-features li::before{content:'\2713';color:#2ecc71;font-weight:700;font-size:11px}
 
-/* Card highlight on hover */
-.demo-card.card-highlight,.visual-card.card-highlight{border-color:var(--accent-cyan);box-shadow:0 0 20px rgba(0,71,160,.25);transform:translateY(-3px);transition:all .25s}
+/* Hardware Items */
+.hw-items{display:flex;flex-direction:column;gap:12px}
+.hw-item{display:flex;align-items:center;gap:16px;padding:16px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);transition:all .2s}
+.hw-item.hidden{display:none}
+.hw-item .hw-img{width:80px;height:80px;border-radius:8px;background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(0,71,160,.06));display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.hw-item .hw-img img{max-width:100%;max-height:100%;object-fit:contain}
+.hw-item .hw-info{flex:1;min-width:0}
+.hw-item .hw-name{font-size:14px;font-weight:700;margin:0 0 2px}
+.hw-item .hw-model{font-size:12px;color:var(--accent-cyan);margin:0 0 4px}
+.hw-item .hw-desc{font-size:12px;color:var(--text-muted);margin:0;line-height:1.4}
+.hw-item .hw-cost{font-size:13px;color:var(--text-dim);margin-top:4px;font-style:italic}
+.hw-item .hw-actions{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.hw-btn{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .2s;white-space:nowrap}
+.hw-btn.add{background:var(--accent-cyan);color:#fff}
+.hw-btn.add:hover{box-shadow:var(--glow-blue)}
+.hw-btn.add.active{background:var(--accent-cyan);color:#fff;box-shadow:var(--glow-blue)}
+.hw-btn.own{background:var(--glass-hover);color:var(--text-muted);border:1px solid var(--glass-border)}
+.hw-btn.own:hover{background:var(--glass-strong)}
+.hw-btn.own.active{background:rgba(46,204,113,.1);border-color:rgba(46,204,113,.3);color:#2ecc71}
+.hw-item.required-notice{border-color:var(--accent-cyan);border-style:dashed}
+.hw-item .required-tag{font-size:10px;font-weight:700;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px}
+.hw-item .recommended-tag{font-size:10px;font-weight:700;color:#2ecc71;text-transform:uppercase;letter-spacing:.5px}
+.hw-empty{font-size:13px;color:var(--text-dim);text-align:center;padding:24px;font-style:italic}
 
-/* Card type badges */
-.card-type-badge{position:absolute;top:8px;right:8px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;z-index:2}
-.card-type-badge.live-demo{background:var(--accent-cyan);color:#fff}
-.card-type-badge.mockup{background:var(--glass-strong);color:var(--text-muted);border:1px solid var(--glass-border)}
-.demo-card,.visual-card{position:relative}
+/* Setup Options */
+.setup-options{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.setup-card{padding:16px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);cursor:pointer;transition:all .2s;text-align:center}
+.setup-card:hover{background:var(--glass-hover)}
+.setup-card.selected{border-color:var(--accent-cyan);background:rgba(0,71,160,.08)}
+.setup-card .setup-name{font-size:14px;font-weight:700;margin:0 0 4px}
+.setup-card .setup-price{font-size:20px;font-weight:800;color:var(--accent-cyan)}
+.setup-card .setup-desc{font-size:12px;color:var(--text-muted);margin-top:6px;line-height:1.4}
 
-/* What's New separator on bundle cards */
-.price-card li.whats-new{border-bottom:none;color:var(--accent-cyan);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:8px 0 2px;opacity:.7}
-.price-card li.whats-new::before{content:'';display:none}
+/* Training Rows */
+.training-title{font-size:12px;font-weight:700;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.training-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;transition:background .15s;cursor:pointer;user-select:none}
+.training-row:hover{background:var(--glass-hover)}
+.training-row input[type="checkbox"]{accent-color:var(--accent-cyan);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.training-row .train-info{flex:1}
+.training-row .train-name{font-size:14px;font-weight:600}
+.training-row .train-desc{font-size:12px;color:var(--text-muted);margin-top:2px}
+.training-row .train-price{font-size:14px;font-weight:600;color:var(--accent-cyan);white-space:nowrap}
 
-/* Wizard selection labels */
-.wiz-selection{font-size:10px;color:var(--accent-cyan);white-space:nowrap;max-width:80px;overflow:hidden;text-overflow:ellipsis;text-align:center;opacity:0;transition:opacity .3s}
-.wiz-selection.visible{opacity:1}
+/* Revenue Share Disclosure */
+.revenue-disclosure{background:rgba(199,50,64,.06);border:1px solid rgba(199,50,64,.15);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px}
+.revenue-disclosure h3{font-size:14px;margin:0 0 8px;color:var(--accent-green)}
+.revenue-disclosure p{font-size:12px;color:var(--text-muted);margin:0 0 8px;line-height:1.5}
+.revenue-disclosure .share-items{list-style:none;padding:0;margin:0}
+.revenue-disclosure .share-items li{font-size:12px;padding:4px 0;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.revenue-disclosure .share-items li::before{content:'\2022';color:var(--accent-green);font-weight:700}
+.revenue-disclosure .share-items li strong{color:var(--text)}
 
-/* Step 4 Summary */
-.summary-layout{max-width:900px;margin:0 auto}
-.summary-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;margin-bottom:16px}
-.summary-card h3{font-size:16px;margin:0 0 16px;color:var(--accent-cyan)}
-.cost-table{width:100%;border-collapse:collapse}
-.cost-table td{padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
-.cost-table td:last-child{text-align:right;font-weight:600}
-.cost-table tr.total td{border-top:2px solid var(--accent-cyan);font-weight:700;font-size:16px;color:var(--accent-cyan)}
-.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.analysis-stat{text-align:center;padding:20px;background:rgba(0,71,160,.06);border-radius:var(--radius)}
-.analysis-stat .stat-num{font-size:28px;font-weight:800;color:var(--accent-cyan)}
-.analysis-stat .stat-desc{font-size:12px;color:var(--text-muted);margin-top:4px}
-.feature-checklist{columns:2;column-gap:24px;list-style:none;padding:0}
-.feature-checklist li{font-size:13px;padding:4px 0;break-inside:avoid;display:flex;align-items:center;gap:6px}
-.feature-checklist li::before{content:'\2713';color:#2ecc71;font-weight:700}
-.summary-checkout{display:block;width:100%;max-width:400px;margin:24px auto 0;padding:14px;border:none;border-radius:12px;background:var(--accent-cyan);color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
-.summary-checkout:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,71,160,.35)}
-.timeline-steps{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
-.timeline-step{flex:1;text-align:center;padding:16px 8px;background:rgba(0,71,160,.06);border-radius:var(--radius)}
-.timeline-step .tl-day{font-size:20px;font-weight:800;color:var(--accent-cyan)}
-.timeline-step .tl-label{font-size:11px;color:var(--text-muted);margin-top:4px}
+/* ── Sticky Sidebar ───────────────────────────────────── */
+.config-sidebar{position:sticky;top:80px}
+.sidebar-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;overflow:hidden}
+.sidebar-card h3{font-size:16px;font-weight:700;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.sidebar-card h3::before{content:'';display:inline-block;width:4px;height:18px;border-radius:2px;background:var(--accent-cyan)}
 
-/* Selections Row */
-.selections-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
-.sel-col{text-align:center;padding:14px 8px;background:rgba(255,255,255,.04);border-radius:var(--radius);border:1px solid var(--glass-border)}
-.sel-col .sel-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-.sel-col .sel-name{font-size:14px;font-weight:700;color:var(--text)}
-.sel-col .sel-price{font-size:13px;color:var(--accent-cyan);font-weight:600;margin-top:2px}
-.totals-row{display:flex;justify-content:space-between;padding:14px 0;border-top:2px solid var(--accent-cyan);margin-top:8px}
-.totals-row .total-box{text-align:center;flex:1}
-.totals-row .total-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
-.totals-row .total-amount{font-size:24px;font-weight:800;color:var(--accent-cyan)}
+/* Sidebar Line Items */
+.sidebar-section{margin-bottom:12px}
+.sidebar-section-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin:0 0 6px}
+.sidebar-item{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:13px}
+.sidebar-item .item-name{color:var(--text-muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px}
+.sidebar-item .item-price{font-weight:600;white-space:nowrap}
+.sidebar-item .item-price.monthly{color:var(--accent-green)}
+.sidebar-empty{font-size:12px;color:var(--text-dim);font-style:italic;padding:2px 0}
 
-/* Revenue Stats */
-.revenue-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.revenue-stat{text-align:center;padding:20px;background:rgba(0,71,160,.06);border-radius:var(--radius);border:1px solid rgba(0,71,160,.12)}
-.revenue-stat .rev-num{font-size:28px;font-weight:800;color:var(--accent-cyan)}
-.revenue-stat .rev-label{font-size:12px;color:var(--text-muted);margin-top:4px}
+/* Sidebar Totals */
+.sidebar-divider{height:1px;background:var(--border);margin:12px 0}
+.sidebar-total{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
+.sidebar-total .total-label{font-size:14px;font-weight:700}
+.sidebar-total .total-amount{font-size:20px;font-weight:800;color:var(--accent-cyan)}
+.sidebar-total.monthly .total-amount{color:var(--accent-green)}
+.sidebar-total.monthly .total-label{font-size:13px;font-weight:600;color:var(--text-muted)}
+.sidebar-total.monthly .total-amount{font-size:16px}
 
-/* Upgrade Scales */
-.upgrade-scale{margin-bottom:16px}
-.upgrade-scale .scale-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
-.upgrade-scale .scale-label span:first-child{font-weight:600;color:var(--text)}
-.upgrade-scale .scale-label span:last-child{color:var(--accent-cyan);font-weight:700}
-.scale-track{height:24px;background:rgba(255,255,255,.06);border-radius:12px;position:relative;overflow:visible}
-.scale-fill{height:100%;border-radius:12px;background:linear-gradient(90deg,#c73240,#0047a0);transition:width .6s ease}
-.scale-ghost{position:absolute;top:0;height:100%;border-radius:12px;background:rgba(0,71,160,.12);border-right:2px dashed rgba(0,71,160,.5)}
-.scale-ticks{display:flex;justify-content:space-between;font-size:9px;color:var(--text-dim);margin-top:3px;padding:0 2px}
-.scale-upgrade-hint{font-size:10px;color:var(--text-dim);margin-top:2px;font-style:italic}
-/* Revenue Hero */
-.revenue-hero{background:linear-gradient(135deg,rgba(0,71,160,.15),rgba(199,50,64,.10));border:2px solid rgba(0,71,160,.25);border-radius:var(--radius);padding:40px 32px;margin-bottom:20px;text-align:center}
-.revenue-hero .hero-subtitle{font-size:14px;color:var(--text-muted);margin:0 0 24px;text-transform:uppercase;letter-spacing:1px;font-weight:600}
-.revenue-hero .hero-numbers{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.revenue-hero .hero-stat{padding:20px}
-.revenue-hero .hero-stat .hero-num{font-size:36px;font-weight:800;color:var(--accent-cyan);line-height:1.1}
-.revenue-hero .hero-stat .hero-label{font-size:13px;color:var(--text-muted);margin-top:6px}
+/* Revenue Share in Sidebar */
+.sidebar-share{font-size:11px;color:var(--text-dim);padding:4px 0;font-style:italic;border-top:1px solid var(--border);margin-top:8px}
 
-/* ROI Comparison */
-.roi-comparison{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:28px;margin-bottom:20px}
-.roi-comparison h3{font-size:16px;margin:0 0 20px;color:var(--accent-cyan);text-align:center}
-.roi-columns{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;margin-bottom:20px}
-.roi-col{text-align:center;padding:24px 16px;border-radius:var(--radius)}
-.roi-col.invest{background:rgba(199,50,64,.08);border:1px solid rgba(199,50,64,.15)}
-.roi-col.earn{background:rgba(0,71,160,.08);border:1px solid rgba(0,71,160,.15)}
-.roi-col .roi-col-title{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;font-weight:600}
-.roi-col .roi-col-amount{font-size:28px;font-weight:800}
-.roi-col.invest .roi-col-amount{color:#c73240}
-.roi-col.earn .roi-col-amount{color:var(--accent-cyan)}
-.roi-col .roi-col-detail{font-size:12px;color:var(--text-muted);margin-top:4px}
-.roi-vs{font-size:24px;font-weight:800;color:var(--text-dim)}
-.roi-badge{display:inline-block;background:linear-gradient(135deg,var(--accent-cyan),#c73240);color:#fff;font-size:20px;font-weight:800;padding:10px 24px;border-radius:12px;margin:0 auto 16px;text-align:center}
-.roi-badge-wrap{text-align:center;margin-bottom:16px}
-.guarantee-callout{background:rgba(199,50,64,.06);border:1px solid rgba(199,50,64,.12);border-radius:var(--radius);padding:14px 20px;text-align:center;font-size:13px;color:var(--text);font-weight:600}
-.guarantee-callout span{color:#c73240}
-.guarantee-note{font-size:11px;color:var(--text-dim);text-align:center;margin-top:8px;font-style:italic}
+/* CTA */
+.sidebar-cta{display:block;width:100%;text-align:center;padding:14px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;border:none;background:var(--accent-cyan);color:#fff;transition:all .2s;margin-top:16px}
+.sidebar-cta:hover{box-shadow:var(--glow-blue);transform:translateY(-1px)}
 
-/* Share Breakdown */
-.share-breakdown{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:28px;margin-bottom:20px}
-.share-breakdown h3{font-size:16px;margin:0 0 20px;color:var(--accent-cyan)}
-.share-math{margin-bottom:16px}
-.share-math .share-pct{font-size:20px;font-weight:800;color:var(--accent-cyan);margin-bottom:8px}
-.share-example{background:rgba(0,71,160,.06);border-radius:var(--radius);padding:16px;margin-bottom:16px;font-size:13px;line-height:1.8}
-.share-example .example-label{font-weight:700;color:var(--text);margin-bottom:4px}
-.share-example .example-math{color:var(--text-muted)}
-.share-scenarios{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.share-scenario{padding:16px;border-radius:var(--radius);text-align:center}
-.share-scenario.conservative{background:rgba(255,255,255,.04);border:1px solid var(--glass-border)}
-.share-scenario.best{background:rgba(0,71,160,.08);border:1px solid rgba(0,71,160,.15)}
-.share-scenario .scenario-title{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:600;margin-bottom:8px}
-.share-scenario .scenario-rev{font-size:22px;font-weight:800;color:var(--accent-cyan)}
-.share-scenario .scenario-share{font-size:13px;color:var(--text-muted);margin-top:4px}
-.share-scenario .scenario-annual{font-size:12px;color:var(--text-dim);margin-top:6px}
+/* ── Mobile Bottom Bar ────────────────────────────────── */
+.mobile-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(20,24,32,.95);backdrop-filter:blur(24px);border-top:1px solid var(--border);padding:12px 20px}
+.mobile-bar-summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.mobile-bar-totals{display:flex;gap:20px}
+.mobile-bar-totals .mb-total{text-align:center}
+.mobile-bar-totals .mb-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+.mobile-bar-totals .mb-amount{font-size:18px;font-weight:800;color:var(--accent-cyan)}
+.mobile-bar-totals .mb-amount.monthly{color:var(--accent-green)}
+.mobile-bar-cta{padding:10px 20px;border:none;border-radius:10px;background:var(--accent-cyan);color:#fff;font-weight:700;font-size:13px;cursor:pointer}
+.mobile-bar-expand{display:none;padding-top:12px;border-top:1px solid var(--border);margin-top:12px;max-height:50vh;overflow-y:auto}
+.mobile-bar.expanded .mobile-bar-expand{display:block}
+.mobile-bar-expand .sidebar-section,.mobile-bar-expand .sidebar-item,.mobile-bar-expand .sidebar-divider,.mobile-bar-expand .sidebar-total{/* inherit sidebar styles */}
 
-/* Compact Selections */
-.selections-compact{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
-.selections-compact h3{font-size:14px;margin:0 0 12px;color:var(--text-muted)}
-
-/* Mobile */
-@media(max-width:640px){
-  .included-card .included-features{grid-template-columns:1fr}
-  .pkg-nav{padding:12px 16px}
+/* ── Responsive ───────────────────────────────────────── */
+@media(max-width:1024px){
+  .configurator{grid-template-columns:1fr 280px;gap:20px}
+  .plan-grid{grid-template-columns:repeat(2,1fr)}
+  .setup-options{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+  .configurator{grid-template-columns:1fr;padding-bottom:100px}
+  .config-sidebar{display:none}
+  .mobile-bar{display:block}
   .pkg-nav .nav-links{display:none}
-  .detail-features{grid-template-columns:1fr}
-  .detail-previews{grid-template-columns:1fr}
-  .detail-inner{padding:20px}
-  .demo-grid{grid-template-columns:1fr}
-  .revenue-hero .hero-numbers{grid-template-columns:1fr}
-  .roi-columns{grid-template-columns:1fr;gap:12px}
-  .roi-vs{transform:rotate(90deg)}
-  .share-scenarios{grid-template-columns:1fr}
-  .selections-row{grid-template-columns:1fr}
+  .pkg-nav{padding:12px 16px}
+  .plan-grid{grid-template-columns:1fr 1fr}
+  .setup-options{grid-template-columns:1fr}
+  .hw-item{flex-direction:column;text-align:center}
+  .hw-item .hw-actions{flex-direction:row}
+}
+@media(max-width:480px){
+  .plan-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -345,8 +218,8 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <nav class="pkg-nav">
   <div class="brand">Sew<span>Ready</span></div>
   <div class="nav-links">
-    <a href="#packages">Packages</a>
-    <a href="#hardware">Setup</a>
+    <a href="#features">Features</a>
+    <a href="#hardware">Hardware</a>
     <a href="/admin/login">Admin Login</a>
   </div>
   <button class="snipcart-checkout" style="background:none;border:1px solid var(--glass-border);color:var(--text);padding:8px 16px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">&#128722; Cart (<span class="snipcart-items-count">0</span>)</button>
@@ -354,1265 +227,727 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="pkg-hero">
-  <h1>Let's Build Your Internet Presence<span class="hangul">완벽한 매장 준비</span></h1>
+  <h1>Build Your Perfect Package<span class="hangul">나만의 패키지 구성</span></h1>
   <div class="taeguk" style="display:block;margin:8px auto"></div>
-  <p>Build your package in three steps &mdash; choose your bundle, pick a plan, and add hardware.</p>
+  <p>Pick exactly the features you need. See transparent pricing for every item. No hidden bundles &mdash; you're in control.</p>
 </section>
 
-<!-- ── Included Storefront ─────────────────────────────── -->
-<div class="included-banner">
-  <div class="included-card">
-    <div class="badge">모든 매장 포함 — Included with Every Shop</div>
-    <h3>Storefront</h3>
-    <p class="tier-desc">Every SewReady shop gets a professional web presence at no extra charge</p>
-    <ul class="included-features">
-      <li>Custom branded website</li>
-      <li>Google Maps integration</li>
-      <li>Click-to-call button</li>
-      <li>Services &amp; hours display</li>
-      <li>SEO &amp; structured data</li>
-      <li>Mobile-responsive design</li>
-    </ul>
-  </div>
-</div>
+<!-- ── Configurator ────────────────────────────────────── -->
+<div class="configurator">
+  <div class="config-main">
 
-<!-- ── Wizard Progress ────────────────────────────────── -->
-<div class="wizard-progress">
-  <div class="wiz-group"><div class="wiz-dot active" id="wdot1">1</div><div class="wiz-label active" id="wlab1">Bundle</div><div class="wiz-selection" id="wsel1"></div></div>
-  <div class="wiz-line" id="wline1"></div>
-  <div class="wiz-group"><div class="wiz-dot" id="wdot2">2</div><div class="wiz-label" id="wlab2">Plan</div><div class="wiz-selection" id="wsel2"></div></div>
-  <div class="wiz-line" id="wline2"></div>
-  <div class="wiz-group"><div class="wiz-dot" id="wdot3">3</div><div class="wiz-label" id="wlab3">Setup</div><div class="wiz-selection" id="wsel3"></div></div>
-  <div class="wiz-line" id="wline3"></div>
-  <div class="wiz-group"><div class="wiz-dot" id="wdot4">4</div><div class="wiz-label" id="wlab4">Summary</div><div class="wiz-selection" id="wsel4"></div></div>
-</div>
-
-<!-- ── Step 1 — Choose Your Bundle ────────────────────── -->
-<div class="wizard-step active" data-step="1" id="wizard-step-1">
-<div class="step-header" id="packages">
-  <span class="step-number">1</span>
-  <h2>Choose Your Bundle<span class="hangul">번들 선택</span></h2>
-</div>
-<p class="section-sub">Choose the level of build that fits your shop</p>
-
-<div class="pricing-grid">
-
-  <!-- Site Setup -->
-  <div class="price-card" data-detail="detail-setup-site" onclick="expandCard(this,event)">
-    <h3>Site Setup</h3>
-    <p class="tier-desc">Professional branded website, ready to go</p>
-    <div class="price-row"><span class="price-amount">$199</span></div>
-    <div class="price-period">One-time setup + revenue share</div>
-    <div class="revenue-share-line">then 8% of new revenue/mo</div>
-    <ul>
-      <li data-feature="public-website">Custom branded website build</li>
-      <li data-feature="google-maps">Google Maps integration</li>
-      <li data-feature="seo">SEO &amp; structured data</li>
-      <li data-feature="contact-form">Contact form</li>
-      <li data-feature="services-hours">Services &amp; hours configuration</li>
-      <li data-feature="mobile-responsive">Mobile-responsive design</li>
-      <li data-feature="employee-management">Employee management</li>
-      <li class="locked" data-feature="online-order-wizard">Online order wizard</li>
-      <li class="locked" data-feature="customer-accounts">Customer accounts &amp; login</li>
-      <li class="locked" data-feature="order-tracking">Order tracking dashboard</li>
-      <li class="locked" data-feature="inventory-tracking">Inventory tracking</li>
-      <li class="locked" data-feature="calendar-scheduling">Calendar &amp; scheduling</li>
-      <li class="locked" data-feature="sms-email-notifications">SMS &amp; email notifications</li>
-      <li class="locked" data-feature="analytics-reporting">Analytics &amp; reporting</li>
-    </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Site Setup','$199');event.stopPropagation()"
-      data-item-id="setup-site"
-      data-item-name="SewReady Site Setup"
-      data-item-price="199.00"
-      data-item-url="/"
-      data-item-description="Custom branded website build with Google Maps, SEO, contact form, services configuration, mobile-responsive design"
-      data-item-shippable="false"
-      data-item-max-quantity="1">Choose This</button>
-  </div>
-
-  <!-- Site + Online Orders -->
-  <div class="price-card featured" data-detail="detail-setup-online" onclick="expandCard(this,event)">
-    <div class="badge">Recommended</div>
-    <h3>Site + Online Orders</h3>
-    <p class="tier-desc">Full site build with online ordering system</p>
-    <div class="price-row"><span class="price-amount">$499</span></div>
-    <div class="price-period">One-time setup + revenue share</div>
-    <div class="revenue-share-line">then 10% of new revenue/mo</div>
-    <ul>
-      <li data-feature="public-website">Everything in Site Setup</li>
-      <li class="whats-new">What's New:</li>
-      <li data-feature="online-order-wizard">Online order wizard</li>
-      <li data-feature="customer-accounts">Customer accounts &amp; login</li>
-      <li data-feature="order-tracking">Order tracking dashboard</li>
-      <li data-feature="employee-management">Employee management</li>
-      <li data-feature="inventory-tracking">Inventory tracking</li>
-      <li data-feature="calendar-scheduling">Calendar &amp; scheduling</li>
-      <li data-feature="receipt-label">Receipt &amp; label printing</li>
-      <li class="locked" data-feature="sms-notifications">SMS notifications (Twilio)</li>
-      <li class="locked" data-feature="email-notifications">Email notifications (Resend)</li>
-      <li class="locked" data-feature="automated-alerts">Automated pickup alerts</li>
-      <li class="locked" data-feature="sop-library">SOP library</li>
-      <li class="locked" data-feature="driver-coordination">Driver pickup coordination</li>
-      <li class="locked" data-feature="analytics">Cost &amp; revenue analytics</li>
-      <li class="locked" data-feature="ai-lead-gen">AI-powered lead generation</li>
-      <li class="locked" data-feature="automated-marketing">Automated marketing campaigns</li>
-    </ul>
-    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(1,'Site + Online Orders','$499');event.stopPropagation()"
-      data-item-id="setup-online"
-      data-item-name="SewReady Site + Online Orders Setup"
-      data-item-price="499.00"
-      data-item-url="/"
-      data-item-description="Everything in Site Setup plus online ordering, customer accounts, order tracking, employee management, inventory, calendar, receipt & label printing"
-      data-item-shippable="false"
-      data-item-max-quantity="1">Choose This</button>
-  </div>
-
-  <!-- Full Platform -->
-  <div class="price-card" data-detail="detail-setup-full" onclick="expandCard(this,event)">
-    <h3>Full Platform</h3>
-    <p class="tier-desc">Complete automation with notifications &amp; analytics</p>
-    <div class="price-row"><span class="price-amount">$799</span></div>
-    <div class="price-period">One-time setup + revenue share</div>
-    <div class="revenue-share-line">then 12% of new revenue/mo</div>
-    <ul>
-      <li data-feature="public-website">Everything in Site + Online Orders</li>
-      <li class="whats-new">What's New:</li>
-      <li data-feature="sms-notifications">SMS notifications (Twilio)</li>
-      <li data-feature="email-notifications">Email notifications (Resend)</li>
-      <li data-feature="automated-alerts">Automated pickup alerts</li>
-      <li data-feature="sop-library">SOP library</li>
-      <li data-feature="driver-coordination">Driver pickup coordination</li>
-      <li data-feature="analytics">Cost &amp; revenue analytics</li>
-      <li data-feature="ai-lead-gen">AI-powered lead generation</li>
-      <li data-feature="automated-marketing">Automated marketing campaigns</li>
-      <li data-feature="priority-support">Priority setup support</li>
-    </ul>
-    <p style="font-size:12px;color:var(--text-muted);margin:0 0 16px;font-style:italic">Add hardware, setup &amp; training in Step 3</p>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Full Platform','$799');event.stopPropagation()"
-      data-item-id="setup-full"
-      data-item-name="SewReady Full Platform Setup"
-      data-item-price="799.00"
-      data-item-url="/"
-      data-item-description="Everything in Site + Online Orders plus SMS & email notifications, automated alerts, SOP library, driver coordination, analytics, priority support"
-      data-item-shippable="false"
-      data-item-max-quantity="1">Choose This</button>
-  </div>
-
-</div>
-
-<!-- ── Setup Detail Panels ─────────────────────────────── -->
-<div class="package-detail" id="detail-setup-site" data-section="setup">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Site Setup &mdash; What's Included</h3>
-      <button class="detail-close" onclick="collapseCard('detail-setup-site')">&times;</button>
+    <!-- Section 1: Your Shop -->
+    <div class="config-section" id="shop-section">
+      <h2><span class="section-num">1</span> Your Shop<span class="hangul" style="display:inline;font-size:11px;margin-left:8px">매장 정보</span></h2>
+      <p class="section-desc">Name your shop and choose how customers find you online</p>
+      <input type="text" class="shop-name-input" id="shopName" placeholder="Enter your shop name (e.g. Kim's Tailoring)" autocomplete="off">
+      <div class="domain-options" id="domainOptions"></div>
     </div>
-    <div class="demo-grid-horizontal">
-      <div class="demo-card" data-feature="public-website"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Public Website</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your custom branded public website with Google Maps, services &amp; hours display, contact form, SEO, and mobile-responsive design.</p>
-      </div>
-      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Calendar &amp; Scheduling</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
-      </div>
-      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Inventory Tracking</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
-      </div>
-      <div class="demo-card" data-feature="google-maps"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Google Maps Integration</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers find your shop easily with embedded Google Maps and one-click directions.</p>
-      </div>
-      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SEO &amp; Structured Data</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your site is optimized to appear in local search results with rich snippets.</p>
-      </div>
-      <div class="demo-card" data-feature="contact-form"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Contact Form</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers can send inquiries directly from your website. You get notified instantly.</p>
-      </div>
-      <div class="demo-card" data-feature="services-hours"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Services &amp; Hours</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your services, pricing, and business hours are clearly displayed for customers.</p>
-      </div>
-      <div class="demo-card" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Mobile-Responsive Design</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your website looks great on phones, tablets, and desktops &mdash; no pinching or zooming.</p>
-      </div>
+
+    <!-- Section 2: Features -->
+    <div class="config-section" id="features">
+      <h2><span class="section-num">2</span> Features<span class="hangul" style="display:inline;font-size:11px;margin-left:8px">기능 선택</span></h2>
+      <p class="section-desc">Check the features you want &mdash; every item is priced individually</p>
+      <div id="featureGroups"></div>
     </div>
-    <div class="detail-cta-row">
-      <a href="/demo.html">Try the Demo</a>
+
+    <!-- Section 3: Hosting Plan -->
+    <div class="config-section" id="plans-section">
+      <h2><span class="section-num">3</span> Hosting Plan<span class="hangul" style="display:inline;font-size:11px;margin-left:8px">호스팅 플랜</span></h2>
+      <p class="section-desc">Monthly hosting, maintenance, and support for your platform</p>
+      <div class="plan-grid" id="planGrid"></div>
+    </div>
+
+    <!-- Section 4: Hardware -->
+    <div class="config-section" id="hardware">
+      <h2><span class="section-num">4</span> Hardware<span class="hangul" style="display:inline;font-size:11px;margin-left:8px">하드웨어</span></h2>
+      <p class="section-desc">Devices auto-populate based on your feature selections &mdash; sold at cost, no markup</p>
+      <div class="hw-items" id="hwItems"></div>
+      <div class="hw-empty" id="hwEmpty">Select features above to see recommended hardware</div>
+    </div>
+
+    <!-- Section 5: Setup & Training -->
+    <div class="config-section" id="setup-section">
+      <h2><span class="section-num">5</span> Setup &amp; Training<span class="hangul" style="display:inline;font-size:11px;margin-left:8px">설치 및 교육</span></h2>
+      <p class="section-desc">Choose your setup level and optional hands-on training</p>
+      <div class="setup-options" id="setupOptions"></div>
+      <div class="training-title">Training Add-ons</div>
+      <div id="trainingOptions"></div>
+    </div>
+
+    <!-- Revenue Share Disclosure -->
+    <div class="revenue-disclosure" id="revenueDisclosure" style="display:none">
+      <h3>Revenue Share Disclosure</h3>
+      <p>Some advanced features use a revenue-share model instead of upfront fees. You pay nothing upfront &mdash; we only earn when you earn.</p>
+      <ul class="share-items" id="shareItems"></ul>
+    </div>
+
+  </div>
+
+  <!-- Sticky Sidebar -->
+  <div class="config-sidebar">
+    <div class="sidebar-card">
+      <h3>Your Package</h3>
+      <div id="sidebarContent">
+        <div class="sidebar-empty">Start selecting features to build your package</div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-total">
+        <span class="total-label">Upfront</span>
+        <span class="total-amount" id="sidebarUpfront">$0</span>
+      </div>
+      <div class="sidebar-total monthly">
+        <span class="total-label">Monthly</span>
+        <span class="total-amount" id="sidebarMonthly">$0/mo</span>
+      </div>
+      <div class="sidebar-share" id="sidebarShare" style="display:none"></div>
+      <button class="sidebar-cta" id="sidebarCta" onclick="addAllToCart()">Get Started</button>
     </div>
   </div>
 </div>
 
-<div class="package-detail" id="detail-setup-online" data-section="setup">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Site + Online Orders &mdash; What's Included</h3>
-      <button class="detail-close" onclick="collapseCard('detail-setup-online')">&times;</button>
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bar" id="mobileBar">
+  <div class="mobile-bar-summary" onclick="toggleMobileExpand()">
+    <div class="mobile-bar-totals">
+      <div class="mb-total"><div class="mb-label">Upfront</div><div class="mb-amount" id="mobileUpfront">$0</div></div>
+      <div class="mb-total"><div class="mb-label">Monthly</div><div class="mb-amount monthly" id="mobileMonthly">$0/mo</div></div>
     </div>
-    <div class="demo-grid-horizontal">
-      <div class="demo-card" data-feature="public-website"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Public Website</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Branded public website with Google Maps, services, contact form, and mobile-responsive design.</p>
-      </div>
-      <div class="demo-card" data-feature="order-tracking"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Orders Dashboard</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
-      </div>
-      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Calendar &amp; Scheduling</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
-      </div>
-      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Inventory Tracking</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
-      </div>
-      <div class="demo-card" data-feature="employee-management"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Employee Management</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Add your team, assign roles, and track who's working on which orders.</p>
-      </div>
-      <div class="demo-card" data-feature="google-maps"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Google Maps Integration</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers find your shop easily with embedded Google Maps.</p>
-      </div>
-      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SEO &amp; Structured Data</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Appear in local search results with rich snippets and structured data.</p>
-      </div>
-      <div class="demo-card" data-feature="contact-form"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Contact Form</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers send inquiries directly. You get notified instantly.</p>
-      </div>
-      <div class="demo-card" data-feature="services-hours"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Services &amp; Hours</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Services, pricing, and hours clearly displayed for customers.</p>
-      </div>
-      <div class="demo-card" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Mobile-Responsive</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Looks great on every screen size.</p>
-      </div>
-      <div class="demo-card" data-feature="online-order-wizard"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Online Order Wizard</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers place orders online with a guided wizard. Pick items, select services, schedule drop-off.</p>
-      </div>
-      <div class="demo-card" data-feature="customer-accounts"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Customer Accounts</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers sign in, view their orders, and track progress.</p>
-      </div>
-      <div class="demo-card" data-feature="receipt-label"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Receipt &amp; Label Printing</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Print receipts and garment labels with QR codes for easy tracking.</p>
-      </div>
-    </div>
-    <div class="detail-cta-row">
-      <a href="/demo.html">Try the Demo</a>
-    </div>
+    <button class="mobile-bar-cta" onclick="event.stopPropagation();addAllToCart()">Get Started</button>
   </div>
+  <div class="mobile-bar-expand" id="mobileExpand"></div>
 </div>
 
-<div class="package-detail" id="detail-setup-full" data-section="setup">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Full Platform &mdash; What's Included</h3>
-      <button class="detail-close" onclick="collapseCard('detail-setup-full')">&times;</button>
-    </div>
-    <div class="demo-grid-horizontal">
-      <div class="demo-card" data-feature="public-website"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Public Website</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Branded public website with Google Maps, services, contact form, and mobile-responsive design.</p>
-      </div>
-      <div class="demo-card" data-feature="order-tracking"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Orders Dashboard</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
-      </div>
-      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Calendar &amp; Scheduling</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
-      </div>
-      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Inventory Tracking</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
-      </div>
-      <div class="demo-card" data-feature="employee-management"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Employee Management</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Add your team, assign roles, and track who's working on which orders.</p>
-      </div>
-      <div class="demo-card" data-feature="driver-coordination"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Driver Coordination</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/driver?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Manage driver routes and pickups for shops that offer delivery or base pickup service.</p>
-      </div>
-      <div class="demo-card" data-feature="analytics"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Analytics</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Track revenue, costs, turnaround times, and customer metrics with visual dashboards.</p>
-      </div>
-      <div class="demo-card" data-feature="sop-library"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SOP Library</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Standard operating procedures, training docs, checklists, and process guides for your team.</p>
-      </div>
-      <div class="demo-card" data-feature="google-maps"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Google Maps Integration</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers find your shop easily with embedded Google Maps.</p>
-      </div>
-      <div class="demo-card" data-feature="seo"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SEO &amp; Structured Data</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Appear in local search results with rich snippets.</p>
-      </div>
-      <div class="demo-card" data-feature="contact-form"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Contact Form</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers send inquiries directly from your site.</p>
-      </div>
-      <div class="demo-card" data-feature="services-hours"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Services &amp; Hours</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Services, pricing, and hours clearly displayed.</p>
-      </div>
-      <div class="demo-card" data-feature="mobile-responsive"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Mobile-Responsive</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Looks great on every screen size.</p>
-      </div>
-      <div class="demo-card" data-feature="online-order-wizard"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Online Order Wizard</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers place orders online with a guided wizard.</p>
-      </div>
-      <div class="demo-card" data-feature="customer-accounts"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Customer Accounts</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Customers sign in and track their orders.</p>
-      </div>
-      <div class="demo-card" data-feature="receipt-label"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Receipt &amp; Label Printing</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Print receipts and garment labels with QR codes.</p>
-      </div>
-      <div class="demo-card" data-feature="sms-notifications"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SMS Notifications</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Automatic text updates at every stage.</p>
-      </div>
-      <div class="demo-card" data-feature="email-notifications"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Email Notifications</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Professional branded emails to customers plus daily summaries.</p>
-      </div>
-      <div class="demo-card" data-feature="automated-alerts"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Automated Pickup Alerts</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">One click to "Ready" and the customer is notified.</p>
-      </div>
-      <div class="demo-card" data-feature="ai-lead-gen"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">AI-Powered Lead Generation</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">AI finds and qualifies new customers near your shop.</p>
-      </div>
-      <div class="demo-card" data-feature="automated-marketing"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Automated Marketing Campaigns</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Automated marketing that runs itself &mdash; seasonal, PCS season, re-engagement.</p>
-      </div>
-      <div class="demo-card" data-feature="priority-support"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Priority Setup Support</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Dedicated setup support with same-day response times.</p>
-      </div>
-    </div>
-    <div class="detail-cta-row">
-      <a href="/demo.html">Try the Demo</a>
-    </div>
-  </div>
-</div>
-
-</div><!-- /wizard-step-1 -->
-
-<!-- ── Step 2 — Choose Your Plan ──────────────────────── -->
-<div class="wizard-step" data-step="2" id="wizard-step-2">
-<button class="wizard-back" onclick="goToStep(1)">&larr; Back to Bundles</button>
-<div class="step-header" id="services">
-  <span class="step-number">2</span>
-  <h2>Choose Your Plan<span class="hangul">플랜 선택</span></h2>
-</div>
-<p class="section-sub">Ongoing hosting, maintenance, and support</p>
-
-<div class="pricing-grid">
-
-  <!-- Free -->
-  <div class="price-card" data-detail="detail-svc-free" onclick="expandCard(this,event)">
-    <h3>Free</h3>
-    <p class="tier-desc">Get started at no cost</p>
-    <div class="price-row"><span class="price-amount">$0</span><span class="price-label">/month</span></div>
-    <div class="price-period">No credit card required</div>
-    <ul>
-      <li data-feature="plan-hosting">Website hosting</li>
-      <li data-feature="plan-ssl">Secure website (HTTPS)</li>
-      <li data-feature="plan-guides">Help guides &amp; tutorials</li>
-      <li data-feature="plan-email-support">Email support</li>
-      <li class="locked" data-feature="plan-updates">We handle updates for you</li>
-      <li class="locked" data-feature="plan-monitoring">24/7 website monitoring</li>
-      <li class="locked" data-feature="plan-alerts">Text &amp; email alerts to customers</li>
-      <li class="locked" data-feature="plan-maps">Google, Waze &amp; Apple Maps setup</li>
-      <li class="locked" data-feature="plan-auto-texts">Automatic "order ready" texts</li>
-      <li class="locked" data-feature="plan-report">Monthly business report</li>
-      <li class="locked" data-feature="plan-sameday">Same-day support</li>
-      <li class="locked" data-feature="plan-changes">Website changes on request</li>
-    </ul>
-    <button class="card-cta secondary" onclick="wizardChoose(2,'Free','$0/mo');event.stopPropagation()" style="width:100%">Choose This</button>
-  </div>
-
-  <!-- Basic -->
-  <div class="price-card" data-detail="detail-svc-basic" onclick="expandCard(this,event)">
-    <h3>Basic</h3>
-    <p class="tier-desc">Hosting and maintenance essentials</p>
-    <div class="price-row"><span class="price-amount">$49</span><span class="price-label">/month</span></div>
-    <div class="price-period">Billed monthly</div>
-    <ul>
-      <li data-feature="plan-hosting">Website hosting</li>
-      <li data-feature="plan-ssl">Secure website (HTTPS)</li>
-      <li data-feature="plan-monitoring">24/7 website monitoring</li>
-      <li data-feature="plan-email-support">Email support</li>
-      <li class="locked" data-feature="plan-alerts">Text &amp; email alerts to customers</li>
-      <li class="locked" data-feature="plan-maps">Google, Waze &amp; Apple Maps setup</li>
-      <li class="locked" data-feature="plan-auto-texts">Automatic "order ready" texts</li>
-      <li class="locked" data-feature="plan-report">Monthly business report</li>
-      <li class="locked" data-feature="plan-sameday">Same-day support</li>
-      <li class="locked" data-feature="plan-changes">Website changes on request</li>
-      <li class="locked" data-feature="plan-info-updates">We update your info for you</li>
-    </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2,'Basic','$49/mo');event.stopPropagation()"
-      data-item-id="svc-basic"
-      data-item-name="SewReady Basic Monthly Service"
-      data-item-price="49.00"
-      data-item-url="/"
-      data-item-description="Hosting, maintenance, SSL, uptime monitoring, basic email support — $49/mo"
-      data-item-payment-interval="Month"
-      data-item-payment-interval-count="1"
-      data-item-shippable="false"
-      data-item-max-quantity="1">Choose This</button>
-  </div>
-
-  <!-- Standard -->
-  <div class="price-card featured" data-detail="detail-svc-standard" onclick="expandCard(this,event)">
-    <div class="badge">Recommended</div>
-    <h3>Standard</h3>
-    <p class="tier-desc">Notifications and monthly reporting</p>
-    <div class="price-row"><span class="price-amount">$100</span><span class="price-label">/month</span></div>
-    <div class="price-period">Billed monthly</div>
-    <ul>
-      <li data-feature="plan-hosting">Everything in Basic</li>
-      <li data-feature="plan-alerts">Text &amp; email alerts to customers</li>
-      <li data-feature="plan-maps">Google, Waze &amp; Apple Maps setup</li>
-      <li data-feature="plan-auto-texts">Automatic "order ready" texts</li>
-      <li data-feature="plan-report">Monthly business report</li>
-      <li class="locked" data-feature="plan-changes">Website changes on request</li>
-      <li class="locked" data-feature="plan-sameday">Same-day support</li>
-      <li class="locked" data-feature="plan-maintenance">Full tech maintenance</li>
-      <li class="locked" data-feature="plan-info-updates">We update your info for you</li>
-    </ul>
-    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(2,'Standard','$100/mo');event.stopPropagation()"
-      data-item-id="svc-standard"
-      data-item-name="SewReady Standard Monthly Service"
-      data-item-price="100.00"
-      data-item-url="/"
-      data-item-description="Everything in Basic plus SMS & email notifications, automated pickup alerts, monthly analytics — $100/mo"
-      data-item-payment-interval="Month"
-      data-item-payment-interval-count="1"
-      data-item-shippable="false"
-      data-item-max-quantity="1">Choose This</button>
-  </div>
-
-  <!-- Premium -->
-  <div class="price-card" data-detail="detail-svc-premium" onclick="expandCard(this,event)">
-    <h3>Premium</h3>
-    <p class="tier-desc">Full-service management and priority support</p>
-    <div class="price-row"><span class="price-amount">$250</span><span class="price-label">/month</span></div>
-    <div class="price-period">Billed monthly</div>
-    <ul>
-      <li data-feature="plan-hosting">Everything in Standard</li>
-      <li data-feature="plan-maps">Google, Waze &amp; Apple Maps setup</li>
-      <li data-feature="plan-changes">Website changes on request</li>
-      <li data-feature="plan-sameday">Same-day support</li>
-      <li data-feature="plan-maintenance">Full tech maintenance</li>
-      <li data-feature="plan-info-updates">We update your info for you</li>
-    </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2,'Premium','$250/mo');event.stopPropagation()"
-      data-item-id="svc-premium"
-      data-item-name="SewReady Premium Monthly Service"
-      data-item-price="250.00"
-      data-item-url="/"
-      data-item-description="Everything in Standard plus ongoing site updates, priority support, full platform maintenance, content updates on request — $250/mo"
-      data-item-payment-interval="Month"
-      data-item-payment-interval-count="1"
-      data-item-shippable="false"
-      data-item-max-quantity="1">Choose This</button>
-  </div>
-
-</div>
-
-<!-- ── Monthly Detail Panels ───────────────────────────── -->
-<div class="package-detail" id="detail-svc-free" data-section="svc">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Free Plan &mdash; What's Included</h3>
-      <button class="detail-close" onclick="collapseCard('detail-svc-free')">&times;</button>
-    </div>
-    <div class="demo-grid-horizontal">
-      <div class="demo-card" data-feature="plan-hosting"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Cloud Hosting</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Enterprise-grade infrastructure at no charge. Always online, always fast.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-ssl"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Secure Website (HTTPS)</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your site is always secure with automatic HTTPS.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-guides"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Help Guides &amp; Tutorials</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Docs, guides, and tutorials to help you manage your shop.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-email-support"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Email Support</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Community email support to help you independently.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="package-detail" id="detail-svc-basic" data-section="svc">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Basic Service &mdash; What's Included</h3>
-      <button class="detail-close" onclick="collapseCard('detail-svc-basic')">&times;</button>
-    </div>
-    <div class="demo-grid-horizontal">
-      <div class="demo-card" data-feature="plan-hosting"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Managed Hosting</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">We handle hosting, updates, and security patches.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-ssl"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Secure Website (HTTPS)</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Always secure with automatic certificate renewal.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-monitoring"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">24/7 Uptime Monitoring</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">24/7 monitoring with instant alerts if anything goes down.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-email-support"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Email Support</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Email support within one business day.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="package-detail" id="detail-svc-standard" data-section="svc">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Standard Service &mdash; What's Included</h3>
-      <button class="detail-close" onclick="collapseCard('detail-svc-standard')">&times;</button>
-    </div>
-    <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">Everything in Basic, plus automated notifications and monthly reporting.</p>
-    <div class="demo-grid-horizontal">
-      <div class="demo-card" data-feature="plan-alerts"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">SMS Notifications</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Automatic text updates at every stage.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-alerts"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Email Notifications</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Professional branded emails to customers plus daily summaries.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-maps"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Google / Waze / Apple Maps</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Your shop visible on all major maps platforms.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-auto-texts"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Automated Pickup Alerts</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">One click to "Ready" and customer is notified.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-report"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Monthly Business Report</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe></div>
-        <p class="demo-desc">Monthly summary of revenue, orders, and performance.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="package-detail" id="detail-svc-premium" data-section="svc">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Premium Service &mdash; What's Included</h3>
-      <button class="detail-close" onclick="collapseCard('detail-svc-premium')">&times;</button>
-    </div>
-    <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">Everything in Standard, plus hands-on management &mdash; we handle it all.</p>
-    <div class="demo-grid-horizontal">
-      <div class="demo-card" data-feature="plan-sameday"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Priority Support</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Same-day response for urgent issues.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-changes"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Ongoing Site Updates</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Design changes, features &mdash; just ask and we build it.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-maintenance"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Full Platform Maintenance</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Database optimization, security patches &mdash; all proactive.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-info-updates"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Content Updates on Request</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Hours, services, pricing &mdash; just email us.</p>
-      </div>
-      <div class="demo-card" data-feature="plan-maps"><span class="card-type-badge live-demo">Live Demo</span>
-        <div class="demo-label">Google / Waze / Apple Maps</div>
-        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
-        <p class="demo-desc">Full maps management. We respond to reviews for you.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /wizard-step-2 -->
-
-<!-- ── Step 3 — Setup & Training ─────────────────────── -->
-<div class="wizard-step" data-step="3" id="wizard-step-3">
-<button class="wizard-back" onclick="goToStep(2)">&larr; Back to Plans</button>
-<div class="step-header" id="hardware">
-  <span class="step-number">3</span>
-  <h2>Setup &amp; Training<span class="hangul">설치 및 교육</span></h2>
-</div>
-<p class="section-sub">Hardware, professional installation, and hands-on training for your team &mdash; all in one package</p>
-
-<div class="pricing-grid">
-
-  <!-- Self Setup -->
-  <div class="price-card" data-detail="detail-hw-none" onclick="expandCard(this,event)">
-    <h3>Self Setup</h3>
-    <p class="tier-desc">I'll handle it myself</p>
-    <div class="price-row"><span class="price-amount">$0</span></div>
-    <div class="price-period">DIY &mdash; use your own devices</div>
-    <ul>
-      <li>Online setup guides &amp; video tutorials</li>
-      <li>Works on any tablet or laptop</li>
-      <li>Email support during setup</li>
-      <li>Browser-based &mdash; no app install</li>
-    </ul>
-    <button class="card-cta secondary" onclick="wizardChoose(3,'Self Setup','$0');event.stopPropagation()" style="width:100%">Choose This</button>
-  </div>
-
-  <!-- Essential Kit -->
-  <div class="price-card" data-detail="detail-hw-essential" onclick="expandCard(this,event)">
-    <h3>Essential Kit</h3>
-    <p class="tier-desc">Hardware + setup for the basics</p>
-    <div class="price-row"><span class="price-amount">$499</span></div>
-    <div class="price-period">One-time &mdash; hardware, install &amp; training</div>
-    <ul>
-      <li>iPad counter mount + receipt printer</li>
-      <li>On-site hardware installation &amp; config</li>
-      <li>1-hour hands-on staff training (up to 2 people)</li>
-      <li>SewReady software setup &amp; testing</li>
-    </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3,'Essential Kit','$499');event.stopPropagation()"
-      data-item-id="hw-essential"
-      data-item-name="SewReady Essential Kit — Setup & Training"
-      data-item-price="499.00"
-      data-item-url="/"
-      data-item-description="iPad counter mount + Epson receipt printer + professional installation + 1-hr staff training"
-      data-item-weight="4500"
-      data-item-max-quantity="5">Choose This</button>
-  </div>
-
-  <!-- Pro Kit -->
-  <div class="price-card featured" data-detail="detail-hw-pro" onclick="expandCard(this,event)">
-    <div class="badge">Recommended</div>
-    <h3>Pro Kit</h3>
-    <p class="tier-desc">Full hardware + training for your team</p>
-    <div class="price-row"><span class="price-amount">$799</span></div>
-    <div class="price-period">One-time &mdash; hardware, install &amp; training</div>
-    <ul>
-      <li>iPad mount + receipt printer + label printer</li>
-      <li>On-site hardware installation &amp; config</li>
-      <li>2-hour hands-on staff training (up to 4 people)</li>
-      <li>Custom workflow setup (services, pricing, labels)</li>
-    </ul>
-    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(3,'Pro Kit','$799');event.stopPropagation()"
-      data-item-id="hw-pro"
-      data-item-name="SewReady Pro Kit — Setup & Training"
-      data-item-price="799.00"
-      data-item-url="/"
-      data-item-description="iPad mount + receipt printer + label printer + professional installation + 2-hr staff training + workflow setup"
-      data-item-weight="6000"
-      data-item-max-quantity="5">Choose This</button>
-  </div>
-
-  <!-- Full Kit -->
-  <div class="price-card" data-detail="detail-hw-full" onclick="expandCard(this,event)">
-    <h3>Full Kit</h3>
-    <p class="tier-desc">Everything + half-day training &amp; ongoing support</p>
-    <div class="price-row"><span class="price-amount">$1,199</span></div>
-    <div class="price-period">One-time &mdash; hardware, install &amp; training</div>
-    <ul>
-      <li>All hardware (mount, receipt, labels, scanner)</li>
-      <li>On-site hardware installation &amp; config</li>
-      <li>Half-day staff training (up to 6 people)</li>
-      <li>60-day post-install support + follow-up session</li>
-    </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3,'Full Kit','$1,199');event.stopPropagation()"
-      data-item-id="hw-full"
-      data-item-name="SewReady Full Kit — Setup & Training"
-      data-item-price="1199.00"
-      data-item-url="/"
-      data-item-description="All hardware + professional installation + half-day staff training + 60-day support"
-      data-item-weight="7000"
-      data-item-max-quantity="5">Choose This</button>
-  </div>
-
-</div>
-
-<!-- ── Setup & Training Detail Panels ─────────────────── -->
-<div class="package-detail" id="detail-hw-none" data-section="hw">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Self Setup &mdash; What You'll Need</h3>
-      <button class="detail-close" onclick="collapseCard('detail-hw-none')">&times;</button>
-    </div>
-    <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">SewReady is browser-based &mdash; no app to install. Set up on your own schedule with our guides.</p>
-    <div class="visual-grid">
-      <div class="visual-card">
-        <div class="visual-header">Required</div>
-        <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128187;</div><div><div class="stat-label">Tablet, Laptop, or Desktop</div><div class="stat-value">Any modern browser (Chrome, Safari, Edge)</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128246;</div><div><div class="stat-label">Internet Connection</div><div class="stat-value">WiFi or cellular data</div></div></div>
-        </div>
-        <div class="visual-caption">That's it &mdash; open your browser, log in, and you're running your shop.</div>
-      </div>
-      <div class="visual-card">
-        <div class="visual-header">DIY Resources Included</div>
-        <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#127909;</div><div><div class="stat-label">Video Tutorials</div><div class="stat-value">Step-by-step setup walkthroughs</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128214;</div><div><div class="stat-label">Setup Guides</div><div class="stat-value">Hardware connection &amp; configuration docs</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Email Support</div><div class="stat-value">Get help if you get stuck</div></div></div>
-        </div>
-        <div class="visual-caption">Want hardware? You can buy devices separately and follow our guides to connect them.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="package-detail" id="detail-hw-essential" data-section="hw">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Essential Kit &mdash; Hardware, Setup &amp; Training</h3>
-      <button class="detail-close" onclick="collapseCard('detail-hw-essential')">&times;</button>
-    </div>
-    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px">Hardware Included</h4>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">iPad Counter Mount</div>
-          <p class="product-spec">AboveTEK TS-138W. Adjustable angle, anti-theft lock. Sits on your counter for walk-in customers.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/receipt-printer.jpg" alt="Epson TM-T20III Receipt Printer" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">Thermal Receipt Printer</div>
-          <p class="product-spec">Epson TM-T20III. USB + Ethernet. 80mm thermal paper. Fast, reliable, industry standard.</p>
-        </div>
-      </div>
-    </div>
-    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 12px">Setup &amp; Training Included</h4>
-    <div class="visual-grid">
-      <div class="visual-card">
-        <div class="visual-header">Professional Installation</div>
-        <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128295;</div><div><div class="stat-label">On-Site Hardware Setup</div><div class="stat-value">We install &amp; configure all devices at your shop</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128268;</div><div><div class="stat-label">Network &amp; Printer Config</div><div class="stat-value">Connect printers, test receipts, verify everything works</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#9881;</div><div><div class="stat-label">SewReady Software Setup</div><div class="stat-value">Configure your account, services menu, and pricing</div></div></div>
-        </div>
-      </div>
-      <div class="visual-card">
-        <div class="visual-header">Staff Training &mdash; 1 Hour</div>
-        <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128101;</div><div><div class="stat-label">Up to 2 Employees</div><div class="stat-value">Hands-on, in-person training at your shop</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Core Workflows</div><div class="stat-value">Order intake, printing receipts, basic navigation</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128222;</div><div><div class="stat-label">Post-Install Support</div><div class="stat-value">14 days of priority email &amp; phone support</div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="package-detail" id="detail-hw-pro" data-section="hw">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Pro Kit &mdash; Hardware, Setup &amp; Training</h3>
-      <button class="detail-close" onclick="collapseCard('detail-hw-pro')">&times;</button>
-    </div>
-    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px">Hardware Included</h4>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">iPad Counter Mount</div>
-          <p class="product-spec">AboveTEK TS-138W. Adjustable angle, anti-theft lock.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/receipt-printer.jpg" alt="Epson TM-T20III Receipt Printer" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">Thermal Receipt Printer</div>
-          <p class="product-spec">Epson TM-T20III. USB + Ethernet. 80mm thermal paper.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/label-printer.png" alt="Brother QL-820NWB Label Printer" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">Label Printer</div>
-          <p class="product-spec">Brother QL-820NWB. WiFi + Bluetooth. Print garment tags with order ID, name, QR code.</p>
-        </div>
-      </div>
-    </div>
-    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 12px">Setup &amp; Training Included</h4>
-    <div class="visual-grid">
-      <div class="visual-card">
-        <div class="visual-header">Professional Installation</div>
-        <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128295;</div><div><div class="stat-label">On-Site Hardware Setup</div><div class="stat-value">We install &amp; configure all devices at your shop</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128268;</div><div><div class="stat-label">Network &amp; Printer Config</div><div class="stat-value">Receipt printer, label printer, WiFi &amp; Bluetooth pairing</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#127991;</div><div><div class="stat-label">Custom Label Templates</div><div class="stat-value">Garment tags designed with your shop name, QR codes, order info</div></div></div>
-        </div>
-      </div>
-      <div class="visual-card">
-        <div class="visual-header">Staff Training &mdash; 2 Hours</div>
-        <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128101;</div><div><div class="stat-label">Up to 4 Employees</div><div class="stat-value">Hands-on, in-person training at your shop</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Full Workflow Training</div><div class="stat-value">Order intake, label printing, services, pricing &amp; reports</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#9881;</div><div><div class="stat-label">Custom Workflow Setup</div><div class="stat-value">We configure your services menu, pricing, and label layouts</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128222;</div><div><div class="stat-label">30-Day Post-Install Support</div><div class="stat-value">Priority email &amp; phone support after go-live</div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="package-detail" id="detail-hw-full" data-section="hw">
-  <div class="detail-inner">
-    <div class="detail-header">
-      <h3>Full Kit &mdash; Hardware, Setup &amp; Training</h3>
-      <button class="detail-close" onclick="collapseCard('detail-hw-full')">&times;</button>
-    </div>
-    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px">Hardware Included</h4>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">iPad Counter Mount</div>
-          <p class="product-spec">AboveTEK TS-138W. Adjustable angle, anti-theft lock.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/receipt-printer.jpg" alt="Epson TM-T20III Receipt Printer" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">Thermal Receipt Printer</div>
-          <p class="product-spec">Epson TM-T20III. USB + Ethernet. 80mm thermal paper.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/label-printer.png" alt="Brother QL-820NWB Label Printer" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">Label Printer</div>
-          <p class="product-spec">Brother QL-820NWB. WiFi + Bluetooth. Print garment tags.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-img"><img src="/img/hardware/barcode-scanner.jpg" alt="Tera HW0002 Barcode Scanner" loading="lazy"></div>
-        <div class="product-info">
-          <div class="product-name">Barcode Scanner</div>
-          <p class="product-spec">Tera HW0002. USB plug-and-play. Scan order labels to pull up details instantly.</p>
-        </div>
-      </div>
-    </div>
-    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 12px">Setup &amp; Training Included</h4>
-    <div class="visual-grid">
-      <div class="visual-card">
-        <div class="visual-header">Professional Installation</div>
-        <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128295;</div><div><div class="stat-label">On-Site Hardware Setup</div><div class="stat-value">We install &amp; configure every device at your shop</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128268;</div><div><div class="stat-label">Full Network Config</div><div class="stat-value">Receipt printer, label printer, barcode scanner, WiFi &amp; Bluetooth</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#127991;</div><div><div class="stat-label">Custom Label Templates</div><div class="stat-value">Garment tags + scannable order labels designed for your shop</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128196;</div><div><div class="stat-label">SOP Documentation</div><div class="stat-value">Custom quick-reference guides for your staff to keep at the counter</div></div></div>
-        </div>
-      </div>
-      <div class="visual-card">
-        <div class="visual-header">Staff Training &mdash; Half Day</div>
-        <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128101;</div><div><div class="stat-label">Up to 6 Employees</div><div class="stat-value">Hands-on, in-person training at your shop</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Complete Workflow Training</div><div class="stat-value">Every feature: intake, labels, scanning, reports, calendar, inventory</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#9881;</div><div><div class="stat-label">Custom Workflow Setup</div><div class="stat-value">Services menu, pricing, labels, SOPs &mdash; fully configured to your shop</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128222;</div><div><div class="stat-label">60-Day Post-Install Support</div><div class="stat-value">Priority email &amp; phone support + 1-hour follow-up training session</div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /wizard-step-3 -->
-
-<!-- ── Step 4 — Summary & Analysis ─────────────────────── -->
-<div class="wizard-step" data-step="4" id="wizard-step-4">
-  <button class="wizard-back" onclick="goToStep(3)">&larr; Back to Setup &amp; Training</button>
-  <div class="step-header">
-    <span class="step-number">4</span>
-    <h2>Your Package Summary<span class="hangul">패키지 요약</span></h2>
-  </div>
-  <p class="section-sub">Review your selections and see what this means for your shop</p>
-  <div id="summaryContent"></div>
-</div>
-
-<!-- ── Footer ───────────────────────────────────────────── -->
+<!-- ── Footer ──────────────────────────────────────────── -->
 <footer class="pkg-footer">
   &copy; 2026 SewReady &mdash; Built for military alteration shops near Fort Liberty
   <br><a href="/legal/terms.html" style="color:var(--text-dim)">Terms of Service</a> &middot; <a href="/legal/privacy.html" style="color:var(--text-dim)">Privacy Policy</a>
 </footer>
 
 <script>
-var currentStep = 1;
-window.wizardSelections = {};
+/* ══════════════════════════════════════════════════════════
+   DATA LAYER
+   ══════════════════════════════════════════════════════════ */
+var CONFIGURATOR = {
+  features: {
+    'website-essentials': {
+      label: 'Website Essentials',
+      items: [
+        { id: 'website', name: 'Custom branded website', price: 0, included: true },
+        { id: 'mobile', name: 'Mobile-responsive design', price: 0, included: true },
+        { id: 'hosting-base', name: 'Secure hosting (HTTPS)', price: 0, included: true }
+      ]
+    },
+    'website-addons': {
+      label: 'Website Add-ons',
+      items: [
+        { id: 'maps', name: 'Google Maps integration', price: 29 },
+        { id: 'seo', name: 'SEO & structured data', price: 49 },
+        { id: 'contact', name: 'Contact form', price: 19 },
+        { id: 'services-display', name: 'Services & hours display', price: 19 }
+      ]
+    },
+    'online-ordering': {
+      label: 'Online Ordering',
+      items: [
+        { id: 'order-wizard', name: 'Online order wizard', price: 99 },
+        { id: 'customer-accounts', name: 'Customer accounts & login', price: 49 },
+        { id: 'order-tracking', name: 'Order tracking dashboard', price: 49 }
+      ]
+    },
+    'shop-ops': {
+      label: 'Shop Operations',
+      items: [
+        { id: 'employee-mgmt', name: 'Employee management', price: 29 },
+        { id: 'inventory', name: 'Inventory tracking', price: 49 },
+        { id: 'calendar', name: 'Calendar & scheduling', price: 49 },
+        { id: 'receipt-printing', name: 'Receipt printing', price: 39, hardware: 'receipt-printer' },
+        { id: 'label-printing', name: 'Label printing & garment tags', price: 39, hardware: 'label-printer' }
+      ]
+    },
+    'notifications': {
+      label: 'Notifications',
+      monthly: true,
+      items: [
+        { id: 'sms', name: 'SMS alerts (Twilio)', price: 49 },
+        { id: 'email-notif', name: 'Email alerts (Resend)', price: 29 },
+        { id: 'auto-pickup', name: 'Automated pickup alerts', price: 19 }
+      ]
+    },
+    'advanced': {
+      label: 'Advanced',
+      items: [
+        { id: 'sop', name: 'SOP library', price: 29 },
+        { id: 'driver', name: 'Driver pickup coordination', price: 39 },
+        { id: 'analytics', name: 'Cost & revenue analytics', price: 49 },
+        { id: 'ai-leads', name: 'AI-powered lead generation', price: 0, revenueShare: 10, shareLabel: '10% of leads converted to paying customers' },
+        { id: 'marketing', name: 'Automated marketing campaigns', price: 0, revenueShare: 8, shareLabel: '8% of revenue from campaign-driven orders' }
+      ]
+    }
+  },
+  hardware: [
+    { id: 'ipad-mount', name: 'iPad Counter Mount', model: 'AboveTEK TS-138W', price: 50, img: '/img/hardware/ipad-mount.jpg', desc: 'Adjustable angle, anti-theft lock. Counter mount for walk-in customers.', recommended: true },
+    { id: 'receipt-printer', name: 'Thermal Receipt Printer', model: 'Epson TM-T20III', price: 155, img: '/img/hardware/receipt-printer.jpg', desc: 'USB + Ethernet. 80mm thermal paper. Industry standard.', requiredFor: ['receipt-printing'] },
+    { id: 'label-printer', name: 'Label Printer', model: 'Brother QL-820NWB', price: 240, img: '/img/hardware/label-printer.png', desc: 'WiFi + Bluetooth. Print garment tags with QR codes.', requiredFor: ['label-printing'] },
+    { id: 'barcode-scanner', name: 'Barcode Scanner', model: 'Tera HW0002', price: 40, img: '/img/hardware/barcode-scanner.jpg', desc: 'USB plug-and-play. Scan order labels instantly.', requiredFor: ['order-tracking'] }
+  ],
+  domains: [
+    { id: 'subdomain', label: 'Free subdomain', format: '{shop}.sewready.com', price: 0, period: '' },
+    { id: 'custom-com', label: 'Custom .com domain', format: '{shop}.com', price: 15, period: '/yr' },
+    { id: 'custom-shop', label: 'Custom .shop domain', format: '{shop}.shop', price: 12, period: '/yr' },
+    { id: 'premium', label: 'Premium domain + Google Business + SEO', format: '{shop}.com', price: 99, period: '/yr', desc: 'Custom domain + Google Business Profile setup + local SEO optimization' }
+  ],
+  plans: [
+    { id: 'free', name: 'Free', price: 0, features: ['Website hosting', 'HTTPS', 'Help guides', 'Email support'] },
+    { id: 'basic', name: 'Basic', price: 49, features: ['Website hosting', 'HTTPS', '24/7 monitoring', 'Email support'] },
+    { id: 'standard', name: 'Standard', price: 100, recommended: true, features: ['Everything in Basic', 'Customer text & email alerts', 'Google/Waze/Apple Maps setup', 'Auto order-ready texts', 'Monthly business report'] },
+    { id: 'premium', name: 'Premium', price: 250, features: ['Everything in Standard', 'Same-day support', 'Website changes on request', 'Full tech maintenance', 'We update your info for you'] }
+  ],
+  setup: [
+    { id: 'self', name: 'Self Setup', price: 0, desc: 'DIY with our video tutorials & guides' },
+    { id: 'remote', name: 'Remote Setup', price: 150, desc: 'Screen-share session — we configure everything remotely' },
+    { id: 'onsite', name: 'On-Site Setup', price: 250, desc: 'We come to your shop and install everything in person' }
+  ],
+  training: [
+    { id: 'train-1hr', name: '1-Hour Training', price: 100, desc: 'Core workflows for up to 2 employees' },
+    { id: 'train-2hr', name: '2-Hour Training', price: 175, desc: 'Full workflow training for up to 4 employees' },
+    { id: 'train-half', name: 'Half-Day Training', price: 350, desc: 'Comprehensive training for up to 6 employees' },
+    { id: 'train-followup', name: 'Follow-Up Session', price: 75, desc: '1-hour refresher within 30 days of install' }
+  ]
+};
 
-function goToStep(n) {
-  document.querySelectorAll('.wizard-step').forEach(function(s) { s.classList.remove('active'); });
-  var target = document.getElementById('wizard-step-' + n);
-  if (target) target.classList.add('active');
-  currentStep = n;
-  updateProgress();
-  window.scrollTo({top:0,behavior:'smooth'});
+/* ══════════════════════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════════════════════ */
+var state = {
+  shopName: '',
+  domain: 'subdomain',
+  features: new Set(),
+  plan: 'free',
+  hardware: new Set(),       // items added to cart
+  hardwareOwned: new Set(),  // items user already has
+  setup: 'self',
+  training: new Set()
+};
+
+/* ══════════════════════════════════════════════════════════
+   RENDER FUNCTIONS
+   ══════════════════════════════════════════════════════════ */
+function slugify(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
+
+function renderDomains() {
+  var el = document.getElementById('domainOptions');
+  var html = '';
+  CONFIGURATOR.domains.forEach(function(d) {
+    var shopSlug = slugify(state.shopName) || 'yourshop';
+    var preview = d.format.replace('{shop}', shopSlug);
+    var priceStr = d.price === 0 ? 'Free' : '$' + d.price + d.period;
+    var sel = state.domain === d.id ? ' selected' : '';
+    html += '<label class="domain-option' + sel + '" data-domain="' + d.id + '" onclick="selectDomain(\'' + d.id + '\')">';
+    html += '<input type="radio" name="domain" value="' + d.id + '"' + (sel ? ' checked' : '') + '>';
+    html += '<div class="domain-info"><div class="domain-label">' + d.label + '</div>';
+    html += '<div class="domain-preview">' + preview + '</div>';
+    if (d.desc) html += '<div class="domain-desc">' + d.desc + '</div>';
+    html += '</div><div class="domain-price">' + priceStr + '</div></label>';
+  });
+  el.innerHTML = html;
 }
 
-function wizardChoose(step, name, price) {
-  window.wizardSelections[step] = {name: name, price: price};
-  var sel = document.getElementById('wsel' + step);
-  if (sel) {
-    sel.textContent = name + ' ' + price;
-    sel.classList.add('visible');
+function renderFeatures() {
+  var el = document.getElementById('featureGroups');
+  var html = '';
+  var groups = CONFIGURATOR.features;
+  for (var gKey in groups) {
+    var g = groups[gKey];
+    html += '<div class="feature-group">';
+    html += '<div class="feature-group-title">' + g.label;
+    if (g.monthly) html += '<span class="monthly-tag">Monthly recurring</span>';
+    html += '</div>';
+    g.items.forEach(function(item) {
+      if (item.included) {
+        html += '<div class="feature-row included">';
+        html += '<input type="checkbox" checked disabled>';
+        html += '<span class="feat-name">' + item.name + '</span>';
+        html += '<span class="feat-price">Included</span>';
+        html += '</div>';
+      } else {
+        var checked = state.features.has(item.id) ? ' checked' : '';
+        var priceStr = item.price > 0 ? '$' + item.price + (g.monthly ? '/mo' : '') : '';
+        html += '<label class="feature-row" for="feat-' + item.id + '">';
+        html += '<input type="checkbox" id="feat-' + item.id + '" data-feature="' + item.id + '"' + checked + ' onchange="toggleFeature(\'' + item.id + '\', this.checked)">';
+        html += '<span class="feat-name">' + item.name + '</span>';
+        if (item.revenueShare) {
+          html += '<span class="revenue-share-tag">Revenue share</span>';
+        } else {
+          html += '<span class="feat-price">' + priceStr + '</span>';
+        }
+        html += '</label>';
+      }
+    });
+    html += '</div>';
   }
-  if (step < 3) {
-    setTimeout(function() { goToStep(step + 1); }, 300);
+  el.innerHTML = html;
+}
+
+function renderPlans() {
+  var el = document.getElementById('planGrid');
+  var html = '';
+  CONFIGURATOR.plans.forEach(function(p) {
+    var sel = state.plan === p.id ? ' selected' : '';
+    var rec = p.recommended ? ' recommended' : '';
+    html += '<div class="plan-card' + sel + rec + '" onclick="selectPlan(\'' + p.id + '\')">';
+    if (p.recommended) html += '<div class="plan-badge">Recommended</div>';
+    html += '<div class="plan-name">' + p.name + '</div>';
+    html += '<div class="plan-price">$' + p.price + '</div>';
+    html += '<div class="plan-period">' + (p.price === 0 ? 'Free forever' : '/month') + '</div>';
+    html += '<ul class="plan-features">';
+    p.features.forEach(function(f) { html += '<li>' + f + '</li>'; });
+    html += '</ul></div>';
+  });
+  el.innerHTML = html;
+}
+
+function renderHardware() {
+  var container = document.getElementById('hwItems');
+  var emptyEl = document.getElementById('hwEmpty');
+  var html = '';
+  var visibleCount = 0;
+
+  CONFIGURATOR.hardware.forEach(function(hw) {
+    var isVisible = false;
+    if (hw.recommended) {
+      isVisible = true;
+    }
+    if (hw.requiredFor) {
+      hw.requiredFor.forEach(function(fId) {
+        if (state.features.has(fId)) isVisible = true;
+      });
+    }
+
+    var hiddenClass = isVisible ? '' : ' hidden';
+    if (isVisible) visibleCount++;
+
+    var isAdded = state.hardware.has(hw.id);
+    var isOwned = state.hardwareOwned.has(hw.id);
+    var isRequired = hw.requiredFor && hw.requiredFor.some(function(fId) { return state.features.has(fId); });
+
+    html += '<div class="hw-item' + hiddenClass + (isRequired ? ' required-notice' : '') + '" data-hw="' + hw.id + '">';
+    html += '<div class="hw-img"><img src="' + hw.img + '" alt="' + hw.name + '" loading="lazy"></div>';
+    html += '<div class="hw-info">';
+    if (isRequired) html += '<div class="required-tag">Required for your selection</div>';
+    else if (hw.recommended) html += '<div class="recommended-tag">Recommended</div>';
+    html += '<div class="hw-name">' + hw.name + '</div>';
+    html += '<div class="hw-model">' + hw.model + '</div>';
+    html += '<div class="hw-desc">' + hw.desc + '</div>';
+    html += '<div class="hw-cost">$' + hw.price + ' (at cost &mdash; no markup)</div>';
+    html += '</div>';
+    html += '<div class="hw-actions">';
+    html += '<button class="hw-btn add' + (isAdded ? ' active' : '') + '" onclick="toggleHardware(\'' + hw.id + '\', \'add\')">' + (isAdded ? 'Added' : 'Add to Cart') + '</button>';
+    html += '<button class="hw-btn own' + (isOwned ? ' active' : '') + '" onclick="toggleHardware(\'' + hw.id + '\', \'own\')">' + (isOwned ? 'I Have This' : 'I Already Have This') + '</button>';
+    html += '</div></div>';
+  });
+
+  container.innerHTML = html;
+  emptyEl.style.display = visibleCount > 0 ? 'none' : 'block';
+}
+
+function renderSetup() {
+  var el = document.getElementById('setupOptions');
+  var html = '';
+  CONFIGURATOR.setup.forEach(function(s) {
+    var sel = state.setup === s.id ? ' selected' : '';
+    html += '<div class="setup-card' + sel + '" onclick="selectSetup(\'' + s.id + '\')">';
+    html += '<div class="setup-name">' + s.name + '</div>';
+    html += '<div class="setup-price">' + (s.price === 0 ? 'Free' : '$' + s.price) + '</div>';
+    html += '<div class="setup-desc">' + s.desc + '</div>';
+    html += '</div>';
+  });
+  el.innerHTML = html;
+}
+
+function renderTraining() {
+  var el = document.getElementById('trainingOptions');
+  var html = '';
+  CONFIGURATOR.training.forEach(function(t) {
+    var checked = state.training.has(t.id) ? ' checked' : '';
+    html += '<label class="training-row" for="' + t.id + '">';
+    html += '<input type="checkbox" id="' + t.id + '" data-training="' + t.id + '"' + checked + ' onchange="toggleTraining(\'' + t.id + '\', this.checked)">';
+    html += '<div class="train-info"><div class="train-name">' + t.name + '</div>';
+    html += '<div class="train-desc">' + t.desc + '</div></div>';
+    html += '<span class="train-price">$' + t.price + '</span>';
+    html += '</label>';
+  });
+  el.innerHTML = html;
+}
+
+/* ══════════════════════════════════════════════════════════
+   UPDATE SIDEBAR / TOTALS
+   ══════════════════════════════════════════════════════════ */
+function updateTotal() {
+  var upfront = 0;
+  var monthly = 0;
+  var shares = [];
+  var sidebarHtml = '';
+
+  // Domain
+  var domainData = CONFIGURATOR.domains.find(function(d) { return d.id === state.domain; });
+  if (domainData && domainData.price > 0) {
+    sidebarHtml += '<div class="sidebar-section"><div class="sidebar-section-title">Domain</div>';
+    sidebarHtml += '<div class="sidebar-item"><span class="item-name">' + domainData.label + '</span>';
+    sidebarHtml += '<span class="item-price">$' + domainData.price + domainData.period + '</span></div></div>';
+    upfront += domainData.price; // annual treated as upfront for simplicity
+  }
+
+  // Features
+  var featUpfront = 0;
+  var featMonthly = 0;
+  var featItems = [];
+  var groups = CONFIGURATOR.features;
+  for (var gKey in groups) {
+    var g = groups[gKey];
+    g.items.forEach(function(item) {
+      if (!item.included && state.features.has(item.id)) {
+        if (item.revenueShare) {
+          shares.push({ name: item.name, label: item.shareLabel });
+          featItems.push({ name: item.name, price: 'Rev share', monthly: false, share: true });
+        } else if (g.monthly) {
+          featMonthly += item.price;
+          featItems.push({ name: item.name, price: '$' + item.price + '/mo', monthly: true });
+        } else {
+          featUpfront += item.price;
+          featItems.push({ name: item.name, price: '$' + item.price, monthly: false });
+        }
+      }
+    });
+  }
+  if (featItems.length > 0) {
+    sidebarHtml += '<div class="sidebar-section"><div class="sidebar-section-title">Features</div>';
+    featItems.forEach(function(fi) {
+      sidebarHtml += '<div class="sidebar-item"><span class="item-name">' + fi.name + '</span>';
+      if (fi.share) {
+        sidebarHtml += '<span class="item-price" style="color:var(--accent-green);font-size:11px">' + fi.price + '</span>';
+      } else {
+        sidebarHtml += '<span class="item-price' + (fi.monthly ? ' monthly' : '') + '">' + fi.price + '</span>';
+      }
+      sidebarHtml += '</div>';
+    });
+    sidebarHtml += '</div>';
+  }
+  upfront += featUpfront;
+  monthly += featMonthly;
+
+  // Hosting Plan
+  var planData = CONFIGURATOR.plans.find(function(p) { return p.id === state.plan; });
+  if (planData && planData.price > 0) {
+    sidebarHtml += '<div class="sidebar-section"><div class="sidebar-section-title">Hosting Plan</div>';
+    sidebarHtml += '<div class="sidebar-item"><span class="item-name">' + planData.name + '</span>';
+    sidebarHtml += '<span class="item-price monthly">$' + planData.price + '/mo</span></div></div>';
+    monthly += planData.price;
+  }
+
+  // Hardware
+  var hwTotal = 0;
+  var hwItems = [];
+  CONFIGURATOR.hardware.forEach(function(hw) {
+    if (state.hardware.has(hw.id)) {
+      hwTotal += hw.price;
+      hwItems.push({ name: hw.name, price: hw.price });
+    }
+  });
+  if (hwItems.length > 0) {
+    sidebarHtml += '<div class="sidebar-section"><div class="sidebar-section-title">Hardware</div>';
+    hwItems.forEach(function(hi) {
+      sidebarHtml += '<div class="sidebar-item"><span class="item-name">' + hi.name + '</span>';
+      sidebarHtml += '<span class="item-price">$' + hi.price + '</span></div>';
+    });
+    sidebarHtml += '</div>';
+  }
+  upfront += hwTotal;
+
+  // Setup
+  var setupData = CONFIGURATOR.setup.find(function(s) { return s.id === state.setup; });
+  var setupCost = setupData ? setupData.price : 0;
+  var trainingCost = 0;
+  var setupItems = [];
+  if (setupCost > 0) {
+    setupItems.push({ name: setupData.name, price: setupCost });
+  }
+  CONFIGURATOR.training.forEach(function(t) {
+    if (state.training.has(t.id)) {
+      trainingCost += t.price;
+      setupItems.push({ name: t.name, price: t.price });
+    }
+  });
+  if (setupItems.length > 0) {
+    sidebarHtml += '<div class="sidebar-section"><div class="sidebar-section-title">Setup & Training</div>';
+    setupItems.forEach(function(si) {
+      sidebarHtml += '<div class="sidebar-item"><span class="item-name">' + si.name + '</span>';
+      sidebarHtml += '<span class="item-price">$' + si.price + '</span></div>';
+    });
+    sidebarHtml += '</div>';
+  }
+  upfront += setupCost + trainingCost;
+
+  // Empty state
+  if (!sidebarHtml) {
+    sidebarHtml = '<div class="sidebar-empty">Start selecting features to build your package</div>';
+  }
+
+  // Update sidebar
+  document.getElementById('sidebarContent').innerHTML = sidebarHtml;
+  document.getElementById('sidebarUpfront').textContent = '$' + upfront.toLocaleString();
+  document.getElementById('sidebarMonthly').textContent = '$' + monthly + '/mo';
+
+  // Revenue share disclosure
+  var shareEl = document.getElementById('sidebarShare');
+  var disclosureEl = document.getElementById('revenueDisclosure');
+  if (shares.length > 0) {
+    shareEl.style.display = 'block';
+    shareEl.textContent = '+ revenue share on ' + shares.length + ' item' + (shares.length > 1 ? 's' : '') + ' (only when you earn)';
+    disclosureEl.style.display = 'block';
+    var shareHtml = '';
+    shares.forEach(function(s) {
+      shareHtml += '<li><strong>' + s.name + ':</strong> ' + s.label + '</li>';
+    });
+    document.getElementById('shareItems').innerHTML = shareHtml;
   } else {
-    setTimeout(function() {
-      goToStep(4);
-      populateSummary();
-    }, 300);
+    shareEl.style.display = 'none';
+    disclosureEl.style.display = 'none';
   }
+
+  // Mobile bar
+  document.getElementById('mobileUpfront').textContent = '$' + upfront.toLocaleString();
+  document.getElementById('mobileMonthly').textContent = '$' + monthly + '/mo';
+  document.getElementById('mobileExpand').innerHTML = sidebarHtml;
 }
 
-function updateProgress() {
-  for (var i = 1; i <= 4; i++) {
-    var dot = document.getElementById('wdot' + i);
-    var lab = document.getElementById('wlab' + i);
-    var line = document.getElementById('wline' + i);
-    dot.classList.remove('active', 'done');
-    lab.classList.remove('active', 'done');
-    if (line) line.classList.remove('done');
-    if (i < currentStep) {
-      dot.classList.add('done'); dot.textContent = '\u2713';
-      lab.classList.add('done');
-      if (line) line.classList.add('done');
-    } else if (i === currentStep) {
-      dot.classList.add('active'); dot.textContent = i;
-      lab.classList.add('active');
-    } else { dot.textContent = i; }
-  }
+/* ══════════════════════════════════════════════════════════
+   EVENT HANDLERS
+   ══════════════════════════════════════════════════════════ */
+function selectDomain(id) {
+  state.domain = id;
+  renderDomains();
+  updateTotal();
 }
 
-function populateSummary() {
-  var s = window.wizardSelections;
-  var bundle = s[1] || {name:'—',price:'$0'};
-  var plan = s[2] || {name:'—',price:'$0/mo'};
-  var hw = s[3] || {name:'—',price:'$0'};
-
-  function parsePrice(p) { return parseInt((p||'0').replace(/[^0-9]/g,''),10)||0; }
-  var bundleCost = parsePrice(bundle.price);
-  var planCost = parsePrice(plan.price);
-  var hwCost = parsePrice(hw.price);
-  var upfrontTotal = bundleCost + hwCost;
-  var monthly = planCost;
-
-  // Feature lists by bundle tier
-  var bundleFeatures = {
-    'Site Setup': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Employee management'],
-    'Site + Online Orders': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Online order wizard','Customer accounts & login','Order tracking dashboard','Employee management','Inventory tracking','Calendar & scheduling','Receipt & label printing'],
-    'Full Platform': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Online order wizard','Customer accounts & login','Order tracking dashboard','Employee management','Inventory tracking','Calendar & scheduling','Receipt & label printing','SMS notifications','Email notifications','Automated pickup alerts','SOP library','Driver pickup coordination','Cost & revenue analytics','AI-powered lead generation','Automated marketing campaigns']
-  };
-  var planFeatures = {
-    'Free': ['Website hosting','Secure website (HTTPS)','Help guides & tutorials','Email support'],
-    'Basic': ['Website hosting','Secure website (HTTPS)','24/7 website monitoring','Email support'],
-    'Standard': ['Website hosting','Secure website (HTTPS)','24/7 website monitoring','Email support','Text & email alerts to customers','Google, Waze & Apple Maps setup','Automatic order-ready texts','Monthly business report'],
-    'Premium': ['Website hosting','Secure website (HTTPS)','24/7 website monitoring','Same-day support','Text & email alerts to customers','Google, Waze & Apple Maps setup','Automatic order-ready texts','Monthly business report','Website changes on request','Full tech maintenance','We update your info for you']
-  };
-
-  var allFeatures = (bundleFeatures[bundle.name]||[]).concat(planFeatures[plan.name]||[]);
-  var seen = {};
-  allFeatures = allFeatures.filter(function(f) { if(seen[f]) return false; seen[f]=true; return true; });
-
-  // Revenue projections + share percentages by bundle tier
-  var revenueData = {
-    'Site Setup':          {moLow:500, moHigh:1000, yrLow:6000, yrHigh:12000, share:0.08},
-    'Site + Online Orders':{moLow:1500,moHigh:3000, yrLow:18000,yrHigh:36000, share:0.10},
-    'Full Platform':       {moLow:3000,moHigh:5000, yrLow:36000,yrHigh:60000, share:0.12}
-  };
-  var rev = revenueData[bundle.name] || revenueData['Site Setup'];
-  var sharePct = Math.round(rev.share * 100);
-
-  // Calculate ROI numbers
-  var estMonthlyShareLow = Math.round(rev.moLow * rev.share);
-  var estMonthlyShareHigh = Math.round(rev.moHigh * rev.share);
-  var totalMonthlyPayLow = monthly + estMonthlyShareLow;
-  var totalMonthlyPayHigh = monthly + estMonthlyShareHigh;
-  var roiRatio = totalMonthlyPayLow > 0 ? Math.round(rev.moLow / totalMonthlyPayLow) : 0;
-
-  // Timeline days
-  var dayMap = {'Site Setup':3,'Site + Online Orders':5,'Full Platform':7};
-  var days = dayMap[bundle.name] || 3;
-
-  function fmt(n) { return '$' + n.toLocaleString(); }
-
-  var html = '<div class="summary-layout">';
-
-  // ── A. Revenue Hero ──
-  html += '<div class="revenue-hero">';
-  html += '<div class="hero-subtitle">Here\'s how much more your shop will earn</div>';
-  html += '<div class="hero-numbers">';
-  html += '<div class="hero-stat"><div class="hero-num">+' + fmt(rev.moLow) + '–' + rev.moHigh.toLocaleString() + '</div><div class="hero-label">Projected Monthly Revenue Increase</div></div>';
-  html += '<div class="hero-stat"><div class="hero-num">+' + fmt(rev.yrLow) + '–' + rev.yrHigh.toLocaleString() + '</div><div class="hero-label">Projected Annual Revenue Increase</div></div>';
-  html += '</div></div>';
-
-  // ── B. What You Pay vs What You Make ──
-  html += '<div class="roi-comparison"><h3>What You Pay vs What You Make</h3>';
-  html += '<div class="roi-columns">';
-  html += '<div class="roi-col invest">';
-  html += '<div class="roi-col-title">Your Investment</div>';
-  html += '<div class="roi-col-amount">' + fmt(totalMonthlyPayLow) + '–' + fmt(totalMonthlyPayHigh) + '</div>';
-  html += '<div class="roi-col-detail">' + fmt(upfrontTotal) + ' upfront + ' + fmt(estMonthlyShareLow) + '–' + fmt(estMonthlyShareHigh) + ' share/mo' + (monthly > 0 ? ' + ' + fmt(monthly) + ' plan/mo' : '') + '</div>';
-  html += '</div>';
-  html += '<div class="roi-vs">→</div>';
-  html += '<div class="roi-col earn">';
-  html += '<div class="roi-col-title">Your Revenue</div>';
-  html += '<div class="roi-col-amount">+' + fmt(rev.moLow) + '–' + fmt(rev.moHigh) + '</div>';
-  html += '<div class="roi-col-detail">Projected new monthly revenue</div>';
-  html += '</div>';
-  html += '</div>';
-  if (roiRatio > 1) {
-    html += '<div class="roi-badge-wrap"><div class="roi-badge">For every $1 you pay us, you earn $' + roiRatio + '</div></div>';
-  }
-  html += '<div class="guarantee-callout"><span>&#9888;</span> If we don\'t bring you revenue, you don\'t pay us</div>';
-  html += '<div class="guarantee-note">Revenue share only applies to new revenue generated through your SewReady platform</div>';
-  html += '</div>';
-
-  // ── C. Revenue Share Breakdown ──
-  html += '<div class="share-breakdown"><h3>Revenue Share Breakdown</h3>';
-  html += '<div class="share-math"><div class="share-pct">Your share rate: ' + sharePct + '% of new platform revenue</div></div>';
-  html += '<div class="share-example">';
-  html += '<div class="example-label">Example calculation (' + bundle.name + '):</div>';
-  html += '<div class="example-math">If your platform generates ' + fmt(rev.moLow) + '/mo in new revenue → you pay ' + fmt(estMonthlyShareLow) + '/mo (' + sharePct + '%), you keep ' + fmt(rev.moLow - estMonthlyShareLow) + '/mo</div>';
-  html += '</div>';
-  html += '<div class="share-scenarios">';
-  html += '<div class="share-scenario conservative"><div class="scenario-title">Conservative Estimate</div>';
-  html += '<div class="scenario-rev">+' + fmt(rev.moLow) + '/mo</div>';
-  html += '<div class="scenario-share">You pay ' + fmt(estMonthlyShareLow) + '/mo share</div>';
-  html += '<div class="scenario-annual">Annual: +' + fmt(rev.yrLow) + ' revenue, ' + fmt(estMonthlyShareLow * 12) + ' share</div></div>';
-  html += '<div class="share-scenario best"><div class="scenario-title">Best Case Estimate</div>';
-  html += '<div class="scenario-rev">+' + fmt(rev.moHigh) + '/mo</div>';
-  html += '<div class="scenario-share">You pay ' + fmt(estMonthlyShareHigh) + '/mo share</div>';
-  html += '<div class="scenario-annual">Annual: +' + fmt(rev.yrHigh) + ' revenue, ' + fmt(estMonthlyShareHigh * 12) + ' share</div></div>';
-  html += '</div></div>';
-
-  // ── D. Your Selections (compact) ──
-  html += '<div class="selections-compact"><h3>Your Selections</h3>';
-  html += '<div class="selections-row">';
-  html += '<div class="sel-col"><div class="sel-label">Bundle</div><div class="sel-name">' + bundle.name + '</div><div class="sel-price">' + bundle.price + '</div></div>';
-  html += '<div class="sel-col"><div class="sel-label">Plan</div><div class="sel-name">' + plan.name + '</div><div class="sel-price">' + plan.price + '</div></div>';
-  html += '<div class="sel-col"><div class="sel-label">Setup &amp; Training</div><div class="sel-name">' + hw.name + '</div><div class="sel-price">' + hw.price + '</div></div>';
-  html += '</div></div>';
-
-  // ── E. What You're Getting ──
-  html += '<div class="summary-card"><h3>What You\'re Getting</h3>';
-  html += '<ul class="feature-checklist">';
-  allFeatures.forEach(function(f) { html += '<li>' + f + '</li>'; });
-  html += '</ul></div>';
-
-  // ── F. Setup Timeline ──
-  html += '<div class="summary-card"><h3>Setup Timeline</h3>';
-  html += '<div class="timeline-steps">';
-  html += '<div class="timeline-step"><div class="tl-day">Day 1</div><div class="tl-label">Onboarding call & info gathering</div></div>';
-  html += '<div class="timeline-step"><div class="tl-day">Day 2–' + Math.max(days-1,2) + '</div><div class="tl-label">Build & configure your platform</div></div>';
-  html += '<div class="timeline-step"><div class="tl-day">Day ' + days + '</div><div class="tl-label">Review, launch & go live</div></div>';
-  html += '</div></div>';
-
-  // ── G. CTA Button ──
-  html += '<button class="summary-checkout" onclick="document.querySelector(\'.snipcart-checkout\').click()">Start Growing Your Revenue</button>';
-  html += '</div>';
-
-  document.getElementById('summaryContent').innerHTML = html;
+function toggleFeature(id, checked) {
+  if (checked) state.features.add(id);
+  else state.features.delete(id);
+  renderHardware();
+  updateTotal();
 }
 
-function expandCard(card, event) {
-  var detailId = card.getAttribute('data-detail');
-  if (!detailId) return;
+function selectPlan(id) {
+  state.plan = id;
+  renderPlans();
+  updateTotal();
+}
 
-  // If this card is already expanded, collapse it
-  if (card.classList.contains('expanded')) {
-    collapseCard();
+function toggleHardware(id, action) {
+  if (action === 'add') {
+    if (state.hardware.has(id)) {
+      state.hardware.delete(id);
+    } else {
+      state.hardware.add(id);
+      state.hardwareOwned.delete(id);
+    }
+  } else if (action === 'own') {
+    if (state.hardwareOwned.has(id)) {
+      state.hardwareOwned.delete(id);
+    } else {
+      state.hardwareOwned.add(id);
+      state.hardware.delete(id);
+    }
+  }
+  renderHardware();
+  updateTotal();
+}
+
+function selectSetup(id) {
+  state.setup = id;
+  renderSetup();
+  updateTotal();
+}
+
+function toggleTraining(id, checked) {
+  if (checked) state.training.add(id);
+  else state.training.delete(id);
+  updateTotal();
+}
+
+function toggleMobileExpand() {
+  document.getElementById('mobileBar').classList.toggle('expanded');
+}
+
+// Shop name debounce
+var nameTimer;
+document.getElementById('shopName').addEventListener('input', function() {
+  var val = this.value.trim();
+  clearTimeout(nameTimer);
+  nameTimer = setTimeout(function() {
+    state.shopName = val;
+    renderDomains();
+  }, 200);
+});
+
+/* ══════════════════════════════════════════════════════════
+   SNIPCART INTEGRATION
+   ══════════════════════════════════════════════════════════ */
+function addAllToCart() {
+  // Collect all selected items as Snipcart line items
+  var items = [];
+
+  // Domain (if paid)
+  var domainData = CONFIGURATOR.domains.find(function(d) { return d.id === state.domain; });
+  if (domainData && domainData.price > 0) {
+    items.push({
+      id: 'domain-' + domainData.id,
+      name: 'Domain: ' + domainData.label,
+      price: domainData.price,
+      url: '/',
+      description: domainData.label + (domainData.desc ? ' — ' + domainData.desc : ''),
+      shippable: false,
+      maxQuantity: 1
+    });
+  }
+
+  // Features (one-time)
+  var groups = CONFIGURATOR.features;
+  for (var gKey in groups) {
+    var g = groups[gKey];
+    g.items.forEach(function(item) {
+      if (!item.included && state.features.has(item.id) && item.price > 0) {
+        var snipcartItem = {
+          id: 'feat-' + item.id,
+          name: item.name,
+          price: item.price,
+          url: '/',
+          description: item.name + (g.monthly ? ' (monthly)' : ' (one-time setup)'),
+          shippable: false,
+          maxQuantity: 1
+        };
+        if (g.monthly) {
+          snipcartItem.paymentInterval = 'Month';
+          snipcartItem.paymentIntervalCount = 1;
+        }
+        items.push(snipcartItem);
+      }
+    });
+  }
+
+  // Plan
+  var planData = CONFIGURATOR.plans.find(function(p) { return p.id === state.plan; });
+  if (planData && planData.price > 0) {
+    items.push({
+      id: 'plan-' + planData.id,
+      name: 'SewReady ' + planData.name + ' Plan',
+      price: planData.price,
+      url: '/',
+      description: planData.name + ' hosting & support — $' + planData.price + '/mo',
+      shippable: false,
+      maxQuantity: 1,
+      paymentInterval: 'Month',
+      paymentIntervalCount: 1
+    });
+  }
+
+  // Hardware
+  CONFIGURATOR.hardware.forEach(function(hw) {
+    if (state.hardware.has(hw.id)) {
+      items.push({
+        id: 'hw-' + hw.id,
+        name: hw.name + ' (' + hw.model + ')',
+        price: hw.price,
+        url: '/',
+        description: hw.desc,
+        shippable: true,
+        maxQuantity: 1
+      });
+    }
+  });
+
+  // Setup
+  var setupData = CONFIGURATOR.setup.find(function(s) { return s.id === state.setup; });
+  if (setupData && setupData.price > 0) {
+    items.push({
+      id: 'setup-' + setupData.id,
+      name: setupData.name,
+      price: setupData.price,
+      url: '/',
+      description: setupData.desc,
+      shippable: false,
+      maxQuantity: 1
+    });
+  }
+
+  // Training
+  CONFIGURATOR.training.forEach(function(t) {
+    if (state.training.has(t.id)) {
+      items.push({
+        id: 'train-' + t.id,
+        name: t.name,
+        price: t.price,
+        url: '/',
+        description: t.desc,
+        shippable: false,
+        maxQuantity: 1
+      });
+    }
+  });
+
+  if (items.length === 0) {
+    // Nothing selected — just open cart
+    document.querySelector('.snipcart-checkout').click();
     return;
   }
 
-  // Collapse any other expanded card in this step first
-  var step = card.closest('.wizard-step');
-  if (step) {
-    step.querySelectorAll('.price-card.expanded').forEach(function(c) { c.classList.remove('expanded'); });
-    step.querySelectorAll('.package-detail.open').forEach(function(p) {
-      p.classList.remove('open');
-      p.querySelectorAll('iframe[src]').forEach(function(f) {
-        f.setAttribute('data-src', f.src);
-        f.removeAttribute('src');
+  // Use Snipcart JS API to add items
+  if (window.Snipcart) {
+    // Clear cart first, then add all items
+    window.Snipcart.api.cart.items.clear().then(function() {
+      var chain = Promise.resolve();
+      items.forEach(function(item) {
+        chain = chain.then(function() {
+          var addObj = {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            url: item.url,
+            description: item.description,
+            shippable: item.shippable,
+            maxQuantity: item.maxQuantity,
+            quantity: 1
+          };
+          if (item.paymentInterval) {
+            addObj.paymentInterval = item.paymentInterval;
+            addObj.paymentIntervalCount = item.paymentIntervalCount;
+          }
+          return window.Snipcart.api.cart.items.add(addObj);
+        });
+      });
+      chain.then(function() {
+        window.Snipcart.api.theme.cart.open();
       });
     });
-  }
-
-  card.classList.add('expanded');
-  var panel = document.getElementById(detailId);
-  if (panel) {
-    panel.classList.add('open');
-    panel.querySelectorAll('iframe[data-src]').forEach(function(f) {
-      if (!f.src) f.src = f.getAttribute('data-src');
-    });
+  } else {
+    // Fallback — just open checkout
+    document.querySelector('.snipcart-checkout').click();
   }
 }
 
-function collapseCard() {
-  document.querySelectorAll('.price-card.expanded').forEach(function(c) { c.classList.remove('expanded'); });
-  document.querySelectorAll('.package-detail.open').forEach(function(p) {
-    p.classList.remove('open');
-    p.querySelectorAll('iframe[src]').forEach(function(f) {
-      f.setAttribute('data-src', f.src);
-      f.removeAttribute('src');
-    });
-  });
-}
-
-// ── Fullscreen Demo ──────────────────────────────────────
-function openDemoFullscreen(label, url) {
-  document.getElementById('demoFsTitle').textContent = label;
-  document.getElementById('demoFsIframe').src = url;
-  document.getElementById('demoFullscreen').classList.add('open');
-}
-
-function closeDemoFullscreen() {
-  var overlay = document.getElementById('demoFullscreen');
-  overlay.classList.remove('open');
-  document.getElementById('demoFsIframe').src = '';
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeDemoFullscreen();
-});
-
-// ── Feature Highlight on Hover ──────────────────────────
-document.addEventListener('mouseover', function(e) {
-  var li = e.target.closest('li[data-feature]');
-  if (!li) return;
-  var slug = li.getAttribute('data-feature');
-  li.classList.add('feature-highlight');
-  var step = li.closest('.wizard-step');
-  if (!step) return;
-  var card = step.querySelector('.package-detail.open [data-feature="' + slug + '"]');
-  if (card) {
-    card.classList.add('card-highlight');
-    card.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
-  }
-});
-document.addEventListener('mouseout', function(e) {
-  var li = e.target.closest('li[data-feature]');
-  if (!li) return;
-  li.classList.remove('feature-highlight');
-  document.querySelectorAll('.card-highlight').forEach(function(c) { c.classList.remove('card-highlight'); });
-});
-
-// Attach click handlers to all demo cards
+/* ══════════════════════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.demo-card').forEach(function(card) {
-    card.addEventListener('click', function(e) {
-      // Don't trigger if clicking a link inside the card
-      if (e.target.closest('a')) return;
-      var label = card.querySelector('.demo-label');
-      var iframe = card.querySelector('iframe');
-      if (!iframe) return;
-      var url = iframe.src || iframe.getAttribute('data-src');
-      if (url) openDemoFullscreen(label ? label.textContent : 'Demo', url);
-    });
-  });
+  renderDomains();
+  renderFeatures();
+  renderPlans();
+  renderHardware();
+  renderSetup();
+  renderTraining();
+  updateTotal();
 });
 </script>
-
-<!-- Fullscreen Demo Overlay -->
-<div class="demo-fullscreen-overlay" id="demoFullscreen" onclick="if(event.target===this)closeDemoFullscreen()">
-  <div class="demo-fs-modal">
-    <div class="demo-fullscreen-bar">
-      <span class="demo-fs-title" id="demoFsTitle"></span>
-      <button class="demo-fs-close" onclick="closeDemoFullscreen()">&times;</button>
-    </div>
-    <iframe id="demoFsIframe"></iframe>
-  </div>
-</div>
 
 <div hidden id="snipcart" data-api-key="Y2QzMWQ1NWQtNjc3NC00MDY1LThkMmQtY2ZmNzg5ZDkwMWE2NjM5MDc5MTUyNTMxMDc3MzE4" data-config-modal-style="side"></div>
 <script src="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js"></script>
