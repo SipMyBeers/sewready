@@ -198,7 +198,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .preview-iframe-wrap{position:relative;height:520px;overflow-y:auto;overflow-x:hidden}
 .preview-iframe-wrap::-webkit-scrollbar{width:4px}
 .preview-iframe-wrap::-webkit-scrollbar-thumb{background:var(--glass-strong);border-radius:2px}
-.preview-iframe{width:420px;height:2500px;border:none;pointer-events:none}
+.preview-iframe{width:420px;height:2500px;border:none}
 
 /* Price Summary */
 .sidebar-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;overflow:hidden}
@@ -347,7 +347,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <button class="preview-expand-btn" onclick="expandDemoSite()">View Demo</button>
       </div>
       <div class="preview-iframe-wrap" id="previewWrap">
-        <iframe class="preview-iframe" id="previewIframe" src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy" onload="onPreviewLoad()"></iframe>
+        <iframe class="preview-iframe" id="previewIframe" src="demos/configurator-preview.html" loading="lazy"></iframe>
       </div>
     </div>
 
@@ -791,89 +791,86 @@ function renderSetup() {
 /* ══════════════════════════════════════════════════════════
    LIVE PREVIEW
    ══════════════════════════════════════════════════════════ */
-/* Preview: inject CSS into the live-site iframe to grey out unselected features */
+/* Preview: communicate with configurator-preview.html via postMessage */
 var _previewReady = false;
+var _demoReady = false;
 
-function onPreviewLoad() {
-  _previewReady = true;
-  updatePreview();
+function sendFeaturesToPreview() {
+  var featureArr = [];
+  state.features.forEach(function(f) { featureArr.push(f); });
+  var msg = { type: 'updateFeatures', features: featureArr };
+
+  // Send to sidebar iframe
+  var sidebarIframe = document.getElementById('previewIframe');
+  if (sidebarIframe && sidebarIframe.contentWindow) {
+    sidebarIframe.contentWindow.postMessage(msg, '*');
+  }
+
+  // Send to fullscreen demo iframe if open
+  var demoIframe = document.getElementById('demoFullIframe');
+  if (demoIframe && demoIframe.contentWindow && _demoReady) {
+    demoIframe.contentWindow.postMessage(msg, '*');
+  }
+
+  // Send shop name
+  var nameMsg = { type: 'updateShopName', name: state.shopName || 'SewReady' };
+  if (sidebarIframe && sidebarIframe.contentWindow) {
+    sidebarIframe.contentWindow.postMessage(nameMsg, '*');
+  }
+  if (demoIframe && demoIframe.contentWindow && _demoReady) {
+    demoIframe.contentWindow.postMessage(nameMsg, '*');
+  }
 }
 
 function updatePreview() {
   document.getElementById('previewUrl').textContent = getDomainPreview();
-  if (!_previewReady) return;
-
-  var iframe = document.getElementById('previewIframe');
-  var doc;
-  try { doc = iframe.contentDocument || iframe.contentWindow.document; } catch(e) { return; }
-  if (!doc || !doc.head) return;
-
-  // Get or create our injected style tag
-  var style = doc.getElementById('cfg-preview-css');
-  if (!style) {
-    style = doc.createElement('style');
-    style.id = 'cfg-preview-css';
-    doc.head.appendChild(style);
-  }
-
-  var locked = 'filter:grayscale(1)!important;opacity:.22!important;pointer-events:none!important;user-select:none!important;transition:all .4s ease!important';
-  var css = '';
-
-  // Map integration (map embed inside location card)
-  if (!state.features.has('maps')) {
-    css += '#shopMapEmbed{' + locked + '}\n';
-  }
-
-  // Contact form (Contact Now button in hero + location contact details)
-  if (!state.features.has('contact')) {
-    css += '.cust-hero-content>div:last-child{' + locked + '}\n';
-    css += '.cust-location-detail{' + locked + '}\n';
-  }
-
-  // SEO — no direct visual element on customer site, skip
-
-  // Services display (services showcase section)
-  if (!state.features.has('services-display')) {
-    css += '#services{' + locked + '}\n';
-  }
-
-  // Customer accounts (Sign In button in nav)
-  if (!state.features.has('customer-accounts')) {
-    css += '#navAuth{' + locked + '}\n';
-  }
-
-  // Order wizard (Make an Order button)
-  if (!state.features.has('order-wizard')) {
-    css += '.cust-hero-ctas .cust-btn-secondary{' + locked + '}\n';
-    css += '.cust-orders-banner{' + locked + '}\n';
-  }
-
-  // Order tracking (Track My Order button)
-  if (!state.features.has('order-tracking')) {
-    css += '.cust-hero-ctas .cust-btn-primary{' + locked + '}\n';
-  }
-
-  // Calendar & scheduling (entire calendar section)
-  if (!state.features.has('calendar')) {
-    css += '.cust-bigcal-section{' + locked + '}\n';
-  }
-
-  // Inventory tracking (store inventory section)
-  if (!state.features.has('inventory')) {
-    css += '#storeInventory{' + locked + '}\n';
-  }
-
-  // Chat FAB — grey out if no SMS/email selected
-  if (!state.features.has('sms') && !state.features.has('email-notif')) {
-    css += '.cust-chat-fab,.cust-chat-panel{' + locked + '}\n';
-  }
-
-  style.textContent = css;
+  sendFeaturesToPreview();
 }
 
+/* Listen for messages from preview iframes */
+window.addEventListener('message', function(e) {
+  if (!e.data || !e.data.type) return;
+
+  // Preview iframe is ready — send current state
+  if (e.data.type === 'previewReady') {
+    _previewReady = true;
+    sendFeaturesToPreview();
+  }
+
+  // User clicked "Unlock" on a feature in the preview
+  if (e.data.type === 'unlockFeature' && e.data.featureId) {
+    var fId = e.data.featureId;
+    // Toggle the feature on (if not already)
+    if (!state.features.has(fId)) {
+      state.features.add(fId);
+      // Update the checkbox in the features list
+      var cb = document.getElementById('feat-' + fId);
+      if (cb) cb.checked = true;
+      // Open the demo card
+      var demoEl = document.getElementById('demo-' + fId);
+      if (demoEl) {
+        demoEl.classList.add('open');
+        var iframe = demoEl.querySelector('iframe');
+        if (iframe && iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+          iframe.removeAttribute('data-src');
+        }
+      }
+      renderHardware();
+      recalc();
+    }
+  }
+});
+
 function expandDemoSite() {
-  document.getElementById('demoFullTitle').textContent = 'Live Site Demo';
-  document.getElementById('demoFullIframe').src = 'https://sewing.ranger-beers.com/shops/aaa-tailor/';
+  _demoReady = false;
+  document.getElementById('demoFullTitle').textContent = 'Live Site Preview';
+  var demoIframe = document.getElementById('demoFullIframe');
+  demoIframe.src = 'demos/configurator-preview.html';
+  demoIframe.onload = function() {
+    _demoReady = true;
+    sendFeaturesToPreview();
+  };
   document.getElementById('demoFullscreen').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
