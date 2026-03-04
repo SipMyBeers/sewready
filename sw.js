@@ -4,7 +4,7 @@
 //  stale-while-revalidate for HTML
 // ══════════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'sewready-v4';
+const CACHE_VERSION = 'sewready-v5';
 const STATIC_CACHE = CACHE_VERSION + '-static';
 const API_CACHE = CACHE_VERSION + '-api';
 
