@@ -264,73 +264,59 @@
   flex-wrap: wrap;
 }
 
-/* ── Hero Contact Area ──────────────────────────────────── */
-.cust-hero-contact {
-  margin-top: 40px;
+/* ── Hero Compact Contact ───────────────────────────────── */
+.cust-hero-compact {
+  margin-top: 28px;
   width: 100%;
-  max-width: 560px;
+  max-width: 640px;
 }
 .cust-hero-info-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 28px;
-  padding: 12px 20px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
+  margin-bottom: 12px;
 }
 .cust-hero-info-sep {
   color: var(--glass-border);
 }
-.cust-hero-info-btns {
-  display: flex;
-  gap: 8px;
-  margin-left: 8px;
-}
 .cust-hero-info-call,
 .cust-hero-info-dir {
-  padding: 4px 14px;
-  border-radius: 6px;
   font-size: 11px;
   font-weight: 600;
   text-decoration: none;
-  transition: all .2s;
-  white-space: nowrap;
+  color: var(--accent-blue);
+  transition: color .2s;
 }
-.cust-hero-info-call {
-  background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+.cust-hero-info-call:hover,
+.cust-hero-info-dir:hover {
   color: var(--white);
 }
-.cust-hero-info-dir {
-  background: rgba(255,255,255,.08);
-  color: var(--text-primary);
-  border: 1px solid var(--glass-border);
+.cust-hero-mini-form {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.cust-hero-info-dir:hover {
-  background: rgba(255,255,255,.15);
+.cust-hero-mini-form .cust-input-sm {
+  height: 34px;
+  padding: 0 10px;
+  font-size: 12px;
+  flex: 1;
+  min-width: 90px;
+  max-width: 140px;
+  border-radius: 8px;
 }
-.cust-hero-contact-form {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  padding: 28px 24px;
-  text-align: left;
-}
-.cust-hero-contact-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--accent-gold);
-  margin: 0 0 6px;
-}
-.cust-hero-contact-sub {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin: 0 0 18px;
+.cust-hero-mini-form .cust-btn-sm {
+  height: 34px;
+  padding: 0 16px;
+  font-size: 12px;
+  border-radius: 8px;
+  white-space: nowrap;
 }
 
 /* ── Sections ────────────────────────────────────────────── */

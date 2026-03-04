@@ -2040,14 +2040,14 @@ function applyShopConfig() {
   const brandEl = document.querySelector('.cust-brand-name');
   if (brandEl && sc.name) brandEl.textContent = sc.name;
 
-  // Top bar info
+  // Hero info bar
   if (sc.address) {
-    document.querySelectorAll('.cust-topbar-addr').forEach(el => {
+    document.querySelectorAll('.cust-hero-info-addr').forEach(el => {
       el.innerHTML = '&#128205; ' + sc.address;
     });
   }
   if (sc.phone) {
-    document.querySelectorAll('.cust-topbar-phone').forEach(el => {
+    document.querySelectorAll('.cust-hero-info-phone').forEach(el => {
       el.innerHTML = '&#128222; ' + sc.phone;
     });
     // Update tel: links with digits only
@@ -2055,6 +2055,12 @@ function applyShopConfig() {
     document.querySelectorAll('a[href^="tel:"]').forEach(a => {
       a.href = 'tel:' + digits;
     });
+    // Update directions link
+    if (sc.address) {
+      document.querySelectorAll('.cust-hero-info-dir').forEach(a => {
+        a.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(sc.address);
+      });
+    }
   }
 
   // Hero title / subtitle
