@@ -19,3 +19,34 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy . --project-name=sewready
+
+      - name: Purge Cloudflare cache
+        if: success()
+        run: |
+          # Look up zone ID for ranger-beers.com
+          ZONE_ID=$(curl -s -X GET \
+            "https://api.cloudflare.com/client/v4/zones?name=ranger-beers.com&account.id=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            | jq -r '.result[0].id // empty')
+
+          if [ -z "$ZONE_ID" ]; then
+            echo "⚠️  Could not find zone ID for ranger-beers.com — skipping cache purge"
+            echo "   Ensure the API token has Zone:Read permission"
+            exit 0
+          fi
+
+          echo "Purging cache for zone $ZONE_ID..."
+          RESULT=$(curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+
+          SUCCESS=$(echo "$RESULT" | jq -r '.success')
+          if [ "$SUCCESS" = "true" ]; then
+            echo "✅ Cache purged successfully"
+          else
+            echo "⚠️  Cache purge failed: $RESULT"
+            echo "   Ensure the API token has Zone:Cache Purge permission"
+          fi
