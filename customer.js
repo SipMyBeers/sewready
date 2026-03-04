@@ -1559,8 +1559,86 @@ function resolveCartItem(c) {
   return null;
 }
 
+// ── Item Customization ──────────────────────────────────────
+// Items that require customization before adding to cart
+const CUSTOMIZABLE_ITEMS = {
+  'SVC-002': {
+    title: 'Custom Nametape',
+    fields: [
+      { key: 'nameText', label: 'Name', type: 'text', placeholder: 'e.g. RODRIGUEZ', required: true },
+      { key: 'pattern', label: 'Pattern', type: 'select', options: ['OCP', 'UCP'], required: true },
+      { key: 'velcro', label: 'Backing', type: 'select', options: ['Velcro (Hook & Loop)', 'Sew-On (No Velcro)'], required: true }
+    ]
+  }
+};
+
+let _pendingCustomize = null;
+
+function openCustomize(type, id, config) {
+  _pendingCustomize = { type, id };
+  document.getElementById('customizeTitle').textContent = config.title;
+  const container = document.getElementById('customizeFields');
+  container.innerHTML = config.fields.map(f => {
+    if (f.type === 'text') {
+      return '<div class="cust-form-group">' +
+        '<label>' + f.label + (f.required ? ' *' : '') + '</label>' +
+        '<input type="text" class="cust-input" id="cust_cf_' + f.key + '" placeholder="' + (f.placeholder || '') + '">' +
+      '</div>';
+    }
+    if (f.type === 'select') {
+      return '<div class="cust-form-group">' +
+        '<label>' + f.label + (f.required ? ' *' : '') + '</label>' +
+        '<select class="cust-input" id="cust_cf_' + f.key + '">' +
+          f.options.map(o => '<option value="' + o + '">' + o + '</option>').join('') +
+        '</select>' +
+      '</div>';
+    }
+    return '';
+  }).join('');
+  document.getElementById('customizeOverlay').style.display = 'flex';
+}
+
+function closeCustomize() {
+  document.getElementById('customizeOverlay').style.display = 'none';
+  _pendingCustomize = null;
+}
+
+function confirmCustomize() {
+  if (!_pendingCustomize) return;
+  var type = _pendingCustomize.type;
+  var id = _pendingCustomize.id;
+  var config = CUSTOMIZABLE_ITEMS[id];
+  var customData = {};
+  var valid = true;
+
+  config.fields.forEach(function(f) {
+    var el = document.getElementById('cust_cf_' + f.key);
+    var val = el ? el.value.trim() : '';
+    if (f.required && !val) valid = false;
+    customData[f.key] = val;
+  });
+
+  if (!valid) { showToast('Please fill in all required fields'); return; }
+
+  // Build a display label with customization details
+  var label = config.title + ' (' + customData.nameText.toUpperCase() + ', ' + customData.pattern + ', ' + customData.velcro + ')';
+
+  // Add to cart with custom data
+  cart.push({ type: type, id: id, qty: 1, custom: customData, customLabel: label });
+  saveCart();
+  updateCartBadge();
+  showToast('Added: ' + label);
+  closeCustomize();
+}
+
 function addToCart(type, id) {
-  const existing = cart.find(c => c.type === type && c.id === id);
+  // Check for customizable items
+  if (CUSTOMIZABLE_ITEMS[id]) {
+    openCustomize(type, id, CUSTOMIZABLE_ITEMS[id]);
+    return;
+  }
+
+  const existing = cart.find(c => c.type === type && c.id === id && !c.custom);
   if (existing) {
     existing.qty++;
   } else {
@@ -1574,6 +1652,13 @@ function addToCart(type, id) {
 
 function removeFromCart(type, id) {
   cart = cart.filter(c => !(c.type === type && c.id === id));
+  saveCart();
+  updateCartBadge();
+  renderCartDrawer();
+}
+
+function removeCartByIndex(idx) {
+  cart.splice(idx, 1);
   saveCart();
   updateCartBadge();
   renderCartDrawer();
@@ -1626,23 +1711,26 @@ function renderCartDrawer() {
 
   footer.style.display = 'block';
   let total = 0;
-  container.innerHTML = cart.map(c => {
+  container.innerHTML = cart.map((c, idx) => {
     const item = resolveCartItem(c);
     if (!item) return '';
     const lineTotal = item.price * c.qty;
     total += lineTotal;
+    const displayName = c.customLabel || item.name;
     return '<div class="cust-cart-item">' +
       '<div class="cust-cart-item-info">' +
-        '<div class="cust-cart-item-name">' + item.name + '</div>' +
+        '<div class="cust-cart-item-name">' + displayName + '</div>' +
         '<div class="cust-cart-item-type">' + (c.type === 'svc' ? t('cart.service') : t('cart.supply')) + '</div>' +
       '</div>' +
       '<div class="cust-cart-qty">' +
-        '<button onclick="updateCartQty(\'' + c.type + '\',\'' + c.id + '\',-1)">-</button>' +
-        '<span>' + c.qty + '</span>' +
-        '<button onclick="updateCartQty(\'' + c.type + '\',\'' + c.id + '\',1)">+</button>' +
+        (c.custom
+          ? '<span>' + c.qty + '</span>'
+          : '<button onclick="updateCartQty(\'' + c.type + '\',\'' + c.id + '\',-1)">-</button>' +
+            '<span>' + c.qty + '</span>' +
+            '<button onclick="updateCartQty(\'' + c.type + '\',\'' + c.id + '\',1)">+</button>') +
       '</div>' +
       '<div class="cust-cart-item-price">' + fmt(lineTotal) + '</div>' +
-      '<button class="cust-cart-item-remove" onclick="removeFromCart(\'' + c.type + '\',\'' + c.id + '\')" title="Remove">&times;</button>' +
+      '<button class="cust-cart-item-remove" onclick="removeCartByIndex(' + idx + ')" title="Remove">&times;</button>' +
     '</div>';
   }).join('');
   totalEl.textContent = fmt(total);
@@ -2247,6 +2335,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close auth modal on overlay click
   document.getElementById('authOverlay').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeAuth();
+  });
+
+  // Close customize modal on overlay click
+  document.getElementById('customizeOverlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeCustomize();
   });
 
   // Enter key handlers for auth forms

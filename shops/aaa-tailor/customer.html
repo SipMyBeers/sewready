@@ -17,21 +17,6 @@
     <span class="cust-orders-banner-cta">Shop Now &rarr;</span>
   </div>
 
-  <!-- ── Top Info Bar ────────────────────────────────────────── -->
-  <div class="cust-topbar">
-    <div class="cust-topbar-inner">
-      <div class="cust-topbar-info">
-        <span class="cust-topbar-addr">&#128205; 123 Bragg Blvd, Fayetteville, NC 28301</span>
-        <span class="cust-topbar-sep">|</span>
-        <span class="cust-topbar-phone">&#128222; (555) 867-5309</span>
-      </div>
-      <div class="cust-topbar-actions">
-        <a href="tel:5558675309" class="cust-topbar-btn cust-topbar-btn-call">&#128222; Call Now</a>
-        <a href="https://maps.google.com" target="_blank" class="cust-topbar-btn cust-topbar-btn-dir">&#128205; Get Directions</a>
-      </div>
-    </div>
-  </div>
-
   <!-- ── Sticky Nav ────────────────────────────────────────── -->
   <nav class="cust-nav" id="custNav">
     <div class="cust-nav-inner">
@@ -84,6 +69,43 @@
         <div class="cust-hero-ctas">
           <button class="cust-btn-primary" onclick="openAuth()" data-i18n="hero.track">Track My Order</button>
           <button class="cust-btn-secondary" onclick="handleMakeOrder()" data-i18n="hero.order">Make an Order</button>
+        </div>
+
+        <!-- Contact Info + Form (below CTAs) -->
+        <div class="cust-hero-contact">
+          <div class="cust-hero-info-bar">
+            <span>&#128205; 123 Bragg Blvd, Fayetteville, NC 28301</span>
+            <span class="cust-hero-info-sep">|</span>
+            <span>&#128222; (555) 867-5309</span>
+            <div class="cust-hero-info-btns">
+              <a href="tel:5558675309" class="cust-btn-sm cust-hero-info-call">&#128222; Call Now</a>
+              <a href="https://maps.google.com" target="_blank" class="cust-btn-sm cust-hero-info-dir">&#128205; Get Directions</a>
+            </div>
+          </div>
+
+          <div class="cust-hero-contact-form" id="contactForm">
+            <h3 class="cust-hero-contact-title">Get In Touch</h3>
+            <p class="cust-hero-contact-sub">Questions? Send us a message and we'll get back to you.</p>
+            <div class="cust-form-group">
+              <label>Your Name *</label>
+              <input type="text" id="cfName" class="cust-input" placeholder="Your name">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div class="cust-form-group">
+                <label>Phone</label>
+                <input type="tel" id="cfPhone" class="cust-input" placeholder="(555) 000-0000">
+              </div>
+              <div class="cust-form-group">
+                <label>Email</label>
+                <input type="email" id="cfEmail" class="cust-input" placeholder="you@email.com">
+              </div>
+            </div>
+            <div class="cust-form-group">
+              <label>Message *</label>
+              <textarea id="cfMessage" class="cust-input" rows="4" placeholder="How can we help?"></textarea>
+            </div>
+            <button class="cust-btn-primary cust-btn-full" onclick="submitContactForm()" id="cfSubmitBtn">Send Message</button>
+          </div>
         </div>
       </div>
     </section>
@@ -139,33 +161,6 @@
             <div id="shopMapEmbed" style="border-radius:12px;overflow:hidden;margin-top:12px"></div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Contact Form -->
-    <section class="cust-section" id="contactForm">
-      <h2 class="cust-section-title">Get In Touch</h2>
-      <p class="cust-section-sub">Questions? Send us a message and we'll get back to you.</p>
-      <div class="cust-contact-form" style="max-width:520px;margin:0 auto">
-        <div class="cust-form-group">
-          <label>Your Name *</label>
-          <input type="text" id="cfName" class="cust-input" placeholder="Your name">
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div class="cust-form-group">
-            <label>Phone</label>
-            <input type="tel" id="cfPhone" class="cust-input" placeholder="(555) 000-0000">
-          </div>
-          <div class="cust-form-group">
-            <label>Email</label>
-            <input type="email" id="cfEmail" class="cust-input" placeholder="you@email.com">
-          </div>
-        </div>
-        <div class="cust-form-group">
-          <label>Message *</label>
-          <textarea id="cfMessage" class="cust-input" rows="4" placeholder="How can we help?"></textarea>
-        </div>
-        <button class="cust-btn-primary cust-btn-full" onclick="submitContactForm()" id="cfSubmitBtn">Send Message</button>
       </div>
     </section>
 
@@ -292,6 +287,16 @@
         </div>
         <button class="cust-btn-primary cust-btn-full" onclick="createAccount()" data-i18n="auth.createBtn">Create Account</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ── Item Customization Modal ─────────────────────────── -->
+  <div class="cust-auth-overlay" id="customizeOverlay" style="display:none">
+    <div class="cust-auth-modal">
+      <button class="cust-auth-close" onclick="closeCustomize()">&times;</button>
+      <h3 class="cust-customize-title" id="customizeTitle">Customize Your Item</h3>
+      <div id="customizeFields"></div>
+      <button class="cust-btn-primary cust-btn-full" id="customizeConfirmBtn" onclick="confirmCustomize()">Add to Cart</button>
     </div>
   </div>
 
