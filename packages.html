@@ -218,6 +218,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .pv-badge.google{background:rgba(234,67,53,.15);color:#ea4335}
 .pv-accounts{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
 .pv-empty{font-size:12px;color:var(--text-dim);text-align:center;padding:24px 8px;font-style:italic}
+
+/* Locked (greyed-out) preview sections */
+.pv-section.locked{opacity:.35;filter:grayscale(1);position:relative;pointer-events:none}
+.pv-section.locked .pv-section-title{color:var(--text-dim)}
+.pv-section.locked::after{content:'\1F512';position:absolute;top:8px;right:10px;font-size:12px;opacity:.6;filter:none}
+.pv-section.unlocking{animation:pvUnlock .4s ease}
+@keyframes pvUnlock{from{opacity:.35;filter:grayscale(1)}to{opacity:1;filter:grayscale(0)}}
 @keyframes pvFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* Price Summary */
@@ -814,11 +821,20 @@ function updatePreview() {
   var urlEl = document.getElementById('previewUrl');
   var contentEl = document.getElementById('previewContent');
 
-  // Update URL bar
   urlEl.textContent = getDomainPreview();
 
   var shopName = state.shopName || 'Your Shop';
   var html = '';
+
+  // Helper: returns 'locked' or '' and tracks unlock animation
+  var prevUnlocked = updatePreview._prev || {};
+  var currUnlocked = {};
+  function cls(featureId) {
+    var on = state.features.has(featureId);
+    currUnlocked[featureId] = on;
+    if (on && !prevUnlocked[featureId]) return ' unlocking';
+    return on ? '' : ' locked';
+  }
 
   // Header (always visible)
   html += '<div class="pv-header">' + shopName + '</div>';
@@ -837,105 +853,79 @@ function updatePreview() {
     }
   }
 
-  // Maps
-  if (state.features.has('maps')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Location</div>';
-    html += '<div class="pv-map">&#128506;</div></div>';
-  }
+  // All sections always shown — locked when not selected
+  html += '<div class="pv-section' + cls('maps') + '"><div class="pv-section-title">Location</div>';
+  html += '<div class="pv-map">&#128506;</div></div>';
 
-  // Contact
-  if (state.features.has('contact')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Contact</div>';
-    html += '<div class="pv-contact"><span>&#128222; (910) 555-0123</span><span>&#128231; info@' + (slugify(state.shopName) || 'yourshop') + '.com</span></div></div>';
-  }
+  html += '<div class="pv-section' + cls('contact') + '"><div class="pv-section-title">Contact</div>';
+  html += '<div class="pv-contact"><span>&#128222; (910) 555-0123</span><span>&#128231; info@' + (slugify(state.shopName) || 'yourshop') + '.com</span></div></div>';
 
-  // Services display
-  if (state.features.has('services-display')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Services</div>';
-    html += '<div class="pv-pills">';
-    html += '<span class="pv-pill">Hemming</span><span class="pv-pill">Tailoring</span><span class="pv-pill">Patches</span><span class="pv-pill">Alterations</span>';
-    html += '</div></div>';
-  }
+  html += '<div class="pv-section' + cls('services-display') + '"><div class="pv-section-title">Services</div>';
+  html += '<div class="pv-pills"><span class="pv-pill">Hemming</span><span class="pv-pill">Tailoring</span><span class="pv-pill">Patches</span><span class="pv-pill">Alterations</span></div></div>';
 
-  // Customer accounts
-  if (state.features.has('customer-accounts')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Accounts</div>';
-    html += '<div class="pv-accounts">&#128100; Customer login & order history</div></div>';
-  }
+  html += '<div class="pv-section' + cls('seo') + '"><div class="pv-section-title">SEO & Structured Data</div>';
+  html += '<div class="pv-accounts">&#128270; Rich search results & local rankings</div></div>';
 
-  // Order wizard
-  if (state.features.has('order-wizard')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Ordering</div>';
-    html += '<div class="pv-btn">&#128230; Place Order</div></div>';
-  }
+  html += '<div class="pv-section' + cls('customer-accounts') + '"><div class="pv-section-title">Customer Accounts</div>';
+  html += '<div class="pv-accounts">&#128100; Login, order history & saved info</div></div>';
 
-  // Calendar
-  if (state.features.has('calendar')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Calendar</div>';
-    html += '<div class="pv-calendar">';
-    for (var i = 1; i <= 14; i++) {
-      html += '<span' + (i === 4 ? ' class="today"' : '') + '>' + i + '</span>';
-    }
-    html += '</div></div>';
-  }
+  html += '<div class="pv-section' + cls('order-wizard') + '"><div class="pv-section-title">Online Ordering</div>';
+  html += '<div class="pv-btn">&#128230; Place Order</div></div>';
 
-  // Notifications
-  if (state.features.has('sms') || state.features.has('email-notif') || state.features.has('auto-pickup')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Notifications</div>';
-    if (state.features.has('sms')) html += '<div class="pv-notif"><span class="pv-notif-badge"></span>SMS alerts active</div>';
-    if (state.features.has('email-notif')) html += '<div class="pv-notif"><span class="pv-notif-badge"></span>Email alerts active</div>';
-    if (state.features.has('auto-pickup')) html += '<div class="pv-notif"><span class="pv-notif-badge"></span>Auto pickup alerts</div>';
-    html += '</div>';
-  }
+  html += '<div class="pv-section' + cls('order-tracking') + '"><div class="pv-section-title">Order Tracking</div>';
+  html += '<div class="pv-accounts">&#128203; Real-time order dashboard</div></div>';
 
-  // Analytics
-  if (state.features.has('analytics')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Analytics</div>';
-    html += '<div class="pv-chart">';
-    var bars = [35, 55, 45, 70, 60, 80, 50, 65, 75, 90];
-    bars.forEach(function(h) { html += '<div class="pv-chart-bar" style="height:' + h + '%"></div>'; });
-    html += '</div></div>';
+  html += '<div class="pv-section' + cls('calendar') + '"><div class="pv-section-title">Calendar & Scheduling</div>';
+  html += '<div class="pv-calendar">';
+  for (var i = 1; i <= 14; i++) {
+    html += '<span' + (i === 4 ? ' class="today"' : '') + '>' + i + '</span>';
   }
+  html += '</div></div>';
 
-  // Order tracking
-  if (state.features.has('order-tracking')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Order Tracking</div>';
-    html += '<div class="pv-accounts">&#128203; Real-time order dashboard</div></div>';
-  }
+  html += '<div class="pv-section' + cls('employee-mgmt') + '"><div class="pv-section-title">Employee Management</div>';
+  html += '<div class="pv-accounts">&#128101; Team scheduling & roles</div></div>';
 
-  // Employee mgmt
-  if (state.features.has('employee-mgmt')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Employees</div>';
-    html += '<div class="pv-accounts">&#128101; Team management panel</div></div>';
-  }
+  html += '<div class="pv-section' + cls('inventory') + '"><div class="pv-section-title">Inventory Tracking</div>';
+  html += '<div class="pv-accounts">&#128230; Stock levels & supply alerts</div></div>';
 
-  // Inventory
-  if (state.features.has('inventory')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Inventory</div>';
-    html += '<div class="pv-accounts">&#128230; Stock & supply tracking</div></div>';
-  }
+  // Notifications — unlock if any of the 3 are selected
+  var hasNotif = state.features.has('sms') || state.features.has('email-notif') || state.features.has('auto-pickup');
+  var notifCls = hasNotif ? '' : ' locked';
+  if (hasNotif && !(prevUnlocked['_notif'])) notifCls = ' unlocking';
+  currUnlocked['_notif'] = hasNotif;
+  html += '<div class="pv-section' + notifCls + '"><div class="pv-section-title">Notifications</div>';
+  html += '<div class="pv-notif"><span class="pv-notif-badge"></span>SMS alerts</div>';
+  html += '<div class="pv-notif"><span class="pv-notif-badge"></span>Email alerts</div>';
+  html += '<div class="pv-notif"><span class="pv-notif-badge"></span>Auto pickup alerts</div>';
+  html += '</div>';
 
-  // SOP
-  if (state.features.has('sop')) {
-    html += '<div class="pv-section"><div class="pv-section-title">SOP Library</div>';
-    html += '<div class="pv-accounts">&#128214; Standard operating procedures</div></div>';
-  }
+  html += '<div class="pv-section' + cls('receipt-printing') + '"><div class="pv-section-title">Receipt Printing</div>';
+  html += '<div class="pv-accounts">&#128424; Thermal receipts for every order</div></div>';
 
-  // Driver
-  if (state.features.has('driver')) {
-    html += '<div class="pv-section"><div class="pv-section-title">Driver Coordination</div>';
-    html += '<div class="pv-accounts">&#128666; Pickup & delivery dispatch</div></div>';
-  }
+  html += '<div class="pv-section' + cls('label-printing') + '"><div class="pv-section-title">Label Printing</div>';
+  html += '<div class="pv-accounts">&#127991; Garment tags with QR codes</div></div>';
 
-  // Empty state if nothing selected
-  var hasAnyFeature = false;
-  state.features.forEach(function() { hasAnyFeature = true; });
-  if (!hasAnyFeature && !state.shopName) {
-    html = '<div class="pv-empty">Name your shop and select features to see a live preview</div>';
-  } else if (!hasAnyFeature) {
-    html += '<div class="pv-empty" style="padding:12px 0">Select features to see them appear here</div>';
-  }
+  html += '<div class="pv-section' + cls('analytics') + '"><div class="pv-section-title">Analytics</div>';
+  html += '<div class="pv-chart">';
+  var bars = [35, 55, 45, 70, 60, 80, 50, 65, 75, 90];
+  bars.forEach(function(h) { html += '<div class="pv-chart-bar" style="height:' + h + '%"></div>'; });
+  html += '</div></div>';
 
+  html += '<div class="pv-section' + cls('sop') + '"><div class="pv-section-title">SOP Library</div>';
+  html += '<div class="pv-accounts">&#128214; Standard operating procedures</div></div>';
+
+  html += '<div class="pv-section' + cls('driver') + '"><div class="pv-section-title">Driver Coordination</div>';
+  html += '<div class="pv-accounts">&#128666; Pickup & delivery dispatch</div></div>';
+
+  // AI features
+  var hasAI = state.features.has('ai-leads') || state.features.has('marketing');
+  var aiCls = hasAI ? '' : ' locked';
+  if (hasAI && !(prevUnlocked['_ai'])) aiCls = ' unlocking';
+  currUnlocked['_ai'] = hasAI;
+  html += '<div class="pv-section' + aiCls + '"><div class="pv-section-title">AI & Marketing</div>';
+  html += '<div class="pv-accounts">&#129302; Lead generation & automated campaigns</div></div>';
+
+  updatePreview._prev = currUnlocked;
   contentEl.innerHTML = html;
 }
 
