@@ -11,6 +11,12 @@
 </head>
 <body class="cust-body">
 
+  <!-- ── Online Orders Banner ────────────────────────────────── -->
+  <div class="cust-orders-banner" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+    <span class="cust-orders-banner-text"><strong>ONLINE ORDERS NOW AVAILABLE!</strong></span>
+    <span class="cust-orders-banner-cta">Shop Now &rarr;</span>
+  </div>
+
   <!-- ── Top Info Bar ────────────────────────────────────────── -->
   <div class="cust-topbar">
     <div class="cust-topbar-inner">
@@ -34,9 +40,8 @@
         <span class="cust-brand-name">SewReady</span>
       </div>
       <div class="cust-nav-links" id="custNavLinks">
-        <a href="#services" class="cust-nav-link" data-i18n="nav.services">Services</a>
-        <a href="#storeInventory" class="cust-nav-link" data-i18n="nav.supplies">Supplies</a>
-        <a href="#about" class="cust-nav-link" data-i18n="nav.about">About</a>
+        <a href="#" class="cust-nav-link" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})" data-i18n="nav.home">HOME</a>
+        <a href="#services" class="cust-nav-link" onclick="event.preventDefault();document.getElementById('services').scrollIntoView({behavior:'smooth'})" data-i18n="nav.shop">SHOP NOW</a>
       </div>
       <div class="cust-nav-right">
         <button class="cust-lang-toggle" id="langToggle" onclick="toggleLanguage()" title="Switch language">EN | 한</button>
@@ -75,56 +80,11 @@
       <div class="cherry-petal"></div>
       <div class="cust-hero-content">
         <h1 class="cust-hero-title" data-i18n="hero.title">Military-Grade Sewing.<br>Mission-Ready Uniforms.</h1>
-        <p class="cust-hero-sub" data-i18n="hero.sub">Professional uniform alterations &amp; embroidery. AR 670-1 compliant. Trusted by soldiers at Fort Liberty.</p>
         <div class="cust-hero-ctas">
           <button class="cust-btn-primary" onclick="document.getElementById('tracker').scrollIntoView({behavior:'smooth'})" data-i18n="hero.track">Track My Order</button>
           <button class="cust-btn-secondary" onclick="handleMakeOrder()" data-i18n="hero.order">Make an Order</button>
-          <button class="cust-btn-secondary" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" data-i18n="hero.team">Meet the Team</button>
         </div>
       </div>
-    </section>
-
-    <!-- Big Calendar + Hours -->
-    <section class="cust-bigcal-section" id="heroCal">
-      <h2 class="cust-section-title" style="text-align:center" data-i18n="schedule.title">Our Schedule</h2>
-      <p class="cust-section-sub" style="text-align:center" data-i18n="schedule.sub">See when we're open. Click a day to book an appointment.</p>
-      <div class="cust-bigcal-layout">
-        <div class="cust-bigcal-card">
-          <div class="cust-bigcal-header">
-            <button class="cust-bigcal-nav" id="bigcalPrev">&#9664;</button>
-            <span class="cust-bigcal-month" id="bigcalMonth"></span>
-            <button class="cust-bigcal-nav" id="bigcalNext">&#9654;</button>
-          </div>
-          <div class="cust-bigcal-weekdays">
-            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-          </div>
-          <div class="cust-bigcal-grid" id="bigcalGrid"></div>
-        </div>
-        <div class="cust-bigcal-sidebar">
-          <div class="cust-bigcal-hours-card">
-            <h3 class="cust-card-title" data-i18n="schedule.hours">Shop Hours</h3>
-            <ul class="cust-hours-list" id="custHours"></ul>
-          </div>
-          <div class="cust-bigcal-hours-card">
-            <h3 class="cust-card-title" data-i18n="schedule.location">Location</h3>
-            <p class="cust-location-addr">123 Bragg Blvd<br>Fayetteville, NC 28301</p>
-            <p class="cust-location-detail">&#128222; (555) 867-5309</p>
-            <p class="cust-location-detail">&#9993; info@sewready.com</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Order Tracker -->
-    <section class="cust-section" id="tracker">
-      <h2 class="cust-section-title" data-i18n="tracker.title">Track Your Order</h2>
-      <p class="cust-section-sub" data-i18n="tracker.sub">No account needed. Enter your order number and phone to check status.</p>
-      <div class="cust-tracker-form">
-        <input type="text" id="trackOrderId" class="cust-input" data-i18n-placeholder="tracker.orderPlaceholder" placeholder="Order # (e.g. SR-001)">
-        <input type="text" id="trackPhone" class="cust-input" data-i18n-placeholder="tracker.phonePlaceholder" placeholder="Phone (e.g. (555) 201-4488)">
-        <button class="cust-btn-primary" onclick="trackOrder()" data-i18n="tracker.btn">Track</button>
-      </div>
-      <div id="trackResult"></div>
     </section>
 
     <!-- Trust Signals -->
@@ -149,6 +109,50 @@
       </div>
     </section>
 
+    <!-- Big Calendar + Hours -->
+    <section class="cust-bigcal-section" id="heroCal">
+      <h2 class="cust-section-title" style="text-align:center" data-i18n="schedule.title">STORE HOURS</h2>
+      <p class="cust-section-sub" style="text-align:center" data-i18n="schedule.sub">Book an appointment now or make a drop off / pickup during our business hours</p>
+      <div class="cust-bigcal-layout">
+        <div class="cust-bigcal-card">
+          <div class="cust-bigcal-header">
+            <button class="cust-bigcal-nav" id="bigcalPrev">&#9664;</button>
+            <span class="cust-bigcal-month" id="bigcalMonth"></span>
+            <button class="cust-bigcal-nav" id="bigcalNext">&#9654;</button>
+          </div>
+          <div class="cust-bigcal-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="cust-bigcal-grid" id="bigcalGrid"></div>
+        </div>
+        <div class="cust-bigcal-sidebar">
+          <div class="cust-bigcal-hours-card">
+            <h3 class="cust-card-title" data-i18n="schedule.hours">Shop Hours</h3>
+            <ul class="cust-hours-list" id="custHours"></ul>
+          </div>
+          <div class="cust-bigcal-hours-card">
+            <h3 class="cust-card-title" data-i18n="schedule.location">Location</h3>
+            <p class="cust-location-addr">123 Bragg Blvd<br>Fayetteville, NC 28301</p>
+            <p class="cust-location-detail">&#128222; (555) 867-5309</p>
+            <p class="cust-location-detail">&#9993; info@sewready.com</p>
+            <div id="shopMapEmbed" style="border-radius:12px;overflow:hidden;margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Order Tracker -->
+    <section class="cust-section" id="tracker">
+      <h2 class="cust-section-title" data-i18n="tracker.title">Track Your Order</h2>
+      <p class="cust-section-sub" data-i18n="tracker.sub">No account needed. Enter your order number and phone to check status.</p>
+      <div class="cust-tracker-form">
+        <input type="text" id="trackOrderId" class="cust-input" data-i18n-placeholder="tracker.orderPlaceholder" placeholder="Order # (e.g. SR-001)">
+        <input type="text" id="trackPhone" class="cust-input" data-i18n-placeholder="tracker.phonePlaceholder" placeholder="Phone (e.g. (555) 201-4488)">
+        <button class="cust-btn-primary" onclick="trackOrder()" data-i18n="tracker.btn">Track</button>
+      </div>
+      <div id="trackResult"></div>
+    </section>
+
     <!-- Services Showcase -->
     <section class="cust-section" id="services">
       <h2 class="cust-section-title" data-i18n="services.title">Our Services</h2>
@@ -163,16 +167,6 @@
       <p class="cust-section-sub" data-i18n="inventory.sub">35 items in stock. Tapes, patches, insignia, badges, and more.</p>
       <div class="cust-filter-pills" id="invFilterPills"></div>
       <div class="cust-inv-grid" id="custInvGrid"></div>
-    </section>
-
-    <!-- Meet the Team -->
-    <section class="cust-section" id="about">
-      <h2 class="cust-section-title" data-i18n="team.title">Meet the Team</h2>
-      <p class="cust-section-sub" data-i18n="team.sub">Skilled professionals dedicated to keeping you mission-ready.</p>
-      <div class="cust-team-grid" id="custTeam"></div>
-      <div class="cust-story">
-        <p>Maria's Alterations has been serving military personnel for over 15 years. Located just outside the gate, we specialize in AR 670-1 compliant uniform services — from quick name tape sew-ons to complete AGSU setups. Every stitch meets regulation standards.</p>
-      </div>
     </section>
 
     <!-- Contact Form -->
@@ -202,9 +196,14 @@
       </div>
     </section>
 
-    <!-- Google Maps Embed -->
-    <section class="cust-section" id="mapSection">
-      <div id="shopMapEmbed" style="border-radius:12px;overflow:hidden;max-width:700px;margin:0 auto"></div>
+    <!-- Newsletter Signup -->
+    <section class="cust-section cust-newsletter">
+      <h2 class="cust-section-title" data-i18n="newsletter.title">Get 10% Off Your First Order</h2>
+      <p class="cust-section-sub" data-i18n="newsletter.sub">Sign up for our newsletter and receive a discount code.</p>
+      <div class="cust-newsletter-form">
+        <input type="email" id="newsletterEmail" class="cust-input" placeholder="Enter your email" data-i18n-placeholder="newsletter.placeholder">
+        <button class="cust-btn-primary" onclick="subscribeNewsletter()" data-i18n="newsletter.btn">Subscribe</button>
+      </div>
     </section>
 
     <!-- Footer -->

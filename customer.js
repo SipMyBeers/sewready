@@ -73,6 +73,13 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
+function subscribeNewsletter() {
+  const email = document.getElementById('newsletterEmail').value.trim();
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email address'); return; }
+  showToast('Thanks for subscribing! Check your email for your 10% discount code.');
+  document.getElementById('newsletterEmail').value = '';
+}
+
 const _dayKeys = ['day.sunday','day.monday','day.tuesday','day.wednesday','day.thursday','day.friday','day.saturday'];
 const _shortDayKeys = ['day.sun','day.mon','day.tue','day.wed','day.thu','day.fri','day.sat'];
 const _monthKeys = ['month.jan','month.feb','month.mar','month.apr','month.may','month.jun','month.jul','month.aug','month.sep','month.oct','month.nov','month.dec'];

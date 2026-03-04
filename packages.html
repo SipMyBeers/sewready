@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css">
 <style>
 /* ── Korean Flag Theme ────────────────────────────────── */
-:root{--bg-deep:#0a0a0a;--bg-surface:#111111;--text:#f5f5f5;--text-muted:rgba(245,245,245,.55);--text-dim:rgba(245,245,245,.28);--accent-cyan:#0047a0;--accent-blue:#0047a0;--accent-green:#c73240;--glass:rgba(255,255,255,.06);--glass-hover:rgba(255,255,255,.10);--glass-border:rgba(255,255,255,.10);--glass-strong:rgba(255,255,255,.14);--border:rgba(255,255,255,.08);--glow-blue:0 0 20px rgba(0,71,160,.3);--shadow:0 4px 24px rgba(0,0,0,.5)}
+:root{--bg-deep:#141820;--bg-surface:#1e1e2e;--text:#f5f5f5;--text-muted:rgba(245,245,245,.55);--text-dim:rgba(245,245,245,.28);--accent-cyan:#0047a0;--accent-blue:#0047a0;--accent-green:#c73240;--glass:rgba(255,255,255,.06);--glass-hover:rgba(255,255,255,.10);--glass-border:rgba(255,255,255,.10);--glass-strong:rgba(255,255,255,.14);--border:rgba(255,255,255,.08);--glow-blue:0 0 20px rgba(0,71,160,.3);--shadow:0 4px 24px rgba(0,0,0,.5)}
 .hangul{display:block;font-size:13px;color:var(--accent-cyan);font-weight:400;letter-spacing:1px;opacity:.7;margin-top:2px}
 h1 .hangul{font-size:15px;-webkit-text-fill-color:var(--accent-cyan)}
 .taeguk{display:inline-block;width:28px;height:28px;border-radius:50%;background:linear-gradient(to bottom,#c73240 50%,#0047a0 50%);position:relative;vertical-align:middle;margin:8px auto;transform:rotate(-15deg)}
@@ -21,7 +21,7 @@ h1 .hangul{font-size:15px;-webkit-text-fill-color:var(--accent-cyan)}
 body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-deep);color:var(--text);min-height:100vh}
 
 /* Nav */
-.pkg-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(10,10,10,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.pkg-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(20,24,32,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .pkg-nav .brand{font-size:20px;font-weight:700;color:var(--accent-cyan);letter-spacing:-.5px}
 .pkg-nav .brand span{color:var(--text)}
 .pkg-nav .nav-links{display:flex;gap:24px;align-items:center}
@@ -198,6 +198,25 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 .demo-grid h4{grid-column:1/-1;font-size:12px;font-weight:700;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 0;padding-bottom:4px;border-bottom:1px solid var(--border)}
 .demo-grid h4:first-child{margin-top:0}
 
+/* Horizontal demo grid */
+.demo-grid-horizontal{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 0 16px;-webkit-overflow-scrolling:touch}
+.demo-grid-horizontal::-webkit-scrollbar{height:6px}
+.demo-grid-horizontal::-webkit-scrollbar-track{background:var(--glass);border-radius:3px}
+.demo-grid-horizontal::-webkit-scrollbar-thumb{background:var(--accent-cyan);border-radius:3px}
+.demo-grid-horizontal>.demo-card,.demo-grid-horizontal>.visual-card{min-width:300px;max-width:340px;flex-shrink:0;scroll-snap-align:start}
+
+/* Feature highlight on hover */
+.price-card li[data-feature].feature-highlight{color:var(--accent-cyan);transform:translateX(4px);transition:all .2s;text-shadow:0 0 8px rgba(0,71,160,.4)}
+
+/* Card highlight on hover */
+.demo-card.card-highlight,.visual-card.card-highlight{border-color:var(--accent-cyan);box-shadow:0 0 20px rgba(0,71,160,.25);transform:translateY(-3px);transition:all .25s}
+
+/* Card type badges */
+.card-type-badge{position:absolute;top:8px;right:8px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;z-index:2}
+.card-type-badge.live-demo{background:var(--accent-cyan);color:#fff}
+.card-type-badge.mockup{background:var(--glass-strong);color:var(--text-muted);border:1px solid var(--glass-border)}
+.demo-card,.visual-card{position:relative}
+
 /* What's New separator on bundle cards */
 .price-card li.whats-new{border-bottom:none;color:var(--accent-cyan);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:8px 0 2px;opacity:.7}
 .price-card li.whats-new::before{content:'';display:none}
@@ -335,27 +354,10 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section class="pkg-hero">
-  <h1>Your Shop, Fully Equipped<span class="hangul">완벽한 매장 준비</span></h1>
+  <h1>Let's Build Your Internet Presence<span class="hangul">완벽한 매장 준비</span></h1>
   <div class="taeguk" style="display:block;margin:8px auto"></div>
   <p>Build your package in three steps &mdash; choose your bundle, pick a plan, and add hardware.</p>
 </section>
-
-<!-- ── Revenue Share Info ───────────────────────────────── -->
-<div class="included-banner">
-  <div class="included-card" style="border-color:#c73240;background:rgba(199,50,64,0.08)">
-    <div class="badge" style="background:#c73240">&#128176; Performance-Based Pricing</div>
-    <h3>We Invest in Your Growth</h3>
-    <p class="tier-desc">We don't just build your site &mdash; we bring you customers. Our fee is tied to your success.</p>
-    <ul class="included-features" style="grid-template-columns:1fr 1fr 1fr">
-      <li>We drive new customers to your shop</li>
-      <li>You pay only 10% of revenue we bring</li>
-      <li>No upfront fees for customer acquisition</li>
-      <li>You only pay when you get paid</li>
-      <li>Aligned incentives &mdash; we win when you win</li>
-      <li>Transparent tracking &amp; reporting</li>
-    </ul>
-  </div>
-</div>
 
 <!-- ── Included Storefront ─────────────────────────────── -->
 <div class="included-banner">
@@ -370,23 +372,6 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li>Services &amp; hours display</li>
       <li>SEO &amp; structured data</li>
       <li>Mobile-responsive design</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ── Manage From Anywhere Banner ─────────────────────── -->
-<div class="included-banner" style="margin-top:16px">
-  <div class="included-card" style="border-color:var(--accent-cyan)">
-    <div class="badge" style="background:var(--accent-cyan)">&#128241; Access From Anywhere</div>
-    <h3>Run Your Shop from Your Phone</h3>
-    <p class="tier-desc">Log in to your shop dashboard from any device — phone, tablet, or laptop</p>
-    <ul class="included-features" style="grid-template-columns:1fr 1fr 1fr">
-      <li>See incoming orders in real-time</li>
-      <li>View &amp; update the calendar</li>
-      <li>Manage inventory on the go</li>
-      <li>Track order status</li>
-      <li>Employee management</li>
-      <li>Review analytics</li>
     </ul>
   </div>
 </div>
@@ -420,26 +405,26 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-period">One-time setup + revenue share</div>
     <div class="revenue-share-line">then 8% of new revenue/mo</div>
     <ul>
-      <li>Custom branded website build</li>
-      <li>Google Maps integration</li>
-      <li>SEO &amp; structured data</li>
-      <li>Contact form</li>
-      <li>Services &amp; hours configuration</li>
-      <li>Mobile-responsive design</li>
-      <li class="locked">Online order wizard</li>
-      <li class="locked">Customer accounts &amp; login</li>
-      <li class="locked">Order tracking dashboard</li>
-      <li class="locked">Employee management</li>
-      <li class="locked">Inventory tracking</li>
-      <li class="locked">Calendar &amp; scheduling</li>
-      <li class="locked">SMS &amp; email notifications</li>
-      <li class="locked">Analytics &amp; reporting</li>
+      <li data-feature="public-website">Custom branded website build</li>
+      <li data-feature="google-maps">Google Maps integration</li>
+      <li data-feature="seo">SEO &amp; structured data</li>
+      <li data-feature="contact-form">Contact form</li>
+      <li data-feature="services-hours">Services &amp; hours configuration</li>
+      <li data-feature="mobile-responsive">Mobile-responsive design</li>
+      <li data-feature="employee-management">Employee management</li>
+      <li class="locked" data-feature="online-order-wizard">Online order wizard</li>
+      <li class="locked" data-feature="customer-accounts">Customer accounts &amp; login</li>
+      <li class="locked" data-feature="order-tracking">Order tracking dashboard</li>
+      <li class="locked" data-feature="inventory-tracking">Inventory tracking</li>
+      <li class="locked" data-feature="calendar-scheduling">Calendar &amp; scheduling</li>
+      <li class="locked" data-feature="sms-email-notifications">SMS &amp; email notifications</li>
+      <li class="locked" data-feature="analytics-reporting">Analytics &amp; reporting</li>
     </ul>
     <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Site Setup','$199');event.stopPropagation()"
       data-item-id="setup-site"
       data-item-name="SewReady Site Setup"
       data-item-price="199.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="Custom branded website build with Google Maps, SEO, contact form, services configuration, mobile-responsive design"
       data-item-shippable="false"
       data-item-max-quantity="1">Choose This</button>
@@ -454,27 +439,29 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-period">One-time setup + revenue share</div>
     <div class="revenue-share-line">then 10% of new revenue/mo</div>
     <ul>
-      <li>Everything in Site Setup</li>
+      <li data-feature="public-website">Everything in Site Setup</li>
       <li class="whats-new">What's New:</li>
-      <li>Online order wizard</li>
-      <li>Customer accounts &amp; login</li>
-      <li>Order tracking dashboard</li>
-      <li>Employee management</li>
-      <li>Inventory tracking</li>
-      <li>Calendar &amp; scheduling</li>
-      <li>Receipt &amp; label printing</li>
-      <li class="locked">SMS notifications (Twilio)</li>
-      <li class="locked">Email notifications (Resend)</li>
-      <li class="locked">Automated pickup alerts</li>
-      <li class="locked">SOP library</li>
-      <li class="locked">Driver pickup coordination</li>
-      <li class="locked">Cost &amp; revenue analytics</li>
+      <li data-feature="online-order-wizard">Online order wizard</li>
+      <li data-feature="customer-accounts">Customer accounts &amp; login</li>
+      <li data-feature="order-tracking">Order tracking dashboard</li>
+      <li data-feature="employee-management">Employee management</li>
+      <li data-feature="inventory-tracking">Inventory tracking</li>
+      <li data-feature="calendar-scheduling">Calendar &amp; scheduling</li>
+      <li data-feature="receipt-label">Receipt &amp; label printing</li>
+      <li class="locked" data-feature="sms-notifications">SMS notifications (Twilio)</li>
+      <li class="locked" data-feature="email-notifications">Email notifications (Resend)</li>
+      <li class="locked" data-feature="automated-alerts">Automated pickup alerts</li>
+      <li class="locked" data-feature="sop-library">SOP library</li>
+      <li class="locked" data-feature="driver-coordination">Driver pickup coordination</li>
+      <li class="locked" data-feature="analytics">Cost &amp; revenue analytics</li>
+      <li class="locked" data-feature="ai-lead-gen">AI-powered lead generation</li>
+      <li class="locked" data-feature="automated-marketing">Automated marketing campaigns</li>
     </ul>
     <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(1,'Site + Online Orders','$499');event.stopPropagation()"
       data-item-id="setup-online"
       data-item-name="SewReady Site + Online Orders Setup"
       data-item-price="499.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="Everything in Site Setup plus online ordering, customer accounts, order tracking, employee management, inventory, calendar, receipt & label printing"
       data-item-shippable="false"
       data-item-max-quantity="1">Choose This</button>
@@ -488,22 +475,24 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-period">One-time setup + revenue share</div>
     <div class="revenue-share-line">then 12% of new revenue/mo</div>
     <ul>
-      <li>Everything in Site + Online Orders</li>
+      <li data-feature="public-website">Everything in Site + Online Orders</li>
       <li class="whats-new">What's New:</li>
-      <li>SMS notifications (Twilio)</li>
-      <li>Email notifications (Resend)</li>
-      <li>Automated pickup alerts</li>
-      <li>SOP library</li>
-      <li>Driver pickup coordination</li>
-      <li>Cost &amp; revenue analytics</li>
-      <li>Priority setup support</li>
+      <li data-feature="sms-notifications">SMS notifications (Twilio)</li>
+      <li data-feature="email-notifications">Email notifications (Resend)</li>
+      <li data-feature="automated-alerts">Automated pickup alerts</li>
+      <li data-feature="sop-library">SOP library</li>
+      <li data-feature="driver-coordination">Driver pickup coordination</li>
+      <li data-feature="analytics">Cost &amp; revenue analytics</li>
+      <li data-feature="ai-lead-gen">AI-powered lead generation</li>
+      <li data-feature="automated-marketing">Automated marketing campaigns</li>
+      <li data-feature="priority-support">Priority setup support</li>
     </ul>
     <p style="font-size:12px;color:var(--text-muted);margin:0 0 16px;font-style:italic">Hardware sold separately</p>
     <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Full Platform','$799');event.stopPropagation()"
       data-item-id="setup-full"
       data-item-name="SewReady Full Platform Setup"
       data-item-price="799.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="Everything in Site + Online Orders plus SMS & email notifications, automated alerts, SOP library, driver coordination, analytics, priority support"
       data-item-shippable="false"
       data-item-max-quantity="1">Choose This</button>
@@ -518,11 +507,56 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Site Setup &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-setup-site')">&times;</button>
     </div>
-    <div class="demo-grid">
-      <div class="demo-card">
+    <div class="demo-grid-horizontal">
+      <div class="demo-card" data-feature="public-website"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Public Website</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
         <p class="demo-desc">Your custom branded public website with Google Maps, services &amp; hours display, contact form, SEO, and mobile-responsive design.</p>
+      </div>
+      <div class="demo-card" data-feature="employee-management"><span class="card-type-badge live-demo">Live Demo</span>
+        <div class="demo-label">Employee Management</div>
+        <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
+        <p class="demo-desc">Add your team, assign roles, and track who's working on which orders.</p>
+      </div>
+      <div class="visual-card" data-feature="google-maps"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Google Maps Integration</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Embedded Map</div><div class="stat-value">Interactive map on your site</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128663;</div><div><div class="stat-label">Directions</div><div class="stat-value">One-click driving directions</div></div></div>
+        </div>
+        <div class="visual-caption">Customers find your shop easily with embedded Google Maps and one-click directions.</div>
+      </div>
+      <div class="visual-card" data-feature="seo"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">SEO &amp; Structured Data</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128269;</div><div><div class="stat-label">Google Search</div><div class="stat-value">Optimized for local search</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128200;</div><div><div class="stat-label">Rich Results</div><div class="stat-value">Schema markup for Google</div></div></div>
+        </div>
+        <div class="visual-caption">Your site is optimized to appear in local search results with rich snippets.</div>
+      </div>
+      <div class="visual-card" data-feature="contact-form"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Contact Form</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Inquiries</div><div class="stat-value">Name, phone, email, message</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128276;</div><div><div class="stat-label">Notifications</div><div class="stat-value">Email alert on submission</div></div></div>
+        </div>
+        <div class="visual-caption">Customers can send inquiries directly from your website. You get notified instantly.</div>
+      </div>
+      <div class="visual-card" data-feature="services-hours"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Services &amp; Hours</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128338;</div><div><div class="stat-label">Business Hours</div><div class="stat-value">Displayed on your site</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9986;</div><div><div class="stat-label">Service Menu</div><div class="stat-value">All services with pricing</div></div></div>
+        </div>
+        <div class="visual-caption">Your services, pricing, and business hours are clearly displayed for customers.</div>
+      </div>
+      <div class="visual-card" data-feature="mobile-responsive"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Mobile-Responsive Design</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128241;</div><div><div class="stat-label">Phone</div><div class="stat-value">Perfect on any screen</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128187;</div><div><div class="stat-label">Desktop</div><div class="stat-value">Beautiful on large screens</div></div></div>
+        </div>
+        <div class="visual-caption">Your website looks great on phones, tablets, and desktops &mdash; no pinching or zooming.</div>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -537,33 +571,93 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Site + Online Orders &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-setup-online')">&times;</button>
     </div>
-    <div class="demo-grid">
-      <h4>Public Website</h4>
-      <div class="demo-card">
+    <div class="demo-grid-horizontal">
+      <div class="demo-card" data-feature="public-website"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Public Website</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
         <p class="demo-desc">Branded public website with Google Maps, services, contact form, and mobile-responsive design.</p>
       </div>
-      <h4>Employee Portal</h4>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="order-tracking"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Orders Dashboard</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Calendar &amp; Scheduling</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
       </div>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Inventory Tracking</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
       </div>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="employee-management"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Employee Management</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Add your team, assign roles, and track who's working on which orders.</p>
+      </div>
+      <div class="visual-card" data-feature="google-maps"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Google Maps Integration</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Embedded Map</div><div class="stat-value">Interactive map on your site</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128663;</div><div><div class="stat-label">Directions</div><div class="stat-value">One-click driving directions</div></div></div>
+        </div>
+        <div class="visual-caption">Customers find your shop easily with embedded Google Maps.</div>
+      </div>
+      <div class="visual-card" data-feature="seo"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">SEO &amp; Structured Data</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128269;</div><div><div class="stat-label">Local Search</div><div class="stat-value">Optimized for Google</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128200;</div><div><div class="stat-label">Rich Results</div><div class="stat-value">Schema markup</div></div></div>
+        </div>
+        <div class="visual-caption">Appear in local search results with rich snippets and structured data.</div>
+      </div>
+      <div class="visual-card" data-feature="contact-form"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Contact Form</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Inquiries</div><div class="stat-value">Direct from your website</div></div></div>
+        </div>
+        <div class="visual-caption">Customers send inquiries directly. You get notified instantly.</div>
+      </div>
+      <div class="visual-card" data-feature="services-hours"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Services &amp; Hours</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128338;</div><div><div class="stat-label">Hours</div><div class="stat-value">Clearly displayed</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9986;</div><div><div class="stat-label">Services</div><div class="stat-value">Full menu with pricing</div></div></div>
+        </div>
+        <div class="visual-caption">Services, pricing, and hours clearly displayed for customers.</div>
+      </div>
+      <div class="visual-card" data-feature="mobile-responsive"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Mobile-Responsive</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128241;</div><div><div class="stat-label">Any Device</div><div class="stat-value">Phone, tablet, desktop</div></div></div>
+        </div>
+        <div class="visual-caption">Looks great on every screen size.</div>
+      </div>
+      <div class="visual-card" data-feature="online-order-wizard"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Online Order Wizard</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128722;</div><div><div class="stat-label">Step-by-step</div><div class="stat-value">Item → Services → Details → Submit</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128176;</div><div><div class="stat-label">Instant Pricing</div><div class="stat-value">Real-time order total</div></div></div>
+        </div>
+        <div class="visual-caption">Customers place orders online with a guided wizard. Pick items, select services, schedule drop-off.</div>
+      </div>
+      <div class="visual-card" data-feature="customer-accounts"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Customer Accounts</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128100;</div><div><div class="stat-label">Sign In</div><div class="stat-value">Email + password</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Order History</div><div class="stat-value">All past orders saved</div></div></div>
+        </div>
+        <div class="visual-caption">Customers sign in, view their orders, and track progress.</div>
+      </div>
+      <div class="visual-card" data-feature="receipt-label"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Receipt &amp; Label Printing</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128424;</div><div><div class="stat-label">Receipts</div><div class="stat-value">Thermal receipt printing</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127991;</div><div><div class="stat-label">Labels</div><div class="stat-value">QR code garment tags</div></div></div>
+        </div>
+        <div class="visual-caption">Print receipts and garment labels with QR codes for easy tracking.</div>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -578,50 +672,146 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Full Platform &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-setup-full')">&times;</button>
     </div>
-    <div class="demo-grid">
-      <h4>Public Website</h4>
-      <div class="demo-card">
+    <div class="demo-grid-horizontal">
+      <div class="demo-card" data-feature="public-website"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Public Website</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/" loading="lazy"></iframe></div>
         <p class="demo-desc">Branded public website with Google Maps, services, contact form, and mobile-responsive design.</p>
       </div>
-      <h4>Employee Portal</h4>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="order-tracking"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Orders Dashboard</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/orders?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage every order from intake to pickup. Update statuses, assign employees, add notes.</p>
       </div>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="calendar-scheduling"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Calendar &amp; Scheduling</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/calendar?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">See your workload by day, week, or month. Schedule pickups and track deadlines.</p>
       </div>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="inventory-tracking"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Inventory Tracking</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/inventory?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Track thread, fabric, zippers, and supplies. Get alerts when stock runs low.</p>
       </div>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="employee-management"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Employee Management</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/employee?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Add your team, assign roles, and track who's working on which orders.</p>
       </div>
-      <h4>Driver Web App</h4>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="driver-coordination"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Driver Coordination</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/driver?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Manage driver routes and pickups for shops that offer delivery or base pickup service.</p>
       </div>
-      <h4>Analytics &amp; Operations</h4>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="analytics"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">Analytics</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/analytics?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Track revenue, costs, turnaround times, and customer metrics with visual dashboards.</p>
       </div>
-      <div class="demo-card">
+      <div class="demo-card" data-feature="sop-library"><span class="card-type-badge live-demo">Live Demo</span>
         <div class="demo-label">SOP Library</div>
         <div class="demo-iframe-wrap"><iframe data-src="https://sewing.ranger-beers.com/shops/aaa-tailor/sop-library?preview=1" loading="lazy"></iframe></div>
         <p class="demo-desc">Standard operating procedures, training docs, checklists, and process guides for your team.</p>
+      </div>
+      <div class="visual-card" data-feature="google-maps"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Google Maps Integration</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Embedded Map</div><div class="stat-value">Interactive map on your site</div></div></div>
+        </div>
+        <div class="visual-caption">Customers find your shop easily with embedded Google Maps.</div>
+      </div>
+      <div class="visual-card" data-feature="seo"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">SEO &amp; Structured Data</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128269;</div><div><div class="stat-label">Local Search</div><div class="stat-value">Optimized for Google</div></div></div>
+        </div>
+        <div class="visual-caption">Appear in local search results with rich snippets.</div>
+      </div>
+      <div class="visual-card" data-feature="contact-form"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Contact Form</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Inquiries</div><div class="stat-value">Direct from your website</div></div></div>
+        </div>
+        <div class="visual-caption">Customers send inquiries directly from your site.</div>
+      </div>
+      <div class="visual-card" data-feature="services-hours"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Services &amp; Hours</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128338;</div><div><div class="stat-label">Hours &amp; Services</div><div class="stat-value">Full menu with pricing</div></div></div>
+        </div>
+        <div class="visual-caption">Services, pricing, and hours clearly displayed.</div>
+      </div>
+      <div class="visual-card" data-feature="mobile-responsive"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Mobile-Responsive</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128241;</div><div><div class="stat-label">Any Device</div><div class="stat-value">Phone, tablet, desktop</div></div></div>
+        </div>
+        <div class="visual-caption">Looks great on every screen size.</div>
+      </div>
+      <div class="visual-card" data-feature="online-order-wizard"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Online Order Wizard</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128722;</div><div><div class="stat-label">Step-by-step</div><div class="stat-value">Guided ordering flow</div></div></div>
+        </div>
+        <div class="visual-caption">Customers place orders online with a guided wizard.</div>
+      </div>
+      <div class="visual-card" data-feature="customer-accounts"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Customer Accounts</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128100;</div><div><div class="stat-label">Sign In</div><div class="stat-value">Email + password login</div></div></div>
+        </div>
+        <div class="visual-caption">Customers sign in and track their orders.</div>
+      </div>
+      <div class="visual-card" data-feature="receipt-label"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Receipt &amp; Label Printing</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128424;</div><div><div class="stat-label">Print</div><div class="stat-value">Receipts &amp; garment tags</div></div></div>
+        </div>
+        <div class="visual-caption">Print receipts and garment labels with QR codes.</div>
+      </div>
+      <div class="visual-card" data-feature="sms-notifications"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">SMS Notifications</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128241;</div><div><div class="stat-label">Auto-texts</div><div class="stat-value">Order updates via Twilio</div></div></div>
+        </div>
+        <div class="visual-caption">Automatic text updates at every stage.</div>
+      </div>
+      <div class="visual-card" data-feature="email-notifications"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Email Notifications</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Branded Emails</div><div class="stat-value">Pickup ready + daily summary</div></div></div>
+        </div>
+        <div class="visual-caption">Professional branded emails to customers plus daily summaries.</div>
+      </div>
+      <div class="visual-card" data-feature="automated-alerts"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Automated Pickup Alerts</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128276;</div><div><div class="stat-label">Zero-touch</div><div class="stat-value">Auto-notify on status change</div></div></div>
+        </div>
+        <div class="visual-caption">One click to "Ready" and the customer is notified.</div>
+      </div>
+      <div class="visual-card" data-feature="ai-lead-gen"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">AI-Powered Lead Generation</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#129302;</div><div><div class="stat-label">Smart Targeting</div><div class="stat-value">AI identifies prospects</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127919;</div><div><div class="stat-label">Lead Scoring</div><div class="stat-value">Prioritize hot prospects</div></div></div>
+        </div>
+        <div class="visual-caption">AI finds and qualifies new customers near your shop.</div>
+      </div>
+      <div class="visual-card" data-feature="automated-marketing"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Automated Marketing Campaigns</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128640;</div><div><div class="stat-label">AI Marketing</div><div class="stat-value">Auto-scheduled campaigns</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128202;</div><div><div class="stat-label">Performance</div><div class="stat-value">Track conversions</div></div></div>
+        </div>
+        <div class="visual-caption">Automated marketing that runs itself &mdash; seasonal, PCS season, re-engagement.</div>
+      </div>
+      <div class="visual-card" data-feature="priority-support"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Priority Setup Support</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128680;</div><div><div class="stat-label">Priority</div><div class="stat-value">Same-day response</div></div></div>
+        </div>
+        <div class="visual-caption">Dedicated setup support with same-day response times.</div>
       </div>
     </div>
     <div class="detail-cta-row">
@@ -650,18 +840,18 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-row"><span class="price-amount">$0</span><span class="price-label">/month</span></div>
     <div class="price-period">No credit card required</div>
     <ul>
-      <li>Website hosting</li>
-      <li>Secure website (HTTPS)</li>
-      <li>Help guides &amp; tutorials</li>
-      <li>Email support</li>
-      <li class="locked">We handle updates for you</li>
-      <li class="locked">24/7 website monitoring</li>
-      <li class="locked">Text &amp; email alerts to customers</li>
-      <li class="locked">Google, Waze &amp; Apple Maps setup</li>
-      <li class="locked">Automatic "order ready" texts</li>
-      <li class="locked">Monthly business report</li>
-      <li class="locked">Same-day support</li>
-      <li class="locked">Website changes on request</li>
+      <li data-feature="plan-hosting">Website hosting</li>
+      <li data-feature="plan-ssl">Secure website (HTTPS)</li>
+      <li data-feature="plan-guides">Help guides &amp; tutorials</li>
+      <li data-feature="plan-email-support">Email support</li>
+      <li class="locked" data-feature="plan-updates">We handle updates for you</li>
+      <li class="locked" data-feature="plan-monitoring">24/7 website monitoring</li>
+      <li class="locked" data-feature="plan-alerts">Text &amp; email alerts to customers</li>
+      <li class="locked" data-feature="plan-maps">Google, Waze &amp; Apple Maps setup</li>
+      <li class="locked" data-feature="plan-auto-texts">Automatic "order ready" texts</li>
+      <li class="locked" data-feature="plan-report">Monthly business report</li>
+      <li class="locked" data-feature="plan-sameday">Same-day support</li>
+      <li class="locked" data-feature="plan-changes">Website changes on request</li>
     </ul>
     <button class="card-cta secondary" onclick="wizardChoose(2,'Free','$0/mo');event.stopPropagation()" style="width:100%">Choose This</button>
   </div>
@@ -673,23 +863,23 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-row"><span class="price-amount">$49</span><span class="price-label">/month</span></div>
     <div class="price-period">Billed monthly</div>
     <ul>
-      <li>Website hosting</li>
-      <li>Secure website (HTTPS)</li>
-      <li>24/7 website monitoring</li>
-      <li>Email support</li>
-      <li class="locked">Text &amp; email alerts to customers</li>
-      <li class="locked">Google, Waze &amp; Apple Maps setup</li>
-      <li class="locked">Automatic "order ready" texts</li>
-      <li class="locked">Monthly business report</li>
-      <li class="locked">Same-day support</li>
-      <li class="locked">Website changes on request</li>
-      <li class="locked">We update your info for you</li>
+      <li data-feature="plan-hosting">Website hosting</li>
+      <li data-feature="plan-ssl">Secure website (HTTPS)</li>
+      <li data-feature="plan-monitoring">24/7 website monitoring</li>
+      <li data-feature="plan-email-support">Email support</li>
+      <li class="locked" data-feature="plan-alerts">Text &amp; email alerts to customers</li>
+      <li class="locked" data-feature="plan-maps">Google, Waze &amp; Apple Maps setup</li>
+      <li class="locked" data-feature="plan-auto-texts">Automatic "order ready" texts</li>
+      <li class="locked" data-feature="plan-report">Monthly business report</li>
+      <li class="locked" data-feature="plan-sameday">Same-day support</li>
+      <li class="locked" data-feature="plan-changes">Website changes on request</li>
+      <li class="locked" data-feature="plan-info-updates">We update your info for you</li>
     </ul>
     <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2,'Basic','$49/mo');event.stopPropagation()"
       data-item-id="svc-basic"
       data-item-name="SewReady Basic Monthly Service"
       data-item-price="49.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="Hosting, maintenance, SSL, uptime monitoring, basic email support — $49/mo"
       data-item-payment-interval="Month"
       data-item-payment-interval-count="1"
@@ -705,21 +895,21 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-row"><span class="price-amount">$100</span><span class="price-label">/month</span></div>
     <div class="price-period">Billed monthly</div>
     <ul>
-      <li>Everything in Basic</li>
-      <li>Text &amp; email alerts to customers</li>
-      <li>Google, Waze &amp; Apple Maps setup</li>
-      <li>Automatic "order ready" texts</li>
-      <li>Monthly business report</li>
-      <li class="locked">Website changes on request</li>
-      <li class="locked">Same-day support</li>
-      <li class="locked">Full tech maintenance</li>
-      <li class="locked">We update your info for you</li>
+      <li data-feature="plan-hosting">Everything in Basic</li>
+      <li data-feature="plan-alerts">Text &amp; email alerts to customers</li>
+      <li data-feature="plan-maps">Google, Waze &amp; Apple Maps setup</li>
+      <li data-feature="plan-auto-texts">Automatic "order ready" texts</li>
+      <li data-feature="plan-report">Monthly business report</li>
+      <li class="locked" data-feature="plan-changes">Website changes on request</li>
+      <li class="locked" data-feature="plan-sameday">Same-day support</li>
+      <li class="locked" data-feature="plan-maintenance">Full tech maintenance</li>
+      <li class="locked" data-feature="plan-info-updates">We update your info for you</li>
     </ul>
     <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(2,'Standard','$100/mo');event.stopPropagation()"
       data-item-id="svc-standard"
       data-item-name="SewReady Standard Monthly Service"
       data-item-price="100.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="Everything in Basic plus SMS & email notifications, automated pickup alerts, monthly analytics — $100/mo"
       data-item-payment-interval="Month"
       data-item-payment-interval-count="1"
@@ -734,18 +924,18 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
     <div class="price-row"><span class="price-amount">$250</span><span class="price-label">/month</span></div>
     <div class="price-period">Billed monthly</div>
     <ul>
-      <li>Everything in Standard</li>
-      <li>Google, Waze &amp; Apple Maps setup</li>
-      <li>Website changes on request</li>
-      <li>Same-day support</li>
-      <li>Full tech maintenance</li>
-      <li>We update your info for you</li>
+      <li data-feature="plan-hosting">Everything in Standard</li>
+      <li data-feature="plan-maps">Google, Waze &amp; Apple Maps setup</li>
+      <li data-feature="plan-changes">Website changes on request</li>
+      <li data-feature="plan-sameday">Same-day support</li>
+      <li data-feature="plan-maintenance">Full tech maintenance</li>
+      <li data-feature="plan-info-updates">We update your info for you</li>
     </ul>
     <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(2,'Premium','$250/mo');event.stopPropagation()"
       data-item-id="svc-premium"
       data-item-name="SewReady Premium Monthly Service"
       data-item-price="250.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="Everything in Standard plus ongoing site updates, priority support, full platform maintenance, content updates on request — $250/mo"
       data-item-payment-interval="Month"
       data-item-payment-interval-count="1"
@@ -762,26 +952,36 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Free Plan &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-svc-free')">&times;</button>
     </div>
-    <div class="visual-grid">
-      <div class="visual-card">
+    <div class="demo-grid-horizontal">
+      <div class="visual-card" data-feature="plan-hosting"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Cloud Hosting</div>
         <div class="visual-body">
           <div class="mock-stat"><div class="stat-icon">&#9729;</div><div><div class="stat-label">Infrastructure</div><div class="stat-value">Cloudflare Edge Network</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#9889;</div><div><div class="stat-label">Global CDN</div><div class="stat-value">300+ edge locations</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#127760;</div><div><div class="stat-label">Custom Domain</div><div class="stat-value">yourshop.sewready.com</div></div></div>
           <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">SSL Certificate</div><div class="stat-value">Auto-renewed HTTPS</div></div></div>
         </div>
-        <div class="visual-caption">Your site runs on enterprise-grade infrastructure at no charge. Always online, always fast.</div>
+        <div class="visual-caption">Enterprise-grade infrastructure at no charge. Always online, always fast.</div>
       </div>
-      <div class="visual-card">
-        <div class="visual-header">Self-Service Support</div>
+      <div class="visual-card" data-feature="plan-ssl"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Secure Website (HTTPS)</div>
         <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128214;</div><div><div class="stat-label">Setup Guides</div><div class="stat-value">Step-by-step walkthroughs</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#127891;</div><div><div class="stat-label">Video Tutorials</div><div class="stat-value">Every feature covered</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128172;</div><div><div class="stat-label">Community Support</div><div class="stat-value">Email &mdash; best effort</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128736;</div><div><div class="stat-label">Self-Managed</div><div class="stat-value">Full admin access</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">SSL</div><div class="stat-value">Auto-renewed certificate</div></div></div>
         </div>
-        <div class="visual-caption">Docs, guides, and community email support to help you manage your shop independently.</div>
+        <div class="visual-caption">Your site is always secure with automatic HTTPS.</div>
+      </div>
+      <div class="visual-card" data-feature="plan-guides"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Help Guides &amp; Tutorials</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128214;</div><div><div class="stat-label">Guides</div><div class="stat-value">Step-by-step walkthroughs</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127891;</div><div><div class="stat-label">Video</div><div class="stat-value">Every feature covered</div></div></div>
+        </div>
+        <div class="visual-caption">Docs, guides, and tutorials to help you manage your shop.</div>
+      </div>
+      <div class="visual-card" data-feature="plan-email-support"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Email Support</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128172;</div><div><div class="stat-label">Support</div><div class="stat-value">Email &mdash; best effort</div></div></div>
+        </div>
+        <div class="visual-caption">Community email support to help you independently.</div>
       </div>
     </div>
   </div>
@@ -793,26 +993,36 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <h3>Basic Service &mdash; What's Included</h3>
       <button class="detail-close" onclick="collapseCard('detail-svc-basic')">&times;</button>
     </div>
-    <div class="visual-grid">
-      <div class="visual-card">
+    <div class="demo-grid-horizontal">
+      <div class="visual-card" data-feature="plan-hosting"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Managed Hosting</div>
         <div class="visual-body">
           <div class="mock-stat"><div class="stat-icon">&#9729;</div><div><div class="stat-label">Cloud Hosting</div><div class="stat-value">Fully managed for you</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">SSL Certificate</div><div class="stat-value">Auto-renewed HTTPS</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128736;</div><div><div class="stat-label">Maintenance</div><div class="stat-value">Updates &amp; security patches</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128230;</div><div><div class="stat-label">Backups</div><div class="stat-value">Daily automated backups</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128230;</div><div><div class="stat-label">Backups</div><div class="stat-value">Daily automated</div></div></div>
         </div>
-        <div class="visual-caption">We handle hosting, updates, and security patches so you can focus on your shop.</div>
+        <div class="visual-caption">We handle hosting, updates, and security patches.</div>
       </div>
-      <div class="visual-card">
-        <div class="visual-header">Uptime Monitoring</div>
+      <div class="visual-card" data-feature="plan-ssl"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Secure Website (HTTPS)</div>
         <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon" style="background:rgba(46,204,113,.1);color:#2ecc71">&#9679;</div><div><div class="stat-label">Current Status</div><div class="stat-value" style="color:#2ecc71">All Systems Online</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128200;</div><div><div class="stat-label">Uptime (30 days)</div><div class="stat-value">99.98%</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#9201;</div><div><div class="stat-label">Avg Response Time</div><div class="stat-value">142ms</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Email Support</div><div class="stat-value">Within 24 hours</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">SSL</div><div class="stat-value">Auto-renewed HTTPS</div></div></div>
         </div>
-        <div class="visual-caption">24/7 monitoring with instant alerts if anything goes down. Email support within one business day.</div>
+        <div class="visual-caption">Always secure with automatic certificate renewal.</div>
+      </div>
+      <div class="visual-card" data-feature="plan-monitoring"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">24/7 Uptime Monitoring</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon" style="background:rgba(46,204,113,.1);color:#2ecc71">&#9679;</div><div><div class="stat-label">Status</div><div class="stat-value" style="color:#2ecc71">All Systems Online</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128200;</div><div><div class="stat-label">Uptime</div><div class="stat-value">99.98%</div></div></div>
+        </div>
+        <div class="visual-caption">24/7 monitoring with instant alerts if anything goes down.</div>
+      </div>
+      <div class="visual-card" data-feature="plan-email-support"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Email Support</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Response</div><div class="stat-value">Within 24 hours</div></div></div>
+        </div>
+        <div class="visual-caption">Email support within one business day.</div>
       </div>
     </div>
   </div>
@@ -825,74 +1035,56 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <button class="detail-close" onclick="collapseCard('detail-svc-standard')">&times;</button>
     </div>
     <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">Everything in Basic, plus automated notifications and monthly reporting.</p>
-    <div class="visual-grid">
-      <div class="visual-card">
+    <div class="demo-grid-horizontal">
+      <div class="visual-card" data-feature="plan-alerts"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">SMS Notifications</div>
         <div class="visual-body" style="padding:14px">
           <div class="mock-notif">
             <div class="notif-from">&#128241; Text to Customer</div>
-            <div class="notif-body">Hi Sarah! Your hem repair is ready for pickup at AAA Tailor. Open Mon-Sat 9am-6pm. Reply STOP to opt out.</div>
+            <div class="notif-body">Hi Sarah! Your hem repair is ready for pickup. Open Mon-Sat 9am-6pm.</div>
             <div class="notif-time">Sent automatically when status &rarr; Ready</div>
           </div>
-          <div class="mock-notif">
-            <div class="notif-from">&#128241; Text to Customer</div>
-            <div class="notif-body">Thanks for visiting AAA Tailor! Your order #1042 has been received. Estimated ready date: Mar 8. We'll text you when it's done!</div>
-            <div class="notif-time">Sent automatically on new order</div>
-          </div>
         </div>
-        <div class="visual-caption">Customers get automatic text updates at every stage &mdash; intake, in-progress, and ready for pickup.</div>
+        <div class="visual-caption">Automatic text updates at every stage.</div>
       </div>
-      <div class="visual-card">
+      <div class="visual-card" data-feature="plan-alerts"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Email Notifications</div>
         <div class="visual-body" style="padding:14px">
           <div class="mock-notif">
-            <div class="notif-from">&#128231; Pickup Ready Email</div>
-            <div class="notif-body">Your order is ready! 2 items completed at AAA Tailor Shop. Visit us Mon-Sat 9am-6pm to pick up. Bring your receipt or order number #1042.</div>
+            <div class="notif-from">&#128231; Pickup Ready</div>
+            <div class="notif-body">Your order is ready! Visit us Mon-Sat 9am-6pm to pick up.</div>
             <div class="notif-time">Branded HTML email with your shop logo</div>
           </div>
-          <div class="mock-notif">
-            <div class="notif-from">&#128231; Daily Summary to Owner</div>
-            <div class="notif-body">Today: 6 new orders, 4 completed, 2 pickups. Revenue: $340. 12 active orders in queue.</div>
-            <div class="notif-time">Sent to you every morning at 8am</div>
-          </div>
         </div>
-        <div class="visual-caption">Professional branded emails to customers plus daily business summaries sent to you.</div>
+        <div class="visual-caption">Professional branded emails to customers plus daily summaries.</div>
       </div>
-      <div class="visual-card">
-        <div class="visual-header">Monthly Analytics Report</div>
+      <div class="visual-card" data-feature="plan-maps"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Google / Waze / Apple Maps</div>
         <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128176;</div><div><div class="stat-label">Monthly Revenue</div><div class="stat-value">$4,280</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Orders Completed</div><div class="stat-value">142 orders</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#9201;</div><div><div class="stat-label">Avg Turnaround</div><div class="stat-value">2.4 days</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#11088;</div><div><div class="stat-label">Customer Rating</div><div class="stat-value">4.9 / 5.0</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Google</div><div class="stat-value">Listing managed</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128663;</div><div><div class="stat-label">Waze</div><div class="stat-value">Drive-to directions</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127823;</div><div><div class="stat-label">Apple Maps</div><div class="stat-value">Place card with hours</div></div></div>
         </div>
-        <div class="visual-caption">We email you a monthly summary of revenue, orders, turnaround times, and performance trends.</div>
+        <div class="visual-caption">Your shop visible on all major maps platforms.</div>
       </div>
-      <div class="visual-card">
+      <div class="visual-card" data-feature="plan-auto-texts"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Automated Pickup Alerts</div>
         <div class="visual-body" style="padding:14px">
           <div class="mock-notif">
             <div class="notif-from">&#128276; Auto-Trigger</div>
-            <div class="notif-body">When you mark an order "Ready" &rarr; customer gets an SMS + email instantly. No manual work needed.</div>
+            <div class="notif-body">Mark "Ready" &rarr; customer gets SMS + email instantly.</div>
             <div class="notif-time">Zero-touch notification workflow</div>
           </div>
-          <div class="mock-notif">
-            <div class="notif-from">&#128276; Reminder (3 days)</div>
-            <div class="notif-body">If not picked up in 3 days, a gentle reminder is sent automatically: "Your order is still waiting at the shop!"</div>
-            <div class="notif-time">Configurable reminder intervals</div>
-          </div>
         </div>
-        <div class="visual-caption">One click to "Ready" and the customer is notified. Auto-reminders if they forget to pick up.</div>
+        <div class="visual-caption">One click to "Ready" and customer is notified.</div>
       </div>
-      <div class="visual-card">
-        <div class="visual-header">Google / Waze / Apple Maps</div>
+      <div class="visual-card" data-feature="plan-report"><span class="card-type-badge mockup">Preview</span>
+        <div class="visual-header">Monthly Business Report</div>
         <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Google Business Profile</div><div class="stat-value">Listing managed &amp; optimized</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128663;</div><div><div class="stat-label">Waze Listing</div><div class="stat-value">Drive-to directions for customers</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#127823;</div><div><div class="stat-label">Apple Maps</div><div class="stat-value">Place card with hours &amp; photos</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#11088;</div><div><div class="stat-label">Review Monitoring</div><div class="stat-value">Alerts on new reviews</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128176;</div><div><div class="stat-label">Revenue</div><div class="stat-value">$4,280</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Orders</div><div class="stat-value">142 completed</div></div></div>
         </div>
-        <div class="visual-caption">We keep your shop visible on all major maps platforms. Hours, photos, and reviews &mdash; all managed for you.</div>
+        <div class="visual-caption">Monthly summary of revenue, orders, and performance.</div>
       </div>
     </div>
   </div>
@@ -905,74 +1097,55 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <button class="detail-close" onclick="collapseCard('detail-svc-premium')">&times;</button>
     </div>
     <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">Everything in Standard, plus hands-on management &mdash; we handle it all.</p>
-    <div class="visual-grid">
-      <div class="visual-card">
+    <div class="demo-grid-horizontal">
+      <div class="visual-card" data-feature="plan-sameday"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Priority Support</div>
         <div class="visual-body" style="padding:14px">
           <div class="mock-notif">
-            <div class="notif-from" style="color:#e74c3c">&#128680; Urgent Request</div>
-            <div class="notif-body">"My checkout page isn't loading for customers!"</div>
-            <div class="notif-time">Submitted 9:14 AM</div>
-          </div>
-          <div class="mock-notif">
-            <div class="notif-from" style="color:#2ecc71">&#9989; Resolved</div>
-            <div class="notif-body">Fixed &mdash; a script conflict was blocking the form. Deployed fix and verified on mobile + desktop.</div>
-            <div class="notif-time">Resolved 10:02 AM &mdash; same day</div>
+            <div class="notif-from" style="color:#e74c3c">&#128680; Urgent</div>
+            <div class="notif-body">"Checkout page isn't loading!"</div>
+            <div class="notif-time">Resolved same day</div>
           </div>
         </div>
-        <div class="visual-caption">Same-day response for urgent issues. You're never waiting in a queue.</div>
+        <div class="visual-caption">Same-day response for urgent issues.</div>
       </div>
-      <div class="visual-card">
+      <div class="visual-card" data-feature="plan-changes"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Ongoing Site Updates</div>
         <div class="visual-body" style="padding:14px">
           <div class="mock-notif">
             <div class="notif-from">&#127912; Design Change</div>
-            <div class="notif-body">"Can you add a Holiday Hours banner to our site this week?"</div>
+            <div class="notif-body">"Add a Holiday Hours banner this week."</div>
             <div class="notif-time">Done within 24 hours</div>
           </div>
-          <div class="mock-notif">
-            <div class="notif-from">&#128640; New Feature</div>
-            <div class="notif-body">"We want to add a photo gallery of our work to the storefront."</div>
-            <div class="notif-time">Scoped, built, and deployed for you</div>
-          </div>
         </div>
-        <div class="visual-caption">Design changes, new pages, feature requests &mdash; just ask and we build it.</div>
+        <div class="visual-caption">Design changes, features &mdash; just ask and we build it.</div>
       </div>
-      <div class="visual-card">
+      <div class="visual-card" data-feature="plan-maintenance"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Full Platform Maintenance</div>
         <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon" style="background:rgba(46,204,113,.1)">&#128737;</div><div><div class="stat-label">Database Optimization</div><div class="stat-value">Automated weekly</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#9889;</div><div><div class="stat-label">Performance Tuning</div><div class="stat-value">Proactive monitoring</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">Security Updates</div><div class="stat-value">Applied same-day</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128230;</div><div><div class="stat-label">Backups</div><div class="stat-value">Hourly + on-demand</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128737;</div><div><div class="stat-label">Database</div><div class="stat-value">Optimized weekly</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">Security</div><div class="stat-value">Same-day patches</div></div></div>
         </div>
-        <div class="visual-caption">Database optimization, performance tuning, security patches &mdash; all proactive, no action needed from you.</div>
+        <div class="visual-caption">Database optimization, security patches &mdash; all proactive.</div>
       </div>
-      <div class="visual-card">
+      <div class="visual-card" data-feature="plan-info-updates"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Content Updates on Request</div>
         <div class="visual-body" style="padding:14px">
           <div class="mock-notif">
             <div class="notif-from">&#128221; Quick Update</div>
-            <div class="notif-body">"Change our hours to 8am-7pm on weekdays and add 'Leather Repair' to our services list."</div>
-            <div class="notif-time">Updated within hours, no tech skills needed</div>
-          </div>
-          <div class="mock-notif">
-            <div class="notif-from">&#128176; Pricing Change</div>
-            <div class="notif-body">"Update hem pricing to $15 for pants and $20 for formal wear."</div>
-            <div class="notif-time">Updated across all pages instantly</div>
+            <div class="notif-body">"Change hours to 8am-7pm and update pricing."</div>
+            <div class="notif-time">Updated within hours</div>
           </div>
         </div>
-        <div class="visual-caption">Hours, services, pricing, photos &mdash; just email us what to change and it's done.</div>
+        <div class="visual-caption">Hours, services, pricing &mdash; just email us.</div>
       </div>
-      <div class="visual-card">
+      <div class="visual-card" data-feature="plan-maps"><span class="card-type-badge mockup">Preview</span>
         <div class="visual-header">Google / Waze / Apple Maps</div>
         <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Google Business Profile</div><div class="stat-value">Fully managed &amp; optimized</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128663;</div><div><div class="stat-label">Waze Listing</div><div class="stat-value">Drive-to directions for customers</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#127823;</div><div><div class="stat-label">Apple Maps</div><div class="stat-value">Place card with hours &amp; photos</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#11088;</div><div><div class="stat-label">Review Monitoring &amp; Alerts</div><div class="stat-value">Respond to reviews for you</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128205;</div><div><div class="stat-label">Google</div><div class="stat-value">Fully managed</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#11088;</div><div><div class="stat-label">Reviews</div><div class="stat-value">We respond for you</div></div></div>
         </div>
-        <div class="visual-caption">Full maps management across all platforms. We update hours, respond to reviews, and keep your listing optimized.</div>
+        <div class="visual-caption">Full maps management. We respond to reviews for you.</div>
       </div>
     </div>
   </div>
@@ -1021,7 +1194,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-id="hw-essential"
       data-item-name="SewReady Essential Kit"
       data-item-price="249.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="iPad counter mount + Epson TM-T20III thermal receipt printer"
       data-item-weight="4500"
       data-item-max-quantity="5">Choose This</button>
@@ -1044,7 +1217,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-id="hw-pro"
       data-item-name="SewReady Pro Kit"
       data-item-price="399.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="iPad counter mount + Epson TM-T20III receipt printer + Brother QL-820NWB label printer"
       data-item-weight="6000"
       data-item-max-quantity="5">Choose This</button>
@@ -1066,7 +1239,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       data-item-id="hw-full"
       data-item-name="SewReady Full Kit"
       data-item-price="479.00"
-      data-item-url="/packages.html"
+      data-item-url="/"
       data-item-description="iPad mount + receipt printer + label printer + barcode scanner"
       data-item-weight="7000"
       data-item-max-quantity="5">Choose This</button>
@@ -1283,9 +1456,9 @@ function populateSummary() {
 
   // Feature lists by bundle tier
   var bundleFeatures = {
-    'Site Setup': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design'],
+    'Site Setup': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Employee management'],
     'Site + Online Orders': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Online order wizard','Customer accounts & login','Order tracking dashboard','Employee management','Inventory tracking','Calendar & scheduling','Receipt & label printing'],
-    'Full Platform': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Online order wizard','Customer accounts & login','Order tracking dashboard','Employee management','Inventory tracking','Calendar & scheduling','Receipt & label printing','SMS notifications','Email notifications','Automated pickup alerts','SOP library','Driver pickup coordination','Cost & revenue analytics']
+    'Full Platform': ['Custom branded website','Google Maps integration','SEO & structured data','Contact form','Services & hours display','Mobile-responsive design','Online order wizard','Customer accounts & login','Order tracking dashboard','Employee management','Inventory tracking','Calendar & scheduling','Receipt & label printing','SMS notifications','Email notifications','Automated pickup alerts','SOP library','Driver pickup coordination','Cost & revenue analytics','AI-powered lead generation','Automated marketing campaigns']
   };
   var planFeatures = {
     'Free': ['Website hosting','Secure website (HTTPS)','Help guides & tutorials','Email support'],
@@ -1458,6 +1631,27 @@ function closeDemoFullscreen() {
 
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeDemoFullscreen();
+});
+
+// ── Feature Highlight on Hover ──────────────────────────
+document.addEventListener('mouseover', function(e) {
+  var li = e.target.closest('li[data-feature]');
+  if (!li) return;
+  var slug = li.getAttribute('data-feature');
+  li.classList.add('feature-highlight');
+  var step = li.closest('.wizard-step');
+  if (!step) return;
+  var card = step.querySelector('.package-detail.open [data-feature="' + slug + '"]');
+  if (card) {
+    card.classList.add('card-highlight');
+    card.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  }
+});
+document.addEventListener('mouseout', function(e) {
+  var li = e.target.closest('li[data-feature]');
+  if (!li) return;
+  li.classList.remove('feature-highlight');
+  document.querySelectorAll('.card-highlight').forEach(function(c) { c.classList.remove('card-highlight'); });
 });
 
 // Attach click handlers to all demo cards

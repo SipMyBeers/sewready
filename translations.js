@@ -6,6 +6,8 @@
 const TRANSLATIONS = {
   en: {
     // Nav
+    'nav.home': 'HOME',
+    'nav.shop': 'SHOP NOW',
     'nav.services': 'Services',
     'nav.supplies': 'Supplies',
     'nav.about': 'About',
@@ -20,8 +22,8 @@ const TRANSLATIONS = {
     'hero.team': 'Meet the Team',
 
     // Schedule
-    'schedule.title': 'Our Schedule',
-    'schedule.sub': "See when we're open. Click a day to book an appointment.",
+    'schedule.title': 'STORE HOURS',
+    'schedule.sub': 'Book an appointment now or make a drop off / pickup during our business hours',
     'schedule.hours': 'Shop Hours',
     'schedule.location': 'Location',
 
@@ -200,6 +202,12 @@ const TRANSLATIONS = {
     'emp.reason': 'Reason',
     'emp.reasonPlaceholder': 'Why are you requesting this change?',
 
+    // Newsletter
+    'newsletter.title': 'Get 10% Off Your First Order',
+    'newsletter.sub': 'Sign up for our newsletter and receive a discount code.',
+    'newsletter.placeholder': 'Enter your email',
+    'newsletter.btn': 'Subscribe',
+
     // Footer
     'footer.copy': '© 2026 SewReady — Maria\'s Alterations. All rights reserved.',
 
@@ -333,6 +341,8 @@ const TRANSLATIONS = {
 
   ko: {
     // Nav
+    'nav.home': '홈',
+    'nav.shop': '지금 쇼핑',
     'nav.services': '서비스',
     'nav.supplies': '용품',
     'nav.about': '소개',
@@ -347,8 +357,8 @@ const TRANSLATIONS = {
     'hero.team': '팀 소개',
 
     // Schedule
-    'schedule.title': '운영 시간',
-    'schedule.sub': '영업 시간을 확인하세요. 날짜를 클릭하여 예약할 수 있습니다.',
+    'schedule.title': '매장 영업 시간',
+    'schedule.sub': '예약하시거나 영업 시간 중 방문/수령하세요',
     'schedule.hours': '영업 시간',
     'schedule.location': '위치',
 
@@ -385,6 +395,12 @@ const TRANSLATIONS = {
     // Team
     'team.title': '팀 소개',
     'team.sub': '여러분의 임무 준비를 위해 헌신하는 전문가들입니다.',
+
+    // Newsletter
+    'newsletter.title': '첫 주문 10% 할인',
+    'newsletter.sub': '뉴스레터에 가입하시면 할인 코드를 받으실 수 있습니다.',
+    'newsletter.placeholder': '이메일을 입력하세요',
+    'newsletter.btn': '구독',
 
     // Auth
     'auth.signin': '로그인',
