@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SewReady — Packages, Services & Hardware</title>
+<title>SewReady — Packages, Services & Setup</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css">
 <style>
@@ -346,7 +346,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <div class="brand">Sew<span>Ready</span></div>
   <div class="nav-links">
     <a href="#packages">Packages</a>
-    <a href="#hardware">Hardware</a>
+    <a href="#hardware">Setup</a>
     <a href="/admin/login">Admin Login</a>
   </div>
   <button class="snipcart-checkout" style="background:none;border:1px solid var(--glass-border);color:var(--text);padding:8px 16px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">&#128722; Cart (<span class="snipcart-items-count">0</span>)</button>
@@ -382,7 +382,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <div class="wiz-line" id="wline1"></div>
   <div class="wiz-group"><div class="wiz-dot" id="wdot2">2</div><div class="wiz-label" id="wlab2">Plan</div><div class="wiz-selection" id="wsel2"></div></div>
   <div class="wiz-line" id="wline2"></div>
-  <div class="wiz-group"><div class="wiz-dot" id="wdot3">3</div><div class="wiz-label" id="wlab3">Hardware</div><div class="wiz-selection" id="wsel3"></div></div>
+  <div class="wiz-group"><div class="wiz-dot" id="wdot3">3</div><div class="wiz-label" id="wlab3">Setup</div><div class="wiz-selection" id="wsel3"></div></div>
   <div class="wiz-line" id="wline3"></div>
   <div class="wiz-group"><div class="wiz-dot" id="wdot4">4</div><div class="wiz-label" id="wlab4">Summary</div><div class="wiz-selection" id="wsel4"></div></div>
 </div>
@@ -487,7 +487,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
       <li data-feature="automated-marketing">Automated marketing campaigns</li>
       <li data-feature="priority-support">Priority setup support</li>
     </ul>
-    <p style="font-size:12px;color:var(--text-muted);margin:0 0 16px;font-style:italic">Hardware sold separately</p>
+    <p style="font-size:12px;color:var(--text-muted);margin:0 0 16px;font-style:italic">Add hardware, setup &amp; training in Step 3</p>
     <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(1,'Full Platform','$799');event.stopPropagation()"
       data-item-id="setup-full"
       data-item-name="SewReady Full Platform Setup"
@@ -1022,49 +1022,50 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 </div><!-- /wizard-step-2 -->
 
-<!-- ── Step 3 — Choose Your Hardware ─────────────────── -->
+<!-- ── Step 3 — Setup & Training ─────────────────────── -->
 <div class="wizard-step" data-step="3" id="wizard-step-3">
 <button class="wizard-back" onclick="goToStep(2)">&larr; Back to Plans</button>
 <div class="step-header" id="hardware">
   <span class="step-number">3</span>
-  <h2>Choose Your Hardware<span class="hangul">하드웨어 선택</span></h2>
+  <h2>Setup &amp; Training<span class="hangul">설치 및 교육</span></h2>
 </div>
-<p class="section-sub">Everything you need to run SewReady in your shop</p>
+<p class="section-sub">Hardware, professional installation, and hands-on training for your team &mdash; all in one package</p>
 
 <div class="pricing-grid">
 
-  <!-- No Hardware -->
+  <!-- Self Setup -->
   <div class="price-card" data-detail="detail-hw-none" onclick="expandCard(this,event)">
-    <h3>No Hardware</h3>
-    <p class="tier-desc">I already have what I need</p>
+    <h3>Self Setup</h3>
+    <p class="tier-desc">I'll handle it myself</p>
     <div class="price-row"><span class="price-amount">$0</span></div>
-    <div class="price-period">Use your own devices</div>
+    <div class="price-period">DIY &mdash; use your own devices</div>
     <ul>
+      <li>Online setup guides &amp; video tutorials</li>
       <li>Works on any tablet or laptop</li>
+      <li>Email support during setup</li>
       <li>Browser-based &mdash; no app install</li>
-      <li>BYOD (bring your own device)</li>
     </ul>
-    <button class="card-cta secondary" onclick="wizardChoose(3,'No Hardware','$0');event.stopPropagation()" style="width:100%">Choose This</button>
+    <button class="card-cta secondary" onclick="wizardChoose(3,'Self Setup','$0');event.stopPropagation()" style="width:100%">Choose This</button>
   </div>
 
   <!-- Essential Kit -->
   <div class="price-card" data-detail="detail-hw-essential" onclick="expandCard(this,event)">
     <h3>Essential Kit</h3>
-    <p class="tier-desc">Get started with the basics</p>
-    <div class="price-row"><span class="price-amount">$249</span></div>
-    <div class="price-period">One-time purchase</div>
+    <p class="tier-desc">Hardware + setup for the basics</p>
+    <div class="price-row"><span class="price-amount">$499</span></div>
+    <div class="price-period">One-time &mdash; hardware, install &amp; training</div>
     <ul>
-      <li>iPad counter mount (AboveTEK)</li>
-      <li>Thermal receipt printer (Epson TM-T20III)</li>
-      <li class="locked">Label printer (Brother QL-820NWB)</li>
-      <li class="locked">Barcode scanner (Tera HW0002)</li>
+      <li>iPad counter mount + receipt printer</li>
+      <li>On-site hardware installation &amp; config</li>
+      <li>1-hour hands-on staff training (up to 2 people)</li>
+      <li>SewReady software setup &amp; testing</li>
     </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3,'Essential Kit','$249');event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3,'Essential Kit','$499');event.stopPropagation()"
       data-item-id="hw-essential"
-      data-item-name="SewReady Essential Kit"
-      data-item-price="249.00"
+      data-item-name="SewReady Essential Kit — Setup & Training"
+      data-item-price="499.00"
       data-item-url="/"
-      data-item-description="iPad counter mount + Epson TM-T20III thermal receipt printer"
+      data-item-description="iPad counter mount + Epson receipt printer + professional installation + 1-hr staff training"
       data-item-weight="4500"
       data-item-max-quantity="5">Choose This</button>
   </div>
@@ -1073,21 +1074,21 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <div class="price-card featured" data-detail="detail-hw-pro" onclick="expandCard(this,event)">
     <div class="badge">Recommended</div>
     <h3>Pro Kit</h3>
-    <p class="tier-desc">Add label printing for garment tags</p>
-    <div class="price-row"><span class="price-amount">$399</span></div>
-    <div class="price-period">One-time purchase</div>
+    <p class="tier-desc">Full hardware + training for your team</p>
+    <div class="price-row"><span class="price-amount">$799</span></div>
+    <div class="price-period">One-time &mdash; hardware, install &amp; training</div>
     <ul>
-      <li>iPad counter mount (AboveTEK)</li>
-      <li>Thermal receipt printer (Epson TM-T20III)</li>
-      <li>Label printer (Brother QL-820NWB)</li>
-      <li class="locked">Barcode scanner (Tera HW0002)</li>
+      <li>iPad mount + receipt printer + label printer</li>
+      <li>On-site hardware installation &amp; config</li>
+      <li>2-hour hands-on staff training (up to 4 people)</li>
+      <li>Custom workflow setup (services, pricing, labels)</li>
     </ul>
-    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(3,'Pro Kit','$399');event.stopPropagation()"
+    <button class="snipcart-add-item card-cta primary" onclick="wizardChoose(3,'Pro Kit','$799');event.stopPropagation()"
       data-item-id="hw-pro"
-      data-item-name="SewReady Pro Kit"
-      data-item-price="399.00"
+      data-item-name="SewReady Pro Kit — Setup & Training"
+      data-item-price="799.00"
       data-item-url="/"
-      data-item-description="iPad counter mount + Epson TM-T20III receipt printer + Brother QL-820NWB label printer"
+      data-item-description="iPad mount + receipt printer + label printer + professional installation + 2-hr staff training + workflow setup"
       data-item-weight="6000"
       data-item-max-quantity="5">Choose This</button>
   </div>
@@ -1095,35 +1096,35 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
   <!-- Full Kit -->
   <div class="price-card" data-detail="detail-hw-full" onclick="expandCard(this,event)">
     <h3>Full Kit</h3>
-    <p class="tier-desc">Complete setup with barcode scanning</p>
-    <div class="price-row"><span class="price-amount">$479</span></div>
-    <div class="price-period">One-time purchase</div>
+    <p class="tier-desc">Everything + half-day training &amp; ongoing support</p>
+    <div class="price-row"><span class="price-amount">$1,199</span></div>
+    <div class="price-period">One-time &mdash; hardware, install &amp; training</div>
     <ul>
-      <li>iPad counter mount (AboveTEK)</li>
-      <li>Thermal receipt printer (Epson TM-T20III)</li>
-      <li>Label printer (Brother QL-820NWB)</li>
-      <li>Barcode scanner (Tera HW0002)</li>
+      <li>All hardware (mount, receipt, labels, scanner)</li>
+      <li>On-site hardware installation &amp; config</li>
+      <li>Half-day staff training (up to 6 people)</li>
+      <li>60-day post-install support + follow-up session</li>
     </ul>
-    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3,'Full Kit','$479');event.stopPropagation()"
+    <button class="snipcart-add-item card-cta secondary" onclick="wizardChoose(3,'Full Kit','$1,199');event.stopPropagation()"
       data-item-id="hw-full"
-      data-item-name="SewReady Full Kit"
-      data-item-price="479.00"
+      data-item-name="SewReady Full Kit — Setup & Training"
+      data-item-price="1199.00"
       data-item-url="/"
-      data-item-description="iPad mount + receipt printer + label printer + barcode scanner"
+      data-item-description="All hardware + professional installation + half-day staff training + 60-day support"
       data-item-weight="7000"
       data-item-max-quantity="5">Choose This</button>
   </div>
 
 </div>
 
-<!-- ── Hardware Detail Panels ─────────────────────────── -->
+<!-- ── Setup & Training Detail Panels ─────────────────── -->
 <div class="package-detail" id="detail-hw-none" data-section="hw">
   <div class="detail-inner">
     <div class="detail-header">
-      <h3>What You'll Need</h3>
+      <h3>Self Setup &mdash; What You'll Need</h3>
       <button class="detail-close" onclick="collapseCard('detail-hw-none')">&times;</button>
     </div>
-    <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">SewReady is browser-based &mdash; no app to install. Here's what you need to run it:</p>
+    <p style="font-size:13px;color:var(--text-muted);margin:0 0 16px">SewReady is browser-based &mdash; no app to install. Set up on your own schedule with our guides.</p>
     <div class="visual-grid">
       <div class="visual-card">
         <div class="visual-header">Required</div>
@@ -1134,13 +1135,13 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         <div class="visual-caption">That's it &mdash; open your browser, log in, and you're running your shop.</div>
       </div>
       <div class="visual-card">
-        <div class="visual-header">Recommended (Optional)</div>
+        <div class="visual-header">DIY Resources Included</div>
         <div class="visual-body">
-          <div class="mock-stat"><div class="stat-icon">&#128424;</div><div><div class="stat-label">Receipt Printer</div><div class="stat-value">Any ESC/POS thermal printer</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#127991;</div><div><div class="stat-label">Label Printer</div><div class="stat-value">For garment tags with QR codes</div></div></div>
-          <div class="mock-stat"><div class="stat-icon">&#128274;</div><div><div class="stat-label">iPad or Tablet Stand</div><div class="stat-value">Counter mount for walk-in intake</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127909;</div><div><div class="stat-label">Video Tutorials</div><div class="stat-value">Step-by-step setup walkthroughs</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128214;</div><div><div class="stat-label">Setup Guides</div><div class="stat-value">Hardware connection &amp; configuration docs</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128231;</div><div><div class="stat-label">Email Support</div><div class="stat-value">Get help if you get stuck</div></div></div>
         </div>
-        <div class="visual-caption">These speed up your workflow but aren't required. You can always add hardware later.</div>
+        <div class="visual-caption">Want hardware? You can buy devices separately and follow our guides to connect them.</div>
       </div>
     </div>
   </div>
@@ -1149,9 +1150,10 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 <div class="package-detail" id="detail-hw-essential" data-section="hw">
   <div class="detail-inner">
     <div class="detail-header">
-      <h3>Essential Kit &mdash; What's Included</h3>
+      <h3>Essential Kit &mdash; Hardware, Setup &amp; Training</h3>
       <button class="detail-close" onclick="collapseCard('detail-hw-essential')">&times;</button>
     </div>
+    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px">Hardware Included</h4>
     <div class="product-grid">
       <div class="product-card">
         <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
@@ -1168,15 +1170,35 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         </div>
       </div>
     </div>
+    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 12px">Setup &amp; Training Included</h4>
+    <div class="visual-grid">
+      <div class="visual-card">
+        <div class="visual-header">Professional Installation</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128295;</div><div><div class="stat-label">On-Site Hardware Setup</div><div class="stat-value">We install &amp; configure all devices at your shop</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128268;</div><div><div class="stat-label">Network &amp; Printer Config</div><div class="stat-value">Connect printers, test receipts, verify everything works</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9881;</div><div><div class="stat-label">SewReady Software Setup</div><div class="stat-value">Configure your account, services menu, and pricing</div></div></div>
+        </div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-header">Staff Training &mdash; 1 Hour</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128101;</div><div><div class="stat-label">Up to 2 Employees</div><div class="stat-value">Hands-on, in-person training at your shop</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Core Workflows</div><div class="stat-value">Order intake, printing receipts, basic navigation</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128222;</div><div><div class="stat-label">Post-Install Support</div><div class="stat-value">14 days of priority email &amp; phone support</div></div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="package-detail" id="detail-hw-pro" data-section="hw">
   <div class="detail-inner">
     <div class="detail-header">
-      <h3>Pro Kit &mdash; What's Included</h3>
+      <h3>Pro Kit &mdash; Hardware, Setup &amp; Training</h3>
       <button class="detail-close" onclick="collapseCard('detail-hw-pro')">&times;</button>
     </div>
+    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px">Hardware Included</h4>
     <div class="product-grid">
       <div class="product-card">
         <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
@@ -1200,15 +1222,36 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         </div>
       </div>
     </div>
+    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 12px">Setup &amp; Training Included</h4>
+    <div class="visual-grid">
+      <div class="visual-card">
+        <div class="visual-header">Professional Installation</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128295;</div><div><div class="stat-label">On-Site Hardware Setup</div><div class="stat-value">We install &amp; configure all devices at your shop</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128268;</div><div><div class="stat-label">Network &amp; Printer Config</div><div class="stat-value">Receipt printer, label printer, WiFi &amp; Bluetooth pairing</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127991;</div><div><div class="stat-label">Custom Label Templates</div><div class="stat-value">Garment tags designed with your shop name, QR codes, order info</div></div></div>
+        </div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-header">Staff Training &mdash; 2 Hours</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128101;</div><div><div class="stat-label">Up to 4 Employees</div><div class="stat-value">Hands-on, in-person training at your shop</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Full Workflow Training</div><div class="stat-value">Order intake, label printing, services, pricing &amp; reports</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9881;</div><div><div class="stat-label">Custom Workflow Setup</div><div class="stat-value">We configure your services menu, pricing, and label layouts</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128222;</div><div><div class="stat-label">30-Day Post-Install Support</div><div class="stat-value">Priority email &amp; phone support after go-live</div></div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="package-detail" id="detail-hw-full" data-section="hw">
   <div class="detail-inner">
     <div class="detail-header">
-      <h3>Full Kit &mdash; What's Included</h3>
+      <h3>Full Kit &mdash; Hardware, Setup &amp; Training</h3>
       <button class="detail-close" onclick="collapseCard('detail-hw-full')">&times;</button>
     </div>
+    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px">Hardware Included</h4>
     <div class="product-grid">
       <div class="product-card">
         <div class="product-img"><img src="/img/hardware/ipad-mount.jpg" alt="AboveTEK iPad Counter Mount" loading="lazy"></div>
@@ -1239,6 +1282,27 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
         </div>
       </div>
     </div>
+    <h4 style="font-size:13px;color:var(--accent-cyan);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 12px">Setup &amp; Training Included</h4>
+    <div class="visual-grid">
+      <div class="visual-card">
+        <div class="visual-header">Professional Installation</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128295;</div><div><div class="stat-label">On-Site Hardware Setup</div><div class="stat-value">We install &amp; configure every device at your shop</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128268;</div><div><div class="stat-label">Full Network Config</div><div class="stat-value">Receipt printer, label printer, barcode scanner, WiFi &amp; Bluetooth</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#127991;</div><div><div class="stat-label">Custom Label Templates</div><div class="stat-value">Garment tags + scannable order labels designed for your shop</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128196;</div><div><div class="stat-label">SOP Documentation</div><div class="stat-value">Custom quick-reference guides for your staff to keep at the counter</div></div></div>
+        </div>
+      </div>
+      <div class="visual-card">
+        <div class="visual-header">Staff Training &mdash; Half Day</div>
+        <div class="visual-body">
+          <div class="mock-stat"><div class="stat-icon">&#128101;</div><div><div class="stat-label">Up to 6 Employees</div><div class="stat-value">Hands-on, in-person training at your shop</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128203;</div><div><div class="stat-label">Complete Workflow Training</div><div class="stat-value">Every feature: intake, labels, scanning, reports, calendar, inventory</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#9881;</div><div><div class="stat-label">Custom Workflow Setup</div><div class="stat-value">Services menu, pricing, labels, SOPs &mdash; fully configured to your shop</div></div></div>
+          <div class="mock-stat"><div class="stat-icon">&#128222;</div><div><div class="stat-label">60-Day Post-Install Support</div><div class="stat-value">Priority email &amp; phone support + 1-hour follow-up training session</div></div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1246,7 +1310,7 @@ body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;back
 
 <!-- ── Step 4 — Summary & Analysis ─────────────────────── -->
 <div class="wizard-step" data-step="4" id="wizard-step-4">
-  <button class="wizard-back" onclick="goToStep(3)">&larr; Back to Hardware</button>
+  <button class="wizard-back" onclick="goToStep(3)">&larr; Back to Setup &amp; Training</button>
   <div class="step-header">
     <span class="step-number">4</span>
     <h2>Your Package Summary<span class="hangul">패키지 요약</span></h2>
@@ -1417,7 +1481,7 @@ function populateSummary() {
   html += '<div class="selections-row">';
   html += '<div class="sel-col"><div class="sel-label">Bundle</div><div class="sel-name">' + bundle.name + '</div><div class="sel-price">' + bundle.price + '</div></div>';
   html += '<div class="sel-col"><div class="sel-label">Plan</div><div class="sel-name">' + plan.name + '</div><div class="sel-price">' + plan.price + '</div></div>';
-  html += '<div class="sel-col"><div class="sel-label">Hardware</div><div class="sel-name">' + hw.name + '</div><div class="sel-price">' + hw.price + '</div></div>';
+  html += '<div class="sel-col"><div class="sel-label">Setup &amp; Training</div><div class="sel-name">' + hw.name + '</div><div class="sel-price">' + hw.price + '</div></div>';
   html += '</div></div>';
 
   // ── E. What You're Getting ──
