@@ -2648,26 +2648,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ?view=about — switch to About Us page (for Google Maps demo)
   if (params.get('view') === 'about') {
-    switchToAbout();
-    // Scroll to map section after a short delay for render
+    _hideAllPages();
+    var aboutEl = document.getElementById('custAboutPage');
+    if (aboutEl) aboutEl.style.display = 'block';
     setTimeout(function() {
       var mapEl = document.getElementById('aboutMapEmbed');
-      if (mapEl) mapEl.scrollIntoView({ behavior: 'auto', block: 'center' });
-    }, 300);
+      if (mapEl) window.scrollTo(0, mapEl.offsetTop - 20);
+    }, 600);
   }
 
   // ?openContact=1 — open the contact card modal
   if (params.get('openContact') === '1') {
-    switchToLanding();
-    setTimeout(function() { openContactModal(); }, 300);
+    setTimeout(function() { openContactModal(); }, 400);
   }
 
   // ?scroll=heroCal — scroll to the calendar/hours section
   if (params.get('scroll') === 'heroCal') {
-    switchToLanding();
     setTimeout(function() {
       var calEl = document.getElementById('heroCal');
-      if (calEl) calEl.scrollIntoView({ behavior: 'auto', block: 'start' });
-    }, 300);
+      if (calEl) window.scrollTo(0, calEl.offsetTop);
+    }, 600);
   }
 });
