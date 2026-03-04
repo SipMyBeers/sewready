@@ -6,11 +6,11 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 
-# Cache static assets
+# Cache static assets (short TTL, revalidate on deploy)
 /*.css
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=0, must-revalidate
 /*.js
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Auth script must not be cached aggressively
 /admin-auth.js
