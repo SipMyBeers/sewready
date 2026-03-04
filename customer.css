@@ -77,7 +77,7 @@
 /* ── Sticky Nav ──────────────────────────────────────────── */
 .cust-nav {
   position: fixed;
-  top: 0;
+  top: 40px;
   left: 0;
   right: 0;
   height: 64px;
@@ -222,7 +222,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 120px 24px 60px;
+  padding: 160px 24px 60px;
   position: relative;
 }
 .cust-hero::before {
@@ -802,7 +802,7 @@
   align-items: center;
   gap: 6px;
   padding: 10px 20px;
-  margin: 80px 0 0 24px;
+  margin: 120px 0 0 24px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 10px;
@@ -830,7 +830,7 @@
 .cust-welcome-bar {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 124px 24px 24px;
+  padding: 164px 24px 24px;
 }
 .cust-welcome-inner {
   background: var(--glass);
@@ -2560,7 +2560,10 @@
   cursor: pointer;
   transition: opacity .2s;
   z-index: 102;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 .cust-orders-banner:hover {
   opacity: .9;
@@ -2600,6 +2603,44 @@
   .cust-newsletter-form {
     flex-direction: column;
   }
+}
+
+/* ── Quantity Stepper ─────────────────────────────────────── */
+.cust-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 160px;
+}
+.cust-qty-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--glass-border, rgba(255,255,255,.12));
+  background: rgba(255,255,255,.06);
+  color: var(--text-main, #e0e0e0);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cust-qty-btn:first-child { border-radius: 8px 0 0 8px; }
+.cust-qty-btn:last-child { border-radius: 0 8px 8px 0; }
+.cust-qty-btn:hover { background: rgba(255,255,255,.12); }
+.cust-qty-input {
+  width: 60px;
+  text-align: center;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  -moz-appearance: textfield;
+}
+.cust-qty-input::-webkit-outer-spin-button,
+.cust-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* ── Contact Card Modal ──────────────────────────────────── */
@@ -2671,7 +2712,7 @@
 .cust-about-page {
   max-width: 800px;
   margin: 0 auto;
-  padding: 100px 24px 60px;
+  padding: 140px 24px 60px;
 }
 .cust-about-back {
   background: none;

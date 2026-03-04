@@ -1711,7 +1711,7 @@ function openCustomize(type, id, config) {
   _pendingCustomize = { type, id };
   document.getElementById('customizeTitle').textContent = config.title;
   const container = document.getElementById('customizeFields');
-  container.innerHTML = config.fields.map(f => {
+  var html = config.fields.map(f => {
     if (f.type === 'text') {
       return '<div class="cust-form-group">' +
         '<label>' + f.label + (f.required ? ' *' : '') + '</label>' +
@@ -1728,6 +1728,16 @@ function openCustomize(type, id, config) {
     }
     return '';
   }).join('');
+  // Always show amount selector
+  html += '<div class="cust-form-group">' +
+    '<label>Amount *</label>' +
+    '<div class="cust-qty-row">' +
+      '<button type="button" class="cust-qty-btn" onclick="var e=document.getElementById(\'cust_cf__qty\');var v=parseInt(e.value)||1;if(v>1)e.value=v-1">−</button>' +
+      '<input type="number" class="cust-input cust-qty-input" id="cust_cf__qty" value="1" min="1" max="99">' +
+      '<button type="button" class="cust-qty-btn" onclick="var e=document.getElementById(\'cust_cf__qty\');var v=parseInt(e.value)||1;if(v<99)e.value=v+1">+</button>' +
+    '</div>' +
+  '</div>';
+  container.innerHTML = html;
   document.getElementById('customizeOverlay').style.display = 'flex';
 }
 
@@ -1740,9 +1750,10 @@ function confirmCustomize() {
   if (!_pendingCustomize) return;
   var type = _pendingCustomize.type;
   var id = _pendingCustomize.id;
-  var config = CUSTOMIZABLE_ITEMS[id];
+  var config = CUSTOMIZABLE_ITEMS[id] || { title: '', fields: [] };
   var customData = {};
   var valid = true;
+  var hasCustomFields = config.fields.length > 0;
 
   config.fields.forEach(function(f) {
     var el = document.getElementById('cust_cf_' + f.key);
@@ -1753,6 +1764,27 @@ function confirmCustomize() {
 
   if (!valid) { showToast('Please fill in all required fields'); return; }
 
+  // Read qty
+  var qtyEl = document.getElementById('cust_cf__qty');
+  var qty = Math.max(1, parseInt(qtyEl ? qtyEl.value : '1') || 1);
+
+  // For items without custom fields, just add to cart with qty
+  if (!hasCustomFields) {
+    var existing = cart.find(function(c) { return c.type === type && c.id === id && !c.custom; });
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ type: type, id: id, qty: qty });
+    }
+    saveCart();
+    updateCartBadge();
+    var item = resolveCartItem({ type: type, id: id });
+    var name = item ? (typeof svcName !== 'undefined' && type === 'svc' ? svcName(item) : (typeof invName !== 'undefined' && type === 'inv' ? invName(item) : item.name)) : 'Item';
+    showToast('Added ' + qty + 'x ' + name);
+    closeCustomize();
+    return;
+  }
+
   // Build a display label with customization details
   var parts = config.fields.map(function(f) {
     var v = customData[f.key] || '';
@@ -1761,7 +1793,7 @@ function confirmCustomize() {
   var label = config.title + (parts.length ? ' (' + parts.join(', ') + ')' : '');
 
   // Add to cart with custom data
-  cart.push({ type: type, id: id, qty: 1, custom: customData, customLabel: label });
+  cart.push({ type: type, id: id, qty: qty, custom: customData, customLabel: label });
   saveCart();
   updateCartBadge();
   showToast('Added: ' + label);
@@ -1769,22 +1801,16 @@ function confirmCustomize() {
 }
 
 function addToCart(type, id) {
-  // Check for customizable items
+  // Resolve item name for the modal title
+  var item = resolveCartItem({ type, id });
+  var itemName = item ? (typeof svcName !== 'undefined' && type === 'svc' ? svcName(item) : (typeof invName !== 'undefined' && type === 'inv' ? invName(item) : item.name)) : 'Item';
+
   if (CUSTOMIZABLE_ITEMS[id]) {
     openCustomize(type, id, CUSTOMIZABLE_ITEMS[id]);
-    return;
-  }
-
-  const existing = cart.find(c => c.type === type && c.id === id && !c.custom);
-  if (existing) {
-    existing.qty++;
   } else {
-    cart.push({ type: type, id: id, qty: 1 });
+    // No custom fields — just amount picker
+    openCustomize(type, id, { title: itemName, fields: [] });
   }
-  saveCart();
-  updateCartBadge();
-  const item = resolveCartItem({ type, id });
-  showToast(t('cart.addedToCart', { name: item ? (typeof invName !== 'undefined' && type === 'inv' ? invName(item) : (typeof svcName !== 'undefined' && type === 'svc' ? svcName(item) : item.name)) : 'Item' }));
 }
 
 function removeFromCart(type, id) {
